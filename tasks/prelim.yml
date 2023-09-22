@@ -1,0 +1,85 @@
+---
+
+- name: "PRELIM | Get Display Version value."
+  ansible.windows.win_reg_stat:
+      path: HKLM:\Software\Microsoft\Windows NT\CurrentVersion
+      name: DisplayVersion
+  changed_when: false
+  failed_when: false
+  register: win11cis_displayversion
+  tags:
+      - always
+
+- name: "PRELIM | Get OS Build value."
+  ansible.windows.win_reg_stat:
+      path: HKLM:\Software\Microsoft\Windows NT\CurrentVersion
+      name: CurrentBuild
+  changed_when: false
+  failed_when: false
+  register: win11cis_currentbuild
+  tags:
+      - always
+
+- name: "PRELIM | Detect if Trusted Platform Module (TPM) is Available"
+  ansible.windows.win_shell: (Get-CimInstance -ClassName Win32_OperatingSystem).ProductType
+  changed_when: false
+  failed_when: false
+  register: win11cis_tpm_enabled
+  tags:
+      - always
+
+- name: Set System Facts Based On Gather Facts Module
+  block:
+      - name: Set fact is system is standalone
+        ansible.builtin.set_fact:
+            win10cis_is_standalone: true
+        when:
+            - ansible_windows_domain_role == 'Stand-alone server'
+
+      - name: Set fact if domain controller role
+        ansible.builtin.set_fact:
+            win10cis_is_domain_controller: true
+        when:
+            - ansible_windows_domain_role | regex_search('(domain controller)')
+
+      - name: set fact if domain member server
+        ansible.builtin.set_fact:
+            win10cis_is_domain_member: true
+        when:
+            - ansible_windows_domain_role == 'Member server'
+  tags:
+      - always
+
+# HVM is Amazon AMI's, Hyper-V is Azure's, KVM is used for ('QEMU', 'Amazon EC2', 'DigitalOcean', 'Google', 'Scaleway', 'Nutanix', 'KVM', 'KVM Server', 'Bochs', 'AHV')
+# Current list is elastic and will be updated as we test more cloud based services.
+# Current testing is working in Azure using Hyper-V. We are currently using this for reference:
+# https://github.com/ansible/ansible/blob/905131fc76a07cf89dbc8d33e7a4910da3f10a16/lib/ansible/module_utils/facts/virtual/linux.py#L205
+- name: Set Fact If Cloud Based System.
+  ansible.builtin.set_fact:
+      win11cis_cloud_based_system: true
+  when:
+      - ansible_virtualization_type == 'Hyper-V' or
+        ansible_virtualization_type == 'hvm' or
+        ansible_virtualization_type == 'kvm'
+  tags:
+      - always
+
+- name: Check Hyper-V Installation
+  ansible.windows.win_shell: Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All | Select-Object -Property State | ft -hide
+  changed_when: false
+  failed_when: false
+  register: win11cis_hyper_v_installed
+
+- name: Get Windows installation type
+  ansible.windows.win_reg_stat:
+      path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion
+      name: InstallationType
+  register: get_windows_installation_type
+  tags:
+      - always
+
+- name: Set Windows installation type
+  ansible.builtin.set_fact:
+      win11cis_windows_installation_type: "{{ get_windows_installation_type.value | default('') }}"
+  tags:
+      - always

@@ -1,0 +1,21 @@
+---
+
+# vars file for .
+
+# Used to control warning summary
+warn_control_list: ""
+warn_count: 0
+
+# This sets the variable that is created for the banner.
+lockdown_banner: "{{lookup('file', './templates/banner.txt')}}"
+
+# win11cis_cloud_based_system is a setting built into the playbook for testing locally vs. Azure.
+# We have found certain controls that need to be set in a different order when being applied in the
+# different environments. By Default This is set to false.
+win11cis_cloud_based_system: false
+
+# These are default values that will be changed when the prelim
+# runs and finds the correct setting.
+win11cis_is_standalone: false
+win11cis_is_domain_controller: false
+win11cis_is_domain_member: false

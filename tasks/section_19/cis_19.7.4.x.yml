@@ -1,0 +1,49 @@
+---
+
+- name: "19.7.4.1 | PATCH | Ensure Do not preserve zone information in file attachments is set to Disabled"
+  block:
+      - name: "19.7.4.1 | PATCH | Ensure Do not preserve zone information in file attachments is set to Disabled"
+        ansible.windows.win_regedit:
+            path: HKU:\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments
+            name: SaveZoneInformation
+            data: 2
+            type: dword
+
+      - name: "19.7.4.1 | PATCH | Ensure Do not preserve zone information in file attachments is set to Disabled"
+        ansible.windows.win_regedit:
+            path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments
+            name: SaveZoneInformation
+            data: 2
+            type: dword
+  when:
+      - win11cis_rule_19_7_4_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - rule_19.7.4.1
+      - automated
+      - patch
+      - preserve-zone-information
+
+- name: "19.7.4.2 | PATCH | Ensure Notify antivirus programs when opening attachments is set to Enabled"
+  block:
+      - name: "19.7.4.2 | PATCH | Ensure Notify antivirus programs when opening attachments is set to Enabled"
+        ansible.windows.win_regedit:
+            path: HKU:\.DEFAULT\Software\Microsoft\Windows\Currentversion\Policies\Attachments
+            name: ScanWithAntiVirus
+            data: 3
+            type: dword
+
+      - name: "19.7.4.2 | PATCH | Ensure Notify antivirus programs when opening attachments is set to Enabled"
+        ansible.windows.win_regedit:
+            path: HKCU:\Software\Microsoft\Windows\Currentversion\Policies\Attachments
+            name: ScanWithAntiVirus
+            data: 3
+            type: dword
+  when:
+      - win11cis_rule_19_7_4_2
+  tags:
+      - level1-corporate-enterprise-environment
+      - rule_19.7.4.2
+      - automated
+      - patch
+      - antivirus

@@ -1,0 +1,25 @@
+---
+
+- name: "19.5.1.1 | PATCH | Ensure Turn off toast notifications on the lock screen is set to Enabled"
+  block:
+      - name: "19.5.1.1 | PATCH | Ensure Turn off toast notifications on the lock screen is set to Enabled"
+        ansible.windows.win_regedit:
+            path: HKU:\.DEFAULT\Software\Policies\Microsoft\Windows\Currentversion\Pushnotifications
+            name: NoToastApplicationNotificationOnLockScreen
+            data: 1
+            type: dword
+
+      - name: "19.5.1.1 | PATCH | Ensure Turn off toast notifications on the lock screen is set to Enabled"
+        ansible.windows.win_regedit:
+            path: HKCU:\Software\Policies\Microsoft\Windows\Currentversion\Pushnotifications
+            name: NoToastApplicationNotificationOnLockScreen
+            data: 1
+            type: dword
+  when:
+      - win11cis_rule_19_5_1_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - rule_19.5.1.1
+      - automated
+      - patch
+      - toast-notifications
