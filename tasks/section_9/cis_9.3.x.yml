@@ -68,7 +68,6 @@
       type: dword
   when:
       - win11cis_rule_9_3_5
-      - not win_skip_for_test
   tags:
       - level1-corporate-enterprise-environment
       - rule_9.3.5
