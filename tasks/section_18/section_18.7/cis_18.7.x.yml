@@ -15,7 +15,7 @@
       - patch
       - spooler
 
-- name: "18.7.2 | PATCH | Ensure Allow Print Spooler to accept client connections is set to Disabled"
+- name: "18.7.2 | PATCH | Ensure 'Configure Redirection Guard' is set to 'Enabled: Redirection Guard Enabled'"
   ansible.windows.win_regedit:
       path: HKLM:\Software\Policies\Microsoft\Windows NT\Printers
       name: RedirectionguardPolicy
