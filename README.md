@@ -58,7 +58,7 @@ To use release version please point to main branch and relevant release for the 
 
 ## Matching a security Level for CIS
 
-It is possible to to only run level 1 or level 2 controls for CIS as well as a variety of other tags that are available for this role.
+It is possible to only run level 1 or level 2 controls for CIS as well as a variety of other tags that are available for this role.
 This is managed using tags:
 
 - level1-corporate-enterprise-environment
@@ -72,11 +72,11 @@ This is managed using tags:
 - level2-bitlocker
 - bitlocker
 
-The controls found in defaults main also need to reflect this as this control the testing thet takes place if you are using the audit component.
+The controls found in defaults/main also need to reflect those control numbers due to aligning every control to the audit component.
 
 ## Coming from a previous release
 
-CIS release always contains changes, so it is highly recommended to review the new references and available variables. This have changed significantly since the ansible-lockdown initial release.
+CIS releases always contain changes, so it is highly recommended to review the new references and available variables. This has changed significantly since the ansible-lockdown initial release.
 This is now compatible with python3 if it is found to be the default interpreter. This does come with prerequisites that configure the system accordingly.
 
 Further details can be seen in the [Changelog](./ChangeLog.md)

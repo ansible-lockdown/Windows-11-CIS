@@ -24,6 +24,7 @@
       type: dword
   when:
       - win11cis_rule_18_10_89_1_2
+      - not win_skip_for_test
   tags:
       - level1-corporate-enterprise-environment
       - rule_18.10.89.1.2
@@ -64,33 +65,11 @@
 
 # This control will have to be set to Enabled (1) to allow for continued remote management via Ansible following machine restart
 - name: "18.10.89.2.2 | PATCH | Ensure Allow remote server management through WinRM is set to Disabled"
-  block:
-      - name: "18.10.89.2.2 | AUDIT | Ensure Allow remote server management through WinRM is set to Disabled | Warning Check For Variable Standards."
-        ansible.builtin.debug:
-            msg:
-                - "Warning!! You have an invalid setting for win11cis_winrm_allow_auto_config. Please read"
-                - "the notes for the variable and make the necessary change to the variable to be in compliance."
-        when:
-            - win11cis_winrm_allow_auto_config != 0
-            - win11cis_winrm_allow_auto_config != 1
-
-      - name: "18.10.89.2.2 | AUDIT | Ensure Allow remote server management through WinRM is set to Disabled | Warn Count."
-        ansible.builtin.import_tasks:
-            file: warning_facts.yml
-        vars:
-            warn_control_id: '18.10.89.2.2'
-        when:
-            - win11cis_winrm_allow_auto_config != 0
-            - win11cis_winrm_allow_auto_config != 1
-
-      - name: "18.10.89.2.2 | PATCH | Ensure Allow remote server management through WinRM is set to Disabled | Set Variable."
-        ansible.windows.win_regedit:
-            path: HKLM:\Software\Policies\Microsoft\Windows\Winrm\Service
-            name: AllowAutoConfig
-            data: "{{ win11cis_winrm_allow_auto_config }}"
-            type: dword
-        when:
-            - win11cis_winrm_allow_auto_config == 0 or win11cis_winrm_allow_auto_config == 1
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows\Winrm\Service
+      name: AllowAutoConfig
+      data: 0
+      type: dword
   when:
       - win11cis_rule_18_10_89_2_2
       - not win_skip_for_test
@@ -109,6 +88,7 @@
       type: dword
   when:
       - win11cis_rule_18_10_89_2_3
+      - not win_skip_for_test
   tags:
       - level1-corporate-enterprise-environment
       - rule_18.10.89.2.3

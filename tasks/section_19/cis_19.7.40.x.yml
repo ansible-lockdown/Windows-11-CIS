@@ -1,20 +1,13 @@
 ---
 
 - name: "19.7.40.1 | PATCH | Ensure Always install with elevated privileges is set to Disabled"
-  block:
-      - name: "19.7.40.1 | PATCH | Ensure Always install with elevated privileges is set to Disabled"
-        ansible.windows.win_regedit:
-            path: HKU:\.DEFAULT\Software\Policies\Microsoft\Windows\Installer
-            name: AlwaysInstallElevated
-            data: 0
-            type: dword
-
-      - name: "19.7.40.1 | PATCH | Ensure Always install with elevated privileges is set to Disabled"
-        ansible.windows.win_regedit:
-            path: HKCU:\Software\Policies\Microsoft\Windows\Installer
-            name: AlwaysInstallElevated
-            data: 0
-            type: dword
+  ansible.windows.win_regedit:
+      path: HKU:\{{ item }}\Software\Policies\Microsoft\Windows\Installer
+      name: AlwaysInstallElevated
+      data: 0
+      type: dword
+  loop: "{{ hku_loaded_list }}"
+  notify: change_requires_reboot
   when:
       - win11cis_rule_19_7_40_1
   tags:

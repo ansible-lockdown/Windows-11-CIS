@@ -8,7 +8,6 @@
       type: string
   when:
       - win11cis_rule_18_3_1
-      - not win11cis_is_domain_controller
   tags:
       - level1-corporate-enterprise-environment
       - rule_18.3.1
@@ -24,7 +23,6 @@
       type: dword
   when:
       - win11cis_rule_18_3_2
-      - not win11cis_is_domain_controller
   tags:
       - level1-corporate-enterprise-environment
       - rule_18.3.2
@@ -40,7 +38,6 @@
       type: dword
   when:
       - win11cis_rule_18_3_3
-      - not win11cis_is_domain_controller
   tags:
       - level1-corporate-enterprise-environment
       - rule_18.3.3
@@ -56,7 +53,6 @@
       type: dword
   when:
       - win11cis_rule_18_3_4
-      - not win11cis_is_domain_controller
   tags:
       - level1-corporate-enterprise-environment
       - rule_18.3.4
@@ -89,7 +85,6 @@
         when: win11cis_laps_password_length >= 15
   when:
       - win11cis_rule_18_3_5
-      - not win11cis_is_domain_controller
   tags:
       - level1-corporate-enterprise-environment
       - rule_18.3.5
@@ -121,7 +116,6 @@
         when: win11cis_laps_password_age_days <= 30
   when:
       - win11cis_rule_18_3_6
-      - not win11cis_is_domain_controller
   tags:
       - level1-corporate-enterprise-environment
       - rule_18.3.6

@@ -10,7 +10,7 @@ win11cis_section19: true
 
 # Global Variables
 
-win11cis_min_ansible_version: "2.10.1"
+win11cis_min_ansible_version: "2.12.1"
 
 # win_skip_for_test is the setting that will skip tasks that may cause changes that will affect the system.
 # These controls are primarily around RDP and WinRM
@@ -22,10 +22,17 @@ win11cis_min_ansible_version: "2.10.1"
 # 9.3.5 - Enables Firewall Public Rules *Breaks Reboot*
 # 18.10.57.3.2.1 - Disables Remote Desktop Connections
 # 18.10.89.1.1  - Disables WinRM Allow Client Basic Auth
+# 18.10.89.1.2 - Disables Client Ensure Allow unencrypted traffic is set to Disabled Control.
 # 18.10.89.2.1 - Disables WinRM Allow Service Basic Auth
 # 18.10.89.2.2 - Disables Remote Server Management through WinRM
+# 18.10.89.2.3 - Disables Service Ensure Allow unencrypted traffic is set to Disabled Control.
 # 18.10.90.1 - Disables Remote Shell Access
-win_skip_for_test: false
+win_skip_for_test: true
+
+# Changes will be made that will require a system reboot.
+# The following option will allow whether or not to skip the reboot.
+# Default: true
+skip_reboot: true
 
 # Section 1 Rules
 win11cis_rule_1_1_1: true
@@ -796,7 +803,7 @@ win11cis_consent_prompt_behavior_admin: 2
 
 # 9.1.5
 # win11cis_domain_firewall_log_path is the path to the domain firewall log files. The control suggests %SystemRoot%\System32\logfiles\firewall\domainfw.log
-# This is a variable to give some leway on where to store these log files.
+# This is a variable to give some leeway on where to store these log files.
 # Default: '%SystemRoot%\System32\logfiles\firewall\domainfw.log'
 win11cis_domain_firewall_log_path: '%SystemRoot%\System32\logfiles\firewall\domainfw.log'
 
@@ -808,22 +815,22 @@ win11cis_domain_firewall_log_size: 16384
 
 # 9.2.5
 # win11cis_private_firewall_log_path is the path to the private firewall log files. The control suggests %SystemRoot%\System32\logfiles\firewall\privatefw.log
-# This is a variable to give some leway on where to store these log files
+# This is a variable to give some leeway on where to store these log files
 win11cis_private_firewall_log_path: '%SystemRoot%\System32\logfiles\firewall\privatefw.log'
 
 # 9.2.6
 # win11cis_private_firewall_log_size is the size of the log file
-# To conform to CIS stadnards the value should be 16,384 or greater. Value is in KB
+# To conform to CIS standards the value should be 16,384 or greater. Value is in KB
 win11cis_private_firewall_log_size: 16384
 
 # 9.3.7
 # win11cis_public_firewall_log_path is the path to the public firewall log file. The control suggests %SystemRoot%\System32\logfiles\firewall\publicfw.log
-# This is a variable to give some leway on where to store these log files
+# This is a variable to give some leeway on where to store these log files
 win11cis_public_firewall_log_path: '%SystemRoot%\System32\logfiles\firewall\publicfw.log'
 
 # 9.3.8
 # win11cis_public_firewall_log_size is the size of the log file
-# To conform to CIS stadnards the value should be 16,384 or greater. Value is in KB
+# To conform to CIS standards the value should be 16,384 or greater. Value is in KB
 win11cis_public_firewall_log_size: 16384
 
 # Section 18 Variables
@@ -970,14 +977,6 @@ win11cis_allow_windows_ink_workspace: 1
 # Example: C:\PS_Transcription_Location_Ansible
 # Default: Default - This will save it to the default location
 win11cis_powershell_transcription_dir: Default
-
-# 18.10.89.2.2
-# win11cis_winrm_allow_auto_config will have to be set to Enabled (1) to allow for continued remote management via Ansible following machine restart
-# *** CIS calls for Disabled ***
-# 0 - Disbaled
-# 1 - Enabled
-# Default: 1
-win11cis_winrm_allow_auto_config: 1
 
 # 18.10.93.2.1
 # win11cis_au_options is policy setting specifies whether computers in your environment will receive security updates from Windows Update or WSUS.

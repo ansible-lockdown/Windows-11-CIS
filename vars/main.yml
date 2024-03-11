@@ -14,8 +14,6 @@ lockdown_banner: "{{lookup('file', './templates/banner.txt')}}"
 # different environments. By Default This is set to false.
 win11cis_cloud_based_system: false
 
-# These are default values that will be changed when the prelim
-# runs and finds the correct setting.
-win11cis_is_standalone: false
-win11cis_is_domain_controller: false
-win11cis_is_domain_member: false
+# default setting, this should not be changed
+# and is overridden if a task that changed sets the value if required.
+change_requires_reboot: false

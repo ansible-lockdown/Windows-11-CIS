@@ -1,20 +1,13 @@
 ---
 
 - name: "19.7.7.1 | PATCH | Ensure Configure Windows spotlight on lock screen is set to Disabled"
-  block:
-      - name: "19.7.7.1 | PATCH | Ensure Configure Windows spotlight on lock screen is set to Disabled"
-        ansible.windows.win_regedit:
-            path: HKU:\.DEFAULT\Software\Policies\Microsoft\Windows\CloudContent
-            name: ConfigureWindowsSpotlight
-            data: 2
-            type: dword
-
-      - name: "19.7.7.1 | PATCH | Ensure Configure Windows spotlight on lock screen is set to Disabled"
-        ansible.windows.win_regedit:
-            path: HKCU:\Software\Policies\Microsoft\Windows\CloudContent
-            name: ConfigureWindowsSpotlight
-            data: 2
-            type: dword
+  ansible.windows.win_regedit:
+      path: HKU:\{{ item }}\Software\Policies\Microsoft\Windows\CloudContent
+      name: ConfigureWindowsSpotlight
+      data: 2
+      type: dword
+  loop: "{{ hku_loaded_list }}"
+  notify: change_requires_reboot
   when:
       - win11cis_rule_19_7_7_1
   tags:
@@ -25,20 +18,13 @@
       - windows-spotlight
 
 - name: "19.7.7.2 | PATCH | Ensure Do not suggest third-party content in Windows spotlight is set to Enabled"
-  block:
-      - name: "19.7.7.2 | PATCH | Ensure Do not suggest third-party content in Windows spotlight is set to Enabled"
-        ansible.windows.win_regedit:
-            path: HKU:\.DEFAULT\Software\Policies\Microsoft\Windows\CloudContent
-            name: DisableThirdPartySuggestions
-            data: 1
-            type: dword
-
-      - name: "19.7.7.2 | PATCH | Ensure Do not suggest third-party content in Windows spotlight is set to Enabled"
-        ansible.windows.win_regedit:
-            path: HKCU:\Software\Policies\Microsoft\Windows\CloudContent
-            name: DisableThirdPartySuggestions
-            data: 1
-            type: dword
+  ansible.windows.win_regedit:
+      path: HKU:\{{ item }}\Software\Policies\Microsoft\Windows\CloudContent
+      name: DisableThirdPartySuggestions
+      data: 1
+      type: dword
+  loop: "{{ hku_loaded_list }}"
+  notify: change_requires_reboot
   when:
       - win11cis_rule_19_7_7_2
   tags:
@@ -49,20 +35,13 @@
       - third-party-content
 
 - name: "19.7.7.3 | PATCH | Ensure Do not use diagnostic data for tailored experiences is set to Enabled"
-  block:
-      - name: "19.7.7.3 | PATCH | Ensure Do not use diagnostic data for tailored experiences is set to Enabled"
-        ansible.windows.win_regedit:
-            path: HKU:\.DEFAULT\Software\Policies\Microsoft\Windows\CloudContent
-            name: DisableTailoredExperiencesWithDiagnosticData
-            data: 1
-            type: dword
-
-      - name: "19.7.7.3 | PATCH | Ensure Do not use diagnostic data for tailored experiences is set to Enabled"
-        ansible.windows.win_regedit:
-            path: HKCU:\Software\Policies\Microsoft\Windows\CloudContent
-            name: DisableTailoredExperiencesWithDiagnosticData
-            data: 1
-            type: dword
+  ansible.windows.win_regedit:
+      path: HKU:\{{ item }}\Software\Policies\Microsoft\Windows\CloudContent
+      name: DisableTailoredExperiencesWithDiagnosticData
+      data: 1
+      type: dword
+  loop: "{{ hku_loaded_list }}"
+  notify: change_requires_reboot
   when:
       - win11cis_rule_19_7_7_3
   tags:
@@ -73,20 +52,13 @@
       - diagnostic-data
 
 - name: "19.7.7.4 | PATCH | Ensure Turn off all Windows spotlight features is set to Enabled"
-  block:
-      - name: "19.7.7.4 | PATCH | Ensure Turn off all Windows spotlight features is set to Enabled"
-        ansible.windows.win_regedit:
-            path: HKU:\.DEFAULT\Software\Policies\Microsoft\Windows\CloudContent
-            name: DisableWindowsSpotlightFeatures
-            data: 1
-            type: dword
-
-      - name: "19.7.7.4 | PATCH | Ensure Turn off all Windows spotlight features is set to Enabled"
-        ansible.windows.win_regedit:
-            path: HKCU:\Software\Policies\Microsoft\Windows\CloudContent
-            name: DisableWindowsSpotlightFeatures
-            data: 1
-            type: dword
+  ansible.windows.win_regedit:
+      path: HKU:\{{ item }}\Software\Policies\Microsoft\Windows\CloudContent
+      name: DisableWindowsSpotlightFeatures
+      data: 1
+      type: dword
+  loop: "{{ hku_loaded_list }}"
+  notify: change_requires_reboot
   when:
       - win11cis_rule_19_7_7_4
   tags:
@@ -98,10 +70,12 @@
 
 - name: "19.7.7.5 | PATCH | Ensure Turn off Spotlight collection on Desktop is set to Enabled"
   ansible.windows.win_regedit:
-      path: HKCU:\SOFTWARE\Policies\Microsoft\Windows\CloudContent
+      path: HKU:\{{ item }}\SOFTWARE\Policies\Microsoft\Windows\CloudContent
       name: DisableSpotlightCollectionOnDesktop
       data: 1
       type: dword
+  loop: "{{ hku_loaded_list }}"
+  notify: change_requires_reboot
   when:
       - win11cis_rule_19_7_7_5
   tags:
