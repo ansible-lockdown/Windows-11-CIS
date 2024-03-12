@@ -14,6 +14,6 @@ lockdown_banner: "{{lookup('file', './templates/banner.txt')}}"
 # different environments. By Default This is set to false.
 win11cis_cloud_based_system: false
 
-# default setting, this should not be changed
+# Default setting, this should not be changed
 # and is overridden if a task that changed sets the value if required.
-change_requires_reboot: false
+reboot_host: false

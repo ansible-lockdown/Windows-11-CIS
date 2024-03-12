@@ -10,10 +10,11 @@ win11cis_section19: true
 
 # Global Variables
 
-win11cis_min_ansible_version: "2.12.1"
+win11cis_min_ansible_version: "2.10.1"
 
 # win_skip_for_test is the setting that will skip tasks that may cause changes that will affect the system.
 # These controls are primarily around RDP and WinRM
+# Default: false
 # Controls that will be skipped:
 # 2.2.16 - Breaks Local Admin Connection
 # 2.2.20 - Breaks Local Admin Connection
@@ -27,7 +28,7 @@ win11cis_min_ansible_version: "2.12.1"
 # 18.10.89.2.2 - Disables Remote Server Management through WinRM
 # 18.10.89.2.3 - Disables Service Ensure Allow unencrypted traffic is set to Disabled Control.
 # 18.10.90.1 - Disables Remote Shell Access
-win_skip_for_test: true
+win_skip_for_test: false
 
 # Changes will be made that will require a system reboot.
 # The following option will allow whether or not to skip the reboot.
