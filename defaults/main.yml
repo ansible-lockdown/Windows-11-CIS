@@ -33,7 +33,7 @@ win_skip_for_test: false
 # Changes will be made that will require a system reboot.
 # The following option will allow whether or not to skip the reboot.
 # Default: true
-skip_reboot: false
+skip_reboot: true
 
 # Section 1 Rules
 win11cis_rule_1_1_1: true
