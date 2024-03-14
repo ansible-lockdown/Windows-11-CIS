@@ -104,8 +104,8 @@
       - name: "2.3.9.5 | PATCH | Ensure Microsoft network server Server SPN target name validation level is set to Accept if provided by client or higher. | Apply Registry Setting."
         ansible.windows.win_regedit:
             path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
-            name: "{{ win11cis_smb_server_name_hardening_level }}"
-            data: 1
+            name: SMBServerNameHardeningLevel
+            data: "{{ win11cis_smb_server_name_hardening_level }}"
             type: dword
         when:
             - win11cis_smb_server_name_hardening_level == 1 or
