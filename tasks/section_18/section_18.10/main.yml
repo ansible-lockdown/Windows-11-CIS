@@ -1,0 +1,337 @@
+---
+
+- name: "SECTION | 18.10.3 | App Package Deployment"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.3.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - app-package-deployment
+
+- name: "SECTION | 18.10.4 | App Privacy"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.4.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - app-privacy
+
+- name: "SECTION | 18.10.5 | App Runtime"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.5.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - app-runtime
+
+- name: "SECTION | 18.10.7 | Autoplay Policies"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.7.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - autoplay-policies
+
+- name: "SECTION | 18.10.8 | Biometrics"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.8.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - biometrics
+
+- name: "SECTION | 18.10.9 | Bitlocker Drive Encryption"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.9.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - bitlocker-drive-encryption
+
+- name: "SECTION | 18.10.10 | Camera"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.10.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - camera
+
+- name: "SECTION | 18.10.12 | Cloud Content"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.12.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - cloud-content
+
+- name: "SECTION | 18.10.13 | Connect"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.13.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - connect
+
+- name: "SECTION | 18.10.14 | Credential User Interface"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.14.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - credential-user-interface
+
+- name: "SECTION | 18.10.15 | Data Collection And Preview Builds"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.15.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - data-collection-and-preview-builds
+
+- name: "SECTION | 18.10.16 | Delivery Optimization"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.16.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - delivery-optimization
+
+- name: "SECTION | 18.10.17 | Desktop App Installer"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.17.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - desktop-app-installer
+
+- name: "SECTION | 18.10.26 | Event Log Service"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.26.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - event-log-service
+
+- name: "SECTION | 18.10.29 | File Explorer (Formerly Windows Explorer)"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.29.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - file-explorer
+
+- name: "SECTION | 18.10.33 | Homegroup"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.33.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - homegroup
+
+- name: "SECTION | 18.10.37 | Location And Sensors"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.37.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - location-and-sensors
+
+- name: "SECTION | 18.10.41 | Messaging"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.41.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - messaging
+
+- name: "SECTION | 18.10.42 | Microsoft Account"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.42.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - microsoft-account
+
+- name: "SECTION | 18.10.43 | Microsoft Defender Antivirus (formerly Windows Defender and Windows Defender Antivirus)"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.43.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - microsoft-defender-antivirus
+
+- name: "SECTION | 18.10.44 | Microsoft Defender Application Guard (formerly Windows Defender Application Guard)"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.44.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - microsoft-defender-application-guard
+
+- name: "SECTION | 18.10.50 | News And Interests"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.50.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - news-and-interests
+
+- name: "SECTION | 18.10.51 | OneDrive (Formerly SkyDrive)"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.51.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - onedrive
+
+- name: "SECTION | 18.10.56 | Push To Install"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.56.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - push-to-install
+
+- name: "SECTION | 18.10.57 | Remote Desktop Services (formerly Terminal Services)"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.57.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - remote-desktop-services
+
+- name: "SECTION | 18.10.58 | RSS Feeds"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.58.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - rss-feeds
+
+- name: "SECTION | 18.10.59 | Search"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.59.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - search
+
+- name: "SECTION | 18.10.63 | Software Protection Platform"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.63.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - software-protection-platform
+
+- name: "SECTION | 18.10.66 | Store"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.66.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - store
+
+- name: "SECTION | 18.10.72 | Widgets"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.72.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - widgets
+
+- name: "SECTION | 18.10.76 | Windows Defender SmartScreen"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.76.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - windows-defender-smartscreen
+
+- name: "SECTION | 18.10.78 | Windows Game Recording and Broadcasting"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.78.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - windows-game-recording-and-broadcasting
+
+- name: "SECTION | 18.10.79 | Windows Hello for Business (formerly Microsoft Passport for Work)"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.79.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - windows-hello-for-business
+
+- name: "SECTION | 18.10.80 | Windows Ink Workspace"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.80.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - windows-ink-workspace
+
+- name: "SECTION | 18.10.81 | Windows Installer"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.81.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - windows-installer
+
+- name: "SECTION | 18.10.82 | Windows Logon Options"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.82.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - windows-logon-options
+
+- name: "SECTION | 18.10.87 | Windows Powershell"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.87.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - windows-powershell
+
+- name: "SECTION | 18.10.89 | Windows Remote Management (WinRM)"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.89.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - windows-remote-management
+
+- name: "SECTION | 18.10.90 | Windows Remote Shell"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.90.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - windows-remote-shell
+
+- name: "SECTION | 18.10.91 | Windows Sandbox"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.91.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - windows-sandbox
+
+- name: "SECTION | 18.10.92 | Windows Security (formerly Windows Defender Security Center)"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.92.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - windows-security
+
+- name: "SECTION | 18.10.93 | Windows Update"
+  ansible.builtin.import_tasks:
+      file: cis_18.10.93.x.yml
+  tags:
+      - administrative-templates-computer
+      - windows-components
+      - windows-update
