@@ -91,7 +91,7 @@
         failed_when: false
         register: current_users_loaded_hku
 
-      - name: PRELIM | Create List Fact For Current Users SIDs from HKEY_USERS
+      - name: PRELIM | Create List Fact For Current Users SIDs from HKEY_USERS.
         ansible.builtin.set_fact:
             hku_loaded_list: "{{ current_users_loaded_hku.stdout | regex_replace('HKEY_USERS\\\\','') | split }}"
   when: win11cis_section19
