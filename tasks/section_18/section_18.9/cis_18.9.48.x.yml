@@ -1,0 +1,16 @@
+---
+
+- name: "18.9.48.1 | PATCH | Ensure Turn off the advertising ID is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows\Advertisinginfo
+      name: DisabledByGroupPolicy
+      data: 1
+      type: dword
+  when:
+      - win11cis_rule_18_9_48_1
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - rule_18.9.48.1
+      - automated
+      - patch
+      - advertising

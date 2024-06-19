@@ -1,0 +1,8 @@
+---
+
+- name: "SECTION | 18.3 | LAPS"
+  ansible.builtin.import_tasks:
+      file: cis_18.3.x.yml
+  tags:
+      - administrative-templates-computer
+      - laps
