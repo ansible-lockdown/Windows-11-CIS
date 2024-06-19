@@ -2,7 +2,7 @@
 
 ## Configure a Windows 11 Enterprise system to be [CIS](https://www.cisecurity.org/cis-benchmarks/) compliant
 
-### Based On [ Microsoft Windows 11 Enterprise Benchmark v2.0.0 - 03-07-2023 ](https://www.cisecurity.org/cis-benchmarks/)
+### Based on [ Microsoft Windows 11 Enterprise Benchmark v2.0.0 - 03-07-2023 ](https://www.cisecurity.org/cis-benchmarks/)
 
 ---
 
