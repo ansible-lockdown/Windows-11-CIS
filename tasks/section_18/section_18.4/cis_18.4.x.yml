@@ -51,7 +51,6 @@
       name: SMB1
       data: 0
       type: dword
-      state: present
   notify: change_requires_reboot
   when:
       - win11cis_rule_18_4_4
@@ -68,7 +67,6 @@
       name: DisableExceptionChainValidation
       data: 0
       type: dword
-      state: present
   when:
       - win11cis_rule_18_4_5
   tags:
@@ -81,7 +79,6 @@
 - name: "18.4.6 | PATCH | Ensure 'NetBT NodeType configuration' is set to 'Enabled: P-node recommended'"
   ansible.windows.win_regedit:
       path: HKLM:\SYSTEM\CurrentControlSet\Services\NetBT\Parameters
-      state: present
       value: NodeType
       data: "{{ win11cis_netbt_nodetype }}"
       datatype: dword
@@ -97,7 +94,6 @@
 - name: "18.4.7 | PATCH | Ensure WDigest Authentication is set to Disabled"
   ansible.windows.win_regedit:
       path: HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\Wdigest
-      state: present
       value: UseLogonCredential
       data: 0
       datatype: dword

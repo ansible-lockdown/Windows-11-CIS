@@ -149,7 +149,7 @@
 - name: "2.2.11 | PATCH | Ensure Create a token object is set to No One."
   ansible.windows.win_user_right:
       name: SeCreateTokenPrivilege
-      users: []
+      users: "{{ wn11cis_secreatetokenprivilege }}"
       action: set
   when:
       - win11cis_rule_2_2_11
@@ -197,7 +197,7 @@
             users:
                 - Administrators
             action: set
-        when: "'Enabled' not in win11cis_hyper_v_installed.stdout"
+        when: "'Enabled' not in discovered_win11cis_hyper_v_installed.stdout"
 
       - name: "2.2.14 | PATCH | Configure Create symbolic links is set to Administrators Or Add NT VIRTUAL MACHINE when Hyper-V Installed. | Hyper-V Installed."
         ansible.windows.win_user_right:
@@ -206,7 +206,7 @@
                 - Administrators
                 - NT VIRTUAL MACHINE\Virtual Machines
             action: set
-        when: "'Enabled' in win11cis_hyper_v_installed.stdout_lines"
+        when: "'Enabled' in discovered_win11cis_hyper_v_installed.stdout_lines"
   when:
       - win11cis_rule_2_2_14
   tags:
@@ -355,7 +355,7 @@
         ansible.windows.win_shell: Get-WindowsOptionalFeature -Online -FeatureName IIS-WebServerRole | Select-Object -Property State | ft -hide
         changed_when: false
         failed_when: false
-        register: win11cis_iis_web_server_role_installed
+        register: discovered_2_2_24_iis_web_server_role_installed
 
       - name: "2.2.24 | PATCH | Ensure Impersonate a client after authentication is set to Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE, and when the Web Server IIS Role with Web Services Role Service is installed IIS IUSRS. | Web Server Not Installed."
         ansible.windows.win_user_right:
@@ -366,7 +366,7 @@
                 - Network Service
                 - Service
             action: set
-        when: "'Enabled' not in win11cis_iis_web_server_role_installed.stdout_lines"
+        when: "'Enabled' not in discovered_2_2_24_iis_web_server_role_installed.stdout_lines"
 
       - name: "2.2.24 | PATCH | Ensure Impersonate a client after authentication is set to Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE, and when the Web Server IIS Role with Web Services Role Service is installed IIS IUSRS. | Web Server Installed."
         ansible.windows.win_user_right:
@@ -378,7 +378,7 @@
                 - Network Service
                 - Service
             action: set
-        when: "'Enabled' in win11cis_iis_web_server_role_installed.stdout_lines"
+        when: "'Enabled' in discovered_2_2_24_iis_web_server_role_installed.stdout_lines"
   when:
       - win11cis_rule_2_2_24
   tags:
@@ -455,7 +455,7 @@
             users: "{{ win11cis_sebatchlogonright }}"
             action: set
         when:
-            - "'Enabled' not in win11cis_hyper_v_installed.stdout"
+            - "'Enabled' not in discovered_win11cis_hyper_v_installed.stdout"
             - '"" in win11cis_sebatchlogonright'
 
       - name: "2.2.29 | PATCH | Configure Log on as a service. | Hyper-V installed."
@@ -465,7 +465,7 @@
                 - NT VIRTUAL MACHINE\Virtual Machines
             action: set
         when:
-            - "'Enabled' in win11cis_hyper_v_installed.stdout"
+            - "'Enabled' in discovered_win11cis_hyper_v_installed.stdout"
             - '"" in win11cis_sebatchlogonright'
 
       - name: "2.2.29 | PATCH | Configure Log on as a service. | User Defined Input."

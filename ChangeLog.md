@@ -1,5 +1,20 @@
 # Changelog
 
+June 2024
+  - Updated 18.9.19.5 To 0 "Disabled" - Thanks @dennisharder-alight
+  - Updated 18.10.43.10.2 To 0 "Disabled"
+  - Updated 18.5.1 Value to name. - Thanks @mfortin
+  - Updated 18.5.1 path missing \ between Software and Microsoft.
+  - Updated 2.2.11 To allow variables to be input if site requires it.
+  - Updated PRELIM | Set Fact If Cloud Based System to include ansible_system_vendor. - Thanks @mfortin
+  - Updated Pipelines - Thanks @mfortin
+  - Added discovered to Prelim reistered names.
+  - Added discovered_controlid to controls that register values.
+  - Verified 1.1.6 RelaxMinimumPasswordLengthLimits is using registry style entry not win_security_policy.
+  - Verified 18.10.93.4.1 ManagePreviewBuildsPolicyValue is set to 0 value.
+  - Control 17.9.5 updated changed_when.
+  - Removed all win_regedit state: present: (Default) value for the module.
+
 ## Release 1.0.0
 
 March 2024

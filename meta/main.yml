@@ -1,12 +1,12 @@
 ---
 galaxy_info:
-    author: "Stephen Williams"
+    author: "MindPoint Group"
     description: "Ansible Role to Apply The Windows 11 Enterprise CIS Benchmark"
     company: "MindPoint Group"
     license: MIT
     role_name: windows_11_cis
     namespace: mindpointgroup
-    min_ansible_version: 2.10.1
+    min_ansible_version: 2.12
 
     galaxy_tags:
         - system
@@ -19,9 +19,9 @@ galaxy_info:
         - complianceascode
         - compliance
 
-    collections:
-        - ansible.windows
-        - community.windows
-        - community.general
+collections:
+    - ansible.windows
+    - community.windows
+    - community.general
 
-    dependencies: []
+dependencies: []

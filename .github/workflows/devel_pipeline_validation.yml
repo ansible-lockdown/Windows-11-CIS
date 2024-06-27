@@ -49,6 +49,9 @@ jobs:
             ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
             WIN_USERNAME: ${{ secrets.WIN_USERNAME }}
             WIN_PASSWORD: ${{ secrets.WIN_PASSWORD }}
+            OSVAR: ${{ vars.OSVAR }}
+            TF_VAR_benchmark_type: ${{ vars.BENCHMARK_TYPE }}
+            TF_VAR_run_job_id: ${{ github.run_id }}
 
         defaults:
             run:
@@ -83,38 +86,19 @@ jobs:
                 echo "benchmark_type = $benchmark_type"
                 pwd
                 ls
-              env:
-                  # Imported from github variables this is used to load the relevant OS.tfvars file
-                  OSVAR: ${{ vars.OSVAR }}
-                  TF_VAR_benchmark_type: ${{ vars.BENCHMARK_TYPE }}
 
           # Initialize The Terraform Working Directory
             - name: Terraform_Init
               id: init
               run: terraform init
-              env:
-                # Imported from github variables this is used to load the relevant OS.tfvars file
-                  OSVAR: ${{ vars.OSVAR }}
-                  TF_VAR_benchmark_type: ${{ vars.BENCHMARK_TYPE }}
 
           # Validate The Syntax Of Terraform Files
             - name: Terraform_Validate
               id: validate
               run: terraform validate
-              env:
-                # Imported from github variables this is used to load the relevant OS.tfvars file
-                  OSVAR: ${{ vars.OSVAR }}
-                  TF_VAR_benchmark_type: ${{ vars.BENCHMARK_TYPE }}
-
           # Execute The Actions And Build Azure Server
             - name: Terraform_Apply
               id: apply
-              env:
-                # Imported from github variables this is used to load the relevant OS.tfvars file
-                  WIN_USERNAME: ${{ secrets.WIN_USERNAME }}
-                  WIN_PASSWORD: ${{ secrets.WIN_PASSWORD }}
-                  OSVAR: ${{ vars.OSVAR }}
-                  TF_VAR_benchmark_type: ${{ vars.BENCHMARK_TYPE }}
               run: terraform apply -var-file "${OSVAR}.tfvars" --auto-approve
 
           # Debug Section
@@ -137,7 +121,4 @@ jobs:
           # Destroy The Azure Test System
             - name: Terraform_Destroy
               if: always() && env.ENABLE_DEBUG == 'false'
-              env:
-                  OSVAR: ${{ vars.OSVAR }}
-                  TF_VAR_benchmark_type: ${{ vars.BENCHMARK_TYPE }}
               run: terraform destroy -var-file "${OSVAR}.tfvars" --auto-approve

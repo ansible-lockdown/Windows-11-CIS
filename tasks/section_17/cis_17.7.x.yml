@@ -7,11 +7,11 @@
         changed_when: false
         failed_when: false
         check_mode: false
-        register: rule_17_7_1_audit
+        register: discovered_17_7_1_audit
 
       - name: "17.7.1 | PATCH | Ensure Audit Audit Policy Change is set to include Success | Success"
         ansible.windows.win_shell: AuditPol /set /subcategory:"Audit Policy Change" /success:enable
-        when: "'Success' not in rule_17_7_1_audit.stdout"
+        when: "'Success' not in discovered_17_7_1_audit.stdout"
   when:
       - win11cis_rule_17_7_1
   tags:
@@ -28,11 +28,11 @@
         changed_when: false
         failed_when: false
         check_mode: false
-        register: rule_17_7_2_audit
+        register: discovered_17_7_2_audit
 
       - name: "17.7.2 | PATCH | Ensure Audit Authentication Policy Change is set to include Success | Success"
         ansible.windows.win_shell: AuditPol /set /subcategory:"Authentication Policy Change" /success:enable
-        when: "'Success' not in rule_17_7_2_audit.stdout"
+        when: "'Success' not in discovered_17_7_2_audit.stdout"
   when:
       - win11cis_rule_17_7_2
   tags:
@@ -49,11 +49,11 @@
         changed_when: false
         failed_when: false
         check_mode: false
-        register: rule_17_7_3_audit
+        register: discovered_17_7_3_audit
 
       - name: "17.7.3 | PATCH | Ensure Audit Authorization Policy Change is set to include Success | Success"
         ansible.windows.win_shell: AuditPol /set /subcategory:"Authorization Policy Change" /success:enable
-        when: "'Success' not in rule_17_7_3_audit.stdout"
+        when: "'Success' not in discovered_17_7_3_audit.stdout"
   when:
       - win11cis_rule_17_7_3
   tags:
@@ -70,15 +70,15 @@
         changed_when: false
         failed_when: false
         check_mode: false
-        register: rule_17_7_4_audit
+        register: discovered_17_7_4_audit
 
       - name: "17.7.4 | PATCH | Ensure Audit MPSSVC Rule-Level Policy Change is set to Success and Failure | Success"
         ansible.windows.win_shell: AuditPol /set /subcategory:"MPSSVC Rule-Level Policy Change" /success:enable
-        when: "'Success' not in rule_17_7_4_audit.stdout"
+        when: "'Success' not in discovered_17_7_4_audit.stdout"
 
       - name: "17.7.4 | PATCH | Ensure Audit MPSSVC Rule-Level Policy Change is set to Success and Failure | Failure"
         ansible.windows.win_shell: AuditPol /set /subcategory:"MPSSVC Rule-Level Policy Change" /failure:enable
-        when: "'Failure' not in rule_17_7_4_audit.stdout"
+        when: "'Failure' not in discovered_17_7_4_audit.stdout"
   when:
       - win11cis_rule_17_7_4
   tags:
@@ -95,11 +95,11 @@
         changed_when: false
         failed_when: false
         check_mode: false
-        register: rule_17_7_5_audit
+        register: discovered_17_7_5_audit
 
       - name: "17.7.5 | PATCH | Ensure Audit Other Policy Change Events is set to include Failure | Failure"
         ansible.windows.win_shell: AuditPol /set /subcategory:"Other Policy Change Events" /failure:enable
-        when: "'Failure' not in rule_17_7_5_audit.stdout"
+        when: "'Failure' not in discovered_17_7_5_audit.stdout"
   when:
       - win11cis_rule_17_7_5
   tags:
