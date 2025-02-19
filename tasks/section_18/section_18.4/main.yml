@@ -4,5 +4,5 @@
   ansible.builtin.import_tasks:
       file: cis_18.4.x.yml
   tags:
-      - administrative-templates-computer
-      - ms-security-guide
+      - administrative_templates_computer
+      - ms_security_guide

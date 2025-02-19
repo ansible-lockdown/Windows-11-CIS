@@ -6,13 +6,12 @@
       name: NoAutoplayfornonVolume
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_7_1
+  when: win11cis_rule_18_10_7_1
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.10.7.1
-      - automated
       - patch
+      - automated
+      - rule_18.10.7.1
       - autoplay
 
 - name: "18.10.7.2 | PATCH | Ensure Set the default behavior for AutoRun is set to Enabled Do not execute any autorun commands"
@@ -21,13 +20,12 @@
       name: NoAutorun
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_7_2
+  when: win11cis_rule_18_10_7_2
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.10.7.2
-      - automated
       - patch
+      - automated
+      - rule_18.10.7.2
       - autoplay
 
 - name: "18.10.7.3 | PATCH | Ensure Turn off Autoplay is set to Enabled All drives"
@@ -36,11 +34,10 @@
       name: NoDriveTypeAutoRun
       data: 255
       type: dword
-  when:
-      - win11cis_rule_18_10_7_3
+  when: win11cis_rule_18_10_7_3
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.10.7.3
-      - automated
       - patch
+      - automated
+      - rule_18.10.7.3
       - autoplay

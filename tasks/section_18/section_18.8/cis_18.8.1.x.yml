@@ -6,11 +6,10 @@
       name: NoCloudApplicationNotification
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_8_1_1
+  when: win11cis_rule_18_8_1_1
   tags:
-      - level1-corporate-enterprise-environment
-      - rule_18.8.1.1
-      - automated
+      - level2-high-security-sensitive-data-environment
       - patch
+      - automated
+      - rule_18.8.1.1
       - notifications

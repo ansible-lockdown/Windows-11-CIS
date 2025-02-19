@@ -6,12 +6,10 @@
       name: AllowInputPersonalization
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_1_2_2
+  when: win11cis_rule_18_1_2_2
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.1.2.2
-      - automated
       - patch
-      - administrative-templates-computer
-      - speech-recognition
+      - automated
+      - rule_18.1.2.2
+      - speech_recognition

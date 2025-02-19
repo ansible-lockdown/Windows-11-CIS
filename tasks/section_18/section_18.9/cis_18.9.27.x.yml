@@ -1,105 +1,16 @@
 ---
 
-- name: "18.9.27.1 | PATCH | Ensure Block user from showing account details on sign-in is set to Enabled"
+- name: "18.9.27.1 | PATCH | Ensure Disallow copying of user input methods to the system account for sign-in is set to Enabled"
   ansible.windows.win_regedit:
-      path: HKLM:\Software\Policies\Microsoft\Windows\System
-      name: BlockUserFromShowingAccountDetailsOnSignin
+      path: HKLM:\Software\Policies\Microsoft\Control Panel\International
+      name: BlockUserInputMethodsForSignIn
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_9_27_1
+  when: win11cis_rule_18_9_27_1
   tags:
-      - level1-corporate-enterprise-environment
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
       - rule_18.9.27.1
-      - automated
-      - patch
-      - accounts
-
-- name: "18.9.27.2 | PATCH | Ensure Do not display network selection UI is set to Enabled"
-  ansible.windows.win_regedit:
-      path: HKLM:\Software\Policies\Microsoft\Windows\System
-      name: DontDisplayNetworkSelectionUI
-      data: 1
-      type: dword
-  when:
-      - win11cis_rule_18_9_27_2
-  tags:
-      - level1-corporate-enterprise-environment
-      - rule_18.9.27.2
-      - automated
-      - patch
-      - network
-
-- name: "18.9.27.3 | PATCH | Ensure Do not enumerate connected users on domain-joined computers is set to Enabled"
-  ansible.windows.win_regedit:
-      path: HKLM:\Software\Policies\Microsoft\Windows\System
-      name: DontEnumerateConnectedUsers
-      data: 1
-      type: dword
-  when:
-      - win11cis_rule_18_9_27_3
-  tags:
-      - level1-corporate-enterprise-environment
-      - rule_18.9.27.3
-      - automated
-      - patch
-      - enumerate
-
-- name: "18.9.27.4 | PATCH | Ensure Enumerate local users on domain-joined computers is set to Disabled"
-  ansible.windows.win_regedit:
-      path: HKLM:\Software\Policies\Microsoft\Windows\System
-      name: EnumerateLocalUsers
-      data: 0
-      type: dword
-  when:
-      - win11cis_rule_18_9_27_4
-  tags:
-      - level1-corporate-enterprise-environment
-      - rule_18.9.27.4
-      - automated
-      - patch
-      - enumerate
-
-- name: "18.9.27.5 | PATCH | Ensure Turn off app notifications on the lock screen is set to Enabled"
-  ansible.windows.win_regedit:
-      path: HKLM:\Software\Policies\Microsoft\Windows\System
-      name: DisableLockScreenAppNotifications
-      data: 1
-      type: dword
-  when:
-      - win11cis_rule_18_9_27_5
-  tags:
-      - level1-corporate-enterprise-environment
-      - rule_18.9.27.5
-      - automated
-      - patch
-      - notifications
-
-- name: "18.9.27.6 | PATCH | Ensure Turn off picture password sign-in is set to Enabled"
-  ansible.windows.win_regedit:
-      path: HKLM:\Software\Policies\Microsoft\Windows\System
-      name: BlockDomainPicturePassword
-      data: 1
-      type: dword
-  when:
-      - win11cis_rule_18_9_27_6
-  tags:
-      - level1-corporate-enterprise-environment
-      - rule_18.9.27.6
-      - automated
-      - patch
-
-- name: "18.9.27.7 | PATCH | Ensure Turn on convenience PIN sign-in is set to Disabled"
-  ansible.windows.win_regedit:
-      path: HKLM:\Software\Policies\Microsoft\Windows\System
-      name: AllowDomainPINLogon
-      data: 0
-      type: dword
-  when:
-      - win11cis_rule_18_9_27_7
-  tags:
-      - level1-corporate-enterprise-environment
-      - rule_18.9.27.7
-      - automated
-      - patch
-      - pin
+      - copying
+      - input_method

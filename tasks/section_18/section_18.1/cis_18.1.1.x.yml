@@ -6,14 +6,13 @@
       name: NoLockScreenCamera
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_1_1_1
+  when: win11cis_rule_18_1_1_1
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.1.1.1
-      - automated
       - patch
-      - lock-screen-camera
+      - automated
+      - rule_18.1.1.1
+      - lock_screen_camera
 
 - name: "18.1.1.2 | PATCH | Ensure Prevent enabling lock screen slide show is set to Enabled"
   ansible.windows.win_regedit:
@@ -21,11 +20,10 @@
       name: NoLockScreenSlideshow
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_1_1_2
+  when: win11cis_rule_18_1_1_2
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.1.1.2
-      - automated
       - patch
-      - lock-screen-slideshow
+      - automated
+      - rule_18.1.1.2
+      - lock_screen_slideshow

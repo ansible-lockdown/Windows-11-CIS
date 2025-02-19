@@ -6,16 +6,15 @@
       name: DenyDeviceIDs
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_9_7_1_1
+  when: win11cis_rule_18_9_7_1_1
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.9.7.1.1
-      - automated
       - patch
-      - device-installations-restrictions
+      - automated
+      - rule_18.9.7.1.1
+      - device_installations_restrictions
 
 - name: "18.9.7.1.2 | PATCH | Ensure 'Prevent installation of devices that match any of these device IDs: Prevent installation of devices that match any of these device IDs' is set to 'PCI\\CC_0C0A'"
   ansible.windows.win_regedit:
@@ -23,16 +22,15 @@
       name: 1
       data: PCI\CC_0C0A
       type: string
-  when:
-      - win11cis_rule_18_9_7_1_2
+  when: win11cis_rule_18_9_7_1_2
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.9.7.1.2
-      - automated
       - patch
-      - device-installations-restrictions
+      - automated
+      - rule_18.9.7.1.2
+      - device_installations_restrictions
 
 - name: "18.9.7.1.3 | PATCH | Ensure 'Prevent installation of devices that match any of these device IDs: Also apply to matching devices that are already installed.' is set to 'True'"
   ansible.windows.win_regedit:
@@ -40,16 +38,15 @@
       name: DenyDeviceIDsRetroactive
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_9_7_1_3
+  when: win11cis_rule_18_9_7_1_3
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.9.7.1.3
-      - automated
       - patch
-      - device-installations-restrictions
+      - automated
+      - rule_18.9.7.1.3
+      - device_installations_restrictions
 
 - name: "18.9.7.1.4 | PATCH | Ensure 'Prevent installation of devices using drivers that match these device setup classes' is set to 'Enabled'"
   ansible.windows.win_regedit:
@@ -57,16 +54,15 @@
       name: DenyDeviceClasses
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_9_7_1_4
+  when: win11cis_rule_18_9_7_1_4
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.9.7.1.4
-      - automated
       - patch
-      - device-installations-restrictions
+      - automated
+      - rule_18.9.7.1.4
+      - device_installations_restrictions
 
 - name: "18.9.7.1.5 | PATCH | Ensure 'Prevent installation of devices using drivers that match these device setup classes' is set to 'Enabled'"
   block:
@@ -97,16 +93,15 @@
             name: 4
             data: '{6bdd1fc1-810f-11d0-bec7-08002be2092f}'
             type: string
-  when:
-      - win11cis_rule_18_9_7_1_5
+  when: win11cis_rule_18_9_7_1_5
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.9.7.1.5
-      - automated
       - patch
-      - device-installations-restrictions
+      - automated
+      - rule_18.9.7.1.5
+      - device_installations_restrictions
 
 - name: "18.9.7.1.6 | PATCH | Ensure 'Prevent installation of devices using drivers that match these device setup classes: Also apply to matching devices that are already installed.' is set to 'True'"
   ansible.windows.win_regedit:
@@ -114,16 +109,15 @@
       name: DenyDeviceClassesRetroactive
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_9_7_1_6
+  when: win11cis_rule_18_9_7_1_6
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.9.7.1.6
-      - automated
       - patch
-      - device-installations-restrictions
+      - automated
+      - rule_18.9.7.1.6
+      - device_installations_restrictions
 
 - name: "18.9.7.2 | PATCH | Ensure Prevent device metadata retrieval from the Internet is set to Enabled"
   ansible.windows.win_regedit:
@@ -131,11 +125,10 @@
       name: PreventDeviceMetadataFromNetwork
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_9_7_2
+  when: win11cis_rule_18_9_7_2
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.9.7.2
-      - automated
       - patch
+      - automated
+      - rule_18.9.7.2
       - metadata

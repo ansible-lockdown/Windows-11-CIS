@@ -6,13 +6,12 @@
       name: FilterAdministratorToken
       data: 1
       type: dword
-  when:
-      - win11cis_rule_2_3_17_1
+  when: win11cis_rule_2_3_17_1
   tags:
       - level1-corporate-enterprise-environment
-      - rule_2.3.17.1
-      - automated
       - patch
+      - automated
+      - rule_2.3.17.1
 
 - name: "2.3.17.2 | PATCH | Ensure 'User Account Control: Behavior of the elevation prompt for administrators in Admin Approval Mode' is set to 'Prompt for consent on the secure desktop' or higher."
   ansible.windows.win_regedit:
@@ -20,13 +19,12 @@
       name: ConsentPromptBehaviorAdmin
       data: "{{ win11cis_consent_prompt_behavior_admin }}"
       type: dword
-  when:
-      - win11cis_rule_2_3_17_2
+  when: win11cis_rule_2_3_17_2
   tags:
       - level1-corporate-enterprise-environment
-      - rule_2.3.17.2
-      - automated
       - patch
+      - automated
+      - rule_2.3.17.2
 
 - name: "2.3.17.3 | PATCH | Ensure User Account Control Behavior of the elevation prompt for standard users is set to Automatically deny elevation requests."
   ansible.windows.win_regedit:
@@ -34,13 +32,12 @@
       name: ConsentPromptBehaviorUser
       data: 0
       type: dword
-  when:
-      - win11cis_rule_2_3_17_3
+  when: win11cis_rule_2_3_17_3
   tags:
       - level1-corporate-enterprise-environment
-      - rule_2.3.17.3
-      - automated
       - patch
+      - automated
+      - rule_2.3.17.3
 
 - name: "2.3.17.4 | PATCH | Ensure User Account Control Detect application installations and prompt for elevation is set to Enabled."
   ansible.windows.win_regedit:
@@ -48,13 +45,12 @@
       name: EnableInstallerDetection
       data: 1
       type: dword
-  when:
-      - win11cis_rule_2_3_17_4
+  when: win11cis_rule_2_3_17_4
   tags:
       - level1-corporate-enterprise-environment
-      - rule_2.3.17.4
-      - automated
       - patch
+      - automated
+      - rule_2.3.17.4
 
 - name: "2.3.17.5 | PATCH | Ensure User Account Control Only elevate UIAccess applications that are installed in secure locations is set to Enabled."
   ansible.windows.win_regedit:
@@ -62,13 +58,12 @@
       name: EnableSecureUIAPaths
       data: 1
       type: dword
-  when:
-      - win11cis_rule_2_3_17_5
+  when: win11cis_rule_2_3_17_5
   tags:
       - level1-corporate-enterprise-environment
-      - rule_2.3.17.5
-      - automated
       - patch
+      - automated
+      - rule_2.3.17.5
 
 - name: "2.3.17.6 | PATCH | Ensure User Account Control Run all administrators in Admin Approval Mode is set to Enabled."
   ansible.windows.win_regedit:
@@ -76,13 +71,12 @@
       name: EnableLUA
       data: 1
       type: dword
-  when:
-      - win11cis_rule_2_3_17_6
+  when: win11cis_rule_2_3_17_6
   tags:
       - level1-corporate-enterprise-environment
-      - rule_2.3.17.6
-      - automated
       - patch
+      - automated
+      - rule_2.3.17.6
 
 - name: "2.3.17.7 | PATCH | Ensure User Account Control Switch to the secure desktop when prompting for elevation is set to Enabled."
   ansible.windows.win_regedit:
@@ -90,13 +84,12 @@
       name: PromptOnSecureDesktop
       data: 1
       type: dword
-  when:
-      - win11cis_rule_2_3_17_7
+  when: win11cis_rule_2_3_17_7
   tags:
       - level1-corporate-enterprise-environment
-      - rule_2.3.17.7
-      - automated
       - patch
+      - automated
+      - rule_2.3.17.7
 
 - name: "2.3.17.8 | PATCH | Ensure User Account Control Virtualize file and registry write failures to per-user locations is set to Enabled"
   ansible.windows.win_regedit:
@@ -104,10 +97,9 @@
       name: EnableVirtualization
       data: 1
       type: dword
-  when:
-      - win11cis_rule_2_3_17_8
+  when: win11cis_rule_2_3_17_8
   tags:
       - level1-corporate-enterprise-environment
-      - rule_2.3.17.8
-      - automated
       - patch
+      - automated
+      - rule_2.3.17.8

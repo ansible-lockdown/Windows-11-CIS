@@ -6,11 +6,10 @@
       name: DriverLoadPolicy
       data: 3
       type: dword
-  when:
-      - win11cis_rule_18_9_13_1
+  when: win11cis_rule_18_9_13_1
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.9.13.1
-      - automated
       - patch
+      - automated
+      - rule_18.9.13.1
       - drivers

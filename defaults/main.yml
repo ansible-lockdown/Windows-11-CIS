@@ -10,7 +10,7 @@ win11cis_section19: true
 
 # Global Variables
 
-win11cis_min_ansible_version: "2.10.1"
+win11cis_min_ansible_version: "2.14"
 
 # win_skip_for_test is the setting that will skip tasks that may cause changes that will affect the system.
 # These controls are primarily around RDP and WinRM
@@ -18,16 +18,16 @@ win11cis_min_ansible_version: "2.10.1"
 # Controls that will be skipped:
 # 2.2.16 - Breaks Local Admin Connection
 # 2.2.20 - Breaks Local Admin Connection
-# 5.22 -  Disables Remote Desktop Service Disabled
-# 5.40 - Disables WinRm Service
+# 5.21 - Disables Remote Desktop Service Disabled
+# 5.39 - Disables WinRm Service
 # 9.3.5 - Enables Firewall Public Rules *Breaks Reboot*
-# 18.10.57.3.2.1 - Disables Remote Desktop Connections
-# 18.10.89.1.1  - Disables WinRM Allow Client Basic Auth
-# 18.10.89.1.2 - Disables Client Ensure Allow unencrypted traffic is set to Disabled Control.
-# 18.10.89.2.1 - Disables WinRM Allow Service Basic Auth
-# 18.10.89.2.2 - Disables Remote Server Management through WinRM
-# 18.10.89.2.3 - Disables Service Ensure Allow unencrypted traffic is set to Disabled Control.
-# 18.10.90.1 - Disables Remote Shell Access
+# 18.10.56.3.2.1 - Disables Remote Desktop Connections
+# 18.10.88.1.1 - Disables WinRM Allow Client Basic Auth
+# 18.10.88.1.2 - Disables Client Ensure Allow unencrypted traffic is set to Disabled Control.
+# 18.10.88.2.1 - Disables WinRM Allow Service Basic Auth
+# 18.10.88.2.2 - Disables Remote Server Management through WinRM
+# 18.10.88.2.3 - Disables Service Ensure Allow unencrypted traffic is set to Disabled Control.
+# 18.10.89.1 - Disables Remote Shell Access
 win_skip_for_test: false
 
 # Changes will be made that will require a system reboot.
@@ -99,7 +99,6 @@ win11cis_rule_2_3_1_5: true
 win11cis_rule_2_3_2_1: true
 win11cis_rule_2_3_2_2: true
 win11cis_rule_2_3_4_1: true
-win11cis_rule_2_3_4_2: true
 win11cis_rule_2_3_6_1: true
 win11cis_rule_2_3_6_2: true
 win11cis_rule_2_3_6_3: true
@@ -145,6 +144,8 @@ win11cis_rule_2_3_11_7: true
 win11cis_rule_2_3_11_8: true
 win11cis_rule_2_3_11_9: true
 win11cis_rule_2_3_11_10: true
+win11cis_rule_2_3_11_11: true
+win11cis_rule_2_3_11_12: true
 win11cis_rule_2_3_14_1: true
 win11cis_rule_2_3_15_1: true
 win11cis_rule_2_3_15_2: true
@@ -186,8 +187,8 @@ win11cis_rule_5_22: true
 win11cis_rule_5_23: true
 win11cis_rule_5_24: true
 win11cis_rule_5_25: true
+# 5.26 Causes warnings with SID Retrieval in Ansible
 win11cis_rule_5_26: true
-# 5.27 Causes warnings with SID Retrieval in Ansible
 win11cis_rule_5_27: true
 win11cis_rule_5_28: true
 win11cis_rule_5_29: true
@@ -206,7 +207,6 @@ win11cis_rule_5_41: true
 win11cis_rule_5_42: true
 win11cis_rule_5_43: true
 win11cis_rule_5_44: true
-win11cis_rule_5_45: true
 
 # Section 9
 win11cis_rule_9_1_1: true
@@ -216,7 +216,6 @@ win11cis_rule_9_1_4: true
 win11cis_rule_9_1_5: true
 win11cis_rule_9_1_6: true
 win11cis_rule_9_1_7: true
-win11cis_rule_9_1_8: true
 win11cis_rule_9_2_1: true
 win11cis_rule_9_2_2: true
 win11cis_rule_9_2_3: true
@@ -224,7 +223,6 @@ win11cis_rule_9_2_4: true
 win11cis_rule_9_2_5: true
 win11cis_rule_9_2_6: true
 win11cis_rule_9_2_7: true
-win11cis_rule_9_2_8: true
 win11cis_rule_9_3_1: true
 win11cis_rule_9_3_2: true
 win11cis_rule_9_3_3: true
@@ -234,7 +232,6 @@ win11cis_rule_9_3_6: true
 win11cis_rule_9_3_7: true
 win11cis_rule_9_3_8: true
 win11cis_rule_9_3_9: true
-win11cis_rule_9_3_10: true
 
 # Section 17
 win11cis_rule_17_1_1: true
@@ -270,12 +267,6 @@ win11cis_rule_18_1_1_1: true
 win11cis_rule_18_1_1_2: true
 win11cis_rule_18_1_2_2: true
 win11cis_rule_18_1_3: true
-win11cis_rule_18_3_1: true
-win11cis_rule_18_3_2: true
-win11cis_rule_18_3_3: true
-win11cis_rule_18_3_4: true
-win11cis_rule_18_3_5: true
-win11cis_rule_18_3_6: true
 win11cis_rule_18_4_1: true
 win11cis_rule_18_4_2: true
 win11cis_rule_18_4_3: true
@@ -283,6 +274,7 @@ win11cis_rule_18_4_4: true
 win11cis_rule_18_4_5: true
 win11cis_rule_18_4_6: true
 win11cis_rule_18_4_7: true
+win11cis_rule_18_4_8: true
 win11cis_rule_18_5_1: true
 win11cis_rule_18_5_2: true
 win11cis_rule_18_5_3: true
@@ -348,6 +340,8 @@ win11cis_rule_18_9_19_2: true
 win11cis_rule_18_9_19_3: true
 win11cis_rule_18_9_19_4: true
 win11cis_rule_18_9_19_5: true
+win11cis_rule_18_9_19_6: true
+win11cis_rule_18_9_19_7: true
 win11cis_rule_18_9_20_1_1: true
 win11cis_rule_18_9_20_1_2: true
 win11cis_rule_18_9_20_1_3: true
@@ -366,31 +360,39 @@ win11cis_rule_18_9_23_1: true
 win11cis_rule_18_9_24_1: true
 win11cis_rule_18_9_25_1: true
 win11cis_rule_18_9_25_2: true
+win11cis_rule_18_9_25_3: true
+win11cis_rule_18_9_25_4: true
+win11cis_rule_18_9_25_5: true
+win11cis_rule_18_9_25_6: true
+win11cis_rule_18_9_25_7: true
+win11cis_rule_18_9_25_8: true
 win11cis_rule_18_9_26_1: true
+win11cis_rule_18_9_26_2: true
 win11cis_rule_18_9_27_1: true
-win11cis_rule_18_9_27_2: true
-win11cis_rule_18_9_27_3: true
-win11cis_rule_18_9_27_4: true
-win11cis_rule_18_9_27_5: true
-win11cis_rule_18_9_27_6: true
-win11cis_rule_18_9_27_7: true
-win11cis_rule_18_9_30_1: true
-win11cis_rule_18_9_30_2: true
-win11cis_rule_18_9_32_6_1: true
-win11cis_rule_18_9_32_6_2: true
-win11cis_rule_18_9_32_6_3: true
-win11cis_rule_18_9_32_6_4: true
-win11cis_rule_18_9_32_6_5: true
-win11cis_rule_18_9_32_6_6: true
-win11cis_rule_18_9_34_1: true
-win11cis_rule_18_9_34_2: true
+win11cis_rule_18_9_28_1: true
+win11cis_rule_18_9_28_2: true
+win11cis_rule_18_9_28_3: true
+win11cis_rule_18_9_28_4: true
+win11cis_rule_18_9_28_5: true
+win11cis_rule_18_9_28_6: true
+win11cis_rule_18_9_28_7: true
+win11cis_rule_18_9_31_1: true
+win11cis_rule_18_9_31_2: true
+win11cis_rule_18_9_33_6_1: true
+win11cis_rule_18_9_33_6_2: true
+win11cis_rule_18_9_33_6_3: true
+win11cis_rule_18_9_33_6_4: true
+win11cis_rule_18_9_33_6_5: true
+win11cis_rule_18_9_33_6_6: true
 win11cis_rule_18_9_35_1: true
 win11cis_rule_18_9_35_2: true
-win11cis_rule_18_9_46_5_1: true
-win11cis_rule_18_9_46_11_1: true
-win11cis_rule_18_9_48_1: true
-win11cis_rule_18_9_50_1_1: true
-win11cis_rule_18_9_50_1_2: true
+win11cis_rule_18_9_36_1: true
+win11cis_rule_18_9_36_2: true
+win11cis_rule_18_9_47_5_1: true
+win11cis_rule_18_9_47_11_1: true
+win11cis_rule_18_9_49_1: true
+win11cis_rule_18_9_51_1_1: true
+win11cis_rule_18_9_51_1_2: true
 win11cis_rule_18_10_3_1: true
 win11cis_rule_18_10_3_2: true
 win11cis_rule_18_10_4_1: true
@@ -427,6 +429,10 @@ win11cis_rule_18_10_9_2_11: true
 win11cis_rule_18_10_9_2_12: true
 win11cis_rule_18_10_9_2_13: true
 win11cis_rule_18_10_9_2_14: true
+win11cis_rule_18_10_9_2_15: true
+win11cis_rule_18_10_9_2_16: true
+win11cis_rule_18_10_9_2_17: true
+win11cis_rule_18_10_9_2_18: true
 win11cis_rule_18_10_9_3_1: true
 win11cis_rule_18_10_9_3_2: true
 win11cis_rule_18_10_9_3_3: true
@@ -464,131 +470,130 @@ win11cis_rule_18_10_17_1: true
 win11cis_rule_18_10_17_2: true
 win11cis_rule_18_10_17_3: true
 win11cis_rule_18_10_17_4: true
-win11cis_rule_18_10_26_1_1: true
-win11cis_rule_18_10_26_1_2: true
-win11cis_rule_18_10_26_2_1: true
-win11cis_rule_18_10_26_2_2: true
-win11cis_rule_18_10_26_3_1: true
-win11cis_rule_18_10_26_3_2: true
-win11cis_rule_18_10_26_4_1: true
-win11cis_rule_18_10_26_4_2: true
-win11cis_rule_18_10_29_2: true
-win11cis_rule_18_10_29_3: true
-win11cis_rule_18_10_29_4: true
-win11cis_rule_18_10_29_5: true
-win11cis_rule_18_10_33_1: true
-win11cis_rule_18_10_37_2: true
+win11cis_rule_18_10_25_1_1: true
+win11cis_rule_18_10_25_1_2: true
+win11cis_rule_18_10_25_2_1: true
+win11cis_rule_18_10_25_2_2: true
+win11cis_rule_18_10_25_3_1: true
+win11cis_rule_18_10_25_3_2: true
+win11cis_rule_18_10_25_4_1: true
+win11cis_rule_18_10_25_4_2: true
+win11cis_rule_18_10_28_2: true
+win11cis_rule_18_10_28_3: true
+win11cis_rule_18_10_28_4: true
+win11cis_rule_18_10_28_5: true
+win11cis_rule_18_10_36_1: true
+win11cis_rule_18_10_40_1: true
 win11cis_rule_18_10_41_1: true
-win11cis_rule_18_10_42_1: true
-win11cis_rule_18_10_43_5_1: true
-win11cis_rule_18_10_43_5_2: true
-win11cis_rule_18_10_43_6_1_1: true
-win11cis_rule_18_10_43_6_1_2: true
-win11cis_rule_18_10_43_6_3_1: true
-win11cis_rule_18_10_43_7_1: true
-win11cis_rule_18_10_43_10_1: true
-win11cis_rule_18_10_43_10_2: true
-win11cis_rule_18_10_43_10_3: true
-win11cis_rule_18_10_43_10_4: true
-win11cis_rule_18_10_43_12_1: true
-win11cis_rule_18_10_43_13_1: true
-win11cis_rule_18_10_43_13_2: true
-win11cis_rule_18_10_43_16: true
-win11cis_rule_18_10_43_17: true
-win11cis_rule_18_10_44_1: true
-win11cis_rule_18_10_44_2: true
-win11cis_rule_18_10_44_3: true
-win11cis_rule_18_10_44_4: true
-win11cis_rule_18_10_44_5: true
-win11cis_rule_18_10_44_6: true
+win11cis_rule_18_10_42_5_1: true
+win11cis_rule_18_10_42_5_2: true
+win11cis_rule_18_10_42_6_1_1: true
+win11cis_rule_18_10_42_6_1_2: true
+win11cis_rule_18_10_42_6_3_1: true
+win11cis_rule_18_10_42_7_1: true
+win11cis_rule_18_10_42_10_1: true
+win11cis_rule_18_10_42_10_2: true
+win11cis_rule_18_10_42_10_3: true
+win11cis_rule_18_10_42_10_4: true
+win11cis_rule_18_10_42_12_1: true
+win11cis_rule_18_10_42_13_1: true
+win11cis_rule_18_10_42_13_2: true
+win11cis_rule_18_10_42_13_3: true
+win11cis_rule_18_10_42_16: true
+win11cis_rule_18_10_42_17: true
+win11cis_rule_18_10_43_1: true
+win11cis_rule_18_10_43_2: true
+win11cis_rule_18_10_43_3: true
+win11cis_rule_18_10_43_4: true
+win11cis_rule_18_10_43_5: true
+win11cis_rule_18_10_43_6: true
+win11cis_rule_18_10_49_1: true
 win11cis_rule_18_10_50_1: true
-win11cis_rule_18_10_51_1: true
-win11cis_rule_18_10_56_1: true
-win11cis_rule_18_10_57_2_2: true
-win11cis_rule_18_10_57_2_3: true
-win11cis_rule_18_10_57_3_2_1: true
-win11cis_rule_18_10_57_3_3_1: true
-win11cis_rule_18_10_57_3_3_2: true
-win11cis_rule_18_10_57_3_3_3: true
-win11cis_rule_18_10_57_3_3_4: true
-win11cis_rule_18_10_57_3_3_5: true
-win11cis_rule_18_10_57_3_3_6: true
-win11cis_rule_18_10_57_3_3_7: true
-win11cis_rule_18_10_57_3_9_1: true
-win11cis_rule_18_10_57_3_9_2: true
-win11cis_rule_18_10_57_3_9_3: true
-win11cis_rule_18_10_57_3_9_4: true
-win11cis_rule_18_10_57_3_9_5: true
-win11cis_rule_18_10_57_3_10_1: true
-win11cis_rule_18_10_57_3_10_2: true
-win11cis_rule_18_10_57_3_11_1: true
-win11cis_rule_18_10_58_1: true
-win11cis_rule_18_10_59_2: true
-win11cis_rule_18_10_59_3: true
-win11cis_rule_18_10_59_4: true
-win11cis_rule_18_10_59_5: true
-win11cis_rule_18_10_59_6: true
-win11cis_rule_18_10_59_7: true
-win11cis_rule_18_10_63_1: true
-win11cis_rule_18_10_66_1: true
-win11cis_rule_18_10_66_2: true
-win11cis_rule_18_10_66_3: true
-win11cis_rule_18_10_66_4: true
-win11cis_rule_18_10_66_5: true
+win11cis_rule_18_10_55_1: true
+win11cis_rule_18_10_56_2_2: true
+win11cis_rule_18_10_56_2_3: true
+win11cis_rule_18_10_56_3_2_1: true
+win11cis_rule_18_10_56_3_3_1: true
+win11cis_rule_18_10_56_3_3_2: true
+win11cis_rule_18_10_56_3_3_3: true
+win11cis_rule_18_10_56_3_3_4: true
+win11cis_rule_18_10_56_3_3_5: true
+win11cis_rule_18_10_56_3_3_6: true
+win11cis_rule_18_10_56_3_3_7: true
+win11cis_rule_18_10_56_3_9_1: true
+win11cis_rule_18_10_56_3_9_2: true
+win11cis_rule_18_10_56_3_9_3: true
+win11cis_rule_18_10_56_3_9_4: true
+win11cis_rule_18_10_56_3_9_5: true
+win11cis_rule_18_10_56_3_10_1: true
+win11cis_rule_18_10_56_3_10_2: true
+win11cis_rule_18_10_56_3_11_1: true
+win11cis_rule_18_10_57_1: true
+win11cis_rule_18_10_58_2: true
+win11cis_rule_18_10_58_3: true
+win11cis_rule_18_10_58_4: true
+win11cis_rule_18_10_58_5: true
+win11cis_rule_18_10_58_6: true
+win11cis_rule_18_10_58_7: true
+win11cis_rule_18_10_62_1: true
+win11cis_rule_18_10_65_1: true
+win11cis_rule_18_10_65_2: true
+win11cis_rule_18_10_65_3: true
+win11cis_rule_18_10_65_4: true
+win11cis_rule_18_10_65_5: true
+win11cis_rule_18_10_71_1: true
 win11cis_rule_18_10_72_1: true
-win11cis_rule_18_10_76_1_1: true
-win11cis_rule_18_10_76_1_2: true
-win11cis_rule_18_10_76_1_3: true
-win11cis_rule_18_10_76_1_4: true
-win11cis_rule_18_10_76_2_1: true
-win11cis_rule_18_10_76_3_1: true
-win11cis_rule_18_10_76_3_2: true
+win11cis_rule_18_10_75_1_1: true
+win11cis_rule_18_10_75_1_2: true
+win11cis_rule_18_10_75_1_3: true
+win11cis_rule_18_10_75_1_4: true
+win11cis_rule_18_10_75_1_5: true
+win11cis_rule_18_10_75_2_1: true
+win11cis_rule_18_10_77_1: true
 win11cis_rule_18_10_78_1: true
 win11cis_rule_18_10_79_1: true
+win11cis_rule_18_10_79_2: true
 win11cis_rule_18_10_80_1: true
 win11cis_rule_18_10_80_2: true
+win11cis_rule_18_10_80_3: true
 win11cis_rule_18_10_81_1: true
 win11cis_rule_18_10_81_2: true
-win11cis_rule_18_10_81_3: true
-win11cis_rule_18_10_82_1: true
-win11cis_rule_18_10_82_2: true
-win11cis_rule_18_10_87_1: true
-win11cis_rule_18_10_87_2: true
-win11cis_rule_18_10_89_1_1: true
-win11cis_rule_18_10_89_1_2: true
-win11cis_rule_18_10_89_1_3: true
-win11cis_rule_18_10_89_2_1: true
-win11cis_rule_18_10_89_2_2: true
-win11cis_rule_18_10_89_2_3: true
-win11cis_rule_18_10_89_2_4: true
-win11cis_rule_18_1_90_1: true
-win11cis_rule_18_1_91_1: true
-win11cis_rule_18_1_91_2: true
+win11cis_rule_18_10_86_1: true
+win11cis_rule_18_10_86_2: true
+win11cis_rule_18_10_88_1_1: true
+win11cis_rule_18_10_88_1_2: true
+win11cis_rule_18_10_88_1_3: true
+win11cis_rule_18_10_88_2_1: true
+win11cis_rule_18_10_88_2_2: true
+win11cis_rule_18_10_88_2_3: true
+win11cis_rule_18_10_88_2_4: true
+win11cis_rule_18_10_89_1: true
+win11cis_rule_18_10_90_1: true
+win11cis_rule_18_10_90_2: true
+win11cis_rule_18_10_91_2_1: true
+win11cis_rule_18_10_92_1_1: true
 win11cis_rule_18_10_92_2_1: true
-win11cis_rule_18_10_93_1_1: true
-win11cis_rule_18_10_93_2_1: true
-win11cis_rule_18_10_93_2_2: true
-win11cis_rule_18_10_93_2_3: true
-win11cis_rule_18_10_93_4_1: true
-win11cis_rule_18_10_93_4_2: true
-win11cis_rule_18_10_93_4_3: true
+win11cis_rule_18_10_92_2_2: true
+win11cis_rule_18_10_92_2_3: true
+win11cis_rule_18_10_92_2_4: true
+win11cis_rule_18_10_92_4_1: true
+win11cis_rule_18_10_92_4_2: true
+win11cis_rule_18_10_92_4_3: true
 
 # Section 19
-win11cis_rule_19_1_3_1: true
-win11cis_rule_19_1_3_2: true
-win11cis_rule_19_1_3_3: true
 win11cis_rule_19_5_1_1: true
 win11cis_rule_19_6_6_1_1: true
-win11cis_rule_19_7_4_1: true
-win11cis_rule_19_7_4_2: true
-win11cis_rule_19_7_7_1: true
-win11cis_rule_19_7_7_2: true
-win11cis_rule_19_7_7_3: true
-win11cis_rule_19_7_7_4: true
-win11cis_rule_19_7_7_5: true
-win11cis_rule_19_7_25_1: true
-win11cis_rule_19_7_40_1: true
-win11cis_rule_19_7_47_2_1: true
+win11cis_rule_19_7_5_1: true
+win11cis_rule_19_7_5_2: true
+win11cis_rule_19_7_8_1: true
+win11cis_rule_19_7_8_2: true
+win11cis_rule_19_7_8_3: true
+win11cis_rule_19_7_8_4: true
+win11cis_rule_19_7_8_5: true
+win11cis_rule_19_7_26_1: true
+win11cis_rule_19_7_38_1: true
+win11cis_rule_19_7_42_1: true
+win11cis_rule_19_7_44_2_1: true
 
 # Section 1 Variables
 
@@ -644,6 +649,15 @@ win11cis_account_lockout_counter_reset: 15
 
 # Section 2 Variables
 
+# 2.2.11
+# Windows 11 Create a token object user right must not be assigned to any groups or accounts.
+# If any SIDs other than the following are granted the "SeCreateTokenPrivilege" user right, this is a finding.
+# If an application requires this user right, this would not be a finding. Vendor documentation must support the
+# requirement for having the user right. The requirement must be documented with the ISSO.
+# NOTE: Improper Accounts Or Groups listed here will FAIL task.
+# Default: []
+wn11cis_secreatetokenprivilege: []
+
 # 2.2.28
 # This policy setting allows accounts to log on using the task scheduler service.
 # If you install optional components such as ASP.NET or IIS, you might need to assign this user right to
@@ -659,13 +673,17 @@ win11cis_sebatchlogonright: Administrators
 # Log on as a service user right to additional accounts that are required by those components. IIS requires that
 # this user right be explicitly granted to the ASPNET user account. On Windows Workstations with the Hyper-V
 # feature installed, this user right should also be granted to the special group NT VIRTUAL MACHINE\Virtual Machines.
+# When using Windows Defender Application Guard, such as in the Next Generation Windows Security profile) WDAGUtilityAccount
+# Auto Set By Ansible
+# [] - No Accounts Put In.
+# Hyper V Discovered Enabled - NT VIRTUAL MACHINE\Virtual Machines
+# WDAG Discovered Enabled - WDAGUtilityAccount
+# Hyper V & WDAG Discovered Enabled - WDAGUtilityAccount,NT VIRTUAL MACHINE\Virtual Machines
 # Settings Note:
-# When Hyper-V not installed no one will be set. If Hyper-V is set in win11cis_hyperv_installed to true
-# the control will automatically add the proper setting.
-# If you defining your own input list them in win11cis_seservicelogonright by commas and no spacing between them.
-# NOTE: Improper Accounts Or Groups listed here will FAIL task.
-# Default: ""
-win11cis_seservicelogonright: ""
+# If you defining your own input list them in win10cis_seservicelogonright by commas and no spacing between them.
+# NOTE: Improper Accounts Or Groups listed here will FAIL task. When adding place items in ""
+# Default: []
+win11cis_seservicelogonright: []
 
 # 2.3.1.4
 # The built-in local administrator account is a well-known account name that attackers will target. It is
@@ -780,6 +798,20 @@ win11cis_legacy_rc4_hmac_md5_support: false
 # Default: 1
 win11cis_ldap_client_integrity: 1
 
+# 2.3.11.12
+# win11cis_restrict_sending_ntlm_traffic is This policy setting allows the auditing of outgoing NTLM traffic. Events for this setting
+# are recorded in the operational event log (e.g. Applications and Services Log\Microsoft\Windows\NTLM).
+# The recommended state for this setting is: Audit all. Configuring this setting to Deny All also conforms to the benchmark.
+# Note: Configuring this setting to Deny All is more secure, however it could have a negative impact
+# on applications that still require NTLM. Test carefully before implementing the Deny All value. 7.26.24 - CIS documentation is
+# incorrect stating that audit all is 2. CIS has a fix in the works and that is already applied here.
+# Note: Possible Valid Settings
+# Default: 1
+# 1 - Audit All
+# 2 - Deny All
+# Default: 1
+win11cis_restrict_sending_ntlm_traffic: 1
+
 # 2.3.14.1
 # win11cis_force_key_protection is the policy setting determines whether users' private keys (such as their S-MIME keys) require
 # a password to be used. Configuring this setting to User must enter a password each time they use a key also conforms to the benchmark.
@@ -800,55 +832,137 @@ win11cis_force_key_protection: 1
 # Default: 2
 win11cis_consent_prompt_behavior_admin: 2
 
+# Section 5 Variables
+
+# The variables below have been added to take into account the option added to CIS to uninstall the services.
+# NOTE: By default the services will be disabled and stopped as per the CIS standard listed first.
+# Not all the services are setup in CIS to be uninstalled and we have documetned them below in single vars.
+
+# 5.3
+# This Maintains an updated list of computers on the network and supplies this list to computers
+# designated as browsers.
+# Default: false
+win11cis_uninstall_computer_browser_service: false
+
+# 5.6
+# This service is not installed by default. It is supplied with Windows, but is installed
+# by enabling an optional Windows feature (Internet Information Services).
+# Default: false
+win11cis_uninstall_iis_admin_service: false
+
+# 5.7
+# Irmon Service Detects other Infrared devices that are in range and launches the file transfer application.
+# Default: false
+win11cis_uninstall_irmon_service: false
+
+# 5.9
+# The LXSS Manager service supports running native ELF binaries. The service provides the infrastructure
+# necessary for ELF binaries to run on Windows.
+# This service is not installed by default. It is supplied with Windows, but is installed
+# by enabling an optional Windows feature (Windows Subsystem for Linux).
+# Note: If your organization has made an exception to this recommendation and is using Windows Subsystem for Linux (WSL),
+# the Internet Connection Sharing (ICS) (SharedAccess) service will need to be Enabled for WSL to function.
+# Default: false
+win11cis_uninstall_lxssmanager_service: false
+
+# 5.10
+# ftpsvc service is not installed by default. It is supplied with Windows, but is installed by
+# enabling an optional Windows feature (Internet Information Services - FTP Server).
+# Default: false
+win11cis_uninstall_ftpsvc_service: false
+
+# 5.11
+# msiscsi Manages Internet SCSI (iSCSI) sessions from this computer to remote target devices.
+# Default: false
+win11cis_uninstall_msiscsi_service: false
+
+# 5.12
+# service sshd uses SSH protocol based service to provide secure encrypted communications between
+# two untrusted hosts over an insecure network.
+# Note: This service is not installed by default. It is supplied with Windows, but it is
+# installed by enabling an optional Windows feature (OpenSSH Server).
+# Default: false
+win11cis_uninstall_sshd_service: false
+
+# 5.27
+# simptcp supports the following TCP/IP services: Character Generator, Daytime, Discard, Echo, and Quote of the Day.
+# Note: This service is not installed by default. It is supplied with Windows, but is installed by enabling
+# an optional Windows feature (Simple TCPIP services (i.e. echo, daytime etc)).
+# Default: false
+win11cis_uninstall_simptcp_service: false
+
+# 5.28
+# snmp enables Simple Network Management Protocol (SNMP) requests to be processed by this computer.
+# Note: This service is not installed by default. It is supplied with Windows, but is installed by enabling an optional
+# Windows feature (Simple Network Management Protocol (SNMP)).
+# Default: false
+win11cis_uninstall_snmp_service: false
+
+# 5.29
+# sacsvr service allows administrators to remotely access a command prompt using Emergency Management Services.
+# Note: This service is not installed by default. It is supplied with Windows, but it is installed by enabling an optional
+# Windows capability (Windows Emergency Management Services and Serial Console).
+# Default: false
+win11cis_uninstall_sacsvr_service: false
+
+# 5.32
+# wmsvc enables remote and delegated management capabilities for administrators to manage for the Web server,
+# sites and applications present on the machine.
+# Note: This service is not installed by default. It is supplied with Windows, but is installed by enabling an
+# optional Windows feature (Internet Information Services - Web Management Tools - IIS Management Service).
+# Default: false
+win11cis_uninstall_wmsvc_service: false
+
+# 5.35
+# wmpnetworksvc shares Windows Media Player libraries to other networked players and media devices using
+# Universal Plug and Play.
+# Default: false
+win11cis_uninstall_wmpnetworksvc_service: false
+
+# 5.40
+# w3svc provides Web connectivity and administration through the Internet Information Services Manager.
+# Note: This service is not installed by default. It is supplied with Windows, but is installed by enabling
+# an optional Windows feature (Internet Information Services - World Wide Web Services).
+# Default: false
+win11cis_uninstall_w3svc_service: false
+
 # Section 9 Variables
 
-# 9.1.5
+# 9.1.4
 # win11cis_domain_firewall_log_path is the path to the domain firewall log files. The control suggests %SystemRoot%\System32\logfiles\firewall\domainfw.log
 # This is a variable to give some leeway on where to store these log files.
 # Default: '%SystemRoot%\System32\logfiles\firewall\domainfw.log'
 win11cis_domain_firewall_log_path: '%SystemRoot%\System32\logfiles\firewall\domainfw.log'
 
-# 9.1.6
+# 9.1.5
 # win11cis_domain_firewall_log_size is the size of the log file generated
 # To conform to CIS standards the value should be 16,384 or greater. Value is in KB
 # Default: 16384
 win11cis_domain_firewall_log_size: 16384
 
-# 9.2.5
+# 9.2.4
 # win11cis_private_firewall_log_path is the path to the private firewall log files. The control suggests %SystemRoot%\System32\logfiles\firewall\privatefw.log
 # This is a variable to give some leeway on where to store these log files
 win11cis_private_firewall_log_path: '%SystemRoot%\System32\logfiles\firewall\privatefw.log'
 
-# 9.2.6
+# 9.2.5
 # win11cis_private_firewall_log_size is the size of the log file
 # To conform to CIS standards the value should be 16,384 or greater. Value is in KB
 win11cis_private_firewall_log_size: 16384
 
-# 9.3.7
+# 9.3.6
 # win11cis_public_firewall_log_path is the path to the public firewall log file. The control suggests %SystemRoot%\System32\logfiles\firewall\publicfw.log
 # This is a variable to give some leeway on where to store these log files
 win11cis_public_firewall_log_path: '%SystemRoot%\System32\logfiles\firewall\publicfw.log'
 
-# 9.3.8
+# 9.3.7
 # win11cis_public_firewall_log_size is the size of the log file
 # To conform to CIS standards the value should be 16,384 or greater. Value is in KB
 win11cis_public_firewall_log_size: 16384
 
 # Section 18 Variables
 
-# Control 18.3.5
-# win11cis_laps_password_length is the LAPS tool password length.
-# The recommended state for this setting is: Enabled: 15 or more.
-# Default: 15
-win11cis_laps_password_length: 15
-
-# Control 18.3.6
-# win11cis_laps_password_age_days is the LAPS tool password age in days.
-# The recommended state for this setting is: Enabled: 30 or fewer.
-# Default: 30
-win11cis_laps_password_age_days: 30
-
-# 18.4.6
+# 18.4.7
 # win11cis_netbt_nodetype is the node type value in HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters:NodeType
 # Options are B-node value of 1, P-node value of 2, M-node value of 4, H-node value of 8. P-node is the recommended setting from CIS
 # Default: 2
@@ -905,6 +1019,67 @@ win11cis_force_kerberos_for_rpc: 0
 # Default: 1
 win11cis_enable_virtualization_based_security: 1
 
+# 18.9.25.1
+# win11cis_laps_backup_directory is the policy setting configures which directory Windows LAPS will use to back up the
+# local admin account password.
+# The recommended state for this setting is: Enabled: Active Directory or Enabled: Azure Active Directory.
+# 1 - Enabled: Active Directory
+# 2 - Enabled: Azure Active Directory
+# Default: 1
+win11cis_laps_backup_directory: 1
+
+# 18.9.25.5
+# win11cis_laps_password_length is the policy setting configures the Windows LAPS Password Settings policy for password length.
+# The recommended state for this setting is: Enabled: 15 or more.
+# Default: 15
+win11cis_laps_password_length: 15
+
+# 18.9.25.6
+# win11cis_laps_password_age is the policy setting configures the Windows LAPS Password Settings policy for password length.
+# The recommended state for this setting is: Enabled: 30 or fewer.
+# Default: 30
+win11cis_laps_password_age: 30
+
+# 18.9.25.7
+# win11cis_laps_post_auth_actions_grace_period is the olicy settings configures post-authentication actions which will be
+# executed after detecting an authentication by the Windows LAPS managed account. The Grace period refers to the amount of
+# time (hours) to wait after an authentication before executing the specified post-authentication actions.
+# The recommended state for this setting is: Enabled: 8 or fewer hours, but not 0.
+# Default: 8
+win11cis_laps_post_auth_actions_grace_period: 8
+
+# 18.9.25.8
+# win11cis_laps_post_auth_actions_reset_password is the policy settings configures post-authentication actions which
+# will be executed after detecting an authentication by the LAPS managed account. The Action refers to actions to take
+# upon expiry of the grace period before executing the specified post- authentication actions.
+# The recommended state for this setting is: Enabled: Reset the password and logoff the managed account or higher.
+# 3 - Enabled: Reset the password and logoff the managed account
+# 5 - Enabled: Reset the password and reboot.
+# Default: 3
+win11cis_laps_post_auth_actions_reset_password: 3
+
+# 18.10.9.1.4
+# win11cis_48_digit_recovery_password_setting is the policy setting allows you to control how BitLocker-protected fixed data
+# drives are recovered in the absence of the required credentials. This policy setting is applied when you turn on BitLocker.
+# In "Configure user storage of BitLocker recovery information" select whether users are allowed, required, or not allowed to
+# generate a 48-digit recovery password or a 256-bit recovery key.
+# The recommended state for this setting is: Enabled: Allow 48-digit recovery password or Enabled: Require 48-digit recovery password.
+# 1 - Enabled: Require 48-digit recovery password
+# 2 - Enabled: Allow 48-digit recovery password
+# Default: 2
+win11cis_48_digit_recovery_password_setting: 2
+
+# 18.10.9.1.5
+# win11cis_256bit_recovery_key_setting is theThis policy setting allows you to control how BitLocker-protected fixed data drives
+# are recovered in the absence of the required credentials. This policy setting is applied when you turn on BitLocker.
+# In "Configure user storage of BitLocker recovery information" select whether users are allowed, required, or not allowed to
+# generate a 48-digit recovery password or a 256-bit recovery key.
+# The recommended state for this setting is: Enabled: Allow 256-bit recovery key or Enabled: Require 256-bit recovery key.
+# 1 - Enabled: Require 256-bit recovery key
+# 2 - Enabled: Allow 256-bit recovery key
+# Default: 2
+win11cis_256bit_recovery_key_setting: 2
+
 # 18.10.13.1
 # win11cis_require_pin_for_pairing is the policy setting controls whether or not a PIN is required for pairing to a wireless display device.
 # The recommended state for this setting is: Enabled: First Time OR Enabled: Always.
@@ -934,56 +1109,56 @@ win11cis_allow_telemetry: 1
 # Default: 1
 win11cis_do_download_mode: 1
 
-# 18.10.26.1.2
+# 18.10.25.1.2
 # win11cis_application_max_log_file_size is the setting that specifies the maximum size of the log file in kilobytes. The maximum log file size can be
 # configured between 1 megabyte (1,024 kilobytes) and 4 terabytes (4,194,240 kilobytes) in kilobyte increments.
 # The recommended state for this setting is: Enabled: 32,768 or greater
 win11cis_application_max_log_file_size: 32768
 
-# 18.10.26.2.2
+# 18.10.25.2.2
 # win11cis_security_max_log_file_size is the setting that specifies the maximum size of the log file in kilobytes. The maximum log file size can
 # be configured between 1 megabyte (1,024 kilobytes) and 4 terabytes (4,194,240 kilobytes) in kilobyte increments.
 # The recommended state for this setting is: Enabled: 196,608 or greater.
 win11cis_security_max_log_file_size: 196608
 
-# 18.10.26.3.2
+# 18.10.25.3.2
 # win11cis_setup_max_log_file_size is the setting specifies the maximum size of the log file in kilobytes. The maximum log file size can be
 # configured between 1 megabyte (1,024 kilobytes) and 4 terabytes (4,194,240 kilobytes) in kilobyte increments.#
 # The recommended state for this setting is: Enabled: 32,768 or greater.
 win11cis_setup_max_log_file_size: 32768
 
-# 18.10.26.4.2
-# win19cis_system_max_log_file_size is the setting that specifies the maximum size of the log file in kilobytes. The maximum log file size
+# 18.10.25.4.2
+# win11cis_system_max_log_file_size is the setting that specifies the maximum size of the log file in kilobytes. The maximum log file size
 # can be configured between 1 megabyte (1,024 kilobytes) and 4 terabytes (4,194,240 kilobytes) in kilobyte increments.
 # The recommended state for this setting is: Enabled: 32,768 or greater.
 win11cis_system_max_log_file_size: 32768
 
-# 18.10.57.3.10.1
+# 18.10.56.3.10.1
 # win11cis_idle_rdp_session_disconnect_time is the setting allows you to specify the maximum amount of time that an active Remote Desktop
 # Services session can be idle (without user input) before it is automatically disconnected.
 # The recommended state for this setting is: Enabled: 15 minutes or less, but not Never (0).
 # Default: 900000
 win11cis_idle_rdp_session_disconnect_time: 900000
 
-# 18.10.80.2
+# 18.10.79.2
 # win11cis_allow_windows_ink_workspace is the policy setting determines whether Windows Ink items are allowed above the lock screen.
 # The recommended state for this setting is: Enabled: On, but disallow access above lock OR Enabled: Disabled.
 # 0 - Enabled: Disabled
 # 1 - Enabled: On, but disallow access above lock
 win11cis_allow_windows_ink_workspace: 1
 
-# 18.10.87.2
+# 18.10.86.2
 # win11cis_powershell_transcription_dir is the customized folder settings for storing of powershell transcription files.
 # If you opt to not specify an output directory, the PowerShell transcripts will be saved to the user’s Documents folder.
 # Example: C:\PS_Transcription_Location_Ansible
 # Default: Default - This will save it to the default location
 win11cis_powershell_transcription_dir: Default
 
-# 18.10.93.2.1
+# 18.10.92.2.1
 # win11cis_au_options is policy setting specifies whether computers in your environment will receive security updates from Windows Update or WSUS.
 # The recommended state for this setting is: Enabled.
 # If feasible we suggest using a value of 4 - Auto download and schedule the install
-# If 4 is not selected control 18.10.93.2.2 will be skipped.
+# If 4 is not selected control 18.10.92.2.2 will be skipped.
 # 2 - Notify for download and auto install (Notify before downloading any updates)
 # 3 - Auto download and notify for install (Download the updates automatically and notify when they are ready to be installed.) (Default setting)
 # 4 - Auto download and schedule the install (Automatically download updates an install them on the schedule specified below.))
@@ -991,15 +1166,8 @@ win11cis_powershell_transcription_dir: Default
 # Default: 4
 win11cis_au_options: 4
 
-# 18.10.93.4.2
+# 18.10.92.4.2
 # win11cis_defer_feature_updates_period_in_days is the policy setting determines when Preview Build or Feature Updates are received.
 # Recommended setting: Enabled: 180 or more days
 # Default: 180
 win11cis_defer_feature_updates_period_in_days: 180
-
-# Section 19 Variables
-
-# 19.1.3.3
-# win11cis_screen_saver_timeout is the setting that specifies how much user idle time must elapse before the screen saver is launched.
-# The recommended state for this setting is: Enabled: 900 seconds or fewer, but not 0.
-win11cis_screen_saver_timeout: 900

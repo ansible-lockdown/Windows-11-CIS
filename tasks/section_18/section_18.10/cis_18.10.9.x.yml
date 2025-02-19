@@ -4,19 +4,18 @@
   ansible.windows.win_regedit:
       path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
       name: FDVDiscoveryVolumeType
-      data: <none>
+      data: []
       type: string
-  when:
-      - win11cis_rule_18_10_9_1_1
+  when: win11cis_rule_18_10_9_1_1
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.1.1
-      - automated
       - patch
-      - fixed-data-drives
-      - volume-type
+      - automated
+      - rule_18.10.9.1.1
+      - fixed_data_drives
+      - volume_type
 
 - name: "18.10.9.1.2 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered' is set to 'Enabled'"
   ansible.windows.win_regedit:
@@ -24,16 +23,15 @@
       name: FDVRecovery
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_1_2
+  when: win11cis_rule_18_10_9_1_2
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.1.2
-      - automated
       - patch
-      - fixed-data-drives
+      - automated
+      - rule_18.10.9.1.2
+      - fixed_data_drives
       - recovery
 
 - name: "18.10.9.1.3 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Allow data recovery agent' is set to 'Enabled: True'"
@@ -42,53 +40,92 @@
       name: FDVManageDRA
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_1_3
+  when: win11cis_rule_18_10_9_1_3
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
+      - patch
+      - automated
       - rule_18.10.9.1.3
-      - automated
-      - patch
-      - fixed-data-drives
-      - recovery-agent
+      - fixed_data_drives
+      - recovery_agent
 
-- name: "18.10.9.1.4 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Allow data recovery agent' is set to 'Enabled: True'"
-  ansible.windows.win_regedit:
-      path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
-      name: FDVRecoveryPassword
-      data: 2
-      type: dword
-  when:
-      - win11cis_rule_18_10_9_1_4
+- name: "18.10.9.1.4 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Password' is set to 'Enabled: Allow 48-digit recovery password' or higher"
+  block:
+      - name: "18.10.9.1.4 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Password' is set to 'Enabled: Allow 48-digit recovery password' or higher | Set Variable."
+        ansible.windows.win_regedit:
+            path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
+            name: FDVRecoveryPassword
+            data: "{{ win11cis_48_digit_recovery_password_setting }}"
+            type: dword
+        when: win11cis_48_digit_recovery_password_setting == 1 or win11cis_48_digit_recovery_password_setting == 2
+
+      - name: "18.10.9.1.4 | AUDIT | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Password' is set to 'Enabled: Allow 48-digit recovery password' or higher | Warning Check For Variable Standards."
+        ansible.builtin.debug:
+            msg:
+                - "Warning!! You have an invalid setting for win11cis_48_digit_recovery_password_setting. Please read"
+                - "the notes for the variable and make the necessary change to the variable to be in compliance."
+        when:
+            - win11cis_48_digit_recovery_password_setting != 1
+            - win11cis_48_digit_recovery_password_setting != 2
+
+      - name: "18.10.9.1.4 | AUDIT | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Password' is set to 'Enabled: Allow 48-digit recovery password' or higher | Warn Count."
+        ansible.builtin.import_tasks:
+            file: warning_facts.yml
+        vars:
+            warn_control_id: '18.10.9.1.4'
+        when:
+            - win11cis_48_digit_recovery_password_setting != 1
+            - win11cis_48_digit_recovery_password_setting != 2
+  when: win11cis_rule_18_10_9_1_4
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
+      - patch
+      - automated
       - rule_18.10.9.1.4
-      - automated
-      - patch
-      - fixed-data-drives
-      - recovery-password
+      - fixed_data_drives
+      - recovery_password
 
-- name: "18.10.9.1.5 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Key' is set to 'Enabled: Allow 256-bit recovery key'"
-  ansible.windows.win_regedit:
-      path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
-      name: FDVRecoveryKey
-      data: 2
-      type: dword
-  when:
-      - win11cis_rule_18_10_9_1_5
+- name: "18.10.9.1.5 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Key' is set to 'Enabled: Allow 256-bit recovery key' or higher'"
+  block:
+      - name: "18.10.9.1.5 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Key' is set to 'Enabled: Allow 256-bit recovery key' or higher' | Set Variable."
+        ansible.windows.win_regedit:
+            path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
+            name: FDVRecoveryKey
+            data: "{{ win11cis_48_digit_recovery_password_setting }}"
+            type: dword
+        when: win11cis_256bit_recovery_key_setting == 1 or win11cis_256bit_recovery_key_setting == 2
+
+      - name: "18.10.9.1.5 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Key' is set to 'Enabled: Allow 256-bit recovery key' or higher' | Warning Check For Variable Standards."
+        ansible.builtin.debug:
+            msg:
+                - "Warning!! You have an invalid setting for win11cis_48_digit_recovery_password_setting. Please read"
+                - "the notes for the variable and make the necessary change to the variable to be in compliance."
+        when:
+            - win11cis_256bit_recovery_key_setting != 1
+            - win11cis_256bit_recovery_key_setting != 2
+
+      - name: "18.10.9.1.5 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Key' is set to 'Enabled: Allow 256-bit recovery key' or higher' | Warn Count."
+        ansible.builtin.import_tasks:
+            file: warning_facts.yml
+        vars:
+            warn_control_id: '18.10.9.1.5'
+        when:
+            - win11cis_256bit_recovery_key_setting != 1
+            - win11cis_256bit_recovery_key_setting != 2
+  when: win11cis_rule_18_10_9_1_5
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.1.5
-      - automated
       - patch
-      - fixed-data-drives
-      - recovery-key
+      - automated
+      - rule_18.10.9.1.5
+      - fixed_data_drives
+      - recovery_key
 
 - name: "18.10.9.1.6 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Omit recovery options from the BitLocker setup wizard' is set to 'Enabled: True''"
   ansible.windows.win_regedit:
@@ -96,17 +133,16 @@
       name: FDVHideRecoveryPage
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_1_6
+  when: win11cis_rule_18_10_9_1_6
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.1.6
-      - automated
       - patch
-      - fixed-data-drives
-      - recovery-options
+      - automated
+      - rule_18.10.9.1.6
+      - fixed_data_drives
+      - recovery_options
 
 - name: "18.10.9.1.7 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Save BitLocker recovery information to AD DS for fixed data drives' is set to 'Enabled: False'"
   ansible.windows.win_regedit:
@@ -114,17 +150,16 @@
       name: FDVHideRecoveryPage
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_9_1_7
+  when: win11cis_rule_18_10_9_1_7
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.1.7
-      - automated
       - patch
-      - fixed-data-drives
-      - recovery-options
+      - automated
+      - rule_18.10.9.1.7
+      - fixed_data_drives
+      - recovery_options
 
 - name: "18.10.9.1.8 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Configure storage of BitLocker recovery information to AD DS' is set to 'Enabled: Backup recovery passwords and key packages'"
   ansible.windows.win_regedit:
@@ -132,17 +167,16 @@
       name: FDVActiveDirectoryInfoToStore
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_1_8
+  when: win11cis_rule_18_10_9_1_8
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.1.8
-      - automated
       - patch
-      - fixed-data-drives
-      - recovery-options
+      - automated
+      - rule_18.10.9.1.8
+      - fixed_data_drives
+      - recovery_options
 
 - name: "18.10.9.1.9 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Do not enable BitLocker until recovery information is stored to AD DS for fixed data drives' is set to 'Enabled: False'"
   ansible.windows.win_regedit:
@@ -150,17 +184,16 @@
       name: FDVRequireActiveDirectoryBackup
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_9_1_9
+  when: win11cis_rule_18_10_9_1_9
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.1.9
-      - automated
       - patch
-      - fixed-data-drives
-      - recovery-options
+      - automated
+      - rule_18.10.9.1.9
+      - fixed_data_drives
+      - recovery_options
 
 - name: "18.10.9.1.10 | PATCH | Ensure 'Configure use of hardware-based encryption for fixed data drives' is set to 'Disabled'"
   ansible.windows.win_regedit:
@@ -168,34 +201,32 @@
       name: FDVHardwareEncryption
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_9_1_10
+  when: win11cis_rule_18_10_9_1_10
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.1.10
-      - automated
       - patch
-      - fixed-data-drives
+      - automated
+      - rule_18.10.9.1.10
+      - fixed_data_drives
       - encryption
 
-- name: "18.10.9.1.11 | PATCH | Ensure 'Configure use of hardware-based encryption for fixed data drives' is set to 'Disabled'"
+- name: "18.10.9.1.11 | PATCH | Ensure 'Configure use of passwords for fixed data drives' is set to 'Disabled'"
   ansible.windows.win_regedit:
       path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
       name: FDVPassphrase
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_9_1_11
+  when: win11cis_rule_18_10_9_1_11
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.1.11
-      - automated
       - patch
-      - fixed-data-drives
+      - automated
+      - rule_18.10.9.1.11
+      - fixed_data_drives
       - passwords
 
 - name: "18.10.9.1.12 | PATCH | Ensure 'Configure use of smart cards on fixed data drives' is set to 'Enabled'"
@@ -204,17 +235,16 @@
       name: FDVAllowUserCert
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_1_12
+  when: win11cis_rule_18_10_9_1_12
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.1.12
-      - automated
       - patch
-      - fixed-data-drives
-      - smart-cards
+      - automated
+      - rule_18.10.9.1.12
+      - fixed_data_drives
+      - smart_cards
 
 - name: "18.10.9.1.13 | PATCH | Ensure 'Configure use of smart cards on fixed data drives: Require use of smart cards on fixed data drives' is set to 'Enabled: True'"
   ansible.windows.win_regedit:
@@ -222,17 +252,16 @@
       name: FDVEnforceUserCert
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_1_13
+  when: win11cis_rule_18_10_9_1_13
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.1.13
-      - automated
       - patch
-      - fixed-data-drives
-      - smart-cards
+      - automated
+      - rule_18.10.9.1.13
+      - fixed_data_drives
+      - smart_cards
 
 - name: "18.10.9.2.1 | PATCH | Ensure 'Allow enhanced PINs for startup' is set to 'Enabled'"
   ansible.windows.win_regedit:
@@ -240,16 +269,15 @@
       name: UseEnhancedPin
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_2_1
+  when: win11cis_rule_18_10_9_2_1
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.2.1
-      - automated
       - patch
-      - operating-system-drives
+      - automated
+      - rule_18.10.9.2.1
+      - operating_system_drives
       - startup
 
 - name: "18.10.9.2.2 | PATCH | Ensure 'Allow Secure Boot for integrity validation' is set to 'Enabled'"
@@ -258,17 +286,16 @@
       name: OSAllowSecureBootForIntegrity
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_2_2
+  when: win11cis_rule_18_10_9_2_2
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.2.2
-      - automated
       - patch
-      - operating-system-drives
-      - secure-boot
+      - automated
+      - rule_18.10.9.2.2
+      - operating_system_drives
+      - secure_boot
 
 - name: "18.10.9.2.3 | PATCH | Ensure 'Choose how BitLocker-protected operating system drives can be recovered' is set to 'Enabled'"
   ansible.windows.win_regedit:
@@ -276,16 +303,15 @@
       name: OSRecovery
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_2_3
+  when: win11cis_rule_18_10_9_2_3
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.2.3
-      - automated
       - patch
-      - operating-system-drives
+      - automated
+      - rule_18.10.9.2.3
+      - operating_system_drives
       - recovery
 
 - name: "18.10.9.2.4 | PATCH | Ensure 'Choose how BitLocker-protected operating system drives can be recovered: Allow data recovery agent' is set to 'Enabled: False'"
@@ -294,16 +320,16 @@
       name: OSManageDRA
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_9_2_4
+  when: win11cis_rule_18_10_9_2_4
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
+      - patch
+      - automated
       - rule_18.10.9.2.4
       - automated
-      - patch
-      - operating-system-drives
+      - operating_system_drives
       - recovery
 
 - name: "18.10.9.2.5 | PATCH | Ensure 'Choose how BitLocker-protected operating system drives can be recovered: Recovery Password' is set to 'Enabled: Require 48-digit recovery password'"
@@ -312,16 +338,15 @@
       name: OSRecoveryPassword
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_2_5
+  when: win11cis_rule_18_10_9_2_5
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.2.5
-      - automated
       - patch
-      - operating-system-drives
+      - automated
+      - rule_18.10.9.2.5
+      - operating_system_drives
       - recovery
 
 - name: "18.10.9.2.6 | PATCH | Ensure 'Choose how BitLocker-protected operating system drives can be recovered: Recovery Key' is set to 'Enabled: Do not allow 256-bit recovery key'"
@@ -330,16 +355,15 @@
       name: OSRecoveryKey
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_9_2_6
+  when: win11cis_rule_18_10_9_2_6
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.2.6
-      - automated
       - patch
-      - operating-system-drives
+      - automated
+      - rule_18.10.9.2.6
+      - operating_system_drives
       - recovery
 
 - name: "18.10.9.2.7 | PATCH | Ensure 'Choose how BitLocker-protected operating system drives can be recovered: Omit recovery options from the BitLocker setup wizard' is set to 'Enabled: True'"
@@ -348,16 +372,15 @@
       name: OSHideRecoveryPage
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_2_7
+  when: win11cis_rule_18_10_9_2_7
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.2.7
-      - automated
       - patch
-      - operating-system-drives
+      - automated
+      - rule_18.10.9.2.7
+      - operating_system_drives
       - recovery
 
 - name: "18.10.9.2.8 | PATCH | Ensure 'Choose how BitLocker-protected operating system drives can be recovered: Save BitLocker recovery information to AD DS for operating system drives' is set to 'Enabled: True'"
@@ -366,16 +389,15 @@
       name: OSActiveDirectoryBackup
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_2_8
+  when: win11cis_rule_18_10_9_2_8
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.2.8
-      - automated
       - patch
-      - operating-system-drives
+      - automated
+      - rule_18.10.9.2.8
+      - operating_system_drives
       - recovery
 
 - name: "18.10.9.2.9 | PATCH | Ensure 'Choose how BitLocker-protected operating system drives can be recovered: Configure storage of BitLocker recovery information to AD DS:' is set to 'Enabled: Store recovery passwords and key packages'"
@@ -384,16 +406,15 @@
       name: OSActiveDirectoryInfoToStore
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_2_9
+  when: win11cis_rule_18_10_9_2_9
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.2.9
-      - automated
       - patch
-      - operating-system-drives
+      - automated
+      - rule_18.10.9.2.9
+      - operating_system_drives
       - recovery
 
 - name: "18.10.9.2.10 | PATCH | Ensure 'Choose how BitLocker-protected operating system drives can be recovered: Do not enable BitLocker until recovery information is stored to AD DS for operating system drives' is set to 'Enabled: True'"
@@ -402,52 +423,49 @@
       name: OSRequireActiveDirectoryBackup
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_2_10
+  when: win11cis_rule_18_10_9_2_10
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.2.10
-      - automated
       - patch
-      - operating-system-drives
+      - automated
+      - rule_18.10.9.2.10
+      - operating_system_drives
       - recovery
 
-- name: "18.10.9.2.11 | PATCH | Ensure 'Choose how BitLocker-protected operating system drives can be recovered: Do not enable BitLocker until recovery information is stored to AD DS for operating system drives' is set to 'Enabled: True'"
+- name: "18.10.9.2.11 | PATCH | Ensure 'Configure use of hardware-based encryption for operating system drives' is set to 'Disabled'"
   ansible.windows.win_regedit:
       path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
       name: OSHardwareEncryption
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_9_2_11
+  when: win11cis_rule_18_10_9_2_11
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.2.11
-      - automated
       - patch
-      - operating-system-drives
+      - automated
+      - rule_18.10.9.2.11
+      - operating_system_drives
       - passwords
 
-- name: "18.10.9.2.12 | PATCH | Ensure 'Choose how BitLocker-protected operating system drives can be recovered: Do not enable BitLocker until recovery information is stored to AD DS for operating system drives' is set to 'Enabled: True'"
+- name: "18.10.9.2.12 | PATCH | Ensure 'Configure use of passwords for operating system drives' is set to 'Disabled'"
   ansible.windows.win_regedit:
       path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
       name: OSPassphrase
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_9_2_12
+  when: win11cis_rule_18_10_9_2_12
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.2.12
-      - automated
       - patch
-      - operating-system-drives
+      - automated
+      - rule_18.10.9.2.12
+      - operating_system_drives
 
 - name: "18.10.9.2.13 | PATCH | Ensure 'Require additional authentication at startup' is set to 'Enabled'"
   ansible.windows.win_regedit:
@@ -455,16 +473,15 @@
       name: UseAdvancedStartup
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_2_13
+  when: win11cis_rule_18_10_9_2_13
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.2.13
-      - automated
       - patch
-      - operating-system-drives
+      - automated
+      - rule_18.10.9.2.13
+      - operating_system_drives
 
 - name: "18.10.9.2.14 | PATCH | Ensure 'Require additional authentication at startup: Allow BitLocker without a compatible TPM' is set to 'Enabled: False'"
   ansible.windows.win_regedit:
@@ -472,34 +489,108 @@
       name: EnableBDEWithNoTPM
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_9_2_14
+  when: win11cis_rule_18_10_9_2_14
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.2.14
-      - automated
       - patch
-      - operating-system-drives
+      - automated
+      - rule_18.10.9.2.14
+      - operating_system_drives
+      - tpm
+
+- name: "18.10.9.2.15 | PATCH | Ensure 'Require additional authentication at startup: Configure TPM startup:' is set to 'Enabled: Do not allow TPM'"
+  ansible.windows.win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
+      name: UseTPM
+      data: 0
+      type: dword
+  when:
+      - win11cis_rule_18_10_9_2_15
+      - not discovered_domain_joined
+  tags:
+      - level1-bitlocker
+      - level2-bitlocker
+      - bitlocker
+      - patch
+      - automated
+      - rule_18.10.9.2.15
+      - operating_system_drives
+      - tpm
+
+- name: "18.10.9.2.16 | PATCH | Ensure 'Require additional authentication at startup: Configure TPM startup PIN:' is set to 'Enabled: Require startup PIN with TPM'"
+  ansible.windows.win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
+      name: UseTPMPIN
+      data: 1
+      type: dword
+  when:
+      - win11cis_rule_18_10_9_2_16
+      - not discovered_domain_joined
+  tags:
+      - level1-bitlocker
+      - level2-bitlocker
+      - bitlocker
+      - patch
+      - automated
+      - rule_18.10.9.2.16
+      - operating_system_drives
+      - tpm
+
+- name: "18.10.9.2.17 | PATCH | Ensure 'Require additional authentication at startup: Configure TPM startup key:' is set to 'Enabled: Do not allow startup key with TPM'"
+  ansible.windows.win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
+      name: UseTPMKey
+      data: 0
+      type: dword
+  when:
+      - win11cis_rule_18_10_9_2_17
+      - not discovered_domain_joined
+  tags:
+      - level1-bitlocker
+      - level2-bitlocker
+      - bitlocker
+      - patch
+      - automated
+      - rule_18.10.9.2.17
+      - operating_system_drives
+      - tpm
+
+- name: "18.10.9.2.18 | PATCH | Ensure 'Require additional authentication at startup: Configure TPM startup key and PIN:' is set to 'Enabled: Do not allow startup key and PIN with TPM'"
+  ansible.windows.win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
+      name: UseTPMKeyPIN
+      data: 0
+      type: dword
+  when:
+      - win11cis_rule_18_10_9_2_18
+      - not discovered_domain_joined
+  tags:
+      - level1-bitlocker
+      - level2-bitlocker
+      - bitlocker
+      - patch
+      - automated
+      - rule_18.10.9.2.1
+      - operating_system_drives
       - tpm
 
 - name: "18.10.9.3.1 | PATCH | Ensure 'Allow access to BitLocker-protected removable data drives from earlier versions of Windows' is set to 'Disabled'"
   ansible.windows.win_regedit:
       path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
       name: RDVDiscoveryVolumeType
-      data: <none>
+      data: []
       type: string
-  when:
-      - win11cis_rule_18_10_9_3_1
+  when: win11cis_rule_18_10_9_3_1
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.3.1
-      - automated
       - patch
-      - removable-data-drives
+      - automated
+      - rule_18.10.9.3.1
+      - removable_data_drives
 
 - name: "18.10.9.3.2 | PATCH | Ensure 'Choose how BitLocker-protected removable drives can be recovered' is set to 'Enabled'"
   ansible.windows.win_regedit:
@@ -507,16 +598,15 @@
       name: RDVRecovery
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_3_2
+  when: win11cis_rule_18_10_9_3_2
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.3.2
-      - automated
       - patch
-      - removable-data-drives
+      - automated
+      - rule_18.10.9.3.2
+      - removable_data_drives
       - recovery
 
 - name: "18.10.9.3.3 | PATCH | Ensure 'Choose how BitLocker-protected removable drives can be recovered: Allow data recovery agent' is set to 'Enabled: True'"
@@ -525,34 +615,32 @@
       name: RDVManageDRA
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_3_3
+  when: win11cis_rule_18_10_9_3_3
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.3.3
-      - automated
       - patch
-      - removable-data-drives
+      - automated
+      - rule_18.10.9.3.3
+      - removable_data_drives
       - recovery
 
 - name: "18.10.9.3.4 | PATCH | Ensure 'Choose how BitLocker-protected removable drives can be recovered: Recovery Password' is set to 'Enabled: Do not allow 48-digit recovery password'"
   ansible.windows.win_regedit:
       path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
-      name: RDVManageDRA
+      name: RDVRecoveryPassword
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_9_3_4
+  when: win11cis_rule_18_10_9_3_4
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.3.4
-      - automated
       - patch
-      - removable-data-drives
+      - automated
+      - rule_18.10.9.3.4
+      - removable_data_drives
       - recovery
 
 - name: "18.10.9.3.5 | PATCH | Ensure 'Choose how BitLocker-protected removable drives can be recovered: Recovery Key' is set to 'Enabled: Do not allow 256-bit recovery key'"
@@ -561,16 +649,15 @@
       name: RDVRecoveryKey
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_9_3_5
+  when: win11cis_rule_18_10_9_3_5
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.3.5
-      - automated
       - patch
-      - removable-data-drives
+      - automated
+      - rule_18.10.9.3.5
+      - removable_data_drives
       - recovery
 
 - name: "18.10.9.3.6 | PATCH | Ensure 'Choose how BitLocker-protected removable drives can be recovered: Omit recovery options from the BitLocker setup wizard' is set to 'Enabled: True'"
@@ -579,16 +666,15 @@
       name: RDVHideRecoveryPage
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_3_6
+  when: win11cis_rule_18_10_9_3_6
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.3.6
-      - automated
       - patch
-      - removable-data-drives
+      - automated
+      - rule_18.10.9.3.6
+      - removable_data_drives
       - recovery
 
 - name: "18.10.9.3.7 | PATCH | Ensure 'Choose how BitLocker-protected removable drives can be recovered: Save BitLocker recovery information to AD DS for removable data drives' is set to 'Enabled: False'"
@@ -597,16 +683,15 @@
       name: RDVActiveDirectoryBackup
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_9_3_7
+  when: win11cis_rule_18_10_9_3_7
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.3.7
-      - automated
       - patch
-      - removable-data-drives
+      - automated
+      - rule_18.10.9.3.7
+      - removable_data_drives
       - recovery
 
 - name: "18.10.9.3.8 | PATCH | Ensure 'Choose how BitLocker-protected removable drives can be recovered: Configure storage of BitLocker recovery information to AD DS:' is set to 'Enabled: Backup recovery passwords and key packages'"
@@ -615,16 +700,15 @@
       name: RDVActiveDirectoryInfoToStore
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_3_8
+  when: win11cis_rule_18_10_9_3_8
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.3.8
-      - automated
       - patch
-      - removable-data-drives
+      - automated
+      - rule_18.10.9.3.8
+      - removable_data_drives
       - recovery
 
 - name: "18.10.9.3.9 | PATCH | Ensure 'Choose how BitLocker-protected removable drives can be recovered: Do not enable BitLocker until recovery information is stored to AD DS for removable data drives' is set to 'Enabled: False'"
@@ -633,16 +717,15 @@
       name: RDVRequireActiveDirectoryBackup
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_9_3_9
+  when: win11cis_rule_18_10_9_3_9
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.3.9
-      - automated
       - patch
-      - removable-data-drives
+      - automated
+      - rule_18.10.9.3.9
+      - removable_data_drives
       - recovery
 
 - name: "18.10.9.3.10 | PATCH | Ensure 'Configure use of hardware-based encryption for removable data drives' is set to 'Disabled'"
@@ -651,16 +734,15 @@
       name: RDVHardwareEncryption
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_9_3_10
+  when: win11cis_rule_18_10_9_3_10
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.3.10
-      - automated
       - patch
-      - removable-data-drives
+      - automated
+      - rule_18.10.9.3.10
+      - removable_data_drives
       - encryption
 
 - name: "18.10.9.3.11 | PATCH | Ensure 'Configure use of passwords for removable data drives' is set to 'Disabled'"
@@ -669,16 +751,15 @@
       name: RDVPassphrase
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_9_3_11
+  when: win11cis_rule_18_10_9_3_11
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.3.11
-      - automated
       - patch
-      - removable-data-drives
+      - automated
+      - rule_18.10.9.3.11
+      - removable_data_drives
       - passwords
 
 - name: "18.10.9.3.12 | PATCH | Ensure 'Configure use of smart cards on removable data drives' is set to 'Enabled'"
@@ -687,35 +768,33 @@
       name: RDVAllowUserCert
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_3_12
+  when: win11cis_rule_18_10_9_3_12
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.3.12
-      - automated
       - patch
-      - removable-data-drives
+      - automated
+      - rule_18.10.9.3.12
+      - removable_data_drives
       - passwords
 
-- name: "18.10.9.3.13 | PATCH | Ensure 'Configure use of smart cards on removable data drives' is set to 'Enabled'"
+- name: "18.10.9.3.13 | PATCH | Ensure 'Configure use of smart cards on removable data drives: Require use of smart cards on removable data drives' is set to 'Enabled: True' "
   ansible.windows.win_regedit:
       path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
       name: RDVEnforceUserCert
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_3_13
+  when: win11cis_rule_18_10_9_3_13
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.3.13
-      - automated
       - patch
-      - removable-data-drives
-      - smart-cards
+      - automated
+      - rule_18.10.9.3.13
+      - removable_data_drives
+      - smart_cards
 
 - name: "18.10.9.3.14 | PATCH | Ensure 'Deny write access to removable drives not protected by BitLocker' is set to 'Enabled'"
   ansible.windows.win_regedit:
@@ -723,33 +802,31 @@
       name: RDVDenyWriteAccess
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_3_14
+  when: win11cis_rule_18_10_9_3_14
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.3.14
-      - automated
       - patch
-      - removable-data-drives
+      - automated
+      - rule_18.10.9.3.14
+      - removable_data_drives
 
-- name: "18.10.9.3.15 | PATCH |  Ensure 'Deny write access to removable drives not protected by BitLocker: Do not allow write access to devices configured in another organization' is set to 'Enabled: False'"
+- name: "18.10.9.3.15 | PATCH | Ensure 'Deny write access to removable drives not protected by BitLocker: Do not allow write access to devices configured in another organization' is set to 'Enabled: False'"
   ansible.windows.win_regedit:
       path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
       name: RDVDenyCrossOrg
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_9_3_15
+  when: win11cis_rule_18_10_9_3_15
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.3.15
-      - automated
       - patch
-      - removable-data-drives
+      - automated
+      - rule_18.10.9.3.15
+      - removable_data_drives
 
 - name: "18.10.9.4 | PATCH | Ensure 'Disable new DMA devices when this computer is locked' is set to 'Enabled'"
   ansible.windows.win_regedit:
@@ -757,13 +834,12 @@
       name: DisableExternalDMAUnderLock
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_9_4
+  when: win11cis_rule_18_10_9_4
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker
-      - rule_18.10.9.4
-      - automated
       - patch
+      - automated
+      - rule_18.10.9.4
       - dma

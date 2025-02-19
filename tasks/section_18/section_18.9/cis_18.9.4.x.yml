@@ -6,14 +6,13 @@
       name: AllowEncryptionOracle
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_9_4_1
+  when: win11cis_rule_18_9_4_1
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.9.3.1
-      - automated
       - patch
-      - encryption-oracle
+      - automated
+      - rule_18.9.3.1
+      - encryption_oracle
 
 - name: "18.9.4.2 | PATCH | Ensure Remote host allows delegation of non-exportable credentials is set to Enabled"
   ansible.windows.win_regedit:
@@ -21,11 +20,10 @@
       name: AllowProtectedCreds
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_9_4_2
+  when: win11cis_rule_18_9_4_2
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.9.4.2
-      - automated
       - patch
-      - remote-host-credentials
+      - automated
+      - rule_18.9.4.2
+      - remote_host_credentials

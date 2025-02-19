@@ -4,6 +4,6 @@
   ansible.builtin.import_tasks:
       file: cis_18.8.1.x.yml
   tags:
-      - administrative-templates-computer
-      - start-menu-and-taskbar
+      - administrative_templates_computer
+      - start_menu_and_taskbar
       - notifications

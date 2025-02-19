@@ -6,14 +6,13 @@
       name: NC_AllowNetBridge_NLA
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_6_11_2
+  when: win11cis_rule_18_6_11_2
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.6.11.2
-      - automated
       - patch
-      - network-bridge
+      - automated
+      - rule_18.6.11.2
+      - network_bridge
 
 - name: "18.6.11.3 | PATCH | Ensure Prohibit use of Internet Connection Sharing on your DNS domain network is set to Enabled"
   ansible.windows.win_regedit:
@@ -21,13 +20,12 @@
       name: NC_ShowSharedAccessUI
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_6_11_3
+  when: win11cis_rule_18_6_11_3
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.6.11.3
-      - automated
       - patch
+      - automated
+      - rule_18.6.11.3
       - ics
 
 - name: "18.6.11.4 | PATCH | Ensure Require domain users to elevate when setting a networks location is set to Enabled"
@@ -36,11 +34,10 @@
       name: NC_StdDomainUserSetLocation
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_6_11_4
+  when: win11cis_rule_18_6_11_4
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.6.11.4
-      - automated
       - patch
-      - domain-users
+      - automated
+      - rule_18.6.11.4
+      - domain_users
