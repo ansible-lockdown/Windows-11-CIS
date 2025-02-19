@@ -1,0 +1,38 @@
+---
+
+- name: "18.10.16.1 | PATCH | Ensure 'Download Mode' is NOT set to 'Enabled: Internet'"
+  block:
+      - name: "18.10.16.1 | PATCH | Ensure 'Download Mode' is NOT set to 'Enabled: Internet' | Set Variable."
+        ansible.windows.win_regedit:
+            path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization
+            value: DODownloadMode
+            data: "{{ win11cis_do_download_mode }}"
+            datatype: dword
+        when: win11cis_do_download_mode <= 2 or win11cis_do_download_mode == 99 or win11cis_do_download_mode == 100
+
+      - name: "18.10.16.1 | AUDIT | Ensure 'Download Mode' is NOT set to 'Enabled: Internet' | Warning Check For Bad Variable "
+        ansible.builtin.debug:
+            msg:
+                - "Warning!! You have an incorrect variable set for win11cis_do_download_mode. Please read"
+                - "the notes for the variable and make the necessary change to the variable to be in compliance."
+        when:
+            - win11cis_do_download_mode > 2
+            - win11cis_do_download_mode != 99
+            - win11cis_do_download_mode != 100
+
+      - name: "18.10.16.1 | AUDIT | Ensure 'Download Mode' is NOT set to 'Enabled: Internet' | Warn Count."
+        ansible.builtin.import_tasks:
+            file: warning_facts.yml
+        vars:
+            warn_control_id: '18.10.16.1'
+        when:
+            - win11cis_do_download_mode > 2
+            - win11cis_do_download_mode != 99
+            - win11cis_do_download_mode != 100
+  when: win11cis_rule_18_10_16_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.10.16.1
+      - download_mode

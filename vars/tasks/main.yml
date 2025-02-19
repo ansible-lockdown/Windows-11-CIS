@@ -1,0 +1,103 @@
+---
+
+- name: "Main | Display Banner"
+  ansible.builtin.debug:
+      msg: "{{ lockdown_banner.split('\n') }}"
+  tags:
+      - always
+
+- name: "Main | Gather distribution info"
+  ansible.builtin.setup:
+      gather_subset: distribution,!all,!min
+  when:
+      - ansible_distribution is not defined
+  tags:
+      - always
+
+- name: "Main | Check OS Version & Family"
+  ansible.builtin.assert:
+      that:
+          - ansible_os_family == 'Windows'
+          - ansible_distribution | regex_search('(Microsoft Windows 11 Enterprise)')
+      success_msg: "{{ ansible_distribution }} Distribution {{ ansible_distribution_major_version }} is the detected operating system."
+      fail_msg: "This role can only be run against Microsoft Windows 11 Enterprise. {{ ansible_distribution }} {{ ansible_distribution_major_version }} is not supported."
+  tags:
+      - always
+
+- name: "Main | Check Ansible Version"
+  ansible.builtin.assert:
+      that: ansible_version.full is version_compare(win11cis_min_ansible_version, '>=')
+      msg: You must use Ansible {{ win11cis_min_ansible_version }} or greater.
+  tags:
+      - always
+
+- name: "Main | Include The Preliminary Tasks"
+  ansible.builtin.include_tasks:
+      file: prelim.yml
+  tags:
+      - always
+      - prelim_tasks
+
+- name: "Main | Include Section 1 Patches"
+  ansible.builtin.import_tasks:
+      file: section_1/main.yml
+  when: win11cis_section1
+  tags:
+      - section1
+
+- name: "Main | Include Section 2 Patches"
+  ansible.builtin.import_tasks:
+      file: section_2/main.yml
+  when: win11cis_section2
+  tags:
+      - section2
+
+- name: "Main | Include Section 5 Patches"
+  ansible.builtin.import_tasks:
+      file: section_5/main.yml
+  when: win11cis_section5
+  tags:
+      - section5
+
+- name: "Main | Include Section 9 Patches"
+  ansible.builtin.import_tasks:
+      file: section_9/main.yml
+  when: win11cis_section9
+  tags:
+      - section9
+
+- name: "Main | Include Section 17 Patches"
+  ansible.builtin.import_tasks:
+      file: section_17/main.yml
+  when: win11cis_section17
+  tags:
+      - section17
+
+- name: "Main | Include Section 18 Patches"
+  ansible.builtin.import_tasks:
+      file: section_18/main.yml
+  when: win11cis_section18
+  tags:
+      - section18
+
+- name: "Main | Include Section 19 Patches"
+  ansible.builtin.import_tasks:
+      file: section_19/main.yml
+  when: win11cis_section19
+  tags:
+      - section19
+
+- name: "Main | Run Post Tasks"
+  ansible.builtin.import_tasks:
+      file: post.yml
+  tags:
+      - always
+
+- name: "Main | If Warnings found Output count and control IDs affected"
+  ansible.builtin.debug:
+      msg:
+          - "You have {{ warn_count }} Warning(s) that require investigation(s). Their ID’s are listed below:"
+          - "{{ warn_control_list }}"
+  when: warn_count != 0
+  tags:
+      - always

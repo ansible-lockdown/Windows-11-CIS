@@ -1,0 +1,9 @@
+---
+
+- name: "SECTION | 18.8.1 | Notifications"
+  ansible.builtin.import_tasks:
+      file: cis_18.8.1.x.yml
+  tags:
+      - administrative_templates_computer
+      - start_menu_and_taskbar
+      - notifications

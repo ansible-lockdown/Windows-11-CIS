@@ -1,0 +1,7 @@
+---
+
+- name: "SECTION | 5.x | System Services"
+  ansible.builtin.import_tasks:
+      file: cis_5.x.yml
+  tags:
+      - system_services

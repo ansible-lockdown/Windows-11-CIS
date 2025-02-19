@@ -1,0 +1,95 @@
+---
+
+- name: "18.9.33.6.1 | PATCH | Ensure Allow network connectivity during connected-standby on battery is set to Disabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9
+      name: DCSettingIndex
+      data: 0
+      type: dword
+  when: win11cis_rule_18_9_33_6_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.33.6.1
+      - sleep_settings
+      - power
+
+- name: "18.9.33.6.2 | PATCH | Ensure Allow network connectivity during connected-standby plugged in is set to Disabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9
+      name: ACSettingIndex
+      data: 0
+      type: dword
+  when: win11cis_rule_18_9_33_6_2
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.33.6.2
+      - sleep_settings
+      - power
+
+- name: "18.9.33.6.3 | PATCH | Ensure 'Allow standby states (S1-S3) when sleeping (on battery)' is set to 'Disabled'"
+  ansible.windows.win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\abfc2519-3608-4c2a-94ea-171b0ed546ab
+      name: DCSettingIndex
+      data: 0
+      type: dword
+  when: win11cis_rule_18_9_33_6_3
+  tags:
+      - level1-bitlocker
+      - level2-bitlocker
+      - bitlocker
+      - patch
+      - automated
+      - rule_18.9.33.6.3
+      - sleep_settings
+      - power
+
+- name: "18.9.33.6.4 | PATCH | Ensure 'Allow standby states (S1-S3) when sleeping (plugged in)' is set to 'Disabled'"
+  ansible.windows.win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\abfc2519-3608-4c2a-94ea-171b0ed546ab
+      name: ACSettingIndex
+      data: 0
+      type: dword
+  when: win11cis_rule_18_9_33_6_4
+  tags:
+      - level1-bitlocker
+      - level2-bitlocker
+      - bitlocker
+      - patch
+      - automated
+      - rule_18.9.33.6.4
+      - sleep_settings
+      - power
+
+- name: "18.9.33.6.5 | PATCH | Ensure Require a password when a computer wakes on battery is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51
+      name: DCSettingIndex
+      data: 1
+      type: dword
+  when: win11cis_rule_18_9_33_6_5
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.33.6.5
+      - sleep_settings
+      - power
+
+- name: "18.9.33.6.6 | PATCH | Ensure Require a password when a computer wakes plugged in is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51
+      name: ACSettingIndex
+      data: 1
+      type: dword
+  when: win11cis_rule_18_9_33_6_6
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.33.6.6
+      - sleep_settings
+      - power

@@ -1,0 +1,16 @@
+---
+
+- name: "18.10.89.1 | PATCH | Ensure Allow Remote Shell Access is set to Disabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows\Winrm\Service\Winrs
+      name: AllowRemoteShellAccess
+      data: 0
+      type: dword
+  when:
+      - win11cis_rule_18_10_89_1
+      - not win_skip_for_test
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_18.10.89.1

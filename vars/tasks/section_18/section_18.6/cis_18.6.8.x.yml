@@ -1,0 +1,15 @@
+---
+
+- name: "18.6.8.1 | PATCH | Ensure Enable insecure guest logons is set to Disabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows\Lanmanworkstation
+      name: AllowInsecureGuestAuth
+      data: 0
+      type: dword
+  when: win11cis_rule_18_6_8_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.6.8.1
+      - guest

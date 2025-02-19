@@ -1,0 +1,91 @@
+---
+
+- name: "SECTION | 18.6.4 | DNS Client"
+  ansible.builtin.import_tasks:
+      file: cis_18.6.4.x.yml
+  tags:
+      - administrative_templates_computer
+      - network
+      - dns_client
+
+- name: "SECTION | 18.6.5 | Fonts"
+  ansible.builtin.import_tasks:
+      file: cis_18.6.5.x.yml
+  tags:
+      - administrative_templates_computer
+      - network
+      - fonts
+
+- name: "SECTION | 18.6.8 | Lanman Workstation"
+  ansible.builtin.import_tasks:
+      file: cis_18.6.8.x.yml
+  tags:
+      - administrative_templates_computer
+      - network
+      - lanman_workstation
+
+- name: "SECTION | 18.6.9 | Link-Layer Topology Discovery"
+  ansible.builtin.import_tasks:
+      file: cis_18.6.9.x.yml
+  tags:
+      - administrative_templates_computer
+      - network
+      - link_layer_topology_discovery
+
+- name: "SECTION | 18.6.10 | Microsoft Peer-to-Peer Networking Services"
+  ansible.builtin.import_tasks:
+      file: cis_18.6.10.x.yml
+  tags:
+      - administrative_templates_computer
+      - network
+      - microsoft_peer_to_peer_networking_services
+
+- name: "SECTION | 18.6.11 | Network Connections"
+  ansible.builtin.import_tasks:
+      file: cis_18.6.11.x.yml
+  tags:
+      - administrative_templates_computer
+      - network
+      - network_connections
+
+- name: "SECTION | 18.6.14 | Network Provider"
+  ansible.builtin.import_tasks:
+      file: cis_18.6.14.x.yml
+  tags:
+      - administrative_templates_computer
+      - network
+      - network_provider
+
+- name: "SECTION | 18.6.19.2 | TCP/IP Settings"
+  ansible.builtin.import_tasks:
+      file: cis_18.6.19.2.x.yml
+  tags:
+      - administrative_templates_computer
+      - network
+      - tcpip_settings
+      - parameters
+
+- name: "SECTION | 18.6.20 | Windows Connect Now"
+  ansible.builtin.import_tasks:
+      file: cis_18.6.20.x.yml
+  tags:
+      - administrative_templates_computer
+      - network
+      - windows_connect_now
+
+- name: "SECTION | 18.6.21 | Windows Connection Manager"
+  ansible.builtin.import_tasks:
+      file: cis_18.6.21.x.yml
+  tags:
+      - administrative_templates_computer
+      - network
+      - windows_connection_manager
+
+- name: "SECTION | 18.6.23.2 | WLAN Service"
+  ansible.builtin.import_tasks:
+      file: cis_18.6.23.2.x.yml
+  tags:
+      - administrative_templates_computer
+      - network
+      - wlan_service
+      - wlan_settings

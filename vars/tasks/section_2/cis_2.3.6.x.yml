@@ -1,0 +1,104 @@
+---
+
+- name: "2.3.6.1 | PATCH | Ensure Domain member Digitally encrypt or sign secure channel data always is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\System\Currentcontrolset\Services\Netlogon\Parameters
+      name: RequireSignOrSeal
+      data: 1
+      type: dword
+  when: win11cis_rule_2_3_6_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_2.3.6.1
+      - encryption
+
+- name: "2.3.6.2 | PATCH | Ensure Domain member Digitally encrypt secure channel data when possible is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\System\Currentcontrolset\Services\Netlogon\Parameters
+      name: SealSecureChannel
+      data: 1
+      type: dword
+  when: win11cis_rule_2_3_6_2
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_2.3.6.2
+      - encryption
+
+- name: "2.3.6.3 | PATCH | Ensure Domain member Digitally sign secure channel data when possible is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\System\Currentcontrolset\Services\Netlogon\Parameters
+      name: SignSecureChannel
+      data: 1
+      type: dword
+  when: win11cis_rule_2_3_6_3
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_2.3.6.3
+      - encryption
+
+- name: "2.3.6.4 | PATCH | Ensure Domain member Disable machine account password changes is set to Disabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\System\Currentcontrolset\Services\Netlogon\Parameters
+      name: DisablePasswordChange
+      data: 0
+      type: dword
+  when: win11cis_rule_2_3_6_4
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_2.3.6.4
+      - password
+
+- name: "2.3.6.5 | PATCH | Ensure Domain member Maximum machine account password age is set to 30 or fewer days but not 0"
+  block:
+      - name: "2.3.6.5 | PATCH | Ensure Domain member Maximum machine account password age is set to 30 or fewer days but not 0. | Apply Settings To Registry."
+        ansible.windows.win_regedit:
+            path: HKLM:\System\Currentcontrolset\Services\Netlogon\Parameters
+            name: MaximumPasswordAge
+            data: "{{ win11cis_domain_member_maximum_password_age }}"
+            type: dword
+        when:
+            - win11cis_domain_member_maximum_password_age <= 30
+            - win11cis_domain_member_maximum_password_age > 0
+
+      - name: "2.3.6.5 | AUDIT | Ensure Domain member Maximum machine account password age is set to 30 or fewer days but not 0. | Warning Check For Variable Standards."
+        ansible.builtin.debug:
+            msg:
+                - "Warning!! You have an invalid number of days set for win11cis_domain_member_maximum_password_age. Please read"
+                - "the notes for the variable and make the necessary change to the variable to be in compliance."
+        when: win11cis_domain_member_maximum_password_age > 30 or win11cis_domain_member_maximum_password_age == 0
+
+      - name: "2.3.6.5 | AUDIT | Ensure Domain member Maximum machine account password age is set to 30 or fewer days but not 0. | Warn Count."
+        ansible.builtin.import_tasks:
+            file: warning_facts.yml
+        vars:
+            warn_control_id: '2.3.6.5'
+        when: win11cis_domain_member_maximum_password_age > 30 or win11cis_domain_member_maximum_password_age == 0
+  when: win11cis_rule_2_3_6_5
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_2.3.6.5
+      - password
+
+- name: "2.3.6.6 | PATCH | Ensure Domain member Require strong Windows 2000 or later session key is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\System\Currentcontrolset\Services\Netlogon\Parameters
+      name: RequireStrongKey
+      data: 1
+      type: dword
+  when: win11cis_rule_2_3_6_6
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_2.3.6.6
+      - session-key

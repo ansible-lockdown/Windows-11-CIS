@@ -1,0 +1,14 @@
+---
+
+- name: "2.3.14.1 | PATCH | Ensure 'System cryptography: Force strong key protection for user keys stored on the computer' is set to 'User is prompted when the key is first used' or higher."
+  ansible.windows.win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Cryptography
+      name: ForceKeyProtection
+      data: "{{ win11cis_force_key_protection }}"
+      type: dword
+  when: win11cis_rule_2_3_14_1
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_2.3.14.1

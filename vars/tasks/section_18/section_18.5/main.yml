@@ -1,0 +1,8 @@
+---
+
+- name: "SECTION | 18.5 | MSS (Legacy)"
+  ansible.builtin.import_tasks:
+      file: cis_18.5.x.yml
+  tags:
+      - administrative_templates_computer
+      - mss_legacy

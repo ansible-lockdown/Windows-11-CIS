@@ -1,0 +1,39 @@
+---
+
+- name: "17.3.1 | PATCH | Ensure Audit PNP Activity is set to include Success"
+  block:
+      - name: "17.3.1 | AUDIT | Ensure Audit PNP Activity is set to include Success | Get current audit events."
+        ansible.windows.win_shell: AuditPol /get /subcategory:"Plug and Play Events" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        changed_when: false
+        failed_when: false
+        register: discovered_17_3_1_audit
+
+      - name: "17.3.1 | PATCH | Ensure Audit PNP Activity is set to include Success | Success"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"Plug and Play Events" /success:enable
+        when: "'Success' not in discovered_17_3_1_audit.stdout"
+  when: win11cis_rule_17_3_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_17.3.1
+      - pnp_activity
+
+- name: "17.3.2 | PATCH | Ensure Audit Process Creation is set to include Success"
+  block:
+      - name: "17.3.2 | AUDIT | Ensure Audit Process Creation is set to include Success | Get current audit events."
+        ansible.windows.win_shell: AuditPol /get /subcategory:"Process Creation" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        changed_when: false
+        failed_when: false
+        register: diccovered_17_3_2_audit
+
+      - name: "17.3.2 | PATCH | Ensure Audit Process Creation is set to include Success | Success"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"Process Creation" /success:enable
+        when: "'Success' not in diccovered_17_3_2_audit.stdout"
+  when: win11cis_rule_17_3_2
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_17.3.2
+      - audit_process_creation

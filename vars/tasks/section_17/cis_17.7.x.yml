@@ -1,0 +1,100 @@
+---
+
+- name: "17.7.1 | PATCH | Ensure Audit Audit Policy Change is set to include Success"
+  block:
+      - name: "17.7.1 | AUDIT | Ensure Audit Audit Policy Change is set to include Success | Get current audit events."
+        ansible.windows.win_shell: AuditPol /get /subcategory:"Audit Policy Change" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        changed_when: false
+        failed_when: false
+        register: discovered_17_7_1_audit
+
+      - name: "17.7.1 | PATCH | Ensure Audit Audit Policy Change is set to include Success | Success"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"Audit Policy Change" /success:enable
+        when: "'Success' not in discovered_17_7_1_audit.stdout"
+  when: win11cis_rule_17_7_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_17.7.1
+      - audit_policy_change
+
+- name: "17.7.2 | PATCH | Ensure Audit Authentication Policy Change is set to include Success"
+  block:
+      - name: "17.7.2 | AUDIT | Ensure Audit Authentication Policy Change is set to include Success | Get current audit events."
+        ansible.windows.win_shell: AuditPol /get /subcategory:"Authentication Policy Change" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        changed_when: false
+        failed_when: false
+        register: discovered_17_7_2_audit
+
+      - name: "17.7.2 | PATCH | Ensure Audit Authentication Policy Change is set to include Success | Success"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"Authentication Policy Change" /success:enable
+        when: "'Success' not in discovered_17_7_2_audit.stdout"
+  when: win11cis_rule_17_7_2
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_17.7.2
+      - audit_authentication_policy_change
+
+- name: "17.7.3 | PATCH | Ensure Audit Authorization Policy Change is set to include Success"
+  block:
+      - name: "17.7.3 | AUDIT | Ensure Audit Authorization Policy Change is set to include Success | Get current audit events."
+        ansible.windows.win_shell: AuditPol /get /subcategory:"Authorization Policy Change" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        changed_when: false
+        failed_when: false
+        register: discovered_17_7_3_audit
+
+      - name: "17.7.3 | PATCH | Ensure Audit Authorization Policy Change is set to include Success | Success"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"Authorization Policy Change" /success:enable
+        when: "'Success' not in discovered_17_7_3_audit.stdout"
+  when: win11cis_rule_17_7_3
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_17.7.3
+      - audit_authorization_policy_change
+
+- name: "17.7.4 | PATCH | Ensure Audit MPSSVC Rule-Level Policy Change is set to Success and Failure"
+  block:
+      - name: "17.7.4 | AUDIT | Ensure Audit MPSSVC Rule-Level Policy Change is set to Success and Failure | Get current audit events."
+        ansible.windows.win_shell: AuditPol /get /subcategory:"MPSSVC Rule-Level Policy Change" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        changed_when: false
+        failed_when: false
+        register: discovered_17_7_4_audit
+
+      - name: "17.7.4 | PATCH | Ensure Audit MPSSVC Rule-Level Policy Change is set to Success and Failure | Success"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"MPSSVC Rule-Level Policy Change" /success:enable
+        when: "'Success' not in discovered_17_7_4_audit.stdout"
+
+      - name: "17.7.4 | PATCH | Ensure Audit MPSSVC Rule-Level Policy Change is set to Success and Failure | Failure"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"MPSSVC Rule-Level Policy Change" /failure:enable
+        when: "'Failure' not in discovered_17_7_4_audit.stdout"
+  when: win11cis_rule_17_7_4
+  tags:
+      - level1_corporate_enterprise_environment
+      - patch
+      - automated
+      - rule_17.7.4
+      - mpssvc_rule_level_policy
+
+- name: "17.7.5 | PATCH | Ensure Audit Other Policy Change Events is set to include Failure"
+  block:
+      - name: "17.7.5 | AUDIT | Ensure Audit Other Policy Change Events is set to include Failure | Get current audit events."
+        ansible.windows.win_shell: AuditPol /get /subcategory:"Other Policy Change Events" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        changed_when: false
+        failed_when: false
+        register: discovered_17_7_5_audit
+
+      - name: "17.7.5 | PATCH | Ensure Audit Other Policy Change Events is set to include Failure | Failure"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"Other Policy Change Events" /failure:enable
+        when: "'Failure' not in discovered_17_7_5_audit.stdout"
+  when: win11cis_rule_17_7_5
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_17.7.5
+      - audit_other_policy_change

@@ -1,0 +1,17 @@
+---
+
+- name: "18.9.24.1 | PATCH | Ensure Enumeration policy for external devices incompatible with Kernel DMA Protection is set to Enabled Block All"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows\Kernel DMA Protection
+      name: DeviceEnumerationPolicy
+      data: 0
+      type: dword
+  when: win11cis_rule_18_9_24_1
+  tags:
+      - level1-bitlocker
+      - level2-bitlocker
+      - bitlocker
+      - patch
+      - automated
+      - rule_18.9.24.1
+      - kernel_dma_protection

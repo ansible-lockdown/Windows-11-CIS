@@ -1,0 +1,44 @@
+---
+
+- name: "18.10.86.1 | PATCH | Ensure 'Turn on PowerShell Script Block Logging' is set to 'Enabled'"
+  ansible.windows.win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging
+      name: EnableScriptBlockLogging
+      data: 1
+      type: dword
+  when: win11cis_rule_18_10_86_1
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_18.10.86.1
+
+- name: "18.10.86.2 | PATCH | Ensure 'Turn on PowerShell Transcription' is set to 'Enabled'"
+  block:
+      - name: "18.10.86.2 | PATCH | Ensure 'Turn on PowerShell Transcription' is set to 'Enabled | Turn on PowerShell Transcription."
+        ansible.windows.win_regedit:
+            path: HKLM:\Software\Policies\Microsoft\Windows\Powershell\Transcription
+            name: EnableTranscripting
+            data: 1
+            type: dword
+
+      - name: "18.10.86.2 | PATCH | Ensure 'Turn on PowerShell Transcription' is set to 'Enabled | Set Log Directory"
+        ansible.windows.win_regedit:
+            path: HKLM:\Software\Policies\Microsoft\Windows\Powershell\Transcription
+            name: OutputDirectory
+            data: "{{ win11cis_powershell_transcription_dir }}"
+            type: string
+        when: "'Default' not in win11cis_powershell_transcription_dir"
+
+      - name: "18.10.86.2 | PATCH | Ensure 'Turn on PowerShell Transcription' is set to 'Enabled | Remove Custom Log Directory"
+        ansible.windows.win_regedit:
+            path: HKLM:\Software\Policies\Microsoft\Windows\Powershell\Transcription
+            name: OutputDirectory
+            state: absent
+        when: "'Default' in win11cis_powershell_transcription_dir"
+  when: win11cis_rule_18_10_86_2
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_18.10.86.2

@@ -1,0 +1,215 @@
+---
+
+- name: "2.3.11.1 | PATCH | Ensure Network security Allow Local System to use computer identity for NTLM is set to Enabled."
+  ansible.windows.win_regedit:
+      path: HKLM:\System\Currentcontrolset\Control\Lsa
+      name: UseMachineId
+      data: 1
+      type: dword
+  when: win11cis_rule_2_3_11_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_2.3.11.1
+      - ntlm
+
+- name: "2.3.11.2 | PATCH | Ensure Network security Allow LocalSystem NULL session fallback is set to Disabled."
+  ansible.windows.win_regedit:
+      path: HKLM:\System\Currentcontrolset\Control\Lsa\Msv1_0
+      name: AllowNullSessionFallback
+      data: 0
+      type: dword
+  when: win11cis_rule_2_3_11_2
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_2.3.11.2
+      - localsystem
+
+- name: "2.3.11.3 | PATCH | Ensure Network Security Allow PKU2U authentication requests to this computer to use online identities is set to Disabled."
+  ansible.windows.win_regedit:
+      path: HKLM:\System\Currentcontrolset\Control\Lsa\Pku2U
+      name: AllowOnlineID
+      data: 0
+      type: dword
+  when: win11cis_rule_2_3_11_3
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_2.3.11.3
+      - authentication
+
+- name: "2.3.11.4 | PATCH | Ensure Network security Configure encryption types allowed for Kerberos is set to AES128 HMAC SHA1 AES256 HMAC SHA1 Future encryption types."
+  block:
+      - name: "2.3.11.4 | PATCH | Ensure Network security Configure encryption types allowed for Kerberos is set to AES128 HMAC SHA1 AES256 HMAC SHA1 Future encryption types. | Legacy App Encryption Support."
+        ansible.windows.win_regedit:
+            path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System\Kerberos\Parameters
+            name: SupportedEncryptionTypes
+            data: 2147483644
+            type: dword
+        when: win11cis_legacy_rc4_hmac_md5_support
+
+      - name: "2.3.11.4 | PATCH | Ensure Network security Configure encryption types allowed for Kerberos is set to AES128 HMAC SHA1 AES256 HMAC SHA1 Future encryption types. | No Legacy App Encryption Support."
+        ansible.windows.win_regedit:
+            path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System\Kerberos\Parameters
+            name: SupportedEncryptionTypes
+            data: 2147483640
+            type: dword
+        when: not win11cis_legacy_rc4_hmac_md5_support
+  when: win11cis_rule_2_3_11_4
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_2.3.11.4
+      - encryption
+
+- name: "2.3.11.5 | PATCH | Ensure Network security Do not store LAN Manager hash value on next password change is set to Enabled."
+  ansible.windows.win_regedit:
+      path: HKLM:\System\Currentcontrolset\Control\Lsa
+      name: NoLMHash
+      data: 1
+      type: dword
+  when: win11cis_rule_2_3_11_5
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_2.3.11.5
+
+- name: "2.3.11.6 | PATCH | Ensure Network security Force logoff when logon hours expire is set to Enabled."
+  ansible.windows.win_regedit:
+      path: HKLM:\System\CurrentControlSet\Services\LanManServer\Parameters
+      name: EnableForcedLogOff
+      data: 1
+      type: dword
+  when: win11cis_rule_2_3_11_6
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_2.3.11.6
+
+- name: "2.3.11.7 | PATCH | Ensure Network security LAN Manager authentication level is set to Send NTLMv2 response only. Refuse LM NTLM"
+  ansible.windows.win_regedit:
+      path: HKLM:\System\Currentcontrolset\Control\Lsa
+      name: LMCompatibilityLevel
+      data: 5
+      type: dword
+  when: win11cis_rule_2_3_11_7
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_2.3.11.7
+
+- name: "2.3.11.8 | PATCH | Ensure Network security LDAP client signing requirements is set to Negotiate signing or higher."
+  block:
+      - name: "2.3.11.8 | PATCH | Ensure Network security LDAP client signing requirements is set to Negotiate signing or higher. | Apply Variable To Regitry."
+        ansible.windows.win_regedit:
+            path: HKLM:\System\Currentcontrolset\Services\Ldap
+            name: LDAPClientIntegrity
+            data: "{{ win11cis_ldap_client_integrity }}"
+            type: dword
+        when: win11cis_ldap_client_integrity == 1 or win11cis_ldap_client_integrity == 2
+
+      - name: "2.3.11.8 | AUDIT | Ensure Network security LDAP client signing requirements is set to Negotiate signing or higher. | Warning Check For Variable."
+        ansible.builtin.debug:
+            msg:
+                - "Warning!! You have an invalid variable set for win11cis_ldap_client_integrity. Please read"
+                - "the notes for the variable and make the necessary change to the variable to be in compliance."
+        when: win11cis_ldap_client_integrity == 0 or win11cis_ldap_client_integrity > 2
+
+      - name: "2.3.11.8 | AUDIT | Ensure Network security LDAP client signing requirements is set to Negotiate signing or higher. | Warn Count."
+        ansible.builtin.import_tasks:
+            file: warning_facts.yml
+        vars:
+            warn_control_id: '2.3.11.8'
+        when: win11cis_ldap_client_integrity == 0 or win11cis_ldap_client_integrity > 2
+  when: win11cis_rule_2_3_11_8
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_2.3.11.8
+      - ldap
+
+- name: "2.3.11.9 | PATCH | Ensure Network security Minimum session security for NTLM SSP based including secure RPC clients is set to Require NTLMv2 session security Require 128-bit encryption."
+  ansible.windows.win_regedit:
+      path: HKLM:\System\Currentcontrolset\Control\Lsa\Msv1_0
+      name: NTLMMinClientSec
+      data: 537395200
+      type: dword
+  when: win11cis_rule_2_3_11_9
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_2.3.11.9
+      - ntlm
+
+- name: "2.3.11.10 | PATCH | Ensure Network security Minimum session security for NTLM SSP based including secure RPC servers is set to Require NTLMv2 session security Require 128-bit encryption."
+  ansible.windows.win_regedit:
+      path: HKLM:\System\Currentcontrolset\Control\Lsa\Msv1_0
+      name: NTLMMinServerSec
+      data: 537395200
+      type: dword
+  when: win11cis_rule_2_3_11_10
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_2.3.11.10
+      - ntlm
+
+- name: "2.3.11.11 | PATCH | Ensure 'Network security: Restrict NTLM: Audit Incoming NTLM Traffic' is set to 'Enable auditing for all accounts'"
+  ansible.windows.win_regedit:
+      path: HKLM:\System\Currentcontrolset\Control\Lsa\Msv1_0
+      name: AuditReceivingNTLMTraffic
+      data: 2
+      type: dword
+  when: win11cis_rule_2_3_11_11
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_2.3.11.11
+      - ntlm
+
+- name: "2.3.11.12 | PATCH | Ensure 'Network security: Restrict NTLM: Outgoing NTLM traffic to remote servers' is set to 'Audit all' or higher'"
+  block:
+      - name: "2.3.11.12 | PATCH | Ensure 'Network security: Restrict NTLM: Outgoing NTLM traffic to remote servers' is set to 'Audit all' or higher' | Set Variable"
+        ansible.windows.win_regedit:
+            path: HKLM:\System\Currentcontrolset\Control\Lsa\Msv1_0
+            name: RestrictSendingNTLMTraffic
+            data: "{{ win11cis_restrict_sending_ntlm_traffic }}"
+            type: dword
+        when: win11cis_restrict_sending_ntlm_traffic == 1 or win11cis_restrict_sending_ntlm_traffic == 2
+
+      - name: "2.3.11.12 | PATCH | Ensure 'Network security: Restrict NTLM: Outgoing NTLM traffic to remote servers' is set to 'Audit all' or higher' | Warning Check For Variable."
+        ansible.builtin.debug:
+            msg:
+                - "Warning!! You have an invalid variable set for win11cis_restrict_sending_ntlm_traffic. Please read"
+                - "the notes for the variable and make the necessary change to the variable to be in compliance."
+        when:
+            - win11cis_restrict_sending_ntlm_traffic != 1
+            - win11cis_restrict_sending_ntlm_traffic != 2
+
+      - name: "2.3.11.12 | PATCH | Ensure 'Network security: Restrict NTLM: Outgoing NTLM traffic to remote servers' is set to 'Audit all' or higher' | Warn Count."
+        ansible.builtin.import_tasks:
+            file: warning_facts.yml
+        vars:
+            warn_control_id: '2.3.11.12'
+        when:
+            - win11cis_restrict_sending_ntlm_traffic != 1
+            - win11cis_restrict_sending_ntlm_traffic != 2
+  when: win11cis_rule_2_3_11_12
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_2.3.11.12
+      - ntlm

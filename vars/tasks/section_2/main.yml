@@ -1,0 +1,106 @@
+---
+
+- name: "SECTION | 2.2 | User Right Assignment"
+  ansible.builtin.import_tasks:
+      file: cis_2.2.x.yml
+  tags:
+      - local_policies
+      - user_rights_assignment
+
+- name: "SECTION | 2.3.1 | Accounts"
+  ansible.builtin.import_tasks:
+      file: cis_2.3.1.x.yml
+  tags:
+      - local_policies
+      - security_options
+      - accounts
+
+- name: "SECTION | 2.3.2 | Audit"
+  ansible.builtin.import_tasks:
+      file: cis_2.3.2.x.yml
+  tags:
+      - local_policies
+      - security_options
+      - audit
+
+- name: "SECTION | 2.3.4 | Devices"
+  ansible.builtin.import_tasks:
+      file: cis_2.3.4.x.yml
+  tags:
+      - local_policies
+      - security_options
+      - devices
+
+- name: "SECTION | 2.3.6 | Domain Member"
+  ansible.builtin.import_tasks:
+      file: cis_2.3.6.x.yml
+  tags:
+      - local_policies
+      - security_options
+      - domain_member
+  when:
+      - discovered_domain_joined
+
+- name: "SECTION | 2.3.7 | Interactive Logon"
+  ansible.builtin.import_tasks:
+      file: cis_2.3.7.x.yml
+  tags:
+      - local_policies
+      - security_options
+      - interactive_logon
+
+- name: "SECTION | 2.3.8 | Microsoft Network Client"
+  ansible.builtin.import_tasks:
+      file: cis_2.3.8.x.yml
+  tags:
+      - local_policies
+      - security_options
+      - microsoft_network_client
+
+- name: "SECTION | 2.3.9 | Microsoft Network Server"
+  ansible.builtin.import_tasks:
+      file: cis_2.3.9.x.yml
+  tags:
+      - local_policies
+      - security_options
+      - microsoft_network_server
+
+- name: "SECTION | 2.3.10 | Network Access"
+  ansible.builtin.import_tasks:
+      file: cis_2.3.10.x.yml
+  tags:
+      - local_policies
+      - security_options
+      - network_access
+
+- name: "SECTION | 2.3.11 | Network Security"
+  ansible.builtin.import_tasks:
+      file: cis_2.3.11.x.yml
+  tags:
+      - local_policies
+      - security_options
+      - network_security
+
+- name: "SECTION | 2.3.14 | System Cryptography"
+  ansible.builtin.import_tasks:
+      file: cis_2.3.14.x.yml
+  tags:
+      - local_policies
+      - security_options
+      - system_cryptography
+
+- name: "SECTION | 2.3.15 | System Objects"
+  ansible.builtin.import_tasks:
+      file: cis_2.3.15.x.yml
+  tags:
+      - local_policies
+      - security_options
+      - system_objects
+
+- name: "SECTION | 2.3.17 | User Account Control"
+  ansible.builtin.import_tasks:
+      file: cis_2.3.17.x.yml
+  tags:
+      - local_policies
+      - security_options
+      - user_account_control

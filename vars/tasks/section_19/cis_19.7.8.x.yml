@@ -1,0 +1,81 @@
+---
+
+- name: "19.7.8.1 | PATCH | Ensure Configure Windows spotlight on lock screen is set to Disabled"
+  ansible.windows.win_regedit:
+      path: HKU:\{{ item }}\Software\Policies\Microsoft\Windows\CloudContent
+      name: ConfigureWindowsSpotlight
+      data: 2
+      type: dword
+  loop: "{{ discovered_hku_loaded_list }}"
+  notify: change_requires_reboot
+  when: win11cis_rule_19_7_8_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_19.7.8.1
+      - windows_spotlight
+
+- name: "19.7.8.2 | PATCH | Ensure Do not suggest third-party content in Windows spotlight is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKU:\{{ item }}\Software\Policies\Microsoft\Windows\CloudContent
+      name: DisableThirdPartySuggestions
+      data: 1
+      type: dword
+  loop: "{{ discovered_hku_loaded_list }}"
+  notify: change_requires_reboot
+  when: win11cis_rule_19_7_8_2
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_19.7.8.2
+      - third_party_content
+
+- name: "19.7.8.3 | PATCH | Ensure Do not use diagnostic data for tailored experiences is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKU:\{{ item }}\Software\Policies\Microsoft\Windows\CloudContent
+      name: DisableTailoredExperiencesWithDiagnosticData
+      data: 1
+      type: dword
+  loop: "{{ discovered_hku_loaded_list }}"
+  notify: change_requires_reboot
+  when: win11cis_rule_19_7_8_3
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_19.7.8.3
+      - diagnostic_data
+
+- name: "19.7.8.4 | PATCH | Ensure Turn off all Windows spotlight features is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKU:\{{ item }}\Software\Policies\Microsoft\Windows\CloudContent
+      name: DisableWindowsSpotlightFeatures
+      data: 1
+      type: dword
+  loop: "{{ discovered_hku_loaded_list }}"
+  notify: change_requires_reboot
+  when: win11cis_rule_19_7_8_4
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_19.7.8.4
+      - windows_spotlight
+
+- name: "19.7.8.5 | PATCH | Ensure Turn off Spotlight collection on Desktop is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKU:\{{ item }}\SOFTWARE\Policies\Microsoft\Windows\CloudContent
+      name: DisableSpotlightCollectionOnDesktop
+      data: 1
+      type: dword
+  loop: "{{ discovered_hku_loaded_list }}"
+  notify: change_requires_reboot
+  when: win11cis_rule_19_7_8_5
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_19.7.8.5
+      - windows_spotlight

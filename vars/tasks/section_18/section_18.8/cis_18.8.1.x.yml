@@ -1,0 +1,15 @@
+---
+
+- name: "18.8.1.1 | PATCH | Ensure Turn off notifications network usage is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications
+      name: NoCloudApplicationNotification
+      data: 1
+      type: dword
+  when: win11cis_rule_18_8_1_1
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_18.8.1.1
+      - notifications

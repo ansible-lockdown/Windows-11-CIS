@@ -1,0 +1,17 @@
+---
+
+- name: "19.7.42.1 | PATCH | Ensure Always install with elevated privileges is set to Disabled"
+  ansible.windows.win_regedit:
+      path: HKU:\{{ item }}\Software\Policies\Microsoft\Windows\Installer
+      name: AlwaysInstallElevated
+      data: 0
+      type: dword
+  loop: "{{ discovered_hku_loaded_list }}"
+  notify: change_requires_reboot
+  when: win11cis_rule_19_7_42_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_19.7.42.1
+      - elevated_privileges

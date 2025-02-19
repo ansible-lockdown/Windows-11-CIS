@@ -1,0 +1,14 @@
+---
+
+- name: "18.10.57.1 | PATCH | Ensure Prevent downloading of enclosures is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Internet Explorer\Feeds
+      name: DisableEnclosureDownload
+      data: 1
+      type: dword
+  when: win11cis_rule_18_10_57_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.10.57.1

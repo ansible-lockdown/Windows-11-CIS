@@ -1,0 +1,66 @@
+---
+
+- name: "17.2.1 | PATCH | Ensure Audit Application Group Management is set to Success and Failure"
+  block:
+      - name: "17.2.1 | AUDIT | Ensure Audit Application Group Management is set to Success and Failure | Get current audit events."
+        ansible.windows.win_shell: AuditPol /get /subcategory:"Application Group Management" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        changed_when: false
+        failed_when: false
+        register: discovered_17_2_1_audit
+
+      - name: "17.2.1 | PATCH | Ensure Audit Application Group Management is set to Success and Failure | Success"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"Application Group Management" /success:enable
+        when: "'Success' not in discovered_17_2_1_audit.stdout"
+
+      - name: "17.2.1 | PATCH | Ensure Audit Application Group Management is set to Success and Failure | Failure"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"Application Group Management" /failure:enable
+        when: "'Failure' not in discovered_17_2_1_audit.stdout"
+  when: win11cis_rule_17_2_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_17.2.1
+      - application_group_management
+
+- name: "17.2.2 | PATCH | Ensure Audit Security Group Management is set to include Success"
+  block:
+      - name: "17.2.2 | AUDIT | Ensure Audit Security Group Management is set to include Success | Get current audit events."
+        ansible.windows.win_shell: AuditPol /get /subcategory:"Security Group Management" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        changed_when: false
+        failed_when: false
+        register: discovered_17_2_2_audit
+
+      - name: "17.2.2 | PATCH | Ensure Audit Security Group Management is set to include Success | Success"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"Security Group Management" /success:enable
+        when: "'Success' not in discovered_17_2_2_audit.stdout"
+  when: win11cis_rule_17_2_2
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_17.2.2
+      - security_group_management
+
+- name: "17.2.3 | PATCH | Ensure Audit User Account Management is set to Success and Failure"
+  block:
+      - name: "17.2.3 | AUDIT | Ensure Audit User Account Management is set to Success and Failure | Get current audit events."
+        ansible.windows.win_shell: AuditPol /get /subcategory:"User Account Management" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        changed_when: false
+        failed_when: false
+        register: discovered_17_2_3_audit
+
+      - name: "17.2.6 | PATCH | Ensure Audit User Account Management is set to Success and Failure | Success"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"User Account Management" /success:enable
+        when: "'Success' not in discovered_17_2_3_audit.stdout"
+
+      - name: "17.2.6 | PATCH | Ensure Audit User Account Management is set to Success and Failure | Failure"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"User Account Management" /failure:enable
+        when: "'Failure' not in discovered_17_2_3_audit.stdout"
+  when: win11cis_rule_17_2_3
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_17.2.3
+      - user_account_management

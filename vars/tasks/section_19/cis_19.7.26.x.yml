@@ -1,0 +1,17 @@
+---
+
+- name: "19.7.26.1 | PATCH | Ensure Prevent users from sharing files within their profile. is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKU:\{{ item }}\Software\Microsoft\Windows\Currentversion\Policies\Explorer
+      name: NoInplaceSharing
+      data: 1
+      type: dword
+  loop: "{{ discovered_hku_loaded_list }}"
+  notify: change_requires_reboot
+  when: win11cis_rule_19_7_26_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_19.7.26.1
+      - sharing_files

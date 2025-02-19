@@ -1,0 +1,8 @@
+---
+
+- name: "SECTION | 18.7 | Printers"
+  ansible.builtin.import_tasks:
+      file: cis_18.7.x.yml
+  tags:
+      - administrative_templates_computer
+      - printers

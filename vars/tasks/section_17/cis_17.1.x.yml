@@ -1,0 +1,24 @@
+---
+
+- name: "17.1.1 | PATCH | Ensure Audit Credential Validation is set to Success and Failure"
+  block:
+      - name: "17.1.1 | AUDIT | Ensure Audit Credential Validation is set to Success and Failure. | Get current audit events."
+        ansible.windows.win_shell: AuditPol /get /subcategory:"Credential Validation" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        changed_when: false
+        failed_when: false
+        register: discovered_17_1_1_audit
+
+      - name: "17.1.1 | PATCH | Ensure Audit Credential Validation is set to Success and Failure | Success"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"Credential Validation" /success:enable
+        when: "'Success' not in discovered_17_1_1_audit.stdout"
+
+      - name: "17.1.1 | PATCH | Ensure Audit Credential Validation is set to Success and Failure | Failure"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"Credential Validation" /failure:enable
+        when: "'Failure' not in discovered_17_1_1_audit.stdout"
+  when: win11cis_rule_17_1_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_17.1.1
+      - credential_validation

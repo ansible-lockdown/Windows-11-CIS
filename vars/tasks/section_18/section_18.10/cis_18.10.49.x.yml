@@ -1,0 +1,14 @@
+---
+
+- name: "18.10.49.1 | PATCH | Ensure 'Enable news and interests on the taskbar' is set to 'Disabled'"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows\Windows Feeds
+      name: EnableFeeds
+      data: 0
+      type: dword
+  when: win11cis_rule_18_10_49_1
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_18.10.49.1

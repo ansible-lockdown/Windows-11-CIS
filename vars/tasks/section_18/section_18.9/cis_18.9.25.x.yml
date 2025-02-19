@@ -1,0 +1,211 @@
+---
+
+- name: "18.9.25.1 | PATCH | Ensure 'Configure password backup directory' is set to 'Enabled: Active Directory' or 'Enabled: Azure Active Directory'"
+  block:
+      - name: "18.9.25.1 | PATCH | Ensure 'Configure password backup directory' is set to 'Enabled: Active Directory' or 'Enabled: Azure Active Directory'. | Set Variable."
+        ansible.windows.win_regedit:
+            path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
+            name: BackupDirectory
+            data: "{{ win11cis_laps_backup_directory }}"
+            type: dword
+        when: win11cis_laps_backup_directory == 2 or win11cis_laps_backup_directory == 1
+
+      - name: "18.9.25.1 | AUDIT | Ensure 'Configure password backup directory' is set to 'Enabled: Active Directory' or 'Enabled: Azure Active Directory. | Warning Check For Variable Standards."
+        ansible.builtin.debug:
+            msg:
+                - "Warning!! You have an invalid setting for win11cis_laps_backup_directory. Please read"
+                - "the notes for the variable and make the necessary change to the variable to be in compliance."
+        when:
+            - win11cis_laps_backup_directory != 1
+            - win11cis_laps_backup_directory != 2
+
+      - name: "18.9.25.1 | AUDIT | Ensure 'Configure password backup directory' is set to 'Enabled: Active Directory' or 'Enabled: Azure Active Directory. | Warn Count."
+        ansible.builtin.import_tasks:
+            file: warning_facts.yml
+        vars:
+            warn_control_id: '18.9.25.1'
+        when:
+            - win11cis_laps_backup_directory != 1
+            - win11cis_laps_backup_directory != 2
+  when: win11cis_rule_18_9_25_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.25.1
+      - password_backup
+      - password
+
+- name: "18.9.25.2 | PATCH | Ensure 'Do not allow password expiration time longer than required by policy' is set to 'Enabled'."
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\LAPS
+      name: PwdExpirationProtectionEnabled
+      data: 1
+      type: dword
+  when: win11cis_rule_18_9_25_2
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.25.2
+      - password_expiration
+
+- name: "18.9.25.3 | PATCH | Ensure 'Enable password encryption' is set to 'Enabled'"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\LAPS
+      name: ADPasswordEncryptionEnabled
+      data: 1
+      type: dword
+  when: win11cis_rule_18_9_25_3
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.25.3
+      - password
+      - encryption
+
+- name: "18.9.25.4 | PATCH | Ensure 'Password Settings: Password Complexity' is set to 'Enabled: Large letters + small letters + numbers + special characters'"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\LAPS
+      name: PasswordComplexity
+      data: 4
+      type: dword
+  when: win11cis_rule_18_9_25_4
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.25.4
+      - password
+      - complexity
+
+- name: "18.9.25.5 | PATCH | Ensure 'Password Settings: Password Length' is set to 'Enabled: 15 or more'"
+  block:
+      - name: "18.9.25.5 | PATCH | Ensure 'Password Settings: Password Length' is set to 'Enabled: 15 or more' | Set Variable."
+        ansible.windows.win_regedit:
+            path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
+            name: PasswordLength
+            data: "{{ win11cis_laps_password_length }}"
+            type: dword
+        when: win11cis_laps_password_length => 15
+
+      - name: "18.9.25.5 | AUDIT | Ensure 'Password Settings: Password Length' is set to 'Enabled: 15 or more' | Warning Check For Variable Standards."
+        ansible.builtin.debug:
+            msg:
+                - "Warning!! You have an invalid setting for win11cis_laps_password_length. Please read"
+                - "the notes for the variable and make the necessary change to the variable to be in compliance."
+        when: win11cis_laps_password_length < 15
+
+      - name: "18.9.25.5 | AUDIT | Ensure 'Password Settings: Password Length' is set to 'Enabled: 15 or more' | Warn Count."
+        ansible.builtin.import_tasks:
+            file: warning_facts.yml
+        vars:
+            warn_control_id: '18.9.25.5'
+        when: win11cis_laps_password_length < 15
+  when: win11cis_rule_18_9_25_5
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.25.5
+      - password_length
+
+- name: "18.9.25.6 | PATCH | Ensure 'Password Settings: Password Age (Days)' is set to 'Enabled: 30 or fewer' "
+  block:
+      - name: "18.9.25.6 | PATCH | Ensure 'Password Settings: Password Age (Days)' is set to 'Enabled: 30 or fewer' | Set Variable."
+        ansible.windows.win_regedit:
+            path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
+            name: PasswordAgeDays
+            data: "{{ win11cis_laps_password_age }}"
+            type: dword
+        when: win11cis_laps_password_age =< 30
+
+      - name: "18.9.25.6 | AUDIT | Ensure 'Password Settings: Password Age (Days)' is set to 'Enabled: 30 or fewer' | Warning Check For Variable Standards."
+        ansible.builtin.debug:
+            msg:
+                - "Warning!! You have an invalid setting for win11cis_laps_password_age. Please read"
+                - "the notes for the variable and make the necessary change to the variable to be in compliance."
+        when: win11cis_laps_password_age > 30
+
+      - name: "18.9.25.6 | AUDIT | Ensure 'Password Settings: Password Age (Days)' is set to 'Enabled: 30 or fewer' | Warn Count."
+        ansible.builtin.import_tasks:
+            file: warning_facts.yml
+        vars:
+            warn_control_id: '18.9.25.6'
+        when: win11cis_laps_password_age > 30
+  when: win11cis_rule_18_9_25_6
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.25.6
+      - password_age
+
+- name: "18.9.25.7 | PATCH | Ensure 'Post-authentication actions: Grace period (hours)' is set to 'Enabled: 8 or fewer hours, but not 0'"
+  block:
+      - name: "18.9.25.7 | PATCH | Ensure 'Post-authentication actions: Grace period (hours)' is set to 'Enabled: 8 or fewer hours, but not 0' | Set Variable."
+        ansible.windows.win_regedit:
+            path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
+            name: PostAuthenticationResetDelay
+            data: "{{ win11cis_laps_post_auth_actions_grace_period }}"
+            type: dword
+        when:
+            - win11cis_laps_post_auth_actions_grace_period > 0
+            - win11cis_laps_post_auth_actions_grace_period <= 8
+
+      - name: "18.9.25.7 | AUDIT | Ensure 'Post-authentication actions: Grace period (hours)' is set to 'Enabled: 8 or fewer hours, but not 0' | Warning Check For Variable Standards."
+        ansible.builtin.debug:
+            msg:
+                - "Warning!! You have an invalid setting for win11cis_laps_post_auth_actions_grace_period. Please read"
+                - "the notes for the variable and make the necessary change to the variable to be in compliance."
+        when: win11cis_laps_post_auth_actions_grace_period > 8 or win11cis_laps_post_auth_actions_grace_period == 0
+
+      - name: "18.9.25.7 | AUDIT | Ensure 'Post-authentication actions: Grace period (hours)' is set to 'Enabled: 8 or fewer hours, but not 0' | Warn Count."
+        ansible.builtin.import_tasks:
+            file: warning_facts.yml
+        vars:
+            warn_control_id: '18.9.25.7'
+        when: win11cis_laps_post_auth_actions_grace_period > 8 or win11cis_laps_post_auth_actions_grace_period == 0
+  when: win11cis_rule_18_9_25_7
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.25.7
+      - post_authentication_actions
+
+- name: "18.9.25.8 | PATCH | Ensure 'Post-authentication actions: Actions' is set to 'Enabled: Reset the password and logoff the managed account' or higher '"
+  block:
+      - name: "18.9.25.8 | PATCH | Ensure 'Post-authentication actions: Actions' is set to 'Enabled: Reset the password and logoff the managed account' or higher' | Set Variable."
+        ansible.windows.win_regedit:
+            path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS
+            name: PostAuthenticationActions
+            data: "{{ win11cis_laps_post_auth_actions_reset_password }}"
+            type: dword
+        when: win11cis_laps_post_auth_actions_reset_password == 3 or win11cis_laps_post_auth_actions_reset_password == 5
+
+      - name: "18.9.25.8 | AUDIT | Ensure 'Post-authentication actions: Actions' is set to 'Enabled: Reset the password and logoff the managed account' or higher' | Warning Check For Variable Standards."
+        ansible.builtin.debug:
+            msg:
+                - "Warning!! You have an invalid setting for win11cis_laps_post_auth_actions_reset_password. Please read"
+                - "the notes for the variable and make the necessary change to the variable to be in compliance."
+        when:
+            - win11cis_laps_post_auth_actions_reset_password != 3
+            - win11cis_laps_post_auth_actions_reset_password != 5
+
+      - name: "18.9.25.8 | AUDIT | Ensure 'Post-authentication actions: Actions' is set to 'Enabled: Reset the password and logoff the managed account' or higher' | Warn Count."
+        ansible.builtin.import_tasks:
+            file: warning_facts.yml
+        vars:
+            warn_control_id: '18.9.25.8'
+        when:
+            - win11cis_laps_post_auth_actions_reset_password != 3
+            - win11cis_laps_post_auth_actions_reset_password != 5
+  when: win11cis_rule_18_9_25_8
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.25.8
+      - post_authentication_actions

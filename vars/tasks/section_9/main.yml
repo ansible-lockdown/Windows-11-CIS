@@ -1,0 +1,24 @@
+---
+
+- name: "SECTION | 9.1 | Domain Profile"
+  ansible.builtin.import_tasks:
+      file: cis_9.1.x.yml
+  tags:
+      - windows_defender_firewall_with_advanced_security
+      - domain_profile
+  when:
+      - discovered_domain_joined
+
+- name: "SECTION | 9.2 | Private Profile"
+  ansible.builtin.import_tasks:
+      file: cis_9.2.x.yml
+  tags:
+      - windows_defender_firewall_with_advanced_security
+      - private_profile
+
+- name: "SECTION | 9.3 | Public Profile"
+  ansible.builtin.import_tasks:
+      file: cis_9.3.x.yml
+  tags:
+      - windows_defender_firewall_with_advanced_security
+      - public_profile

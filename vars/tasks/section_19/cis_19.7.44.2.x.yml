@@ -1,0 +1,17 @@
+---
+
+- name: "19.7.44.2.1 | PATCH | Ensure Prevent Codec Download is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKU:\{{ item }}\Software\Policies\Microsoft\Windowsmediaplayer
+      name: PreventCodecDownload
+      data: 1
+      type: dword
+  loop: "{{ discovered_hku_loaded_list }}"
+  notify: change_requires_reboot
+  when: win11cis_rule_19_7_44_2_1
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_19.7.44.2.1
+      - codec_download

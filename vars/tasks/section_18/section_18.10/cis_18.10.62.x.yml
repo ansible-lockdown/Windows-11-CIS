@@ -1,0 +1,15 @@
+---
+
+- name: "18.10.62.1 | PATCH | Ensure Turn off KMS Client Online AVS Validation is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows Nt\Currentversion\Software Protection Platform
+      name: NoGenTicket
+      data: 1
+      type: dword
+  when: win11cis_rule_18_10_62_1
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_18.10.62.1
+      - kms

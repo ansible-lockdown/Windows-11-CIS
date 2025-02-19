@@ -1,0 +1,16 @@
+---
+
+- name: "18.10.8.1.1 | PATCH | Ensure Configure enhanced anti-spoofing is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Biometrics\Facialfeatures
+      name: EnhancedAntiSpoofing
+      data: 1
+      type: dword
+  when: win11cis_rule_18_10_8_1_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.10.8.1.1
+      - facial_features
+      - antispoofing

@@ -1,0 +1,163 @@
+---
+
+- name: "SECTION | 18.9.3 | Audit Process Creation"
+  ansible.builtin.import_tasks:
+      file: cis_18.9.3.x.yml
+  tags:
+      - administrative_templates_computer
+      - system
+      - audit_process_creation
+
+- name: "SECTION | 18.9.4 | Credentials Delegation"
+  ansible.builtin.import_tasks:
+      file: cis_18.9.4.x.yml
+  tags:
+      - administrative_templates_computer
+      - system
+      - credentials_delegation
+
+- name: "SECTION | 18.9.5 | Device Guard"
+  ansible.builtin.import_tasks:
+      file: cis_18.9.5.x.yml
+  tags:
+      - administrative_templates_computer
+      - system
+      - device_guard
+
+- name: "SECTION | 18.9.7 | Device Installation"
+  ansible.builtin.import_tasks:
+      file: cis_18.9.7.x.yml
+  tags:
+      - administrative_templates_computer
+      - system
+      - device_installation
+
+- name: "SECTION | 18.9.13 | Early Launch Antimalware"
+  ansible.builtin.import_tasks:
+      file: cis_18.9.13.x.yml
+  tags:
+      - administrative_templates_computer
+      - system
+      - early_launch_antimalware
+
+- name: "SECTION | 18.9.19 | Group Policy"
+  ansible.builtin.import_tasks:
+      file: cis_18.9.19.x.yml
+  tags:
+      - administrative_templates_computer
+      - system
+      - group_policy
+
+- name: "SECTION | 18.9.20 | Internet Conection Management"
+  ansible.builtin.import_tasks:
+      file: cis_18.9.20.x.yml
+  tags:
+      - administrative_templates_computer
+      - system
+      - internet_communication_management
+
+- name: "SECTION | 18.9.23 | Kerberos"
+  ansible.builtin.import_tasks:
+      file: cis_18.9.23.x.yml
+  tags:
+      - administrative_templates_computer
+      - system
+      - kerberos
+
+- name: "SECTION | 18.9.24 | Kernel DMA Protection"
+  ansible.builtin.import_tasks:
+      file: cis_18.9.24.x.yml
+  tags:
+      - administrative_templates_computer
+      - system
+      - kernel_dma_protection
+
+- name: "SECTION | 18.9.25 | LAPS"
+  ansible.builtin.import_tasks:
+      file: cis_18.9.25.x.yml
+  tags:
+      - administrative_templates_computer
+      - system
+      - laps
+  when:
+      - discovered_domain_joined
+
+- name: "SECTION | 18.9.26 | Local Security Authority"
+  ansible.builtin.import_tasks:
+      file: cis_18.9.26.x.yml
+  tags:
+      - administrative_templates_computer
+      - system
+      - local_security_authority
+
+- name: "SECTION | 18.9.27 | Locale Services"
+  ansible.builtin.import_tasks:
+      file: cis_18.9.27.x.yml
+  tags:
+      - administrative_templates_computer
+      - system
+      - locale_service
+
+- name: "SECTION | 18.9.28 | Logon"
+  ansible.builtin.import_tasks:
+      file: cis_18.9.28.x.yml
+  tags:
+      - administrative_templates_computer
+      - system
+      - logon
+
+- name: "SECTION | 18.9.31 | OS Policies"
+  ansible.builtin.import_tasks:
+      file: cis_18.9.31.x.yml
+  tags:
+      - administrative_templates_computer
+      - system
+      - os_policies
+
+- name: "SECTION | 18.9.33 | Power Management"
+  ansible.builtin.import_tasks:
+      file: cis_18.9.33.x.yml
+  tags:
+      - administrative_templates_computer
+      - system
+      - power_management
+
+- name: "SECTION | 18.9.35 | Remote Assistance"
+  ansible.builtin.import_tasks:
+      file: cis_18.9.35.x.yml
+  tags:
+      - administrative_templates_computer
+      - system
+      - remote_assistance
+
+- name: "SECTION | 18.9.36 | Remote Procedure Call"
+  ansible.builtin.import_tasks:
+      file: cis_18.9.36.x.yml
+  tags:
+      - administrative_templates_computer
+      - system
+      - remote_procedure_call
+
+- name: "SECTION | 18.9.47 | Troubleshooting And Diagnostics"
+  ansible.builtin.import_tasks:
+      file: cis_18.9.47.x.yml
+  tags:
+      - administrative_templates_computer
+      - system
+      - troubleshooting_and_diagnostics
+
+- name: "SECTION | 18.9.49 | User Profiles"
+  ansible.builtin.import_tasks:
+      file: cis_18.9.49.x.yml
+  tags:
+      - administrative_templates_computer
+      - system
+      - user_profiles
+
+- name: "SECTION | 18.9.51 | Windows Time Service"
+  ansible.builtin.import_tasks:
+      file: cis_18.9.51.x.yml
+  tags:
+      - administrative_templates_computer
+      - system
+      - windows_time_service

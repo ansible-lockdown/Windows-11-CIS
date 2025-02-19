@@ -1,0 +1,24 @@
+---
+
+- name: "18.9.23.1 | PATCH | Ensure Support device authentication using certificate is set to Enabled Automatic"
+  block:
+      - name: "18.9.23.1 | PATCH | Ensure Support device authentication using certificate is set to Enabled Automatic | DevicePKInitBehavior"
+        ansible.windows.win_regedit:
+            path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System\kerberos\parameters
+            name: DevicePKInitBehavior
+            data: 0
+            type: dword
+
+      - name: "18.9.23.1 | PATCH | Ensure Support device authentication using certificate is set to Enabled Automatic | DevicePKInitEnabled"
+        ansible.windows.win_regedit:
+            path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System\kerberos\parameters
+            name: DevicePKInitEnabled
+            data: 1
+            type: dword
+  when: win11cis_rule_18_9_23_1
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_18.9.23.1
+      - certifcates

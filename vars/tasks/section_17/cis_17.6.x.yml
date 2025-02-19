@@ -1,0 +1,78 @@
+---
+
+- name: "17.6.1 | PATCH | Ensure Audit Detailed File Share is set to include Failure"
+  block:
+      - name: "17.6.1 | AUDIT | Ensure Audit Detailed File Share is set to include Failure | Get current audit events."
+        ansible.windows.win_shell: AuditPol /get /subcategory:"Detailed File Share" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        changed_when: false
+        failed_when: false
+        register: discovered_17_6_1_audit
+
+      - name: "17.6.1 | PATCH | Ensure Audit Detailed File Share is set to include Failure | Failure"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"Detailed File Share" /failure:enable
+        when: "'Failure' not in discovered_17_6_1_audit.stdout"
+  when: win11cis_rule_17_6_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_17.6.1
+      - detailed_file_share
+
+- name: "17.6.2 | PATCH | Ensure Audit File Share is set to Success and Failure"
+  block:
+      - name: "17.6.2 | AUDIT | Ensure Audit File Share is set to Success and Failure | Get current audit events."
+        ansible.windows.win_shell: AuditPol /get /subcategory:"File Share" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        changed_when: false
+        failed_when: false
+        register: discovered_17_6_2_audit
+
+      - name: "17.6.2 | PATCH | Ensure Audit File Share is set to Success and Failure | Success"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"File Share" /success:enable
+        when: "'Success' not in discovered_17_6_2_audit.stdout"
+
+      - name: "17.6.2 | PATCH | Ensure Audit File Share is set to Success and Failure | Failure"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"File Share" /failure:enable
+        when: "'Failure' not in discovered_17_6_2_audit.stdout"
+  when: win11cis_rule_17_6_2
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_17.6.2
+      - audit_file_share
+
+- name: "17.6.3 | PATCH | Ensure Audit Other Object Access Events is set to Success and Failure"
+  community.windows.win_audit_policy_system:
+      subcategory: Other Object Access Events
+      audit_type: success, failure
+  when: win11cis_rule_17_6_3
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_17.6.3
+      - object_access
+
+- name: "17.6.4 | PATCH | Ensure Audit Removable Storage is set to Success and Failure"
+  block:
+      - name: "17.6.4 | AUDIT | Ensure Audit Removable Storage is set to Success and Failure | Get current audit events."
+        ansible.windows.win_shell: AuditPol /get /subcategory:"Removable Storage" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        changed_when: false
+        failed_when: false
+        register: discovered_17_6_4_audit
+
+      - name: "17.6.4 | PATCH | Ensure Audit Removable Storage is set to Success and Failure | Success"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"Removable Storage" /success:enable
+        when: "'Success' not in discovered_17_6_4_audit.stdout"
+
+      - name: "17.6.4 | PATCH | Ensure Audit Removable Storage is set to Success and Failure | Failure"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"Removable Storage" /failure:enable
+        when: "'Failure' not in discovered_17_6_4_audit.stdout"
+  when: win11cis_rule_17_6_4
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_17.6.4
+      - audit_removable_storage

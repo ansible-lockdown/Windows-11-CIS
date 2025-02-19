@@ -1,0 +1,124 @@
+---
+
+- name: "17.9.1 | PATCH | Ensure Audit IPsec Driver is set to Success and Failure"
+  block:
+      - name: "17.9.1 | AUDIT | Ensure Audit IPsec Driver is set to Success and Failure | Get current audit events."
+        ansible.windows.win_shell: AuditPol /get /subcategory:"IPsec Driver" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        changed_when: false
+        failed_when: false
+        register: discovered_17_9_1_audit
+
+      - name: "17.9.1 | PATCH | Ensure Audit IPsec Driver is set to Success and Failure | Success"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"IPsec Driver" /success:enable
+        changed_when: false
+        failed_when: false
+        when: "'Success' not in discovered_17_9_1_audit.stdout"
+
+      - name: "17.9.1 | PATCH | Ensure Audit IPsec Driver is set to Success and Failure | Failure"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"IPsec Driver" /failure:enable
+        changed_when: false
+        failed_when: false
+        when: "'Failure' not in discovered_17_9_1_audit.stdout"
+  when: win11cis_rule_17_9_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_17.9.1
+      - ipsec_driver
+
+- name: "17.9.2 | PATCH | Ensure Audit Other System Events is set to Success and Failure"
+  block:
+      - name: "17.9.2 | AUDIT | Ensure Audit Other System Events is set to Success and Failure | Get current audit events."
+        ansible.windows.win_shell: AuditPol /get /subcategory:"Other System Events" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        changed_when: false
+        failed_when: false
+        register: discovered_17_9_2_audit
+
+      - name: "17.9.2 | PATCH | Ensure Audit Other System Events is set to Success and Failure | Success"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"Other System Events" /success:enable
+        changed_when: false
+        failed_when: false
+        when: "'Success' not in discovered_17_9_2_audit.stdout"
+
+      - name: "17.9.2 | PATCH | Ensure Audit Other System Events is set to Success and Failure | Failure"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"Other System Events" /failure:enable
+        changed_when: false
+        failed_when: false
+        when: "'Failure' not in discovered_17_9_2_audit.stdout"
+  when: win11cis_rule_17_9_2
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_17.9.2
+      - other_system_events
+
+- name: "17.9.3 | PATCH | Ensure Audit Security State Change is set to include Success"
+  block:
+      - name: "17.9.3 | AUDIT | Ensure Audit Security State Change is set to include Success | Get current audit events."
+        ansible.windows.win_shell: AuditPol /get /subcategory:"Security State Change" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        changed_when: false
+        failed_when: false
+        register: discovered_17_9_3_audit
+
+      - name: "17.9.3 | PATCH | Ensure Audit Security State Change is set to include Success | Success"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"Security State Change" /success:enable
+        changed_when: false
+        failed_when: false
+        when: "'Success' not in discovered_17_9_3_audit.stdout"
+  when: win11cis_rule_17_9_3
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_17.9.3
+      - security_state_change
+
+- name: "17.9.4 | PATCH | Ensure Audit Security System Extension is set to include Success"
+  block:
+      - name: "17.9.4 | AUDIT | Ensure Audit Security System Extension is set to include Success | Get current audit events."
+        ansible.windows.win_shell: AuditPol /get /subcategory:"Security System Extension" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        changed_when: false
+        failed_when: false
+        register: discovered_17_9_4_audit
+
+      - name: "17.9.4 | PATCH | Ensure Audit Security System Extension is set to include Success | Success"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"Security System Extension" /success:enable
+        changed_when: false
+        failed_when: false
+        when: "'Success' not in discovered_17_9_4_audit.stdout"
+  when: win11cis_rule_17_9_4
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_17.9.4
+      - security_system_extension
+
+- name: "17.9.5 | PATCH | Ensure Audit System Integrity is set to Success and Failure"
+  block:
+      - name: "17.9.5 | AUDIT | Ensure Audit System Integrity is set to Success and Failure | Get current audit events."
+        ansible.windows.win_shell: AuditPol /get /subcategory:"System Integrity" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        changed_when: false
+        failed_when: false
+        register: discovered_17_9_5_audit
+
+      - name: "17.9.5 | PATCH | Ensure Audit System Integrity is set to Success and Failure | Success"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"System Integrity" /success:enable
+        changed_when: false
+        failed_when: false
+        when: "'Success' not in discovered_17_9_5_audit.stdout"
+
+      - name: "17.9.5 | PATCH | Ensure Audit System Integrity is set to Success and Failure | Failure"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"System Integrity" /failure:enable
+        changed_when: false
+        failed_when: false
+        when: "'Failure' not in discovered_17_9_5_audit.stdout"
+  when: win11cis_rule_17_9_5
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_17.9.5
+      - system_integrity

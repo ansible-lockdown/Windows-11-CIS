@@ -1,0 +1,97 @@
+---
+
+- name: "18.9.19.2 | PATCH | Ensure Configure registry policy processing Do not apply during periodic background processing is set to Enabled FALSE"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows\Group Policy\{35378Eac-683F-11D2-A89A-00C04Fbbcfa2}
+      name: NoBackgroundPolicy
+      data: 0
+      type: dword
+  when: win11cis_rule_18_9_19_2
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.19.2
+      - logging_and_tracing
+
+- name: "18.9.19.3 | PATCH | Ensure Configure registry policy processing Process even if the Group Policy objects have not changed is set to Enabled TRUE"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows\Group Policy\{35378Eac-683F-11D2-A89A-00C04Fbbcfa2}
+      name: NoGPOListChanges
+      data: 0
+      type: dword
+  when:
+      - win11cis_rule_18_9_19_3
+      - discovered_domain_joined
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.19.3
+      - logging_and_tracing
+
+- name: "18.9.19.4 | PATCH | Ensure 'Configure security policy processing: Do not apply during periodic background processing' is set to 'Enabled: FALSE'"
+  ansible.windows.win_regedit:
+      path: HKLM\SOFTWARE\Policies\Microsoft\Windows\Group Policy\{827D319E-6EAC-11D2-A4EA-00C04F79F83A}
+      name: NoBackgroundPolicy
+      data: 0
+      type: dword
+  when:
+      - win11cis_rule_18_9_19_4
+      - discovered_domain_joined
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.19.4
+      - logging_and_tracing
+      - background_processing
+
+- name: "18.9.19.5 | PATCH | Ensure 'Configure security policy processing: Process even if the Group Policy objects have not changed' is set to 'Enabled: TRUE'"
+  ansible.windows.win_regedit:
+      path: HKLM\SOFTWARE\Policies\Microsoft\Windows\Group Policy\{827D319E-6EAC-11D2-A4EA-00C04F79F83A}
+      name: NoGPOListChanges
+      data: 0
+      type: dword
+  when:
+      - win11cis_rule_18_9_19_5
+      - discovered_domain_joined
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.19.5
+      - logging_and_tracing
+      - group_policy_objects
+
+- name: "18.9.19.6 | PATCH | Ensure Continue experiences on this device is set to Disabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\System
+      name: EnableCdp
+      data: 0
+      type: dword
+  when:
+      - win11cis_rule_18_9_19_6
+      - discovered_domain_joined
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.19.6
+      - logging_and_tracing
+
+- name: "18.9.19.7 | PATCH | Ensure Turn off background refresh of Group Policy is set to Disabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System\DisableBkGndGroupPolicy
+      name: DisableBkGndGroupPolicy
+      data: 0
+      type: dword
+  when:
+      - win11cis_rule_18_9_19_7
+      - discovered_domain_joined
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.19.7
+      - logging_and_tracing

@@ -1,0 +1,15 @@
+---
+
+- name: "SECTION | 1.1 | Password Policy"
+  ansible.builtin.import_tasks:
+      file: cis_1.1.x.yml
+  tags:
+      - account_policies
+      - password_policy
+
+- name: "SECTION | 1.2 | Account Lockout Policy"
+  ansible.builtin.import_tasks:
+      file: cis_1.2.x.yml
+  tags:
+      - account_policies
+      - account_lockout_policy

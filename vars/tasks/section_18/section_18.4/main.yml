@@ -1,0 +1,8 @@
+---
+
+- name: "SECTION | 18.4 | MS Security Guide"
+  ansible.builtin.import_tasks:
+      file: cis_18.4.x.yml
+  tags:
+      - administrative_templates_computer
+      - ms_security_guide

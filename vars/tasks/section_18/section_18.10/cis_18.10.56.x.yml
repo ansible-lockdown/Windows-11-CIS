@@ -1,0 +1,291 @@
+---
+
+- name: "18.10.56.2.2 | PATCH | Ensure 'Disable Cloud Clipboard integration for server-to-client data transfer' is set to 'Enabled'"
+  ansible.windows.win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services\Client
+      name: DisableCloudClipboardIntegration
+      data: 1
+      type: dword
+  when: win11cis_rule_18_10_56_2_2
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_18.10.56.2.2
+      - remote_desktop_connection_client
+
+- name: "18.10.56.2.3 | PATCH | Ensure Do not allow passwords to be saved is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+      name: DisablePasswordSaving
+      data: 1
+      type: dword
+  when: win11cis_rule_18_10_56_2_3
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.10.56.2.3
+      - remote_desktop_connection_client
+
+- name: "18.10.56.3.2.1 | PATCH | Ensure 'Allow users to connect remotely by using Remote Desktop Services' is set to 'Disabled'"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows NT\Terminal Services
+      name: fDenyTSConnections
+      data: 1
+      type: dword
+  when:
+      - win11cis_rule_18_10_56_3_2_1
+      - not win_skip_for_test
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_18.10.56.3.2.1
+      - remote_desktop_session_host
+      - connections
+      - rdp
+
+- name: "18.10.56.3.3.1 | PATCH | Ensure 'Allow UI Automation redirection' is set to 'Disabled'"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows NT\Terminal Services
+      name: EnableUiaRedirection
+      data: 0
+      type: dword
+  when: win11cis_rule_18_10_56_3_3_1
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_18.10.56.3.3.1
+      - remote_desktop_session_host
+      - device_and_resource_redirection
+
+- name: "18.10.56.3.3.2 | PATCH | Ensure Do not allow COM port redirection is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows NT\Terminal Services
+      name: fDisableCcm
+      data: 1
+      type: dword
+  when: win11cis_rule_18_10_56_3_3_2
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_18.10.56.3.3.2
+      - remote_desktop_session_host
+      - device_and_resource_redirection
+
+- name: "18.10.56.3.3.3 | PATCH | Ensure Do not allow drive redirection is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows NT\Terminal Services
+      name: fDisableCdm
+      data: 1
+      type: dword
+  when: win11cis_rule_18_10_56_3_3_3
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.10.56.3.3.3
+      - remote_desktop_session_host
+      - device_and_resource_redirection
+
+- name: "18.10.56.3.3.4 | PATCH | Ensure 'Do not allow location redirection' is set to 'Enabled'"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows NT\Terminal Services
+      name: fDisableLocationRedir
+      data: 1
+      type: dword
+  when: win11cis_rule_18_10_56_3_3_4
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_18.10.56.3.3.4
+      - remote_desktop_session_host
+      - device_and_resource_redirection
+
+- name: "18.10.56.3.3.5 | PATCH | Ensure 'Do not allow LPT port redirection' is set to 'Enabled'"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows NT\Terminal Services
+      name: fDisableLPT
+      data: 1
+      type: dword
+  when: win11cis_rule_18_10_56_3_3_5
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_18.10.56.3.3.5
+      - remote_desktop_session_host
+      - device_and_resource_redirection
+
+- name: "18.10.56.3.3.6 | PATCH | Ensure 'Do not allow supported Plug and Play device redirection' is set to 'Enabled'"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows NT\Terminal Services
+      name: fDisablePNPRedir
+      data: 1
+      type: dword
+  when: win11cis_rule_18_10_56_3_3_6
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_18.10.56.3.3.6
+      - remote_desktop_session_host
+      - device_and_resource_redirection
+
+- name: "18.10.56.3.3.7 | PATCH | Ensure 'Do not allow WebAuthn redirection' is set to 'Enabled'"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows NT\Terminal Services
+      name: fDisableWebAuthn
+      data: 1
+      type: dword
+  when: win11cis_rule_18_10_56_3_3_7
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_18.10.56.3.3.7
+      - remote_desktop_session_host
+      - device_and_resource_redirection
+
+- name: "18.10.56.3.9.1 | PATCH | Ensure Always prompt for password upon connection is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+      name: fPromptForPassword
+      data: 1
+      type: dword
+  when: win11cis_rule_18_10_56_3_9_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.10.56.3.9.1
+      - remote_desktop_session_host
+      - security
+
+- name: "18.10.56.3.9.2 | PATCH | Ensure Require secure RPC communication is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+      name: fEncryptRPCTraffic
+      data: 1
+      type: dword
+  when: win11cis_rule_18_10_56_3_9_2
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.10.56.3.9.2
+      - remote_desktop_session_host
+      - security
+
+- name: "18.10.56.3.9.3 | PATCH | Ensure Require use of specific security layer for remote RDP connections is set to Enabled SSL"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+      name: SecurityLayer
+      data: 2
+      type: dword
+  when: win11cis_rule_18_10_56_3_9_3
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.10.56.3.9.3
+      - remote_desktop_session_host
+      - security
+
+- name: "18.10.56.3.9.4 | PATCH | Ensure Require user authentication for remote connections by using Network Level Authentication is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+      name: UserAuthentication
+      data: 1
+      type: dword
+  when: win11cis_rule_18_10_56_3_9_4
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.10.56.3.9.4
+      - remote_desktop_session_host
+      - security
+
+- name: "18.10.56.3.9.5 | PATCH | Ensure Set client connection encryption level is set to Enabled High Level"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+      name: MinEncryptionLevel
+      data: 3
+      type: dword
+  when: win11cis_rule_18_10_56_3_9_5
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.10.56.3.9.5
+      - remote_desktop_session_host
+      - security
+
+- name: "18.10.56.3.10.1 | PATCH | Ensure Set time limit for active but idle Remote Desktop Services sessions is set to Enabled 15 minutes or less, but not Never (0)"
+  block:
+      - name: "18.10.56.3.10.1 | PATCH | Ensure Set time limit for active but idle Remote Desktop Services sessions is set to Enabled 15 minutes or less, but not Never (0) | Set Variable."
+        ansible.windows.win_regedit:
+            path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+            name: MaxIdleTime
+            data: "{{ win11cis_idle_rdp_session_disconnect_time }}"
+            type: dword
+        when:
+            - win11cis_idle_rdp_session_disconnect_time <= 900000
+            - win11cis_idle_rdp_session_disconnect_time != 0
+
+      - name: "18.10.56.3.10.1 | AUDIT | Ensure Set time limit for active but idle Remote Desktop Services sessions is set to Enabled 15 minutes or less, but not Never (0) | Warning Check For Variable Standards."
+        ansible.builtin.debug:
+            msg:
+                - "Warning!! You have an invalid time set for win11cis_idle_rdp_session_disconnect_time. Please read"
+                - "the notes for the variable and make the necessary change to the variable to be in compliance."
+        when: win11cis_idle_rdp_session_disconnect_time == 0 or win11cis_idle_rdp_session_disconnect_time > 900000
+
+      - name: "18.10.56.3.10.1 | AUDIT | Ensure Set time limit for active but idle Remote Desktop Services sessions is set to Enabled 15 minutes or less, but not Never (0) | Warn Count."
+        ansible.builtin.import_tasks:
+            file: warning_facts.yml
+        vars:
+            warn_control_id: '18.10.56.3.10.1'
+        when: win11cis_idle_rdp_session_disconnect_time == 0 or win11cis_idle_rdp_session_disconnect_time > 900000
+  when: win11cis_rule_18_10_56_3_10_1
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_18.10.56.3.10.1
+      - remote_desktop_session_host
+      - session_time_limits
+
+- name: "18.10.56.3.10.2 | PATCH | Ensure Set time limit for disconnected sessions is set to Enabled 1 minute"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+      name: MaxDisconnectionTime
+      data: 60000
+      type: dword
+  when: win11cis_rule_18_10_56_3_10_2
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_18.10.56.3.10.2
+      - remote_desktop_session_host
+      - session_time_limits
+
+- name: "18.10.56.3.11.1 | PATCH | Ensure Do not delete temp folders upon exit is set to Disabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
+      name: DeleteTempDirsOnExit
+      data: 1
+      type: dword
+  when: win11cis_rule_18_10_56_3_11_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.10.56.3.11.1
+      - remote_desktop_session_host
+      - temporary_folders

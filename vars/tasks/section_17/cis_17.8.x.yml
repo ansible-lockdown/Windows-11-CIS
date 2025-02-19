@@ -1,0 +1,24 @@
+---
+
+- name: "17.8.1 | PATCH | Ensure Audit Sensitive Privilege Use is set to Success and Failure"
+  block:
+      - name: "17.8.1 | AUDIT | Ensure Audit Sensitive Privilege Use is set to Success and Failure | Get current audit events."
+        ansible.windows.win_shell: AuditPol /get /subcategory:"Sensitive Privilege Use" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
+        changed_when: false
+        failed_when: false
+        register: discovered_17_8_1_audit
+
+      - name: "17.8.1 | PATCH | Ensure Audit Sensitive Privilege Use is set to Success and Failure | Success"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"Sensitive Privilege Use" /success:enable
+        when: "'Success' not in discovered_17_8_1_audit.stdout"
+
+      - name: "17.8.1 | PATCH | Ensure Audit Sensitive Privilege Use is set to Success and Failure | Failure"
+        ansible.windows.win_shell: AuditPol /set /subcategory:"Sensitive Privilege Use" /failure:enable
+        when: "'Failure' not in discovered_17_8_1_audit.stdout"
+  when: win11cis_rule_17_8_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_17.8.1
+      - audit_sensitive_privilege

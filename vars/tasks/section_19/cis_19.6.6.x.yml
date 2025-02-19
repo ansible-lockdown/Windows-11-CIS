@@ -1,0 +1,17 @@
+---
+
+- name: "19.6.6.1.1 | PATCH | Ensure Turn off Help Experience Improvement Program is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKU:\{{ item }}\Software\Policies\Microsoft\Assistance\Client\1.0
+      name: NoImplicitFeedback
+      data: 1
+      type: dword
+  loop: "{{ discovered_hku_loaded_list }}"
+  notify: change_requires_reboot
+  when: win11cis_rule_19_6_6_1_1
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_19.6.6.1.1
+      - help_experience

@@ -1,0 +1,23 @@
+---
+
+# vars file for .
+
+# Used to control warning summary
+warn_control_list: ""
+warn_count: 0
+
+# This sets the variable that is created for the banner.
+lockdown_banner: "{{lookup('file', './templates/banner.txt')}}"
+
+# discovered_cloud_based_system is a setting built into the playbook for testing locally vs. Azure.
+# We have found certain controls that need to be set in a different order when being applied in the
+# different environments. By default this is set to false.
+discovered_cloud_based_system: false
+
+# Default setting, this should not be changed
+# and is overridden if a task that changed sets the value if required.
+reboot_host: false
+
+# discovered_domain_joined is a setting built into the playbook for some controls that only applies
+# to standalone or domain joined systems. By default this is set to true.
+discovered_domain_joined: true

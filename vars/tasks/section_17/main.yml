@@ -1,0 +1,57 @@
+---
+
+- name: "SECTION | 17.1 | Account Logon"
+  ansible.builtin.import_tasks:
+      file: cis_17.1.x.yml
+  tags:
+      - advanced_audit_policy_configuration
+      - account_logon
+
+- name: "SECTION | 17.2 | Account Management"
+  ansible.builtin.import_tasks:
+      file: cis_17.2.x.yml
+  tags:
+      - advanced_audit_policy_configuration
+      - account_management
+
+- name: "SECTION | 17.3 | Detail Tracking"
+  ansible.builtin.import_tasks:
+      file: cis_17.3.x.yml
+  tags:
+      - advanced_audit_policy_configuration
+      - detailed_tracking
+
+- name: "SECTION | 17.5 | Logon/Logoff"
+  ansible.builtin.import_tasks:
+      file: cis_17.5.x.yml
+  tags:
+      - advanced_audit_policy_configuration
+      - logon_logoff
+
+- name: "SECTION | 17.6 | Object Access"
+  ansible.builtin.import_tasks:
+      file: cis_17.6.x.yml
+  tags:
+      - advanced_audit_policy_configuration
+      - object_access
+
+- name: "SECTION | 17.7 | Policy Change"
+  ansible.builtin.import_tasks:
+      file: cis_17.7.x.yml
+  tags:
+      - advanced_audit_policy_configuration
+      - policy_access
+
+- name: "SECTION | 17.8 | Privilege Use"
+  ansible.builtin.import_tasks:
+      file: cis_17.8.x.yml
+  tags:
+      - advanced_audit_policy_configuration
+      - privilege_use
+
+- name: "SECTION | 17.9 | System"
+  ansible.builtin.import_tasks:
+      file: cis_17.9.x.yml
+  tags:
+      - advanced_audit_policy_configuration
+      - system
