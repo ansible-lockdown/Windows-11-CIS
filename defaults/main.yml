@@ -10,7 +10,7 @@ win11cis_section19: true
 
 # Global Variables
 
-win11cis_min_ansible_version: "2.14"
+win11cis_min_ansible_version: "2.16"
 
 # win_skip_for_test is the setting that will skip tasks that may cause changes that will affect the system.
 # These controls are primarily around RDP and WinRM
