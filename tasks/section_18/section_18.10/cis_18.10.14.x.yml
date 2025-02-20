@@ -6,13 +6,12 @@
       name: DisablePasswordReveal
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_14_1
+  when: win11cis_rule_18_10_14_1
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.10.14.1
-      - automated
       - patch
+      - automated
+      - rule_18.10.14.1
       - gui
 
 - name: "18.10.14.2 | PATCH | Ensure Enumerate administrator accounts on elevation is set to Disabled"
@@ -21,13 +20,12 @@
       name: EnumerateAdministrators
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_14_2
+  when: win11cis_rule_18_10_14_2
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.10.14.2
-      - automated
       - patch
+      - automated
+      - rule_18.10.14.2
       - accounts
 
 - name: "18.10.14.3 | PATCH | Ensure 'Prevent the use of security questions for local accounts' is set to 'Enabled'"
@@ -36,11 +34,10 @@
       name: NoLocalPasswordResetQuestions
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_14_3
+  when: win11cis_rule_18_10_14_3
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.10.14.3
-      - automated
       - patch
+      - automated
+      - rule_18.10.14.3
       - accounts

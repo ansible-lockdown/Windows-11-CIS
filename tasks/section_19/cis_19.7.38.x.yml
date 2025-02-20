@@ -1,0 +1,17 @@
+---
+
+- name: "19.7.38.1 | PATCH | Ensure 'Turn off Windows Copilot' is set to 'Enabled'"
+  ansible.windows.win_regedit:
+      path: HKU:\{{ item }}\Software\Policies\Microsoft\Windows\WindowsCopilot
+      name: TurnOffWindowsCopilot
+      data: 1
+      type: dword
+  loop: "{{ discovered_hku_loaded_list }}"
+  notify: change_requires_reboot
+  when: win11cis_rule_19_7_38_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_19.7.38.1
+      - copilot

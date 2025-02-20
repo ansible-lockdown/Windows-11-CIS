@@ -15,11 +15,10 @@
             name: DevicePKInitEnabled
             data: 1
             type: dword
-  when:
-      - win11cis_rule_18_9_23_1
+  when: win11cis_rule_18_9_23_1
   tags:
       - level2-high-security-sensitive-data-environment
-      - rule_18.9.23.1
-      - automated
       - patch
+      - automated
+      - rule_18.9.23.1
       - certifcates

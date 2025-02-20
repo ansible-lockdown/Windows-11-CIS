@@ -6,11 +6,10 @@
       name: LetAppsActivateWithVoiceAboveLock
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_10_4_1
+  when: win11cis_rule_18_10_4_1
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.10.4.1
-      - automated
       - patch
+      - automated
+      - rule_18.10.4.1
       - voice

@@ -6,13 +6,12 @@
       name: NoToastApplicationNotificationOnLockScreen
       data: 1
       type: dword
-  loop: "{{ hku_loaded_list }}"
+  loop: "{{ discovered_hku_loaded_list }}"
   notify: change_requires_reboot
-  when:
-      - win11cis_rule_19_5_1_1
+  when: win11cis_rule_19_5_1_1
   tags:
       - level1-corporate-enterprise-environment
-      - rule_19.5.1.1
-      - automated
       - patch
-      - toast-notifications
+      - automated
+      - rule_19.5.1.1
+      - toast_notifications

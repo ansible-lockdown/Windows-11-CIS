@@ -1,0 +1,14 @@
+---
+
+- name: "18.10.55.1 | PATCH | (L2) Ensure 'Turn off Push To Install service' is set to 'Enabled'"
+  ansible.windows.win_regedit:
+      path: HKLM:\SOFTWARE\Policies\Microsoft\PushToInstall
+      name: DisablePushToInstall
+      data: 1
+      type: dword
+  when: win11cis_rule_18_10_55_1
+  tags:
+      - level2-high-security-sensitive-data-environment
+      - patch
+      - automated
+      - rule_18.10.55.1

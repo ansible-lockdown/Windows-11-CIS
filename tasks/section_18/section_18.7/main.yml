@@ -4,5 +4,5 @@
   ansible.builtin.import_tasks:
       file: cis_18.7.x.yml
   tags:
-      - administrative-templates-computer
+      - administrative_templates_computer
       - printers

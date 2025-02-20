@@ -6,10 +6,9 @@
       name: ProcessCreationIncludeCmdLine_Enabled
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_9_3_1
+  when: win11cis_rule_18_9_3_1
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.9.3.1
-      - automated
       - patch
+      - automated
+      - rule_18.9.3.1

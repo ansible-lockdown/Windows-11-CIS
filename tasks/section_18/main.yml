@@ -4,10 +4,6 @@
   ansible.builtin.import_tasks:
       file: section_18.1/main.yml
 
-- name: "SECTION | 18.3 | LAPS"
-  ansible.builtin.import_tasks:
-      file: section_18.3/main.yml
-
 - name: "SECTION | 18.4 | MS Security Guide"
   ansible.builtin.import_tasks:
       file: section_18.4/main.yml

@@ -1,0 +1,105 @@
+---
+
+- name: "18.9.28.1 | PATCH | Ensure Block user from showing account details on sign-in is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows\System
+      name: BlockUserFromShowingAccountDetailsOnSignin
+      data: 1
+      type: dword
+  when: win11cis_rule_18_9_28_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.28.1
+      - accounts
+
+- name: "18.9.28.2 | PATCH | Ensure Do not display network selection UI is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows\System
+      name: DontDisplayNetworkSelectionUI
+      data: 1
+      type: dword
+  when: win11cis_rule_18_9_28_2
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.28.2
+      - network
+
+- name: "18.9.28.3 | PATCH | Ensure Do not enumerate connected users on domain-joined computers is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows\System
+      name: DontEnumerateConnectedUsers
+      data: 1
+      type: dword
+  when: win11cis_rule_18_9_28_3
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.28.3
+      - enumerate
+
+- name: "18.9.28.4 | PATCH | Ensure Enumerate local users on domain-joined computers is set to Disabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows\System
+      name: EnumerateLocalUsers
+      data: 0
+      type: dword
+  when: win11cis_rule_18_9_28_4
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.28.4
+      - enumerate
+
+- name: "18.9.28.5 | PATCH | Ensure Turn off app notifications on the lock screen is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows\System
+      name: DisableLockScreenAppNotifications
+      data: 1
+      type: dword
+  when:
+      - win11cis_rule_18_9_28_5
+      - discovered_domain_joined
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.28.5
+      - notifications
+
+- name: "18.9.28.6 | PATCH | Ensure Turn off picture password sign-in is set to Enabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows\System
+      name: BlockDomainPicturePassword
+      data: 1
+      type: dword
+  when:
+      - win11cis_rule_18_9_28_6
+      - discovered_domain_joined
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.28.6
+      - picture_password
+
+- name: "18.9.28.7 | PATCH | Ensure Turn on convenience PIN sign-in is set to Disabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows\System
+      name: AllowDomainPINLogon
+      data: 0
+      type: dword
+  when:
+      - win11cis_rule_18_9_28_7
+      - discovered_domain_joined
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.9.28.7
+      - pin

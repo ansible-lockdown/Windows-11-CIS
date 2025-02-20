@@ -1,0 +1,189 @@
+---
+
+- name: "18.10.25.1.1 | PATCH | Ensure Application Control Event Log behavior when the log file reaches its maximum size is set to Disabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows\EventLog\Application
+      name: Retention
+      data: 0
+      type: string
+  when: win11cis_rule_18_10_25_1_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.10.25.1.1
+      - application
+      - logs
+
+- name: "18.10.25.1.2 | PATCH | Ensure Application Specify the maximum log file size KB is set to Enabled 32768 or greater"
+  block:
+      - name: "18.10.25.1.2 | PATCH | Ensure Application Specify the maximum log file size KB is set to Enabled 32768 or greater | Set File Size."
+        ansible.windows.win_regedit:
+            path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\Application
+            name: MaxSize
+            data: "{{ win11cis_application_max_log_file_size }}"
+            type: dword
+        when: win11cis_application_max_log_file_size >= 32768
+
+      - name: "18.10.25.1.2 | AUDIT | Ensure Application Specify the maximum log file size KB is set to Enabled 32768 or greater | Warning Check For Variable Standards."
+        ansible.builtin.debug:
+            msg:
+                - "Warning!! You have an invalid file size set for win11cis_application_max_log_file_size. Please read"
+                - "the notes for the variable and make the necessary change to the variable to be in compliance."
+        when: win11cis_application_max_log_file_size < 32768
+
+      - name: "18.10.25.1.2 | AUDIT | Ensure Application Specify the maximum log file size KB is set to Enabled 32768 or greater | Warn Count."
+        ansible.builtin.import_tasks:
+            file: warning_facts.yml
+        vars:
+            warn_control_id: '18.10.25.1.2'
+        when: win11cis_application_max_log_file_size < 32768
+  when: win11cis_rule_18_10_25_1_2
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.10.25.1.2
+      - application
+      - application_log_size
+
+- name: "18.10.25.2.1 | PATCH | Ensure Security Control Event Log behavior when the log file reaches its maximum size is set to Disabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\Security
+      name: Retention
+      data: 0
+      type: string
+  when: win11cis_rule_18_10_25_2_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.10.25.2.1
+      - security
+      - logs
+
+- name: "18.10.25.2.2 | PATCH | Ensure Security Specify the maximum log file size KB is set to Enabled 196608 or greater"
+  block:
+      - name: "18.10.25.2.2 | PATCH | Ensure Security Specify the maximum log file size KB is set to Enabled 196608 or greater | Set Variable."
+        ansible.windows.win_regedit:
+            path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\Security
+            name: MaxSize
+            data: "{{ win11cis_security_max_log_file_size }}"
+            type: dword
+        when: win11cis_security_max_log_file_size >= 196608
+
+      - name: "18.10.25.2.2 | AUDIT | Ensure Security Specify the maximum log file size KB is set to Enabled 196608 or greater | Warning Check For Variable Standards."
+        ansible.builtin.debug:
+            msg:
+                - "Warning!! You have an invalid file size set for win11cis_security_max_log_file_size. Please read"
+                - "the notes for the variable and make the necessary change to the variable to be in compliance."
+        when: win11cis_security_max_log_file_size < 196608
+
+      - name: "18.10.25.2.2 | AUDIT | Ensure Security Specify the maximum log file size KB is set to Enabled 196608 or greater | Warn Count."
+        ansible.builtin.import_tasks:
+            file: warning_facts.yml
+        vars:
+            warn_control_id: '18.9.25.2.2'
+        when: win11cis_security_max_log_file_size < 196608
+  when: win11cis_rule_18_10_25_2_2
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.10.25.2.2
+      - security
+      - security_log_size
+
+- name: "18.10.25.3.1 | PATCH | Ensure Setup Control Event Log behavior when the log file reaches its maximum size is set to Disabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\Setup
+      name: Retention
+      data: 0
+      type: string
+  when: win11cis_rule_18_10_25_3_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.10.25.3.1
+      - setup
+      - logs
+
+- name: "18.10.25.3.2 | PATCH | Ensure Setup Specify the maximum log file size KB is set to Enabled 32768 or greater"
+  block:
+      - name: "18.10.25.3.2 | PATCH | Ensure Setup Specify the maximum log file size KB is set to Enabled 32768 or greater | Set Variable."
+        ansible.windows.win_regedit:
+            path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\Setup
+            name: MaxSize
+            data: "{{ win11cis_setup_max_log_file_size }}"
+            type: dword
+        when: win11cis_setup_max_log_file_size >= 32768
+
+      - name: "18.10.25.3.2 | AUDIT | Ensure Setup Specify the maximum log file size KB is set to Enabled 32768 or greater | Warning Check For Variable Standards."
+        ansible.builtin.debug:
+            msg:
+                - "Warning!! You have an invalid file size set for win11cis_setup_max_log_file_size. Please read"
+                - "the notes for the variable and make the necessary change to the variable to be in compliance."
+        when: win11cis_setup_max_log_file_size < 32768
+
+      - name: "18.10.25.3.2 | AUDIT | Ensure Setup Specify the maximum log file size KB is set to Enabled 32768 or greater | Warn Count."
+        ansible.builtin.import_tasks:
+            file: warning_facts.yml
+        vars:
+            warn_control_id: '18.10.25.3.2'
+        when: win11cis_setup_max_log_file_size < 32768
+  when: win11cis_rule_18_10_25_3_2
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.10.25.3.2
+      - setup
+      - setup_log_size
+
+- name: "18.10.25.4.1 | PATCH | Ensure System Control Event Log behavior when the log file reaches its maximum size is set to Disabled"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\System
+      name: Retention
+      data: 0
+      type: string
+  when: win11cis_rule_18_10_25_4_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.10.25.4.1
+      - system
+      - logs
+
+- name: "18.10.25.4.2 | PATCH | Ensure System Specify the maximum log file size KB is set to Enabled 32768 or greater"
+  block:
+      - name: "18.10.25.4.2 | PATCH | Ensure System Specify the maximum log file size KB is set to Enabled 32768 or greater | Set Variable."
+        ansible.windows.win_regedit:
+            path: HKLM:\Software\Policies\Microsoft\Windows\Eventlog\System
+            name: MaxSize
+            data: "{{ win11cis_system_max_log_file_size }}"
+            type: dword
+        when: win11cis_system_max_log_file_size >= 32768
+
+      - name: "18.10.25.4.2 | AUDIT | Ensure System Specify the maximum log file size KB is set to Enabled 32768 or greater | Warning Check For Variable Standards."
+        ansible.builtin.debug:
+            msg:
+                - "Warning!! You have an invalid file size set for win11cis_system_max_log_file_size. Please read"
+                - "the notes for the variable and make the necessary change to the variable to be in compliance."
+        when: win11cis_system_max_log_file_size < 32768
+
+      - name: "18.10.25.4.2 | AUDIT | Ensure System Specify the maximum log file size KB is set to Enabled 32768 or greater | Warn Count."
+        ansible.builtin.import_tasks:
+            file: warning_facts.yml
+        vars:
+            warn_control_id: '18.10.25.4.2'
+        when: win11cis_system_max_log_file_size < 32768
+  when: win11cis_rule_18_10_25_4_2
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.10.25.4.2
+      - system
+      - system_log_size
