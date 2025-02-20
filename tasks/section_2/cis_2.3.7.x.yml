@@ -6,15 +6,12 @@
       name: DisableCAD
       data: 0
       type: dword
-  when:
-      - win11cis_rule_2_3_7_1
+  when: win11cis_rule_2_3_7_1
   tags:
       - level1-corporate-enterprise-environment
-      - rule_2.3.7.1
-      - automated
       - patch
-      - security-options
-      - interactive-logons
+      - automated
+      - rule_2.3.7.1
 
 - name: "2.3.7.2 | PATCH | Ensure Interactive logon Dont display last signed-in is set to Enabled."
   ansible.windows.win_regedit:
@@ -22,77 +19,48 @@
       name: DontDisplayLastUserName
       data: 1
       type: dword
-  when:
-      - win11cis_rule_2_3_7_2
+  when: win11cis_rule_2_3_7_2
   tags:
       - level1-corporate-enterprise-environment
-      - rule_2.3.7.2
-      - automated
       - patch
-      - security-options
-      - interactive-logons
+      - automated
+      - rule_2.3.7.2
 
 - name: "2.3.7.3 | PATCH | Ensure Interactive logon: Machine account lockout threshold is set to 10 or fewer invalid logon attempts, but not 0."
   block:
-      - name: "2.3.7.3 | AUDIT | Ensure Interactive logon: Machine account lockout threshold is set to 10 or fewer invalid logon attempts, but not 0. | Warning Check For Variable Standards."
-        ansible.builtin.debug:
-            msg:
-                - "Warning!! You have an invalid number attempts set for win11cis_max_device_password_failed_attempts. Please read"
-                - "the notes for the variable and make the necessary change to the variable to be in compliance."
-        when:
-            - win11cis_max_device_password_failed_attempts > 10 or
-              win11cis_max_device_password_failed_attempts == 0
-
-      - name: "2.3.7.3 | AUDIT | Ensure Interactive logon: Machine account lockout threshold is set to 10 or fewer invalid logon attempts, but not 0. | Warn Count."
-        ansible.builtin.import_tasks:
-            file: warning_facts.yml
-        vars:
-            warn_control_id: '2.3.7.3'
-        when:
-            - win11cis_max_device_password_failed_attempts > 10 or
-              win11cis_max_device_password_failed_attempts == 0
-
       - name: "2.3.7.3 | PATCH | Ensure Interactive logon: Machine account lockout threshold is set to 10 or fewer invalid logon attempts, but not 0. | Set Variable For MaxDevicePasswordFailedAttempts."
         ansible.windows.win_regedit:
             path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System
             name: MaxDevicePasswordFailedAttempts
             data: "{{ win11cis_max_device_password_failed_attempts }}"
             type: dword
-        when:
-            - win11cis_max_device_password_failed_attempts <= 10 or
-              win11cis_max_device_password_failed_attempts > 0
+        when: win11cis_max_device_password_failed_attempts <= 10 or win11cis_max_device_password_failed_attempts > 0
+
+      - name: "2.3.7.3 | AUDIT | Ensure Interactive logon: Machine account lockout threshold is set to 10 or fewer invalid logon attempts, but not 0. | Warning Check For Variable Standards."
+        ansible.builtin.debug:
+            msg:
+                - "Warning!! You have an invalid number attempts set for win11cis_max_device_password_failed_attempts. Please read"
+                - "the notes for the variable and make the necessary change to the variable to be in compliance."
+        when: win11cis_max_device_password_failed_attempts > 10 or win11cis_max_device_password_failed_attempts == 0
+
+      - name: "2.3.7.3 | AUDIT | Ensure Interactive logon: Machine account lockout threshold is set to 10 or fewer invalid logon attempts, but not 0. | Warn Count."
+        ansible.builtin.import_tasks:
+            file: warning_facts.yml
+        vars:
+            warn_control_id: '2.3.7.3'
+        when: win11cis_max_device_password_failed_attempts > 10 or win11cis_max_device_password_failed_attempts == 0
   when:
       - win11cis_rule_2_3_7_3
   tags:
       - level1-bitlocker
       - level2-bitlocker
       - bitlocker-optional-add-on
-      - rule_2.3.7.3
-      - automated
       - patch
-      - security-options
-      - interactive-logons
+      - automated
+      - rule_2.3.7.3
 
 - name: "2.3.7.4 | PATCH | Ensure Interactive logon Machine inactivity limit is set to 900 or fewer seconds but not 0"
   block:
-      - name: "2.3.7.4 | AUDIT | Ensure Interactive logon Machine inactivity limit is set to 900 or fewer seconds but not 0. | Warning Check For Variable Standards."
-        ansible.builtin.debug:
-            msg:
-                - "Warning!! You have n invalid number of seconds set for win11cis_inactivity_timeout_seconds. Please read"
-                - "the notes for the variable and make the necessary change to the variable to be in compliance."
-        when:
-            - win11cis_inactivity_timeout_seconds > 900 or
-              win11cis_inactivity_timeout_seconds == 0
-
-      - name: "2.3.7.4 | AUDIT | Ensure Interactive logon Machine inactivity limit is set to 900 or fewer seconds but not 0. | Warn Count."
-        ansible.builtin.import_tasks:
-            file: warning_facts.yml
-        vars:
-            warn_control_id: '2.3.7.4'
-        when:
-            - win11cis_inactivity_timeout_seconds > 900 or
-              win11cis_inactivity_timeout_seconds == 0
-
       - name: "2.3.7.4 | PATCH | Ensure Interactive logon Machine inactivity limit is set to 900 or fewer seconds but not 0. | Apply Settings To Registry."
         ansible.windows.win_regedit:
             path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System
@@ -102,15 +70,26 @@
         when:
             - win11cis_inactivity_timeout_seconds <= 900
             - win11cis_inactivity_timeout_seconds > 0
-  when:
-      - win11cis_rule_2_3_7_4
+
+      - name: "2.3.7.4 | AUDIT | Ensure Interactive logon Machine inactivity limit is set to 900 or fewer seconds but not 0. | Warning Check For Variable Standards."
+        ansible.builtin.debug:
+            msg:
+                - "Warning!! You have n invalid number of seconds set for win11cis_inactivity_timeout_seconds. Please read"
+                - "the notes for the variable and make the necessary change to the variable to be in compliance."
+        when: win11cis_inactivity_timeout_seconds > 900 or win11cis_inactivity_timeout_seconds == 0
+
+      - name: "2.3.7.4 | AUDIT | Ensure Interactive logon Machine inactivity limit is set to 900 or fewer seconds but not 0. | Warn Count."
+        ansible.builtin.import_tasks:
+            file: warning_facts.yml
+        vars:
+            warn_control_id: '2.3.7.4'
+        when: win11cis_inactivity_timeout_seconds > 900 or win11cis_inactivity_timeout_seconds == 0
+  when: win11cis_rule_2_3_7_4
   tags:
       - level1-corporate-enterprise-environment
-      - rule_2.3.7.4
-      - automated
       - patch
-      - security-options
-      - interactive-logons
+      - automated
+      - rule_2.3.7.4
 
 - name: "2.3.7.5 | PATCH | Configure Interactive logon Message title for users attempting to log on."
   ansible.windows.win_regedit:
@@ -118,15 +97,12 @@
       name: LegalNoticeCaption
       data: "{{ win11cis_legal_notice }}"
       type: string
-  when:
-      - win11cis_rule_2_3_7_5
+  when: win11cis_rule_2_3_7_5
   tags:
       - level1-corporate-enterprise-environment
-      - rule_2.3.7.5
-      - automated
       - patch
-      - security-options
-      - interactive-logons
+      - automated
+      - rule_2.3.7.5
 
 - name: "2.3.7.6 | PATCH | Configure Interactive logon Message title for users attempting to log on."
   ansible.windows.win_regedit:
@@ -134,18 +110,23 @@
       name: LegalNoticeCaption
       data: "{{ win11cis_legal_notice_caption }}"
       type: string
-  when:
-      - win11cis_rule_2_3_7_5
+  when: win11cis_rule_2_3_7_5
   tags:
       - level1-corporate-enterprise-environment
-      - rule_2.3.7.6
-      - automated
       - patch
-      - security-options
-      - interactive-logons
+      - automated
+      - rule_2.3.7.6
 
 - name: "2.3.7.7 | PATCH | Ensure 'Interactive logon: Number of previous logons to cache (in case domain controller is not available)' is set to '4 or fewer logon(s)'"
   block:
+      - name: "2.3.7.7 | PATCH | Ensure 'Interactive logon: Number of previous logons to cache (in case domain controller is not available)' is set to '4 or fewer logon(s) | Apply Settings To Registry."
+        ansible.windows.win_regedit:
+            path: HKLM:\Software\Microsoft\Windows Nt\Currentversion\Winlogon
+            name: CachedLogonsCount
+            data: "{{ win11cis_cached_logons_count }}"
+            type: string
+        when: win11cis_cached_logons_count <= 4
+
       - name: "2.3.7.7 | AUDIT | Ensure 'Interactive logon: Number of previous logons to cache (in case domain controller is not available)' is set to '4 or fewer logon(s) | Warning Check For Variable Standards."
         ansible.builtin.debug:
             msg:
@@ -159,44 +140,15 @@
         vars:
             warn_control_id: '2.3.7.7'
         when: win11cis_cached_logons_count > 4
-
-      - name: "2.3.7.7 | PATCH | Ensure 'Interactive logon: Number of previous logons to cache (in case domain controller is not available)' is set to '4 or fewer logon(s) | Apply Settings To Registry."
-        ansible.windows.win_regedit:
-            path: HKLM:\Software\Microsoft\Windows Nt\Currentversion\Winlogon
-            name: CachedLogonsCount
-            data: "{{ win11cis_cached_logons_count }}"
-            type: string
-        when: win11cis_cached_logons_count <= 4
-  when:
-      - win11cis_rule_2_3_7_7
+  when: win11cis_rule_2_3_7_7
   tags:
       - level2-high-security-sensitive-data-environment
-      - rule_2.3.7.7
-      - automated
       - patch
-      - security-options
-      - interactive-logons
+      - automated
+      - rule_2.3.7.7
 
 - name: "2.3.7.8 | PATCH | Ensure Interactive logon Prompt user to change password before expiration is set to between 5 and 14 days"
   block:
-      - name: "2.3.7.8 | AUDIT | Ensure Interactive logon Prompt user to change password before expiration is set to between 5 and 14 days | Warning Check For Variable Standards."
-        ansible.builtin.debug:
-            msg:
-                - "Warning!! You have an invalid number of days set for win11cis_password_expiry_warning_days. Please read"
-                - "the notes for the variable and make the necessary change to the variable to be in compliance"
-        when:
-            - win11cis_password_expiry_warning_days < 5 or
-              win11cis_password_expiry_warning_days > 14
-
-      - name: "2.3.7.8 | AUDIT | Ensure Interactive logon Prompt user to change password before expiration is set to between 5 and 14 days | Warn Count."
-        ansible.builtin.import_tasks:
-            file: warning_facts.yml
-        vars:
-            warn_control_id: '2.3.7.7'
-        when:
-            - win11cis_password_expiry_warning_days < 5 or
-              win11cis_password_expiry_warning_days > 14
-
       - name: "2.3.7.8 | PATCH | Ensure Interactive logon Prompt user to change password before expiration is set to between 5 and 14 days | Apply Settings To Registry."
         ansible.windows.win_regedit:
             path: HKLM:\Software\Microsoft\Windows Nt\Currentversion\Winlogon
@@ -206,36 +158,29 @@
         when:
             - win11cis_password_expiry_warning_days >= 5
             - win11cis_password_expiry_warning_days <= 14
-  when:
-      - win11cis_rule_2_3_7_8
-  tags:
-      - level1-corporate-enterprise-environment
-      - rule_2.3.7.8
-      - automated
-      - patch
-      - security-options
-      - interactive-logons
 
-- name: "2.3.7.9 | PATCH | Ensure Interactive logon Smart card removal behavior is set to Lock Workstation or higher."
-  block:
-      - name: "2.3.7.9 | AUDIT | Ensure Interactive logon Smart card removal behavior is set to Lock Workstation or higher | Warning Check For Variable Standards."
+      - name: "2.3.7.8 | AUDIT | Ensure Interactive logon Prompt user to change password before expiration is set to between 5 and 14 days | Warning Check For Variable Standards."
         ansible.builtin.debug:
             msg:
-                - "Warning!! You have an invalid setting for win11cis_sc_remove_option. Please read"
-                - "the notes for the variable and make the necessary change to the variable to be in compliance."
-        when:
-            - win11cis_sc_remove_option == 0 or
-              win11cis_sc_remove_option > 3
+                - "Warning!! You have an invalid number of days set for win11cis_password_expiry_warning_days. Please read"
+                - "the notes for the variable and make the necessary change to the variable to be in compliance"
+        when: win11cis_password_expiry_warning_days < 5 or win11cis_password_expiry_warning_days > 14
 
-      - name: "2.3.7.9 | AUDIT | Ensure Interactive logon Smart card removal behavior is set to Lock Workstation or higher | Warn Count."
+      - name: "2.3.7.8 | AUDIT | Ensure Interactive logon Prompt user to change password before expiration is set to between 5 and 14 days | Warn Count."
         ansible.builtin.import_tasks:
             file: warning_facts.yml
         vars:
-            warn_control_id: '2.3.7.9'
-        when:
-            - win11cis_sc_remove_option == 0 or
-              win11cis_sc_remove_option > 3
+            warn_control_id: '2.3.7.8'
+        when: win11cis_password_expiry_warning_days < 5 or win11cis_password_expiry_warning_days > 14
+  when: win11cis_rule_2_3_7_8
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_2.3.7.8
 
+- name: "2.3.7.9 | PATCH | Ensure Interactive logon Smart card removal behavior is set to Lock Workstation or higher."
+  block:
       - name: "2.3.7.9 | PATCH | Ensure Interactive logon Smart card removal behavior is set to Lock Workstation or higher | Apply Settings To Registry."
         ansible.windows.win_regedit:
             path: HKLM:\Software\Microsoft\Windows Nt\Currentversion\Winlogon
@@ -245,12 +190,25 @@
         when:
             - win11cis_sc_remove_option >= 1
             - win11cis_sc_remove_option <= 3
+
+      - name: "2.3.7.9 | AUDIT | Ensure Interactive logon Smart card removal behavior is set to Lock Workstation or higher | Warning Check For Variable Standards."
+        ansible.builtin.debug:
+            msg:
+                - "Warning!! You have an invalid setting for win11cis_sc_remove_option. Please read"
+                - "the notes for the variable and make the necessary change to the variable to be in compliance."
+        when: win11cis_sc_remove_option == 0 or win11cis_sc_remove_option > 3
+
+      - name: "2.3.7.9 | AUDIT | Ensure Interactive logon Smart card removal behavior is set to Lock Workstation or higher | Warn Count."
+        ansible.builtin.import_tasks:
+            file: warning_facts.yml
+        vars:
+            warn_control_id: '2.3.7.9'
+        when: win11cis_sc_remove_option == 0 or win11cis_sc_remove_option > 3
   when:
       - win11cis_rule_2_3_7_9
+      - discovered_domain_joined
   tags:
       - level1-corporate-enterprise-environment
-      - rule_2.3.7.9
-      - automated
       - patch
-      - security-options
-      - interactive-logons
+      - automated
+      - rule_2.3.7.9

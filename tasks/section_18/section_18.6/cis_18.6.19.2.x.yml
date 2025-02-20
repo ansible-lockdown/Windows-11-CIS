@@ -6,12 +6,11 @@
       name: DisabledComponents
       data: 255
       type: dword
-  when:
-      - win11cis_rule_18_6_19_2_1
+  when: win11cis_rule_18_6_19_2_1
   tags:
       - level2-high-security-sensitive-data-environment
-      - rule_18.6.19.2.1
-      - automated
       - patch
+      - automated
+      - rule_18.6.19.2.1
       - parameters
       - ipv6

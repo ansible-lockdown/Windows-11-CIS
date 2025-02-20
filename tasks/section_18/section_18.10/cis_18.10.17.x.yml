@@ -6,13 +6,12 @@
       name: EnableAppInstaller
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_17_1
+  when: win11cis_rule_18_10_17_1
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.10.17.1
-      - automated
       - patch
+      - automated
+      - rule_18.10.17.1
 
 - name: "18.10.17.2 | PATCH | Ensure 'Enable App Installer Experimental Features' is set to 'Disabled'"
   ansible.windows.win_regedit:
@@ -20,13 +19,12 @@
       name: EnableExperimentalFeatures
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_17_2
+  when: win11cis_rule_18_10_17_2
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.10.17.2
-      - automated
       - patch
+      - automated
+      - rule_18.10.17.2
       - experimental
 
 - name: "18.10.17.3 | PATCH | Ensure 'Enable App Installer Hash Override' is set to 'Disabled'"
@@ -35,13 +33,12 @@
       name: EnableHashOverride
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_17_3
+  when: win11cis_rule_18_10_17_3
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.10.17.3
-      - automated
       - patch
+      - automated
+      - rule_18.10.17.3
       - hash
 
 - name: "18.10.17.4 | PATCH | Ensure 'Enable App Installer ms-appinstaller protocol' is set to 'Disabled'"
@@ -50,11 +47,10 @@
       name: EnableMSAppInstallerProtocol
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_17_4
+  when: win11cis_rule_18_10_17_4
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.10.17.4
-      - automated
       - patch
+      - automated
+      - rule_18.10.17.4
       - hash

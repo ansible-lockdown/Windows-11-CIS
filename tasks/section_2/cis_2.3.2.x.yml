@@ -6,15 +6,12 @@
       name: SCENoApplyLegacyAuditPolicy
       data: 1
       type: dword
-  when:
-      - win11cis_rule_2_3_2_1
+  when: win11cis_rule_2_3_2_1
   tags:
       - level1-corporate-enterprise-environment
-      - rule_2.3.2.1
-      - automated
       - patch
-      - security-options
-      - audit
+      - automated
+      - rule_2.3.2.1
 
 - name: "2.3.2.2 | PATCH | Ensure Audit Shut down system immediately if unable to log security audits is set to Disabled"
   ansible.windows.win_regedit:
@@ -22,12 +19,9 @@
       name: CrashOnAuditFail
       data: 0
       type: dword
-  when:
-      - win11cis_rule_2_3_2_2
+  when: win11cis_rule_2_3_2_2
   tags:
       - level1-corporate-enterprise-environment
-      - rule_2.3.2.2
-      - automated
       - patch
-      - security-options
-      - audit
+      - automated
+      - rule_2.3.2.2

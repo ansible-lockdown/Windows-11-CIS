@@ -6,10 +6,9 @@
       name: ForceKeyProtection
       data: "{{ win11cis_force_key_protection }}"
       type: dword
-  when:
-      - win11cis_rule_2_3_14_1
+  when: win11cis_rule_2_3_14_1
   tags:
-      - level1-corporate-enterprise-environment
-      - rule_2.3.14.1
-      - automated
+      - level2-high-security-sensitive-data-environment
       - patch
+      - automated
+      - rule_2.3.14.1

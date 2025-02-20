@@ -6,14 +6,13 @@
       name: NoUseStoreOpenWith
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_9_20_1_1
+  when: win11cis_rule_18_9_20_1_1
   tags:
       - level2-high-security-sensitive-data-environment
-      - rule_18.9.20.1.1
-      - automated
       - patch
-      - internet-communication-settings
+      - automated
+      - rule_18.9.20.1.1
+      - internet_communication_settings
       - store
 
 - name: "18.9.20.1.2 | PATCH | Ensure Turn off downloading of print drivers over HTTP is set to Enabled"
@@ -22,14 +21,13 @@
       name: DisableWebPnPDownload
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_9_20_1_2
+  when: win11cis_rule_18_9_20_1_2
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.9.20.1.2
-      - automated
       - patch
-      - internet-communication-settings
+      - automated
+      - rule_18.9.20.1.2
+      - internet_communication_settings
       - drivers
 
 - name: "18.9.20.1.3 | PATCH | Ensure Turn off handwriting personalization data sharing is set to Enabled"
@@ -38,14 +36,13 @@
       name: PreventHandwritingDataSharing
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_9_20_1_3
+  when: win11cis_rule_18_9_20_1_3
   tags:
       - level2-high-security-sensitive-data-environment
-      - rule_18.9.20.1.3
-      - automated
       - patch
-      - internet-communication-settings
+      - automated
+      - rule_18.9.20.1.3
+      - internet_communication_settings
       - handwriting
 
 - name: "18.9.20.1.4 | PATCH | Ensure Turn off handwriting recognition error reporting is set to Enabled"
@@ -54,14 +51,13 @@
       name: PreventHandwritingErrorReports
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_9_20_1_4
+  when: win11cis_rule_18_9_20_1_4
   tags:
       - level2-high-security-sensitive-data-environment
-      - rule_18.9.20.1.4
-      - automated
       - patch
-      - internet-communication-settings
+      - automated
+      - rule_18.9.20.1.4
+      - internet_communication_settings
       - handwriting
 
 - name: "18.9.20.1.5 | PATCH | Ensure Turn off Internet Connection Wizard if URL connection is referring to Microsoft.com is set to Enabled"
@@ -70,15 +66,14 @@
       name: ExitOnMSICW
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_9_20_1_5
+  when: win11cis_rule_18_9_20_1_5
   tags:
       - level2-high-security-sensitive-data-environment
-      - rule_18.9.20.1.5
-      - automated
       - patch
-      - internet-communication-settings
-      - internet-connection-wizard
+      - automated
+      - rule_18.9.20.1.5
+      - internet_communication_settings
+      - internet_connection_wizard
 
 - name: "18.9.20.1.6 | PATCH | Ensure Turn off Internet download for Web publishing and online ordering wizards is set to Enabled"
   ansible.windows.win_regedit:
@@ -86,15 +81,14 @@
       name: NoWebServices
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_9_20_1_6
+  when: win11cis_rule_18_9_20_1_6
   tags:
       - level1-corporate-enterprise-environment
-      - rule_18.9.20.1.6
-      - automated
       - patch
-      - internet-communication-settings
-      - internet-download-wizard
+      - automated
+      - rule_18.9.20.1.6
+      - internet_communication_settings
+      - internet_downloadwizard
 
 - name: "18.9.20.1.7 | PATCH | Ensure Turn off printing over HTTP is set to Enabled"
   ansible.windows.win_regedit:
@@ -102,14 +96,13 @@
       name: DisableHTTPPrinting
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_9_20_1_7
+  when: win11cis_rule_18_9_20_1_7
   tags:
       - level2-high-security-sensitive-data-environment
-      - rule_18.9.20.1.7
-      - automated
       - patch
-      - internet-communication-settings
+      - automated
+      - rule_18.9.20.1.7
+      - internet_communication_settings
       - printers
 
 - name: "18.9.20.1.8 | PATCH | Ensure Turn off Registration if URL connection is referring to Microsoft.com is set to Enabled"
@@ -118,14 +111,13 @@
       name: NoRegistration
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_9_20_1_8
+  when: win11cis_rule_18_9_20_1_8
   tags:
       - level2-high-security-sensitive-data-environment
-      - rule_18.9.20.1.8
-      - automated
       - patch
-      - internet-communication-settings
+      - automated
+      - rule_18.9.20.1.8
+      - internet_communication_settings
       - registration
 
 - name: "18.9.20.1.9 | PATCH | Ensure Turn off Search Companion content file updates is set to Enabled"
@@ -134,14 +126,13 @@
       name: DisableContentFileUpdates
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_9_20_1_9
+  when: win11cis_rule_18_9_20_1_9
   tags:
       - level2-high-security-sensitive-data-environment
-      - rule_18.9.20.1.9
-      - automated
       - patch
-      - internet-communication-settings
+      - automated
+      - rule_18.9.20.1.9
+      - internet_communication_settings
       - search
 
 - name: "18.9.20.1.10 | PATCH | Ensure Turn off the Order Prints picture task is set to Enabled"
@@ -150,14 +141,13 @@
       name: NoOnlinePrintsWizard
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_9_20_1_10
+  when: win11cis_rule_18_9_20_1_10
   tags:
       - level2-high-security-sensitive-data-environment
-      - rule_18.9.20.1.10
-      - automated
       - patch
-      - internet-communication-settings
+      - automated
+      - rule_18.9.20.1.10
+      - internet_communication_settings
       - printers
 
 - name: "18.9.20.1.11 | PATCH | Ensure Turn off the Publish to Web task for files and folders is set to Enabled"
@@ -166,15 +156,14 @@
       name: NoPublishingWizard
       data: 1
       type: dword
-  when:
-      - win11cis_rule_18_9_20_1_11
+  when: win11cis_rule_18_9_20_1_11
   tags:
       - level2-high-security-sensitive-data-environment
-      - rule_18.9.20.1.11
-      - automated
       - patch
-      - internet-communication-settings
-      - publish-to-web
+      - automated
+      - rule_18.9.20.1.11
+      - internet_communication_settings
+      - publish_to_web
 
 - name: "18.9.20.1.12 | PATCH | Ensure Turn off the Windows Messenger Customer Experience Improvement Program is set to Enabled"
   ansible.windows.win_regedit:
@@ -182,14 +171,13 @@
       name: CEIP
       data: 2
       type: dword
-  when:
-      - win11cis_rule_18_9_20_1_12
+  when: win11cis_rule_18_9_20_1_12
   tags:
       - level2-high-security-sensitive-data-environment
-      - rule_18.9.20.1.12
-      - automated
       - patch
-      - internet-communication-settings
+      - automated
+      - rule_18.9.20.1.12
+      - internet_communication_settings
       - mwmcei
 
 - name: "18.9.20.1.13 | PATCH | Ensure Turn off Windows Customer Experience Improvement Program is set to Enabled"
@@ -198,14 +186,13 @@
       name: CEIPEnable
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_9_20_1_13
+  when: win11cis_rule_18_9_20_1_13
   tags:
       - level2-high-security-sensitive-data-environment
-      - rule_18.9.20.1.13
-      - automated
       - patch
-      - internet-communication-settings
+      - automated
+      - rule_18.9.20.1.13
+      - internet_communication_settings
       - wmcei
 
 - name: "18.9.20.1.14 | PATCH | Ensure Turn off Windows Error Reporting is set to Enabled"
@@ -223,12 +210,11 @@
             name: DoReport
             data: 0
             type: dword
-  when:
-      - win11cis_rule_18_9_20_1_14
+  when: win11cis_rule_18_9_20_1_14
   tags:
       - level2-high-security-sensitive-data-environment
-      - rule_18.9.20.1.14
-      - automated
       - patch
-      - internet-communication-settings
-      - error-reporting
+      - automated
+      - rule_18.9.20.1.14
+      - internet_communication_settings
+      - error_reporting

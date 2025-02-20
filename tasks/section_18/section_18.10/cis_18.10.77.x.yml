@@ -1,0 +1,14 @@
+---
+
+- name: "18.10.77.1 | PATCH | Ensure 'Enables or disables Windows Game Recording and Broadcasting' is set to 'Disabled'"
+  ansible.windows.win_regedit:
+      path: HKLM:\Software\Policies\Microsoft\Windows\GameDVR
+      name: AllowGameDVR
+      data: 0
+      type: dword
+  when: win11cis_rule_18_10_77_1
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_18.10.77.1

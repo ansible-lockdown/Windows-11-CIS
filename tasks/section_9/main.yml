@@ -4,19 +4,21 @@
   ansible.builtin.import_tasks:
       file: cis_9.1.x.yml
   tags:
-      - windows-defender-firewall-with-advanced-security
-      - domain-profile
+      - windows_defender_firewall_with_advanced_security
+      - domain_profile
+  when:
+      - discovered_domain_joined
 
 - name: "SECTION | 9.2 | Private Profile"
   ansible.builtin.import_tasks:
       file: cis_9.2.x.yml
   tags:
-      - windows-defender-firewall-with-advanced-security
-      - private-profile
+      - windows_defender_firewall_with_advanced_security
+      - private_profile
 
 - name: "SECTION | 9.3 | Public Profile"
   ansible.builtin.import_tasks:
       file: cis_9.3.x.yml
   tags:
-      - windows-defender-firewall-with-advanced-security
-      - public-profile
+      - windows_defender_firewall_with_advanced_security
+      - public_profile

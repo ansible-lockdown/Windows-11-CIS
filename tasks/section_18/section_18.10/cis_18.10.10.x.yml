@@ -6,10 +6,10 @@
       name: AllowCamera
       data: 0
       type: dword
-  when:
-      - win11cis_rule_18_10_10_1
+  when: win11cis_rule_18_10_10_1
   tags:
       - level2-high-security-sensitive-data-environment
-      - rule_18.10.10.1
-      - automated
       - patch
+      - automated
+      - rule_18.10.10.1
+      - camera
