@@ -680,7 +680,7 @@ win11cis_sebatchlogonright: Administrators
 # WDAG Discovered Enabled - WDAGUtilityAccount
 # Hyper V & WDAG Discovered Enabled - WDAGUtilityAccount,NT VIRTUAL MACHINE\Virtual Machines
 # Settings Note:
-# If you defining your own input list them in win10cis_seservicelogonright by commas and no spacing between them.
+# If you defining your own input list them in win11cis_seservicelogonright by commas and no spacing between them.
 # NOTE: Improper Accounts Or Groups listed here will FAIL task. When adding place items in ""
 # Default: []
 win11cis_seservicelogonright: []

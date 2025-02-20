@@ -36,12 +36,10 @@
   ansible.builtin.set_fact:
       discovered_cloud_based_system: true
   when:
-      - ansible_system_vendor == 'Microsoft Corporation'
-      - ansible_virtualization_type == 'Hyper-V' or
-        ansible_virtualization_type == 'hvm' or
-        ansible_virtualization_type == 'kvm'
-  tags:
-      - always
+      - not ansible_virtualization_type == 'VMware' or
+        (ansible_system_vendor == 'Microsoft Corporation' and
+        ansible_virtualization_type in ['Hyper-V', 'hvm', 'kvm'])
+  tags: always
 
 - name: PRELIM | Check Hyper-V Installation
   ansible.windows.win_shell: Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All | Select-Object -Property State | ft -hide
