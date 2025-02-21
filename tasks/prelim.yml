@@ -41,7 +41,7 @@
         ansible_virtualization_type in ['Hyper-V', 'hvm', 'kvm'])
   tags: always
 
-- name: PRELIM | Check Hyper-V Installation
+- name: "PRELIM | Check Hyper-V Installation"
   ansible.windows.win_shell: Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All | Select-Object -Property State | ft -hide
   changed_when: false
   failed_when: false
@@ -49,13 +49,13 @@
   tags:
       - always
 
-- name: PRELIM | Check For Windows Defender Application Guard Status
+- name: "PRELIM | Check For Windows Defender Application Guard Status"
   ansible.windows.win_shell: Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All | Select-Object -Property State | ft -hide
   changed_when: false
   failed_when: false
   register: discovered_wdag_enabled
 
-- name: PRELIM | Get Windows installation type
+- name: "PRELIM | Get Windows installation type"
   ansible.windows.win_reg_stat:
       path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion
       name: InstallationType
@@ -63,13 +63,13 @@
   tags:
       - always
 
-- name: PRELIM | Set Windows installation type
+- name: "PRELIM | Set Windows installation type"
   ansible.builtin.set_fact:
       discovered_windows_installation_type: "{{ discovered_get_windows_installation_type.value | default('') }}"
   tags:
       - always
 
-- name: PRELIM | Set Fact If Domain Joined.
+- name: "PRELIM | Set Fact If Domain Joined."
   ansible.builtin.set_fact:
       discovered_domain_joined: "{{ ansible_windows_domain_member }}"
   when:
@@ -77,7 +77,7 @@
   tags:
       - always
 
-- name: PRELIM | Obtatin And Load Default Hive As Well As User Hives
+- name: "PRELIM | Obtatin And Load Default Hive As Well As User Hives"
   block:
       - name: PRELIM | Load Default User Hive (Account That All New Users Get Created From Profile)
         ansible.windows.win_shell: REG LOAD HKU\DEFAULT C:\Users\Default\NTUSER.DAT
