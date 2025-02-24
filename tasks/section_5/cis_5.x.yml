@@ -59,12 +59,12 @@
   block:
       - name: "5.3 | AUDIT | Ensure 'Computer Browser (Browser)' is set to 'Disabled' or 'Not Installed' | Check to see if Browser service exists."
         ansible.windows.win_service_info:
-            name: Browser
+            name: Computer Browser
         register: discovered_5_3_browser_service_info
 
       - name: "5.3 | PATCH | Ensure 'Computer Browser (Browser)' is set to 'Disabled' or 'Not Installed' | Disable Browser service."
         ansible.windows.win_service:
-            name: Browser
+            name: Computer Browser
             start_mode: disabled
             force_dependent_services: true
             state: stopped
@@ -74,7 +74,7 @@
 
       - name: "5.3 | PATCH | Ensure 'Computer Browser (Browser)' is set to 'Disabled' or 'Not Installed' | Uninstall Browser service."
         ansible.windows.win_service:
-            name: Browser
+            name: Computer Browser
             force_dependent_services: true
             state: absent
         when:
