@@ -1011,13 +1011,13 @@ win11cis_enable_netbios_policy: 2
 win11cis_force_kerberos_for_rpc: 0
 
 # 18.9.5.2
-# win11cis_enable_virtualization_based_security is the policy setting specifies whether Virtualization Based Security (VBS) is enabled.
+# win11cis_virtualization_based_security_level is the the policy setting specifies whether Virtualization Based Security (VBS) is enabled.
 # VBS uses the Windows Hypervisor to provide support for security services.
 # The recommended state for this setting is: Secure Boot or Secure Boot and DMA Protection.
 # 1 - Secure Boot
 # 3 - Secure Boot and DMA Protection
-# Default: 1
-win11cis_enable_virtualization_based_security: 1
+# Default: 3
+win11cis_virtualization_based_security_level: 3
 
 # 18.9.25.1
 # win11cis_laps_backup_directory is the policy setting configures which directory Windows LAPS will use to back up the
