@@ -1,5 +1,9 @@
 # Changelog
 
+## Release 3.0.2
+General Updates
+  - Fixed 18.9.5.2 Variable and registry name
+
 ## Release 3.0.1
 
 #### Feburary 2025
