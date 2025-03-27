@@ -20,7 +20,7 @@ win11cis_min_ansible_version: "2.16"
 # 2.2.20 - Breaks Local Admin Connection
 # 5.21 - Disables Remote Desktop Service Disabled
 # 5.39 - Disables WinRm Service
-# 9.3.5 - Enables Firewall Public Rules *Breaks Reboot*
+# 9.3.4 - Enables Firewall Public Rules *Breaks Reboot*
 # 18.10.56.3.2.1 - Disables Remote Desktop Connections
 # 18.10.88.1.1 - Disables WinRM Allow Client Basic Auth
 # 18.10.88.1.2 - Disables Client Ensure Allow unencrypted traffic is set to Disabled Control.
