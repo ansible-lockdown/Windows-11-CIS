@@ -1,8 +1,14 @@
 # Changelog
 
+## Release 3.0.3
+General Updates
+  - Removed 9.3.4 Win_Skip Tag
+  - Updated Default Main win_skip_for_test 9.3.5 to 9.3.4 - Thanks @mikeeq
+
 ## Release 3.0.2
 General Updates
   - Fixed 18.9.5.2 Variable and registry name
+  - Fixed 2.3.7.6 when statement
 
 ## Release 3.0.1
 
