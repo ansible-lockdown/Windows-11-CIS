@@ -30,7 +30,7 @@
   ansible.windows.win_regedit:
       path: HKLM:\Software\Policies\Microsoft\WindowsStore
       name: AutoDownload
-      data: 4
+      data: 2
       type: dword
   when: win11cis_rule_18_10_65_3
   tags:
