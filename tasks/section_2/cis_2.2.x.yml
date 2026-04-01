@@ -250,7 +250,7 @@
       name: SeDenyNetworkLogonRight
       users:
           - Guests
-          - Local accounts
+          - Local account
       action: add
   when:
       - win11cis_rule_2_2_16
