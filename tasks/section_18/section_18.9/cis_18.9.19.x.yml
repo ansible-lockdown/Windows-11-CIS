@@ -32,7 +32,7 @@
 
 - name: "18.9.19.4 | PATCH | Ensure 'Configure security policy processing: Do not apply during periodic background processing' is set to 'Enabled: FALSE'"
   ansible.windows.win_regedit:
-      path: HKLM\SOFTWARE\Policies\Microsoft\Windows\Group Policy\{827D319E-6EAC-11D2-A4EA-00C04F79F83A}
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Group Policy\{827D319E-6EAC-11D2-A4EA-00C04F79F83A}
       name: NoBackgroundPolicy
       data: 0
       type: dword
@@ -49,7 +49,7 @@
 
 - name: "18.9.19.5 | PATCH | Ensure 'Configure security policy processing: Process even if the Group Policy objects have not changed' is set to 'Enabled: TRUE'"
   ansible.windows.win_regedit:
-      path: HKLM\SOFTWARE\Policies\Microsoft\Windows\Group Policy\{827D319E-6EAC-11D2-A4EA-00C04F79F83A}
+      path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Group Policy\{827D319E-6EAC-11D2-A4EA-00C04F79F83A}
       name: NoGPOListChanges
       data: 0
       type: dword

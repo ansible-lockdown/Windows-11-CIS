@@ -12,28 +12,58 @@ win11cis_section19: true
 
 win11cis_min_ansible_version: "2.16"
 
-# win_skip_for_test is the setting that will skip tasks that may cause changes that will affect the system.
-# These controls are primarily around RDP and WinRM
-# Default: false
-# Controls that will be skipped:
-# 2.2.16 - Breaks Local Admin Connection
-# 2.2.20 - Breaks Local Admin Connection
-# 5.21 - Disables Remote Desktop Service Disabled
-# 5.39 - Disables WinRm Service
-# 9.3.4 - Enables Firewall Public Rules *Breaks Reboot*
-# 18.10.56.3.2.1 - Disables Remote Desktop Connections
-# 18.10.88.1.1 - Disables WinRM Allow Client Basic Auth
-# 18.10.88.1.2 - Disables Client Ensure Allow unencrypted traffic is set to Disabled Control.
-# 18.10.88.2.1 - Disables WinRM Allow Service Basic Auth
-# 18.10.88.2.2 - Disables Remote Server Management through WinRM
-# 18.10.88.2.3 - Disables Service Ensure Allow unencrypted traffic is set to Disabled Control.
-# 18.10.89.1 - Disables Remote Shell Access
-win_skip_for_test: false
-
 # Changes will be made that will require a system reboot.
 # The following option will allow whether or not to skip the reboot.
 # Default: true
 skip_reboot: true
+
+# ╔═══════════════════════════════════════════════════════════════════════════════╗
+# ║                             win_skip_for_test                                 ║
+# ║                                                                               ║
+# ║  Skips tasks that may cause disruptive changes to the system during testing.  ║
+# ║                                                                               ║
+# ║  NOTE: When set to true, the corresponding GPO entries for the controls       ║
+# ║  listed below will also not be created. This applies to both the Ansible      ║
+# ║  remediation path and the GPO creation path.                                  ║
+# ║                                                                               ║
+# ║  Controls that will be skipped:                                               ║
+# ║    2.2.16             - Breaks Local Admin Connection                         ║
+# ║    2.2.20             - Breaks Local Admin Connection                         ║
+# ║    5.22               - Disables Remote Desktop Service                       ║
+# ║    5.40               - Disables WinRM Service                                ║
+# ║    9.3.4              - Enables Firewall Public Rules *Breaks Reboot*         ║
+# ║    18.10.56.3.2.1     - Disables Remote Desktop Connections                   ║
+# ║    18.10.88.1.1       - Disables WinRM Allow Client Basic Auth                ║
+# ║    18.10.88.1.2       - Disables Client Allow Unencrypted Traffic             ║
+# ║    18.10.88.2.1       - Disables WinRM Allow Service Basic Auth               ║
+# ║    18.10.88.2.2       - Disables Remote Server Management via WinRM           ║
+# ║    18.10.88.2.3       - Disables Service Allow Unencrypted Traffic            ║
+# ║    18.10.89.1         - Disables Remote Shell Access                          ║
+# ╚═══════════════════════════════════════════════════════════════════════════════╝
+win_skip_for_test: false
+
+# ╔═══════════════════════════════════════════════════════════════════════════════╗
+# ║                     Hosted Virtual System Override                            ║
+# ║                                                                               ║
+# ║  By default, the role auto-detects whether the target is a cloud-based        ║
+# ║  hosted virtual system (Azure, AWS, GCE, DigitalOcean, etc.).                 ║
+# ║                                                                               ║
+# ║  The auto-detection when condition covers the most common combinations of     ║
+# ║  ansible_virtualization_type and ansible_system_vendor, however the number    ║
+# ║  of possible hypervisor/cloud combinations makes it impossible to account     ║
+# ║  for every environment. Known cases where auto-detection has produced         ║
+# ║  incorrect results include VMware vSphere on-prem, AWS GovCloud EC2, and      ║
+# ║  standalone (non-domain) VMware instances where virtualization_type           ║
+# ║  returns 'NA'. In these cases the secedit lockout control order (1.2.1-1.2.4) ║
+# ║  will fail with 'The parameter is incorrect' from secedit.                    ║
+# ║                                                                               ║
+# ║  If you encounter this error, set the override below to force the correct     ║
+# ║  order for your environment manually.                                         ║
+# ║                                                                               ║
+# ║    true  = treat as hosted/cloud virtual system                               ║
+# ║    false = treat as bare-metal or local VM                                    ║
+# ╚═══════════════════════════════════════════════════════════════════════════════╝
+# hosted_virtual_system_override: true
 
 # Section 1 Rules
 win11cis_rule_1_1_1: true
