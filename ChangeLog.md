@@ -1,5 +1,17 @@
 # Changelog
 
+## Release 3.1.0
+
+#### April 2026
+General Updates
+  - Updated registry issues
+  - Updated the cloud check with new variable
+  - Github Actions Version update 
+  - Pr Message Added
+  
+Issues Addressed:
+  - [#30](https://github.com/ansible-lockdown/Windows-11-CIS/pull/30) - Thanks @exu-g
+
 ## Release 3.0.3
 General Updates
   - Removed 9.3.4 Win_Skip Tag
@@ -12,7 +24,7 @@ General Updates
 
 ## Release 3.0.1
 
-#### Feburary 2025
+#### February 2025
 General Updates
   - Updated Prelim To Add Always Tags To All Tasks
   - Control 2.3.7.5 & 2.3.7.6 Fixed
@@ -26,7 +38,7 @@ Issues Addressed:
 
 ## Release 3.0.0
 
-#### Janurary 2025
+#### January 2025
 General Updates
   - hku_loaded_list renamed to discovered_hku_loaded_list
   - General findings fixed when comparing win10 to win11
