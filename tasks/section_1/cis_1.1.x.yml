@@ -3,11 +3,10 @@
 - name: "1.1.1 | PATCH | Ensure Enforce password history is set to 24 or more passwords."
   block:
       - name: "1.1.1 | PATCH | Ensure Enforce password history is set to 24 or more passwords. | Set Variable."
-        ansible.windows.win_regedit:
-            path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
-            name: PasswordHistorySize
-            data: 24
-            type: dword
+        community.windows.win_security_policy:
+            section: System Access
+            key: PasswordHistorySize
+            value: "{{ win11cis_max_passwords_saved }}"
         when: win11cis_max_passwords_saved == 24
 
       - name: "1.1.1 | AUDIT | Ensure Enforce password history is set to 24 or more passwords. | Check for more then 24 saved passwords warning."
