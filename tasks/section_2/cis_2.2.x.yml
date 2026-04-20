@@ -53,22 +53,28 @@
       - automated
       - rule_2.2.4
 
-- name: "2.2.5 | PATCH | Allow log on locally"
-  ansible.windows.win_user_right:
-      name: SeInteractiveLogonRight
-      users:
-          - Administrators
-          - Users
-      action: set
-  register: logon_right_result
-  when: win11cis_rule_2_2_5
+- name: "2.2.5 | PATCH | Ensure Allow log on locally is set to Administrators, Users."
+  block:
+      - name: "2.2.5 | PATCH | Ensure Allow log on locally - Clear all current assignments"
+        ansible.windows.win_user_right:
+            name: SeInteractiveLogonRight
+            users: []
+            action: set
+        failed_when: false
 
-- name: "2.2.5 | DEBUG | Show error if failed"
-  debug:
-    var: logon_right_result
-  when: 
-    - win11cis_rule_2_2_5
-    - logon_right_result.failed
+      - name: "2.2.5 | PATCH | Ensure Allow log on locally - Add required users"
+        ansible.windows.win_user_right:
+            name: SeInteractiveLogonRight
+            users:
+                - Administrators
+                - Users
+            action: add
+  when: win10cis_rule_2_2_5
+  tags:
+      - level1-corporate-enterprise-environment
+      - patch
+      - automated
+      - rule_2.2.5
 
 - name: "2.2.6 | PATCH | Ensure Allow log on through Remote Desktop Services is set to Administrators, Remote Desktop Users."
   ansible.windows.win_user_right:
