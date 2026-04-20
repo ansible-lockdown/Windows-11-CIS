@@ -72,7 +72,7 @@
             type: dword
         when: win11cis_minimum_password_age <= 999 or win11cis_minimum_password_age > 0
 
-      - name: "1.1.3 | AUDIT | Ensure Minimum password age is set to 1 or more days. | Warning check for minimim password age."
+      - name: "1.1.3 | AUDIT | Ensure Minimum password age is set to 1 or more days. | Warning check for minimum password age."
         ansible.builtin.debug:
             msg:
                 - "Warning!! You have an invalid age set for win11cis_minimum_password_age, please read"

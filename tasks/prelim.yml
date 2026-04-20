@@ -84,7 +84,7 @@
   tags:
     - always
 
-- name: "PRELIM | Obtatin And Load Default Hive As Well As User Hives"
+- name: "PRELIM | Obtain And Load Default Hive As Well As User Hives"
   when: win11cis_section19
   tags:
     - always
