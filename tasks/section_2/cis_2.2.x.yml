@@ -55,7 +55,7 @@
 
 - name: "2.2.5 | PATCH | Ensure Allow log on locally is set to Administrators, Users."
   block:
-      - name: "2.2.5 | AUDIT | Get current assignments"
+      - name: "2.2.5 | AUDIT | Ensure Allow log on locally is set to Administrators, Users. | Get current assignments"
         ansible.windows.win_shell: |
           secedit /export /cfg c:\temp\current.cfg /quiet
           $line = Select-String "SeInteractiveLogonRight" c:\temp\current.cfg
@@ -73,7 +73,7 @@
         register: rights_check
         changed_when: false
 
-      - name: "2.2.5 | PATCH | Clear all current assignments"
+      - name: "2.2.5 | PATCH | Ensure Allow log on locally is set to Administrators, Users. | Clear all current assignments"
         ansible.windows.win_user_right:
             name: SeInteractiveLogonRight
             users: []
@@ -81,7 +81,7 @@
         failed_when: false
         when: rights_check.stdout_lines[-1] == "needs_change"
 
-      - name: "2.2.5 | PATCH | Add required users"
+      - name: "2.2.5 | PATCH | Ensure Allow log on locally is set to Administrators, Users. | Add required users"
         ansible.windows.win_user_right:
             name: SeInteractiveLogonRight
             users:
