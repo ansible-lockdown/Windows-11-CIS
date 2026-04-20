@@ -55,20 +55,39 @@
 
 - name: "2.2.5 | PATCH | Ensure Allow log on locally is set to Administrators, Users."
   block:
-      - name: "2.2.5 | PATCH | Ensure Allow log on locally - Clear all current assignments"
+      - name: "2.2.5 | AUDIT | Get current assignments"
+        ansible.windows.win_shell: |
+          secedit /export /cfg c:\temp\current.cfg /quiet
+          $line = Select-String "SeInteractiveLogonRight" c:\temp\current.cfg
+          if ($line) {
+              $assignments = $line.Line -replace "SeInteractiveLogonRight = ", ""
+              if ($assignments -eq "*S-1-5-32-544,*S-1-5-32-545") {
+                  Write-Output "correct"
+              } else {
+                  Write-Output "needs_change"
+              }
+          } else {
+              Write-Output "needs_change"
+          }
+        register: rights_check
+        changed_when: false
+
+      - name: "2.2.5 | PATCH | Clear all current assignments"
         ansible.windows.win_user_right:
             name: SeInteractiveLogonRight
             users: []
             action: set
         failed_when: false
+        when: rights_check.stdout == "needs_change"
 
-      - name: "2.2.5 | PATCH | Ensure Allow log on locally - Add required users"
+      - name: "2.2.5 | PATCH | Add required users"
         ansible.windows.win_user_right:
             name: SeInteractiveLogonRight
             users:
                 - Administrators
                 - Users
             action: add
+        when: rights_check.stdout == "needs_change"
   when: win11cis_rule_2_2_5
   tags:
       - level1-corporate-enterprise-environment
