@@ -69,7 +69,7 @@
                 - Administrators
                 - Users
             action: add
-  when: win10cis_rule_2_2_5
+  when: win11cis_rule_2_2_5
   tags:
       - level1-corporate-enterprise-environment
       - patch
