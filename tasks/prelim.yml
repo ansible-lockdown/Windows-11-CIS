@@ -1,5 +1,6 @@
 ---
-- name: "PRELIM | Get Display Version value."
+
+- name: "PRELIM | Get Display Version Value."
   ansible.windows.win_reg_stat:
     path: HKLM:\Software\Microsoft\Windows NT\CurrentVersion
     name: DisplayVersion
