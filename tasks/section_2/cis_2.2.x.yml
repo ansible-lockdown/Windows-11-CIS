@@ -60,7 +60,13 @@
           - Administrators
           - Users
       action: set
-  when: win11cis_rule_2_2_5
+  register: user_right_result
+  failed_when: 
+    - user_right_result.failed
+    - not (user_right_result.msg is defined and 
+           'Guest' in user_right_result.msg and 
+           'The system cannot find the file specified' in user_right_result.msg)
+  when: win10cis_rule_2_2_5
   tags:
       - level1-corporate-enterprise-environment
       - patch
