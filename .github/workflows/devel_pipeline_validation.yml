@@ -19,6 +19,9 @@ on:  # yamllint disable-line rule:truthy
       - '**.j2'
       - '**.ps1'
       - '**.cfg'
+    # Allow manual running of workflow
+  workflow_dispatch:
+
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 # This section contains all the jobs below that are running in the workflow.
