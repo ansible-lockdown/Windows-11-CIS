@@ -62,7 +62,7 @@
       action: set
   register: logon_right_result
   failed_when: false
-  when: win10cis_rule_2_2_5
+  when: win11cis_rule_2_2_5
 
 - name: "2.2.5 | DEBUG | Show error if failed"
   debug:
