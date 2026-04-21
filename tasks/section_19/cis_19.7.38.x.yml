@@ -7,7 +7,7 @@
       data: 1
       type: dword
   loop: "{{ discovered_hku_loaded_list }}"
-  notify: change_requires_reboot
+  notify: Change_requires_reboot
   when: win11cis_rule_19_7_38_1
   tags:
       - level1-corporate-enterprise-environment
