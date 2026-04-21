@@ -47,8 +47,8 @@ galaxy_info:
     - windowssecurity
     - windowsserver
     - windows11
-  collections:
-    - ansible.windows
-    - community.windows
-    - community.general
-  dependencies: []
+collections:
+  - ansible.windows
+  - community.windows
+  - community.general
+dependencies: []
