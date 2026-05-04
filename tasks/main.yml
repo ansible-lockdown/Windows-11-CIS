@@ -18,7 +18,7 @@
   ansible.builtin.assert:
       that:
           - ansible_os_family == 'Windows'
-          - ansible_distribution | regex_search('(Microsoft Windows 11 Enterprise)')
+          - "'Microsoft Windows 11 Enterprise' in ansible_distribution"
       success_msg: "{{ ansible_distribution }} Distribution {{ ansible_distribution_major_version }} is the detected operating system."
       fail_msg: "This role can only be run against Microsoft Windows 11 Enterprise. {{ ansible_distribution }} {{ ansible_distribution_major_version }} is not supported."
   tags:
