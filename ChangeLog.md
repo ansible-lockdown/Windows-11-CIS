@@ -2,13 +2,16 @@
 
 ## Release 3.1.0
 
+#### May 2026
+General Updates
+  - Corrected user attributes configurations in Windows 11 CIS section 2 2.2.16
+  - License updated to reflect 2026
 #### April 2026
 General Updates
   - Updated registry issues
   - Updated the cloud check with new variable
   - Github Actions Version update 
   - Pr Message Added
-  
 Issues Addressed:
   - [#30](https://github.com/ansible-lockdown/Windows-11-CIS/pull/30) - Thanks @exu-g
 
