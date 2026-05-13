@@ -1,6 +1,6 @@
 ---
 
-- name: "PRELIM | Get Display Version value."
+- name: "PRELIM | Get Display Version Value."
   ansible.windows.win_reg_stat:
       path: HKLM:\Software\Microsoft\Windows NT\CurrentVersion
       name: DisplayVersion
@@ -34,19 +34,17 @@
 # https://github.com/ansible/ansible/blob/905131fc76a07cf89dbc8d33e7a4910da3f10a16/lib/ansible/module_utils/facts/virtual/linux.py#L205
 - name: "PRELIM | Set Fact If Cloud-Based System (Auto-detect)."
   when:
-    - hosted_virtual_system_override is not defined
-    - not ansible_virtualization_type == 'VMware' or
-      (ansible_system_vendor == 'Microsoft Corporation' and
-      ansible_virtualization_type in ['Hyper-V', 'hvm', 'kvm'])
+      - hosted_virtual_system_override is not defined
+      - not ansible_virtualization_type == 'VMware' or (ansible_system_vendor == 'Microsoft Corporation' and ansible_virtualization_type in ['Hyper-V', 'hvm', 'kvm'])
   tags: always
   ansible.builtin.set_fact:
-    discovered_cloud_based_system: true
+      discovered_cloud_based_system: true
 
 - name: "PRELIM | Set Fact If Cloud-Based System (manual override)."
   when: hosted_virtual_system_override is defined
   tags: always
   ansible.builtin.set_fact:
-    discovered_cloud_based_system: "{{ hosted_virtual_system_override }}"
+      discovered_cloud_based_system: "{{ hosted_virtual_system_override }}"
 
 - name: "PRELIM | Check Hyper-V Installation"
   ansible.windows.win_shell: Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All | Select-Object -Property State | ft -hide
@@ -117,7 +115,7 @@
 
       - name: PRELIM | Create List Fact For Current Users SIDs from HKEY_USERS.
         ansible.builtin.set_fact:
-            discovered_hku_loaded_list: "{{ discovered_current_users_loaded_hku.stdout | regex_replace('HKEY_USERS\\\\','') | split }}"
+            discovered_hku_loaded_list: "{{ discovered_current_users_loaded_hku.stdout | regex_replace('HKEY_USERS\\\\', '') | split }}"
   when: win11cis_section19
   tags:
       - always

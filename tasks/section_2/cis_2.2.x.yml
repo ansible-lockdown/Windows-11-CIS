@@ -54,12 +54,41 @@
       - rule_2.2.4
 
 - name: "2.2.5 | PATCH | Ensure Allow log on locally is set to Administrators, Users."
-  ansible.windows.win_user_right:
-      name: SeInteractiveLogonRight
-      users:
-          - Administrators
-          - Users
-      action: set
+  block:
+      - name: "2.2.5 | AUDIT | Ensure Allow log on locally is set to Administrators, Users. | Get current assignments"
+        ansible.windows.win_shell: |
+          secedit /export /cfg c:\temp\current.cfg /quiet
+          $line = Select-String "SeInteractiveLogonRight" c:\temp\current.cfg
+          if ($line) {
+              $assignments = $line.Line -replace "SeInteractiveLogonRight = ", ""
+              Write-Output "Current: $assignments"
+              if ($assignments -eq "*S-1-5-32-544,*S-1-5-32-545") {
+                  Write-Output "correct"
+              } else {
+                  Write-Output "needs_change"
+              }
+          } else {
+              Write-Output "needss_change"
+          }
+        register: rights_check
+        changed_when: false
+
+      - name: "2.2.5 | PATCH | Ensure Allow log on locally is set to Administrators, Users. | Clear all current assignments"
+        ansible.windows.win_user_right:
+            name: SeInteractiveLogonRight
+            users: []
+            action: set
+        failed_when: false
+        when: rights_check.stdout_lines[-1] == "needs_change"
+
+      - name: "2.2.5 | PATCH | Ensure Allow log on locally is set to Administrators, Users. | Add required users"
+        ansible.windows.win_user_right:
+            name: SeInteractiveLogonRight
+            users:
+                - Administrators
+                - Users
+            action: add
+        when: rights_check.stdout_lines[-1] == "needs_change"
   when: win11cis_rule_2_2_5
   tags:
       - level1-corporate-enterprise-environment
@@ -221,7 +250,7 @@
       name: SeDenyNetworkLogonRight
       users:
           - Guests
-          - Local accounts
+          - Local account
       action: add
   when:
       - win11cis_rule_2_2_16
