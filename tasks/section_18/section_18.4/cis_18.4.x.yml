@@ -48,7 +48,7 @@
       name: SMB1
       data: 0
       type: dword
-  notify: Change_requires_reboot
+  notify: change_requires_reboot
   when: win11cis_rule_18_4_4
   tags:
       - level1-corporate-enterprise-environment
