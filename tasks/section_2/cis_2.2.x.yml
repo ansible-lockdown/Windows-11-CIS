@@ -68,7 +68,7 @@
                   Write-Output "needs_change"
               }
           } else {
-              Write-Output "needss_change"
+              Write-Output "needs_change"
           }
         register: rights_check
         changed_when: false
@@ -250,7 +250,7 @@
       name: SeDenyNetworkLogonRight
       users:
           - Guests
-          - Local accounts
+          - Local account
       action: add
   when:
       - win11cis_rule_2_2_16
