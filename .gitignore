@@ -41,7 +41,37 @@ benchparse/
 *xccdf.xml
 *.retry
 
-# GitHub Action/Workflow files
-.github/
+# GitHub Action/Workflow artifacts (do NOT ignore .github/ wholesale -
+# that silently untracks newly added workflow files)
+.github/.ansible/
 .github/.ansible/.lock
 .ansible/
+
+# Secrets / keys
+*.vault
+*.key
+*.pem
+*.p12
+*.pfx
+*.keystore
+*.jks
+*.credentials
+*vault_pass*
+.vault_pass
+
+# QA / temp artifacts
+qa_report.md
+*qa_report*
+AL_QA_Report_*
+prompt.md
+plan.md
+history.md
+*history.md
+*plan.md
+test_inv
+*.pdf
+
+# Audit binary
+# syver is downloaded from its release, or staged by the operator. It is never
+# committed - see the Auditing section of the README.
+*.exe
