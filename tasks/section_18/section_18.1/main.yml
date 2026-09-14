@@ -1,25 +1,25 @@
 ---
 
 - name: "SECTION | 18.1.1 | Personalization"
-  ansible.builtin.import_tasks:
-      file: cis_18.1.1.x.yml
   tags:
-      - administrative_templates_computer
-      - control_panel
-      - personalization
+    - administrative_templates_computer
+    - control_panel
+    - personalization
+  ansible.builtin.import_tasks:
+    file: cis_18.1.1.x.yml
 
 - name: "SECTION | 18.1.2 | Regional And Language Options"
-  ansible.builtin.import_tasks:
-      file: cis_18.1.2.x.yml
   tags:
-      - administrative_templates_computer
-      - control_panel
-      - regional_and_language_options
-      - handwriting_personalization
+    - administrative_templates_computer
+    - control_panel
+    - regional_and_language_options
+    - handwriting_personalization
+  ansible.builtin.import_tasks:
+    file: cis_18.1.2.x.yml
 
 - name: "SECTION | 18.1.3 | Online Tips"
-  ansible.builtin.import_tasks:
-      file: cis_18.1.3.x.yml
   tags:
-      - administrative_templates_computer
-      - control_panel
+    - administrative_templates_computer
+    - control_panel
+  ansible.builtin.import_tasks:
+    file: cis_18.1.3.x.yml

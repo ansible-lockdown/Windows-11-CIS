@@ -10,7 +10,17 @@ win11cis_section19: true
 
 # Global Variables
 
-win11cis_min_ansible_version: "2.16"
+win11cis_min_ansible_version: "2.16.1"
+
+## Benchmark identity, used by the audit role.
+## benchmark must resolve audit_conf_dir to the directory run_audit.ps1 derives
+## for itself: C:\ProgramData\Windows-11-CIS-Audit
+benchmark: Windows-11-CIS
+## metadata for Audit benchmark
+benchmark_version: v3.0.0
+
+# Write a local facts file recording the benchmark, levels and audit summary.
+create_benchmark_facts: true
 
 # Changes will be made that will require a system reboot.
 # The following option will allow whether or not to skip the reboot.
@@ -27,10 +37,15 @@ skip_reboot: true
 # ║  remediation path and the GPO creation path.                                  ║
 # ║                                                                               ║
 # ║  Controls that will be skipped:                                               ║
+# ║    1.2.1              - Account lockout duration                              ║
+# ║    1.2.2              - Account lockout threshold *Locks Out The Run Account* ║
+# ║    1.2.3              - Allow Administrator account lockout                   ║
+# ║    1.2.4              - Reset account lockout counter                         ║
 # ║    2.2.16             - Breaks Local Admin Connection                         ║
 # ║    2.2.20             - Breaks Local Admin Connection                         ║
-# ║    5.22               - Disables Remote Desktop Service                       ║
-# ║    5.40               - Disables WinRM Service                                ║
+# ║    5.12               - Disables/uninstalls OpenSSH Server *Breaks SSH*       ║
+# ║    5.21               - Disables Remote Desktop Service                       ║
+# ║    5.39               - Disables WinRM Service                                ║
 # ║    9.3.4              - Enables Firewall Public Rules *Breaks Reboot*         ║
 # ║    18.10.56.3.2.1     - Disables Remote Desktop Connections                   ║
 # ║    18.10.88.1.1       - Disables WinRM Allow Client Basic Auth                ║
@@ -42,28 +57,20 @@ skip_reboot: true
 # ╚═══════════════════════════════════════════════════════════════════════════════╝
 win_skip_for_test: false
 
-# ╔═══════════════════════════════════════════════════════════════════════════════╗
-# ║                     Hosted Virtual System Override                            ║
-# ║                                                                               ║
-# ║  By default, the role auto-detects whether the target is a cloud-based        ║
-# ║  hosted virtual system (Azure, AWS, GCE, DigitalOcean, etc.).                 ║
-# ║                                                                               ║
-# ║  The auto-detection when condition covers the most common combinations of     ║
-# ║  ansible_virtualization_type and ansible_system_vendor, however the number    ║
-# ║  of possible hypervisor/cloud combinations makes it impossible to account     ║
-# ║  for every environment. Known cases where auto-detection has produced         ║
-# ║  incorrect results include VMware vSphere on-prem, AWS GovCloud EC2, and      ║
-# ║  standalone (non-domain) VMware instances where virtualization_type           ║
-# ║  returns 'NA'. In these cases the secedit lockout control order (1.2.1-1.2.4) ║
-# ║  will fail with 'The parameter is incorrect' from secedit.                    ║
-# ║                                                                               ║
-# ║  If you encounter this error, set the override below to force the correct     ║
-# ║  order for your environment manually.                                         ║
-# ║                                                                               ║
-# ║    true  = treat as hosted/cloud virtual system                               ║
-# ║    false = treat as bare-metal or local VM                                    ║
-# ╚═══════════════════════════════════════════════════════════════════════════════╝
-# hosted_virtual_system_override: true
+# The 1.2.x set is skipped as a group, along with the prelim task that normalises
+# ResetLockoutCount before them. 1.2.2 is what creates the lockout and 1.2.3 is what makes
+# the built-in Administrator lockable; 1.2.1 and 1.2.4 are meaningless without a threshold,
+# and the fixed order 1.2.2, 1.2.1, 1.2.4, 1.2.3 is only valid applied as a set. Before this
+# they were not covered at all, so a converge with win_skip_for_test: true still locked the
+# operator out of a WinRM-managed host after five failed authentications - reported from a
+# live run where the host was lost mid-play and never recovered.
+
+# 5.12 is ALSO skipped automatically whenever the control connection is SSH, whatever
+# win_skip_for_test is set to - prelim sets discovered_control_connection_is_ssh from
+# ansible_connection (an unset value means SSH). Disabling sshd on an SSH-managed host
+# severs the connection mid-run: the established session survives, so the play keeps
+# going and only new connections fail, which makes it look like a later task or the
+# reboot caused it. Set ansible_connection to winrm or psrp to have 5.12 applied.
 
 # Section 1 Rules
 win11cis_rule_1_1_1: true
@@ -348,6 +355,7 @@ win11cis_rule_18_7_9: true
 win11cis_rule_18_7_10: true
 win11cis_rule_18_7_11: true
 win11cis_rule_18_8_1_1: true
+win11cis_rule_18_8_2: true
 win11cis_rule_18_9_3_1: true
 win11cis_rule_18_9_4_1: true
 win11cis_rule_18_9_4_2: true
@@ -572,7 +580,6 @@ win11cis_rule_18_10_65_3: true
 win11cis_rule_18_10_65_4: true
 win11cis_rule_18_10_65_5: true
 win11cis_rule_18_10_71_1: true
-win11cis_rule_18_10_72_1: true
 win11cis_rule_18_10_75_1_1: true
 win11cis_rule_18_10_75_1_2: true
 win11cis_rule_18_10_75_1_3: true
@@ -609,6 +616,7 @@ win11cis_rule_18_10_92_2_4: true
 win11cis_rule_18_10_92_4_1: true
 win11cis_rule_18_10_92_4_2: true
 win11cis_rule_18_10_92_4_3: true
+win11cis_rule_18_10_92_4_4: true
 
 # Section 19
 win11cis_rule_19_5_1_1: true
@@ -631,7 +639,7 @@ win11cis_rule_19_7_44_2_1: true
 # win11cis_max_passwords_saved is the variable used to dictate the number of unique passwords
 # that have to be associated with a user account before you can reuse an old password.
 # The recommended state for this setting is 24 Or More passwords.
-# NOTE: As Of the publication if this benchmark, Microsoft has a maximum limit of 24 saved passwords.
+# NOTE: As of the publication of this benchmark, Microsoft has a maximum limit of 24 saved passwords.
 # This may change at a later date but we have left it setup as a variable for that reason.
 win11cis_max_passwords_saved: 24
 
@@ -686,7 +694,7 @@ win11cis_account_lockout_counter_reset: 15
 # requirement for having the user right. The requirement must be documented with the ISSO.
 # NOTE: Improper Accounts Or Groups listed here will FAIL task.
 # Default: []
-wn11cis_secreatetokenprivilege: []
+win11cis_secreatetokenprivilege: []
 
 # 2.2.28
 # This policy setting allows accounts to log on using the task scheduler service.
@@ -750,20 +758,22 @@ win11cis_inactivity_timeout_seconds: 900
 # 2.3.7.5
 # win11cis_legal_notice is the setting that specifies a text message that displays to users when they log on.
 # Configure this setting in a manner that is consistent with the security and operational requirements of your organization.
+# It is written through the local security database, which stores one entry per line and ends the value at the first
+# empty line. Blank lines are therefore dropped when it is applied; every other line, commas included, is kept.
 win11cis_legal_notice: |
-    You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.
+  You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.
 
-    By using this IS (which includes any device attached to this IS), you consent to the following conditions:
+  By using this IS (which includes any device attached to this IS), you consent to the following conditions:
 
-    -The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.
+  -The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.
 
-    -At any time, the USG may inspect and seize data stored on this IS.
+  -At any time, the USG may inspect and seize data stored on this IS.
 
-    -Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.
+  -Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.
 
-    -This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.
+  -This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.
 
-    -Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details.
+  -Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details.
 
 # 2.3.7.6
 # win11cis_legal_notice_caption is the policy setting specifies the text displayed in the title bar of the window that users see

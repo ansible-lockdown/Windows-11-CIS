@@ -3,11 +3,11 @@
 galaxy_info:
   author: "MindPoint Group"
   description: "Ansible Role to Apply The Windows 11 Enterprise CIS Benchmark"
-  company: "MindPoint Group"
+  company: "MindPoint Group - A Quantum Sky Company"
   license: MIT
   role_name: windows_11_cis
   namespace: mindpointgroup
-  min_ansible_version: "2.16"
+  min_ansible_version: "2.16.1"
   platforms:
     - name: Windows
       versions:
@@ -47,8 +47,8 @@ galaxy_info:
     - windowssecurity
     - windowsserver
     - windows11
-  collections:
-    - ansible.windows
-    - community.windows
-    - community.general
-  dependencies: []
+collections:
+  - ansible.windows
+  - community.windows
+  - community.general
+dependencies: []
