@@ -1,0 +1,82 @@
+---
+
+# post.yml may have rebooted, which unloads every hive prelim REG LOADed. Without
+# reloading them the snapshot reports Hive.LoadedProfiles=0 and every section 19
+# control fails for a reason unrelated to the host's compliance. This repeats an
+# action prelim already performed, so it introduces no new kind of change.
+- name: "Post Audit | Reload user hives unloaded by the reboot"
+  when:
+    - win11cis_section19
+    - reboot_host
+    - not skip_reboot
+  block:
+    - name: "Post Audit | Load default user hive after reboot"
+      ansible.windows.win_shell: REG LOAD HKU\DEFAULT C:\Users\Default\NTUSER.DAT
+      changed_when: false
+      failed_when: false
+
+    - name: "Post Audit | Reload all user hives after reboot"
+      ansible.windows.win_shell: REG LOAD HKU\{{ item.1 }} C:\Users\{{ item.0 }}\NTUSER.DAT
+      changed_when: false
+      failed_when: false
+      loop: "{{ username_and_sid_results_list | default([]) }}"
+
+- name: "Post Audit | Run post_remediation audit"
+  ansible.windows.win_shell: |
+    $auditArgs = @{
+        Format        = '{{ audit_format }}'
+        Group         = '{{ audit_group }}'
+        MaxConcurrent = {{ audit_max_concurrent }}
+        OutFile       = '{{ post_audit_outfile }}'
+        VarsPath      = '{{ audit_vars_path }}'
+        SystemType    = '{{ audit_system_type }}'
+    }
+    & '{{ audit_conf_dir }}\run_audit.ps1' @auditArgs
+  changed_when: true
+  failed_when: "'Audit Completed' not in post_audit_run.stdout"
+  register: post_audit_run
+  environment:
+    AUDIT_BIN: "{{ audit_bin }}"
+    AUDIT_CONTENT_LOCATION: "{{ audit_conf_dest }}"
+    AUDIT_FILE: "{{ audit_file }}"
+
+- name: "Post Audit | Capture audit data if json format"
+  when: audit_format == 'json'
+  block:
+    - name: "Post Audit | Capture audit data if json format"
+      ansible.windows.win_shell: |
+        $ErrorActionPreference = 'Stop'
+        $audit = Get-Content -LiteralPath '{{ post_audit_outfile }}' -Raw | ConvertFrom-Json
+        $audit.summary.'summary-line'
+      changed_when: false
+      failed_when: post_audit_summary_json.rc != 0 or not (post_audit_summary_json.stdout | trim)
+      register: post_audit_summary_json
+
+    - name: "Post Audit | Set Fact for audit summary"
+      ansible.builtin.set_fact:
+        post_audit_results: "{{ post_audit_summary_json.stdout | trim }}"
+
+- name: "Post Audit | Capture audit data if documentation format"
+  when: audit_format == 'documentation'
+  block:
+    - name: "Post Audit | Capture audit data if documentation format"
+      ansible.windows.win_shell: |
+        $tail = @(Get-Content -LiteralPath '{{ post_audit_outfile }}' -Tail 2)
+        [array]::Reverse($tail)
+        ($tail -join ' ').Trim()
+      changed_when: false
+      register: post_audit_summary_documentation
+
+    - name: "Post Audit | Set Fact for audit summary"
+      ansible.builtin.set_fact:
+        post_audit_results: "{{ post_audit_summary_documentation.stdout | trim }}"
+
+- name: "Post Audit | Warn that a skipped reboot affects the results"
+  when:
+    - reboot_host
+    - skip_reboot
+  ansible.builtin.debug:
+    msg:
+      - "Warning!! A reboot was required but skipped, so some controls are applied"
+      - "but not yet in effect. Post-remediation audit failures may be pending"
+      - "rather than genuine - re-run the audit after a reboot to confirm."
