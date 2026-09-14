@@ -7,17 +7,21 @@ warn_control_list: ""
 warn_count: 0
 
 # This sets the variable that is created for the banner.
-lockdown_banner: "{{lookup('file', './templates/banner.txt')}}"
-
-# discovered_cloud_based_system is a setting built into the playbook for testing locally vs. Azure.
-# We have found certain controls that need to be set in a different order when being applied in the
-# different environments. By default this is set to false.
-discovered_cloud_based_system: false
+lockdown_banner: "{{ lookup('file', './templates/banner.txt') }}"
 
 # Default setting, this should not be changed
 # and is overridden if a task that changed sets the value if required.
 reboot_host: false
 
-# discovered_domain_joined is a setting built into the playbook for some controls that only applies
-# to standalone or domain joined systems. By default this is set to true.
-discovered_domain_joined: true
+# discovered_domain_joined is a setting built into the playbook for some controls that only apply
+# to standalone or domain joined systems. prelim.yml overwrites it from the windows_domain facts.
+# It defaults to false so that a host whose domain membership could not be established is treated
+# as standalone rather than having domain-only settings applied to it.
+discovered_domain_joined: false
+
+# Account Policy (CIS section 1) is domain scoped on any domain joined host: the
+# Default Domain Policy overwrites local [System Access] at every refresh, so the
+# ten secedit backed controls in section 1 cannot hold there. Seeded false so a
+# standalone host still applies them; prelim sets it true when joined. 1.1.6 is a
+# genuine registry value and is not covered by this.
+discovered_account_policy_is_domain_scoped: false
