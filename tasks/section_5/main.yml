@@ -1,7 +1,21 @@
 ---
 
-- name: "SECTION | 5.x | System Services"
+- name: "SECTION | 5.1 - 5.11 | System Services"
+  tags: system_services
   ansible.builtin.import_tasks:
-      file: cis_5.x.yml
-  tags:
-      - system_services
+    file: cis_5.1.x.yml
+
+- name: "SECTION | 5.12 - 5.22 | System Services"
+  tags: system_services
+  ansible.builtin.import_tasks:
+    file: cis_5.12.x.yml
+
+- name: "SECTION | 5.23 - 5.33 | System Services"
+  tags: system_services
+  ansible.builtin.import_tasks:
+    file: cis_5.23.x.yml
+
+- name: "SECTION | 5.34 - 5.44 | System Services"
+  tags: system_services
+  ansible.builtin.import_tasks:
+    file: cis_5.34.x.yml

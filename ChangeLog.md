@@ -1,6 +1,115 @@
 # Changelog
 
-## Release 3.1.0
+## CIS Benchmark v3.0.0 - September 2026 Updates
+
+  - fix: 2.3.11.6 writes ForceLogoffWhenHourExpire through win_security_policy, not LanManServer EnableForcedLogOff
+  - fix: 2.3.11.6 skipped on a domain joined host, with a warning; the Default Domain Policy sets it to 0
+  - fix: 2.3.7.5 legal notice written through the security database; blank lines dropped, commas kept
+  - fix: audit_content copy and archive remove the previous audit content first
+  - fix: audit summary capture fails when the results file does not parse or the summary is empty
+  - fix: 18.9.25.5 warning is counted when the LAPS password length is below 15, not at 15 or above
+  - fix: the 5.12 SSH auto-skip warning is now counted
+  - fix: prelim account lockout ordering skipped on a domain joined host, like the rest of section 1
+  - docs: README table of the controls the domain overrides, and how the role and audit report them
+  - fix: section 1 is skipped on a domain joined host, where the Default Domain Policy overwrites local [System Access] at every refresh and anything applied reverts within about two hours. Prelim sets discovered_account_policy_is_domain_scoped and warns; 1.1.6 is a registry value and still applies
+  - docs: README explains why section 1 cannot hold on a domain member, with the measured before and after values
+  - fix: 18.10.49.1 and 18.10.71.1 aborted the whole play on Windows 11 25H2 - ucpd.sys refuses the writes to Windows Feeds\EnableFeeds and Dsh\AllowNewsAndInterests for every process outside its allow list, elevated or not. Both now tolerate that one error and raise a warning, so the remaining sections still run; the setting has to come from a GPO
+  - fix: discovered_domain_joined defaulted to true, and the role's own fallback gather (distribution,!all,!min) returns no domain facts, so a play with gather_facts: false applied the domain-only settings to a standalone host. It now defaults to false and prelim gathers the windows_domain subset when the fact is missing
+  - fix: prelim REG LOADed the default and per-user hives and nothing ever unloaded them, so a run left NTUSER.DAT locked. tasks/unload_hives.yml unloads exactly what the role loaded, after the post-remediation audit
+  - fix: the eight AuditPol /set tasks in 17.9 carried changed_when: false and failed_when: false inherited from the /get task above them, so section 17.9 never reported changed and an AuditPol failure was swallowed
+  - fix: the OS assert required 'Microsoft Windows 11 Enterprise', refusing Pro, Education and LTSC - it now matches Microsoft Windows 11
+
+  - feat: paired with Windows11-CIS-Audit - setup_audit, run_audit, audit_only and fetch_audit_output now work as they do on the Linux roles
+  - feat: templates/lockdown_audit.yml.j2 renders the audit's vars from this role's own variables, so the audit asserts what the role was asked to do - domain membership and win_skip_for_test come from the role's own facts instead of being assumed
+  - feat: compliance_facts.json written to C:\ProgramData\ansible\facts.d - JSON not INI, because ansible.windows.setup reads only .ps1 and .json
+  - refactor: defaults/main.yml split to defaults/main/main.yml plus defaults/main/audit.yml, matching the estate convention
+  - fix: the post-remediation audit runs after post.yml so settings that need the reboot are not reported as failures, and reloads the user hives the reboot unloaded so section 19 is still measurable
+
+  - fix: 1.2.1, 1.2.2, 1.2.3 and 1.2.4 wrote to the RRAS AccountLockout registry key and never set the account lockout policy - net accounts still reported the Windows defaults after a full run. They now use community.windows.win_security_policy, matching Windows-2025-CIS
+  - fix: prelim normalises ResetLockoutCount before 1.2.1 when the current value would block it, so the fixed order 1.2.2, 1.2.1, 1.2.4, 1.2.3 is valid from any starting state - this replaces the cloud-vs-local task-ordering split and cis_1.2_cloud_lockout_order.yml is retired
+  - refactor: section_5/cis_5.x.yml split into cis_5.1.x.yml, cis_5.12.x.yml, cis_5.23.x.yml and cis_5.34.x.yml (11 controls each), imported by section_5/main.yml
+  - fix: 5.12 disabled the OpenSSH SSH Server on hosts managed over SSH, severing the control connection mid-run - it is now skipped automatically when prelim detects an SSH connection, and honours win_skip_for_test
+  - fix: 18.9.25.6 conditional logic for password age values
+  - fix: 18.9.25.5 used the invalid Jinja operator '=>' instead of '>=', which aborted the play with a when-expression syntax error - only reachable on a domain member, because all of 18.9.25.x sits behind the domain gate on the section import
+  - fix: a --check run aborted in prelim on an unguarded stdout_lines and never evaluated a single control. The 41 read-only discovery tasks now carry check_mode: false so they still gather, matching Windows-2025-CIS section 17. The section 19 user hive load and the pre/post audit are skipped under --check, because REG LOAD mounts registry hives and the audit writes result files
+  - style: .yamllint now enforces indentation spaces: 2, and all 146 YAML files are re-indented to match. Whitespace only - every file was verified to parse to an identical structure, and block scalars were shifted as a unit so the PowerShell inside win_shell is untouched
+  - style: task keys reordered to name, when, tags, then the module, matching how blocks already read and matching Windows-2025-CIS. 134 files, key order only - every file was verified to keep the same set of lines and to parse to an identical structure
+  - refactor: the eight registers in prelim.yml renamed from discovered_ to prelim_, matching every other role in the estate - a PRELIM task registers prelim_, a control task in section_ registers discovered_. The five prelim set_fact names are deliberately unchanged: set_fact follows no prefix convention in any role. Audit output is byte-identical after the rename
+  - fix: win_skip_for_test now covers 1.2.1, 1.2.2, 1.2.3 and 1.2.4 and the prelim task that normalises ResetLockoutCount before them. The toggle documented itself as skipping disruptive changes but did not cover the account lockout policy, so a converge with it set to true still locked the operator out of a WinRM-managed host after five failed authentications. Host-verified: with the toggle true the seven tasks skip and 'net accounts' keeps its existing lockout threshold, while section 1.1 still applies
+  - fix: 2.3.7.1 task name said CTRL-ALT-DEL where the benchmark and the audit both say CTRL+ALT+DEL
+  - refactor: removed the hosted_virtual_system_override / discovered_cloud_based_system cloud detection. It existed to reorder the 1.2.x secedit lockout controls, which the prelim ResetLockoutCount normalisation replaced, and the fact had no remaining consumers. Private-Windows-2025-CIS had already dropped it
+  - feat: syver is public, so get_audit_binary_method now defaults to download - audit_bin_url points at the krameff/syver releases and audit_bin_version pins v0.11.1 with the SHA256 from the signed release sums. The binary no longer has to be staged on the control node, and win_get_url verifies the digest before writing it. ARM64 is left empty deliberately: v0.11.1 publishes no Windows ARM64 asset
+  - split sections to smaller groups of tasks
+
+Alignment against CIS Microsoft Windows 11 Enterprise Benchmark v3.0.0
+  - feat: added missing control 18.8.2 - Remove Personalized Website Recommendations from the Recommended section in the Start Menu
+  - feat: added missing control 18.10.92.4.4 - Enable optional updates
+  - fix: 18.9.36.1 was gated on win11cis_rule_18_9_35_1 instead of win11cis_rule_18_9_36_1
+  - fix: removed retired toggle win11cis_rule_18_10_72_1 - no matching control in v3.0.0
+  - fix: 17.7.4 level tag used underscores (level1_corporate_enterprise_environment)
+  - fix: 5.23 and 18.10.3.2 tagged level2, both are Level 1 in v3.0.0
+  - fix: 1.2.3 and 2.3.11.6 tagged automated, both are Manual in v3.0.0
+  - fix: sub-tasks in the 17.2.3 block were numbered 17.2.6
+  - fix: sub-task in the 9.2.5 block was numbered 9.2.6
+  - fix: 18.4.2 task name carried a duplicated control ID
+  - fix: 2.3.7.5 named "Message title", it sets LegalNoticeText - "Message text"
+  - fix: 18.9.7.1.5 carried 18.9.7.1.4's title
+  - fix: 18.6.14.1 title omitted Require Privacy, which the task already sets
+  - fix: 2.2.16 and 2.2.20 titles omitted Local account, which the tasks already deny
+  - fix: task titles realigned to the v3.0.0 wording (2.2.14, 2.2.24, 2.3.10.8, 5.11,
+    5.13, 5.34, 17.5.5, 18.5.1, 18.5.6, 18.5.9, 18.5.10, 18.6.9.1, 18.9.47.11.1,
+    18.10.42.7.1, 18.10.42.17, 18.10.55.1)
+
+QA pass 2026-09-03
+  - fix: 18.10.9.1.7 wrote FDVHideRecoveryPage instead of FDVActiveDirectoryBackup, so the
+    control was never implemented and it also reverted 18.10.9.1.6
+  - fix: 18.10.4.1 wrote LetAppsActivateWithVoiceAboveLock=1 (Force Allow); benchmark requires 2 (Force Deny)
+  - fix: 18.9.19.7 wrote DisableBkGndGroupPolicy into a self-created subkey of the same name;
+    now removes the value from the real key, which is the benchmark's compliant state
+  - fix: 18.10.79.1 and 18.10.79.2 used SOFTWARE\Microsoft\Policies\Microsoft\WindowsInkWorkspace,
+    a path Windows never reads; corrected to SOFTWARE\Policies\Microsoft\WindowsInkWorkspace
+  - fix: 18.10.9.1.1 and 18.10.9.3.1 passed data: [] for a REG_SZ; win_regedit only coerces null
+    to an empty string, so the value written was undefined. Now data: ""
+  - fix: control 5.6 referenced win11cis_uninstall_iis_service_admin, which is defined nowhere
+    (defaults has win11cis_uninstall_iis_admin_service); aborted the play on any host with IIS
+  - fix: prelim WDAG check ran the Hyper-V command, so 2.2.29 keyed WDAGUtilityAccount rights
+    off Hyper-V state instead of Windows Defender Application Guard
+  - fix: 18.9.4.1 was tagged rule_18.9.3.1 and 18.10.9.2.18 was tagged rule_18.10.9.2.1,
+    breaking --tags selection in both directions
+  - fix: 18.10.9.1.5 wrote win11cis_48_digit_recovery_password_setting while gating on
+    win11cis_256bit_recovery_key_setting
+  - fix: register names diccovered_17_3_2_audit and rights_check; register/changed_when order on 2.2.5
+  - fix: wn11cis_secreatetokenprivilege renamed to win11cis_secreatetokenprivilege
+  - fix: min_ansible_version raised to 2.16.1 in meta/main.yml and defaults/main.yml
+  - fix: 11 sub-tasks labelled AUDIT while writing state, or PATCH while only printing a warning
+  - fix: duplicate automated tag on 18.10.80.2 and 18.10.9.2.4
+  - fix: win_skip_for_test comment named controls 5.22/5.40; the gated controls are 5.21/5.39
+  - fix: LICENSE company casing, CONTRIBUTING canonical heading, spelling and grammar corrections
+  - fix: .gitignore no longer ignores .github/ wholesale (it was silently untracking new workflow
+    files); added secret and QA-artifact patterns
+  - fix: actions/checkout pinned to v7.0.0
+  - fix: added the canonical private-repo workflows benchmark_tracking_controller.yml and
+    export_badges_private.yml, sourced from Private-Windows-2025-CIS
+  - fix: removed update_galaxy.yml - it is a public-mirror-only workflow
+  - fix: 18.9.19.7 now also removes the stray DisableBkGndGroupPolicy subkey that earlier role
+    versions created, so already-hardened hosts are cleaned up
+
+QA pass 2 2026-09-03 (non-registry controls)
+  - fix: 5.3 used the service display name "Computer Browser". win_service_info matches the
+    service name only, so .exists was always false and both the disable and uninstall branches
+    were skipped - the control hardened nothing. Now uses Browser
+  - fix: 2.2.29 gated its Hyper-V/WDAG auto-detection on '"" in win11cis_seservicelogonright'.
+    The default is [], so "" in [] is always false: all four auto-detect branches were dead and
+    the user-defined branch always ran, stripping SeServiceLogonRight to No One even on hosts
+    where Hyper-V or WDAG needed it. Now gated on list length
+  - fix: 5.10 uninstall branch was identical to its disable branch and never set state: absent
+  - fix: 5.5, 5.9, 5.12, 5.17 and 5.35 task names referenced the wrong service or wrong action
+  - fix: 17.5.3 registered discovered_7_5_3_audit (missing the 17)
+  - fix: SeReLabelPrivilege -> SeRelabelPrivilege on 2.2.31
+  - fix: 35 single-item when:/tags: lists converted to inline form, matching the estate convention
+  - fix: 137 block-style tasks used name -> block -> when -> tags. Canonical Lockdown order is
+    name -> when -> tags -> block, which every other role in the estate already follows. Reordered;
+    ansible-lint key-order[task] now reports zero
 
 #### May 2026
 General Updates
@@ -10,7 +119,7 @@ General Updates
 General Updates
   - Updated registry issues
   - Updated the cloud check with new variable
-  - Github Actions Version update 
+  - Github Actions Version update
   - Pr Message Added
 Issues Addressed:
   - [#30](https://github.com/ansible-lockdown/Windows-11-CIS/pull/30) - Thanks @exu-g
@@ -191,7 +300,7 @@ Section Moves
   - Updated 2.2.11 To allow variables to be input if site requires it.
   - Updated PRELIM | Set Fact If Cloud Based System to include ansible_system_vendor. - Thanks @mfortin
   - Updated Pipelines - Thanks @mfortin
-  - Added discovered to Prelim reistered names.
+  - Added discovered to Prelim registered names.
   - Added discovered_controlid to controls that register values.
   - Verified 1.1.6 RelaxMinimumPasswordLengthLimits is using registry style entry not win_security_policy.
   - Verified 18.10.93.4.1 ManagePreviewBuildsPolicyValue is set to 0 value.
@@ -205,12 +314,10 @@ Section Moves
   - Fixed A Number Of Typos
   - Updated Readme
   - Added Option For skip_reboot And Warning Message For It.
-  - Added Two New Comtrols To Win_Skip_For_Test
+  - Added Two New Controls To Win_Skip_For_Test
     - 18.10.89.1.2
     - 18.10.89.2.3
 - Removed When Checks For Domain, Member Server, And Standalone
 
 #### September 2023
   - Initial Release For Benchmark 2.0.0 Released 03.07.2023
-
-

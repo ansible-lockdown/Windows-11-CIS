@@ -1,163 +1,162 @@
 ---
 
 - name: "SECTION | 18.9.3 | Audit Process Creation"
-  ansible.builtin.import_tasks:
-      file: cis_18.9.3.x.yml
   tags:
-      - administrative_templates_computer
-      - system
-      - audit_process_creation
+    - administrative_templates_computer
+    - system
+    - audit_process_creation
+  ansible.builtin.import_tasks:
+    file: cis_18.9.3.x.yml
 
 - name: "SECTION | 18.9.4 | Credentials Delegation"
-  ansible.builtin.import_tasks:
-      file: cis_18.9.4.x.yml
   tags:
-      - administrative_templates_computer
-      - system
-      - credentials_delegation
+    - administrative_templates_computer
+    - system
+    - credentials_delegation
+  ansible.builtin.import_tasks:
+    file: cis_18.9.4.x.yml
 
 - name: "SECTION | 18.9.5 | Device Guard"
-  ansible.builtin.import_tasks:
-      file: cis_18.9.5.x.yml
   tags:
-      - administrative_templates_computer
-      - system
-      - device_guard
+    - administrative_templates_computer
+    - system
+    - device_guard
+  ansible.builtin.import_tasks:
+    file: cis_18.9.5.x.yml
 
 - name: "SECTION | 18.9.7 | Device Installation"
-  ansible.builtin.import_tasks:
-      file: cis_18.9.7.x.yml
   tags:
-      - administrative_templates_computer
-      - system
-      - device_installation
+    - administrative_templates_computer
+    - system
+    - device_installation
+  ansible.builtin.import_tasks:
+    file: cis_18.9.7.x.yml
 
 - name: "SECTION | 18.9.13 | Early Launch Antimalware"
-  ansible.builtin.import_tasks:
-      file: cis_18.9.13.x.yml
   tags:
-      - administrative_templates_computer
-      - system
-      - early_launch_antimalware
+    - administrative_templates_computer
+    - system
+    - early_launch_antimalware
+  ansible.builtin.import_tasks:
+    file: cis_18.9.13.x.yml
 
 - name: "SECTION | 18.9.19 | Group Policy"
-  ansible.builtin.import_tasks:
-      file: cis_18.9.19.x.yml
   tags:
-      - administrative_templates_computer
-      - system
-      - group_policy
+    - administrative_templates_computer
+    - system
+    - group_policy
+  ansible.builtin.import_tasks:
+    file: cis_18.9.19.x.yml
 
 - name: "SECTION | 18.9.20 | Internet Conection Management"
-  ansible.builtin.import_tasks:
-      file: cis_18.9.20.x.yml
   tags:
-      - administrative_templates_computer
-      - system
-      - internet_communication_management
+    - administrative_templates_computer
+    - system
+    - internet_communication_management
+  ansible.builtin.import_tasks:
+    file: cis_18.9.20.x.yml
 
 - name: "SECTION | 18.9.23 | Kerberos"
-  ansible.builtin.import_tasks:
-      file: cis_18.9.23.x.yml
   tags:
-      - administrative_templates_computer
-      - system
-      - kerberos
+    - administrative_templates_computer
+    - system
+    - kerberos
+  ansible.builtin.import_tasks:
+    file: cis_18.9.23.x.yml
 
 - name: "SECTION | 18.9.24 | Kernel DMA Protection"
-  ansible.builtin.import_tasks:
-      file: cis_18.9.24.x.yml
   tags:
-      - administrative_templates_computer
-      - system
-      - kernel_dma_protection
+    - administrative_templates_computer
+    - system
+    - kernel_dma_protection
+  ansible.builtin.import_tasks:
+    file: cis_18.9.24.x.yml
 
 - name: "SECTION | 18.9.25 | LAPS"
-  ansible.builtin.import_tasks:
-      file: cis_18.9.25.x.yml
+  when: discovered_domain_joined
   tags:
-      - administrative_templates_computer
-      - system
-      - laps
-  when:
-      - discovered_domain_joined
+    - administrative_templates_computer
+    - system
+    - laps
+  ansible.builtin.import_tasks:
+    file: cis_18.9.25.x.yml
 
 - name: "SECTION | 18.9.26 | Local Security Authority"
-  ansible.builtin.import_tasks:
-      file: cis_18.9.26.x.yml
   tags:
-      - administrative_templates_computer
-      - system
-      - local_security_authority
+    - administrative_templates_computer
+    - system
+    - local_security_authority
+  ansible.builtin.import_tasks:
+    file: cis_18.9.26.x.yml
 
 - name: "SECTION | 18.9.27 | Locale Services"
-  ansible.builtin.import_tasks:
-      file: cis_18.9.27.x.yml
   tags:
-      - administrative_templates_computer
-      - system
-      - locale_service
+    - administrative_templates_computer
+    - system
+    - locale_service
+  ansible.builtin.import_tasks:
+    file: cis_18.9.27.x.yml
 
 - name: "SECTION | 18.9.28 | Logon"
-  ansible.builtin.import_tasks:
-      file: cis_18.9.28.x.yml
   tags:
-      - administrative_templates_computer
-      - system
-      - logon
+    - administrative_templates_computer
+    - system
+    - logon
+  ansible.builtin.import_tasks:
+    file: cis_18.9.28.x.yml
 
 - name: "SECTION | 18.9.31 | OS Policies"
-  ansible.builtin.import_tasks:
-      file: cis_18.9.31.x.yml
   tags:
-      - administrative_templates_computer
-      - system
-      - os_policies
+    - administrative_templates_computer
+    - system
+    - os_policies
+  ansible.builtin.import_tasks:
+    file: cis_18.9.31.x.yml
 
 - name: "SECTION | 18.9.33 | Power Management"
-  ansible.builtin.import_tasks:
-      file: cis_18.9.33.x.yml
   tags:
-      - administrative_templates_computer
-      - system
-      - power_management
+    - administrative_templates_computer
+    - system
+    - power_management
+  ansible.builtin.import_tasks:
+    file: cis_18.9.33.x.yml
 
 - name: "SECTION | 18.9.35 | Remote Assistance"
-  ansible.builtin.import_tasks:
-      file: cis_18.9.35.x.yml
   tags:
-      - administrative_templates_computer
-      - system
-      - remote_assistance
+    - administrative_templates_computer
+    - system
+    - remote_assistance
+  ansible.builtin.import_tasks:
+    file: cis_18.9.35.x.yml
 
 - name: "SECTION | 18.9.36 | Remote Procedure Call"
-  ansible.builtin.import_tasks:
-      file: cis_18.9.36.x.yml
   tags:
-      - administrative_templates_computer
-      - system
-      - remote_procedure_call
+    - administrative_templates_computer
+    - system
+    - remote_procedure_call
+  ansible.builtin.import_tasks:
+    file: cis_18.9.36.x.yml
 
 - name: "SECTION | 18.9.47 | Troubleshooting And Diagnostics"
-  ansible.builtin.import_tasks:
-      file: cis_18.9.47.x.yml
   tags:
-      - administrative_templates_computer
-      - system
-      - troubleshooting_and_diagnostics
+    - administrative_templates_computer
+    - system
+    - troubleshooting_and_diagnostics
+  ansible.builtin.import_tasks:
+    file: cis_18.9.47.x.yml
 
 - name: "SECTION | 18.9.49 | User Profiles"
-  ansible.builtin.import_tasks:
-      file: cis_18.9.49.x.yml
   tags:
-      - administrative_templates_computer
-      - system
-      - user_profiles
+    - administrative_templates_computer
+    - system
+    - user_profiles
+  ansible.builtin.import_tasks:
+    file: cis_18.9.49.x.yml
 
 - name: "SECTION | 18.9.51 | Windows Time Service"
-  ansible.builtin.import_tasks:
-      file: cis_18.9.51.x.yml
   tags:
-      - administrative_templates_computer
-      - system
-      - windows_time_service
+    - administrative_templates_computer
+    - system
+    - windows_time_service
+  ansible.builtin.import_tasks:
+    file: cis_18.9.51.x.yml
