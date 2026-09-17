@@ -8,8 +8,15 @@
     - automated
     - rule_17.7.1
     - audit_policy_change
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
   block:
-    - name: "17.7.1 | AUDIT | Ensure Audit Audit Policy Change is set to include Success | Get current audit events."
+    - name: "17.7.1 | AUDIT | Ensure Audit Audit Policy Change is set to include Success | Get current audit events"
       ansible.windows.win_shell: AuditPol /get /subcategory:"Audit Policy Change" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
       changed_when: false
       check_mode: false
@@ -28,8 +35,15 @@
     - automated
     - rule_17.7.2
     - audit_authentication_policy_change
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
   block:
-    - name: "17.7.2 | AUDIT | Ensure Audit Authentication Policy Change is set to include Success | Get current audit events."
+    - name: "17.7.2 | AUDIT | Ensure Audit Authentication Policy Change is set to include Success | Get current audit events"
       ansible.windows.win_shell: AuditPol /get /subcategory:"Authentication Policy Change" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
       changed_when: false
       check_mode: false
@@ -48,8 +62,15 @@
     - automated
     - rule_17.7.3
     - audit_authorization_policy_change
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
   block:
-    - name: "17.7.3 | AUDIT | Ensure Audit Authorization Policy Change is set to include Success | Get current audit events."
+    - name: "17.7.3 | AUDIT | Ensure Audit Authorization Policy Change is set to include Success | Get current audit events"
       ansible.windows.win_shell: AuditPol /get /subcategory:"Authorization Policy Change" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
       changed_when: false
       check_mode: false
@@ -68,8 +89,15 @@
     - automated
     - rule_17.7.4
     - mpssvc_rule_level_policy
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
   block:
-    - name: "17.7.4 | AUDIT | Ensure Audit MPSSVC Rule-Level Policy Change is set to Success and Failure | Get current audit events."
+    - name: "17.7.4 | AUDIT | Ensure Audit MPSSVC Rule-Level Policy Change is set to Success and Failure | Get current audit events"
       ansible.windows.win_shell: AuditPol /get /subcategory:"MPSSVC Rule-Level Policy Change" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
       changed_when: false
       check_mode: false
@@ -92,8 +120,15 @@
     - automated
     - rule_17.7.5
     - audit_other_policy_change
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
   block:
-    - name: "17.7.5 | AUDIT | Ensure Audit Other Policy Change Events is set to include Failure | Get current audit events."
+    - name: "17.7.5 | AUDIT | Ensure Audit Other Policy Change Events is set to include Failure | Get current audit events"
       ansible.windows.win_shell: AuditPol /get /subcategory:"Other Policy Change Events" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
       changed_when: false
       check_mode: false

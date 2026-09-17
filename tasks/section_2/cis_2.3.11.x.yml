@@ -1,6 +1,6 @@
 ---
 
-- name: "2.3.11.1 | PATCH | Ensure Network security Allow Local System to use computer identity for NTLM is set to Enabled."
+- name: "2.3.11.1 | PATCH | Ensure Network security Allow Local System to use computer identity for NTLM is set to Enabled"
   when: win11cis_rule_2_3_11_1
   tags:
     - level1-corporate-enterprise-environment
@@ -8,13 +8,14 @@
     - automated
     - rule_2.3.11.1
     - ntlm
+    - NIST800-53R5_IA-3
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Control\Lsa
     name: UseMachineId
     data: 1
     type: dword
 
-- name: "2.3.11.2 | PATCH | Ensure Network security Allow LocalSystem NULL session fallback is set to Disabled."
+- name: "2.3.11.2 | PATCH | Ensure Network security Allow LocalSystem NULL session fallback is set to Disabled"
   when: win11cis_rule_2_3_11_2
   tags:
     - level1-corporate-enterprise-environment
@@ -22,13 +23,15 @@
     - automated
     - rule_2.3.11.2
     - localsystem
+    - NIST800-171_3.1.7
+    - NIST800-53R5_AC-6_10
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Control\Lsa\Msv1_0
     name: AllowNullSessionFallback
     data: 0
     type: dword
 
-- name: "2.3.11.3 | PATCH | Ensure Network Security Allow PKU2U authentication requests to this computer to use online identities is set to Disabled."
+- name: "2.3.11.3 | PATCH | Ensure Network Security Allow PKU2U authentication requests to this computer to use online identities is set to Disabled"
   when: win11cis_rule_2_3_11_3
   tags:
     - level1-corporate-enterprise-environment
@@ -36,13 +39,29 @@
     - automated
     - rule_2.3.11.3
     - authentication
+    - NIST800-171_3.13.1
+    - NIST800-171_3.13.2
+    - NIST800-171_3.4.1
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_CM-1
+    - NIST800-53R5_CM-2
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
+    - NIST800-53R5_CM-7_1
+    - NIST800-53R5_CM-9
+    - NIST800-53R5_SA-10
+    - NIST800-53R5_SA-3
+    - NIST800-53R5_SA-8
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Control\Lsa\Pku2U
     name: AllowOnlineID
     data: 0
     type: dword
 
-- name: "2.3.11.4 | PATCH | Ensure Network security Configure encryption types allowed for Kerberos is set to AES128 HMAC SHA1 AES256 HMAC SHA1 Future encryption types."
+- name: "2.3.11.4 | PATCH | Ensure Network security Configure encryption types allowed for Kerberos is set to AES128 HMAC SHA1 AES256 HMAC SHA1 Future encryption types"
   when: win11cis_rule_2_3_11_4
   tags:
     - level1-corporate-enterprise-environment
@@ -50,8 +69,16 @@
     - automated
     - rule_2.3.11.4
     - encryption
+    - NIST800-171_3.1.13
+    - NIST800-171_3.13.8
+    - NIST800-171_3.5.2
+    - NIST800-53R5_AC-17_2
+    - NIST800-53R5_IA-5
+    - NIST800-53R5_IA-5_1
+    - NIST800-53R5_SC-8
+    - NIST800-53R5_SC-8_1
   block:
-    - name: "2.3.11.4 | PATCH | Ensure Network security Configure encryption types allowed for Kerberos is set to AES128 HMAC SHA1 AES256 HMAC SHA1 Future encryption types. | Legacy App Encryption Support."
+    - name: "2.3.11.4 | PATCH | Ensure Network security Configure encryption types allowed for Kerberos is set to AES128 HMAC SHA1 AES256 HMAC SHA1 Future encryption types | Legacy App Encryption Support"
       when: win11cis_legacy_rc4_hmac_md5_support
       ansible.windows.win_regedit:
         path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System\Kerberos\Parameters
@@ -59,7 +86,7 @@
         data: 2147483644
         type: dword
 
-    - name: "2.3.11.4 | PATCH | Ensure Network security Configure encryption types allowed for Kerberos is set to AES128 HMAC SHA1 AES256 HMAC SHA1 Future encryption types. | No Legacy App Encryption Support."
+    - name: "2.3.11.4 | PATCH | Ensure Network security Configure encryption types allowed for Kerberos is set to AES128 HMAC SHA1 AES256 HMAC SHA1 Future encryption types | No Legacy App Encryption Support"
       when: not win11cis_legacy_rc4_hmac_md5_support
       ansible.windows.win_regedit:
         path: HKLM:\Software\Microsoft\Windows\Currentversion\Policies\System\Kerberos\Parameters
@@ -67,20 +94,25 @@
         data: 2147483640
         type: dword
 
-- name: "2.3.11.5 | PATCH | Ensure Network security Do not store LAN Manager hash value on next password change is set to Enabled."
+- name: "2.3.11.5 | PATCH | Ensure Network security Do not store LAN Manager hash value on next password change is set to Enabled"
   when: win11cis_rule_2_3_11_5
   tags:
     - level1-corporate-enterprise-environment
     - patch
     - automated
     - rule_2.3.11.5
+    - NIST800-171_3.13.16
+    - NIST800-171_3.5.2
+    - NIST800-53R5_IA-5_1
+    - NIST800-53R5_SC-28
+    - NIST800-53R5_SC-28_1
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Control\Lsa
     name: NoLMHash
     data: 1
     type: dword
 
-- name: "2.3.11.6 | PATCH | Ensure Network security Force logoff when logon hours expire is set to Enabled."
+- name: "2.3.11.6 | PATCH | Ensure Network security Force logoff when logon hours expire is set to Enabled"
   when:
     - win11cis_rule_2_3_11_6
     - not discovered_account_policy_is_domain_scoped
@@ -89,6 +121,8 @@
     - patch
     - manual
     - rule_2.3.11.6
+    - NIST800-171_3.1.2
+    - NIST800-53R5_AC-2_12
   community.windows.win_security_policy:
     section: System Access
     key: ForceLogoffWhenHourExpire
@@ -101,13 +135,23 @@
     - patch
     - automated
     - rule_2.3.11.7
+    - NIST800-171_3.1.13
+    - NIST800-171_3.13.8
+    - NIST800-171_3.5.2
+    - NIST800-53R5_AC-17_2
+    - NIST800-53R5_AC-IA-5
+    - NIST800-53R5_AC-IA-5_1
+    - NIST800-53R5_IA-5
+    - NIST800-53R5_IA-5_1
+    - NIST800-53R5_SC-8
+    - NIST800-53R5_SC-8_1
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Control\Lsa
     name: LMCompatibilityLevel
     data: 5
     type: dword
 
-- name: "2.3.11.8 | PATCH | Ensure Network security LDAP client signing requirements is set to Negotiate signing or higher."
+- name: "2.3.11.8 | PATCH | Ensure Network security LDAP client signing requirements is set to Negotiate signing or higher"
   when: win11cis_rule_2_3_11_8
   tags:
     - level1-corporate-enterprise-environment
@@ -115,8 +159,18 @@
     - automated
     - rule_2.3.11.8
     - ldap
+    - NIST800-171_3.1.13
+    - NIST800-171_3.13.8
+    - NIST800-171_3.5.2
+    - NIST800-53R5_AC-17_2
+    - NIST800-53R5_AC-IA-5
+    - NIST800-53R5_AC-IA-5_1
+    - NIST800-53R5_IA-5
+    - NIST800-53R5_IA-5_1
+    - NIST800-53R5_SC-8
+    - NIST800-53R5_SC-8_1
   block:
-    - name: "2.3.11.8 | PATCH | Ensure Network security LDAP client signing requirements is set to Negotiate signing or higher. | Apply Variable To Regitry."
+    - name: "2.3.11.8 | PATCH | Ensure Network security LDAP client signing requirements is set to Negotiate signing or higher | Apply Variable To Regitry"
       when: win11cis_ldap_client_integrity == 1 or win11cis_ldap_client_integrity == 2
       ansible.windows.win_regedit:
         path: HKLM:\System\Currentcontrolset\Services\Ldap
@@ -124,21 +178,21 @@
         data: "{{ win11cis_ldap_client_integrity }}"
         type: dword
 
-    - name: "2.3.11.8 | AUDIT | Ensure Network security LDAP client signing requirements is set to Negotiate signing or higher. | Warning Check For Variable."
+    - name: "2.3.11.8 | AUDIT | Ensure Network security LDAP client signing requirements is set to Negotiate signing or higher | Warning Check For Variable"
       when: win11cis_ldap_client_integrity == 0 or win11cis_ldap_client_integrity > 2
       ansible.builtin.debug:
         msg:
           - "Warning!! You have an invalid variable set for win11cis_ldap_client_integrity. Please read"
           - "the notes for the variable and make the necessary change to the variable to be in compliance."
 
-    - name: "2.3.11.8 | AUDIT | Ensure Network security LDAP client signing requirements is set to Negotiate signing or higher. | Warn Count."
+    - name: "2.3.11.8 | AUDIT | Ensure Network security LDAP client signing requirements is set to Negotiate signing or higher | Warn Count"
       when: win11cis_ldap_client_integrity == 0 or win11cis_ldap_client_integrity > 2
       ansible.builtin.import_tasks:
         file: warning_facts.yml
       vars:
         warn_control_id: '2.3.11.8'
 
-- name: "2.3.11.9 | PATCH | Ensure Network security Minimum session security for NTLM SSP based including secure RPC clients is set to Require NTLMv2 session security Require 128-bit encryption."
+- name: "2.3.11.9 | PATCH | Ensure Network security Minimum session security for NTLM SSP based including secure RPC clients is set to Require NTLMv2 session security Require 128-bit encryption"
   when: win11cis_rule_2_3_11_9
   tags:
     - level1-corporate-enterprise-environment
@@ -146,13 +200,23 @@
     - automated
     - rule_2.3.11.9
     - ntlm
+    - NIST800-171_3.1.13
+    - NIST800-171_3.13.8
+    - NIST800-171_3.5.2
+    - NIST800-53R5_AC-17_2
+    - NIST800-53R5_AC-IA-5
+    - NIST800-53R5_AC-IA-5_1
+    - NIST800-53R5_IA-5
+    - NIST800-53R5_IA-5_1
+    - NIST800-53R5_SC-8
+    - NIST800-53R5_SC-8_1
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Control\Lsa\Msv1_0
     name: NTLMMinClientSec
     data: 537395200
     type: dword
 
-- name: "2.3.11.10 | PATCH | Ensure Network security Minimum session security for NTLM SSP based including secure RPC servers is set to Require NTLMv2 session security Require 128-bit encryption."
+- name: "2.3.11.10 | PATCH | Ensure Network security Minimum session security for NTLM SSP based including secure RPC servers is set to Require NTLMv2 session security Require 128-bit encryption"
   when: win11cis_rule_2_3_11_10
   tags:
     - level1-corporate-enterprise-environment
@@ -160,6 +224,16 @@
     - automated
     - rule_2.3.11.10
     - ntlm
+    - NIST800-171_3.1.13
+    - NIST800-171_3.13.8
+    - NIST800-171_3.5.2
+    - NIST800-53R5_AC-17_2
+    - NIST800-53R5_AC-IA-5
+    - NIST800-53R5_AC-IA-5_1
+    - NIST800-53R5_IA-5
+    - NIST800-53R5_IA-5_1
+    - NIST800-53R5_SC-8
+    - NIST800-53R5_SC-8_1
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Control\Lsa\Msv1_0
     name: NTLMMinServerSec
@@ -174,6 +248,13 @@
     - automated
     - rule_2.3.11.11
     - ntlm
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Control\Lsa\Msv1_0
     name: AuditReceivingNTLMTraffic
@@ -188,6 +269,13 @@
     - automated
     - rule_2.3.11.12
     - ntlm
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
   block:
     - name: "2.3.11.12 | PATCH | Ensure 'Network security: Restrict NTLM: Outgoing NTLM traffic to remote servers' is set to 'Audit all' or higher' | Set Variable"
       when: win11cis_restrict_sending_ntlm_traffic == 1 or win11cis_restrict_sending_ntlm_traffic == 2
@@ -197,7 +285,7 @@
         data: "{{ win11cis_restrict_sending_ntlm_traffic }}"
         type: dword
 
-    - name: "2.3.11.12 | AUDIT | Ensure 'Network security: Restrict NTLM: Outgoing NTLM traffic to remote servers' is set to 'Audit all' or higher' | Warning Check For Variable."
+    - name: "2.3.11.12 | AUDIT | Ensure 'Network security: Restrict NTLM: Outgoing NTLM traffic to remote servers' is set to 'Audit all' or higher' | Warning Check For Variable"
       when:
         - win11cis_restrict_sending_ntlm_traffic != 1
         - win11cis_restrict_sending_ntlm_traffic != 2
@@ -206,7 +294,7 @@
           - "Warning!! You have an invalid variable set for win11cis_restrict_sending_ntlm_traffic. Please read"
           - "the notes for the variable and make the necessary change to the variable to be in compliance."
 
-    - name: "2.3.11.12 | AUDIT | Ensure 'Network security: Restrict NTLM: Outgoing NTLM traffic to remote servers' is set to 'Audit all' or higher' | Warn Count."
+    - name: "2.3.11.12 | AUDIT | Ensure 'Network security: Restrict NTLM: Outgoing NTLM traffic to remote servers' is set to 'Audit all' or higher' | Warn Count"
       when:
         - win11cis_restrict_sending_ntlm_traffic != 1
         - win11cis_restrict_sending_ntlm_traffic != 2

@@ -8,8 +8,15 @@
     - automated
     - rule_17.5.1
     - audit_account_lockout
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
   block:
-    - name: "17.5.1 | AUDIT | Ensure Audit Account Lockout is set to include Failure | Get current audit events."
+    - name: "17.5.1 | AUDIT | Ensure Audit Account Lockout is set to include Failure | Get current audit events"
       ansible.windows.win_shell: AuditPol /get /subcategory:"Account Lockout" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
       changed_when: false
       check_mode: false
@@ -28,8 +35,15 @@
     - automated
     - rule_17.5.2
     - audit_group_membership
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
   block:
-    - name: "17.5.2 | AUDIT | Ensure Audit Group Membership is set to include Success | Get current audit events."
+    - name: "17.5.2 | AUDIT | Ensure Audit Group Membership is set to include Success | Get current audit events"
       ansible.windows.win_shell: AuditPol /get /subcategory:"Group Membership" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
       changed_when: false
       check_mode: false
@@ -48,8 +62,15 @@
     - automated
     - rule_17.5.3
     - audit_logoff
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
   block:
-    - name: "17.5.3 | AUDIT | Ensure Audit Logoff is set to include Success | Get current audit events."
+    - name: "17.5.3 | AUDIT | Ensure Audit Logoff is set to include Success | Get current audit events"
       ansible.windows.win_shell: AuditPol /get /subcategory:"Logoff" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
       changed_when: false
       check_mode: false
@@ -68,8 +89,15 @@
     - automated
     - rule_17.5.4
     - audit_logon
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
   block:
-    - name: "17.5.4 | AUDIT | Ensure Audit Logon is set to Success and Failure | Get current audit events."
+    - name: "17.5.4 | AUDIT | Ensure Audit Logon is set to Success and Failure | Get current audit events"
       ansible.windows.win_shell: AuditPol /get /subcategory:"Logon" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
       changed_when: false
       check_mode: false
@@ -92,8 +120,15 @@
     - automated
     - rule_17.5.5
     - other_logon_logoff
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
   block:
-    - name: "17.5.5 | AUDIT | Ensure Audit Other Logon Logoff Events is set to Success and Failurr | Get current audit events."
+    - name: "17.5.5 | AUDIT | Ensure Audit Other Logon Logoff Events is set to Success and Failurr | Get current audit events"
       ansible.windows.win_shell: AuditPol /get /subcategory:"Other Logon/Logoff Events" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
       changed_when: false
       check_mode: false
@@ -116,8 +151,15 @@
     - automated
     - rule_17.5.6
     - audit_special_logon
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
   block:
-    - name: "17.5.6 | AUDIT | Ensure Audit Special Logon is set to include Success | Get current audit events."
+    - name: "17.5.6 | AUDIT | Ensure Audit Special Logon is set to include Success | Get current audit events"
       ansible.windows.win_shell: AuditPol /get /subcategory:"Special Logon" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
       changed_when: false
       check_mode: false

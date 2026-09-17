@@ -9,6 +9,8 @@
     - rule_18.9.27.1
     - copying
     - input_method
+    - NIST800-171_3.4.2
+    - NIST800-53R5_CM-6_b
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Control Panel\International
     name: BlockUserInputMethodsForSignIn

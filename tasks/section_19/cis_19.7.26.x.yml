@@ -8,6 +8,8 @@
     - automated
     - rule_19.7.26.1
     - sharing_files
+    - NIST800-171_3.1.1
+    - NIST800-53R5_AC-3
   ansible.windows.win_regedit:
     path: HKU:\{{ item }}\Software\Microsoft\Windows\Currentversion\Policies\Explorer
     name: NoInplaceSharing

@@ -1,31 +1,5 @@
 ---
 
-- name: "PRELIM | Get Display Version value."
-  tags: always
-  ansible.windows.win_reg_stat:
-    path: HKLM:\Software\Microsoft\Windows NT\CurrentVersion
-    name: DisplayVersion
-  changed_when: false
-  failed_when: false
-  register: prelim_displayversion
-
-- name: "PRELIM | Get OS Build value."
-  tags: always
-  ansible.windows.win_reg_stat:
-    path: HKLM:\Software\Microsoft\Windows NT\CurrentVersion
-    name: CurrentBuild
-  changed_when: false
-  failed_when: false
-  register: prelim_currentbuild
-
-- name: "PRELIM | Detect if Trusted Platform Module (TPM) is Available"
-  tags: always
-  ansible.windows.win_shell: (Get-CimInstance -ClassName Win32_OperatingSystem).ProductType
-  changed_when: false
-  check_mode: false
-  failed_when: false
-  register: prelim_tpm_enabled
-
 - name: "PRELIM | Check Hyper-V Installation"
   tags: always
   ansible.windows.win_shell: Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All | Select-Object -Property State | ft -hide
@@ -54,13 +28,13 @@
   ansible.builtin.set_fact:
     discovered_windows_installation_type: "{{ prelim_get_windows_installation_type.value | default('') }}"
 
-- name: "PRELIM | Gather Domain Membership Facts."
+- name: "PRELIM | Gather Domain Membership Facts"
   when: ansible_facts['windows_domain_member'] is not defined
   tags: always
   ansible.builtin.setup:
     gather_subset: windows_domain,!all,!min
 
-- name: "PRELIM | Set Fact If Domain Joined."
+- name: "PRELIM | Set Fact If Domain Joined"
   when: ansible_facts['windows_domain_member'] is defined
   tags: always
   ansible.builtin.set_fact:
@@ -162,64 +136,16 @@
       failed_when: false
       register: prelim_current_users_loaded_hku
 
-    - name: PRELIM | Create List Fact For Current Users SIDs from HKEY_USERS.
+    - name: PRELIM | Create List Fact For Current Users SIDs from HKEY_USERS
       ansible.builtin.set_fact:
         discovered_hku_loaded_list: "{{ prelim_current_users_loaded_hku.stdout | regex_replace('HKEY_USERS\\\\', '') | split }}"
 
-# Windows enforces LockoutDuration >= ResetLockoutCount, and win_security_policy re-imports the
-# whole secedit ini on every call, so each of 1.2.1 and 1.2.4 is validated against the machine's
-# current pair. Whichever of the two is written first fails with "The parameter is incorrect" if
-# the existing state conflicts - see https://github.com/ansible/ansible/issues/62594.
-# Windows always maintains duration >= reset, so lowering ResetLockoutCount to its target first
-# (only when the current value would block 1.2.1) makes the fixed order 1.2.2, 1.2.1, 1.2.4, 1.2.3
-# valid from any starting state. This replaces the previous cloud-vs-local task-ordering split.
-- name: "PRELIM | Account Lockout Policy Ordering"
-  when:
-    - win11cis_section1
-    - not win_skip_for_test
-    - not discovered_account_policy_is_domain_scoped
-  tags: always
-  block:
-    - name: PRELIM | Account Lockout Policy Ordering | Read current lockout policy
-      ansible.windows.win_shell: |
-        $ErrorActionPreference = 'Stop'
-        $cfg = [System.IO.Path]::GetTempFileName()
-        secedit /export /areas SECURITYPOLICY /cfg $cfg /quiet | Out-Null
-        $content = Get-Content -LiteralPath $cfg
-        Remove-Item -LiteralPath $cfg -Force
-        $durationMatch = $content | Select-String '^LockoutDuration\s*=\s*(\d+)'
-        $resetMatch = $content | Select-String '^ResetLockoutCount\s*=\s*(\d+)'
-        $duration = if ($durationMatch) { $durationMatch.Matches.Groups[1].Value } else { 0 }
-        $reset = if ($resetMatch) { $resetMatch.Matches.Groups[1].Value } else { 0 }
-        "$duration $reset"
-      changed_when: false
-      check_mode: false
-      register: prelim_lockout_policy
-
-    - name: PRELIM | Account Lockout Policy Ordering | Set current lockout facts
-      ansible.builtin.set_fact:
-        prelim_win11cis_current_lockout_duration: "{{ prelim_lockout_policy.stdout.split()[0] | int }}"
-        prelim_win11cis_current_lockout_reset: "{{ prelim_lockout_policy.stdout.split()[1] | int }}"
-
-    # Only fires when the existing ResetLockoutCount exceeds the target LockoutDuration, which is
-    # the one state in which writing 1.2.1 first is rejected. Safe because Windows guarantees the
-    # current duration is at least the current reset, so it already exceeds the target reset.
-    - name: PRELIM | Account Lockout Policy Ordering | Lower reset counter so 1.2.1 can be applied
-      when:
-        - win11cis_rule_1_2_1
-        - prelim_win11cis_current_lockout_reset | int > win11cis_account_lockout_duration | int
-        - win11cis_account_lockout_counter_reset | int <= prelim_win11cis_current_lockout_duration | int
-      community.windows.win_security_policy:
-        section: System Access
-        key: ResetLockoutCount
-        value: "{{ win11cis_account_lockout_counter_reset }}"
-
-- name: "PRELIM | Detect Whether The Control Connection Is SSH."
+- name: "PRELIM | Detect Whether The Control Connection Is SSH"
   tags: always
   ansible.builtin.set_fact:
     discovered_control_connection_is_ssh: "{{ (ansible_connection | default('ssh')) in ['ssh', 'smart'] }}"
 
-- name: "PRELIM | Warn That SSH-Breaking Controls Will Be Skipped."
+- name: "PRELIM | Warn That SSH-Breaking Controls Will Be Skipped"
   when: discovered_control_connection_is_ssh
   tags: always
   ansible.builtin.debug:
@@ -228,7 +154,7 @@
       - "is skipped automatically, because applying it severs the control connection."
       - "Set ansible_connection explicitly to winrm or psrp to have 5.12 applied."
 
-- name: "PRELIM | Count The SSH-Breaking Controls Warning."
+- name: "PRELIM | Count The SSH-Breaking Controls Warning"
   when: discovered_control_connection_is_ssh
   tags: always
   vars:

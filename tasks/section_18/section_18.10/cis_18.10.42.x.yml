@@ -8,6 +8,11 @@
     - automated
     - rule_18.10.42.5.1
     - maps
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows Defender\Spynet
     name: LocalSettingOverrideSpynetReporting
@@ -22,6 +27,11 @@
     - automated
     - rule_18.10.42.5.2
     - maps
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows Defender\Spynet
     name: SpynetReporting
@@ -38,6 +48,7 @@
     - microsoft_defender_exploit_guard
     - attack_surface_reduction
     - defender
+    - NIST800-53R5_SI-16
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR
     name: ExploitGuard_ASR_Rules
@@ -54,6 +65,7 @@
     - microsoft_defender_exploit_guard
     - attack_surface_reduction
     - defender
+    - NIST800-53R5_SI-16
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR\Rules
     name: "{{ item }}"
@@ -83,6 +95,10 @@
     - rule_18.10.42.6.3.1
     - microsoft_defender_exploit_guard
     - network_protection
+    - NIST800-171_3.13.1
+    - NIST800-53R5_SC-7_3
+    - NIST800-53R5_SC-7_4
+    - NIST800-53R5_SI-16
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\Network Protection
     name: EnableNetworkProtection
@@ -98,6 +114,10 @@
     - rule_18.10.42.7.1
     - mpengine
     - hash
+    - NIST800-171_3.14.2
+    - NIST800-171_3.14.4
+    - NIST800-171_3.14.5
+    - NIST800-53R5_SI-3
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\MpEngine
     name: EnableFileHashComputation
@@ -113,6 +133,10 @@
     - rule_18.10.42.10.1
     - real_time_protection
     - downloads
+    - NIST800-171_3.14.2
+    - NIST800-171_3.14.4
+    - NIST800-171_3.14.5
+    - NIST800-53R5_SI-3
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection
     name: DisableIOAVProtection
@@ -127,6 +151,10 @@
     - automated
     - rule_18.10.42.10.2
     - real_time_protection
+    - NIST800-171_3.14.2
+    - NIST800-171_3.14.4
+    - NIST800-171_3.14.5
+    - NIST800-53R5_SI-3
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection
     name: DisableRealtimeMonitoring
@@ -142,6 +170,9 @@
     - rule_18.10.42.10.3
     - real_time_protection
     - behavior_monitoring
+    - NIST800-171_3.14.6
+    - NIST800-171_3.14.7
+    - NIST800-53R5_SI-4
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows Defender\Real-Time Protection
     name: DisableBehaviorMonitoring
@@ -157,6 +188,9 @@
     - rule_18.10.42.10.4
     - real_time_protection
     - script_scanning
+    - NIST800-171_3.14.6
+    - NIST800-171_3.14.7
+    - NIST800-53R5_SI-4
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection
     name: DisableScriptScanning
@@ -172,6 +206,8 @@
     - rule_18.10.42.12.1
     - reporting
     - watson
+    - NIST800-171_3.12.3
+    - NIST800-53R5_CA-7
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows Defender\Reporting
     name: DisableGenericRePorts
@@ -186,6 +222,12 @@
     - automated
     - rule_18.10.42.13.1
     - scan
+    - NIST800-171_3.14.2
+    - NIST800-171_3.14.4
+    - NIST800-171_3.14.5
+    - NIST800-171_3.8.7
+    - NIST800-53R5_MP-7
+    - NIST800-53R5_SI-3
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows Defender\Scan
     name: DisablePackedExeScanning
@@ -200,6 +242,12 @@
     - automated
     - rule_18.10.42.13.2
     - scan
+    - NIST800-171_3.14.2
+    - NIST800-171_3.14.4
+    - NIST800-171_3.14.5
+    - NIST800-171_3.8.7
+    - NIST800-53R5_MP-7
+    - NIST800-53R5_SI-3
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows Defender\Scan
     name: DisableRemovableDriveScanning
@@ -214,6 +262,10 @@
     - automated
     - rule_18.10.42.13.3
     - email_scanning
+    - NIST800-171_3.14.2
+    - NIST800-171_3.14.4
+    - NIST800-171_3.14.5
+    - NIST800-53R5_SI-3
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows Defender\Scan
     name: DisableEmailScanning
@@ -228,13 +280,17 @@
     - automated
     - rule_18.10.42.16
     - defender
+    - NIST800-171_3.14.2
+    - NIST800-171_3.14.4
+    - NIST800-171_3.14.5
+    - NIST800-53R5_SI-3
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows Defender
     name: PUAProtection
     data: 1
     type: dword
 
-- name: "18.10.42.17 | PATCH | Ensure Turn off Microsoft Defender AntiVirus is set to Disabled."
+- name: "18.10.42.17 | PATCH | Ensure Turn off Microsoft Defender AntiVirus is set to Disabled"
   when: win11cis_rule_18_10_42_17
   tags:
     - level1-corporate-enterprise-environment

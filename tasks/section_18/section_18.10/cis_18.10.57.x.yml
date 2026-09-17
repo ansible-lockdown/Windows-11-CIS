@@ -7,6 +7,11 @@
     - patch
     - automated
     - rule_18.10.57.1
+    - NIST800-171_3.13.13
+    - NIST800-171_3.4.9
+    - NIST800-53R5_CM-10
+    - NIST800-53R5_CM-11
+    - NIST800-53R5_SC-18
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Internet Explorer\Feeds
     name: DisableEnclosureDownload

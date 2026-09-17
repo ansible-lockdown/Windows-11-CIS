@@ -8,6 +8,11 @@
     - automated
     - rule_9.1.1
     - firewall_state
+    - NIST800-171_3.13.1
+    - NIST800-171_3.13.5
+    - NIST800-171_3.13.6
+    - NIST800-53R5_SC-7
+    - NIST800-53R5_SC-7_5
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windowsfirewall\Domainprofile
     name: EnableFirewall
@@ -22,6 +27,11 @@
     - automated
     - rule_9.1.2
     - inbound_connections
+    - NIST800-171_3.13.1
+    - NIST800-171_3.13.5
+    - NIST800-171_3.13.6
+    - NIST800-53R5_SC-7
+    - NIST800-53R5_SC-7_5
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile
     name: DefaultInboundAction
@@ -36,6 +46,11 @@
     - automated
     - rule_9.1.3
     - notifications
+    - NIST800-171_3.13.1
+    - NIST800-171_3.13.5
+    - NIST800-171_3.13.6
+    - NIST800-53R5_SC-7
+    - NIST800-53R5_SC-7_5
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile
     name: DisableNotifications
@@ -51,6 +66,11 @@
     - automated
     - rule_9.1.4
     - logging_name
+    - NIST800-171_3.13.1
+    - NIST800-171_3.13.5
+    - NIST800-171_3.13.6
+    - NIST800-53R5_SC-7
+    - NIST800-53R5_SC-7_5
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging
     name: LogFilePath
@@ -65,8 +85,13 @@
     - automated
     - rule_9.1.5
     - logging_size
+    - NIST800-171_3.13.1
+    - NIST800-171_3.13.5
+    - NIST800-171_3.13.6
+    - NIST800-53R5_SC-7
+    - NIST800-53R5_SC-7_5
   block:
-    - name: "9.1.5 | PATCH | Ensure 'Windows Firewall: Domain: Logging: Size limit (KB)' is set to '16,384 KB or greater' | Apply Settings To Registry."
+    - name: "9.1.5 | PATCH | Ensure 'Windows Firewall: Domain: Logging: Size limit (KB)' is set to '16,384 KB or greater' | Apply Settings To Registry"
       when: win11cis_domain_firewall_log_size >= 16384
       ansible.windows.win_regedit:
         path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging
@@ -74,14 +99,14 @@
         data: '{{ win11cis_domain_firewall_log_size }}'
         type: dword
 
-    - name: "9.1.5 | AUDIT | Ensure 'Windows Firewall: Domain: Logging: Size limit (KB)' is set to '16,384 KB or greater'. | Warning Check For Variable Standards."
+    - name: "9.1.5 | AUDIT | Ensure 'Windows Firewall: Domain: Logging: Size limit (KB)' is set to '16,384 KB or greater' | Warning Check For Variable Standards"
       when: win11cis_domain_firewall_log_size < 16384
       ansible.builtin.debug:
         msg:
           - "Warning!! You have an invalid size set for win11cis_domain_firewall_log_size. Please read"
           - "the notes for the variable and make the necessary change to the variable to be in compliance."
 
-    - name: "9.1.5 | AUDIT | Ensure 'Windows Firewall: Domain: Logging: Size limit (KB)' is set to '16,384 KB or greater' | Warn Count."
+    - name: "9.1.5 | AUDIT | Ensure 'Windows Firewall: Domain: Logging: Size limit (KB)' is set to '16,384 KB or greater' | Warn Count"
       when: win11cis_domain_firewall_log_size < 16384
       ansible.builtin.import_tasks:
         file: warning_facts.yml
@@ -96,6 +121,18 @@
     - automated
     - rule_9.1.6
     - logging_packets
+    - NIST800-171_3.13.1
+    - NIST800-171_3.13.5
+    - NIST800-171_3.13.6
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
+    - NIST800-53R5_SC-7
+    - NIST800-53R5_SC-7_5
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging
     name: LogDroppedPackets
@@ -110,6 +147,18 @@
     - automated
     - rule_9.1.7
     - logging_connections
+    - NIST800-171_3.13.1
+    - NIST800-171_3.13.5
+    - NIST800-171_3.13.6
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
+    - NIST800-53R5_SC-7
+    - NIST800-53R5_SC-7_5
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging
     name: LogSuccessfulConnections

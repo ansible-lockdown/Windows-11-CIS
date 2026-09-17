@@ -7,6 +7,7 @@
     - automated
     - rule_18.10.91.2.1
     - app_and_browser_protection
+    - NIST800-53R5_SI-16
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows Defender Security Center\App and Browser protection
     name: DisallowExploitProtectionOverride

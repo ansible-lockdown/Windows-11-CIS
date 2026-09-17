@@ -7,6 +7,8 @@
     - patch
     - automated
     - rule_18.10.3.1
+    - NIST800-171_3.3.1
+    - NIST800-53R5_AC-3
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows\Currentversion\Appmodel\Statemanager
     name: AllowSharedLocalAppData

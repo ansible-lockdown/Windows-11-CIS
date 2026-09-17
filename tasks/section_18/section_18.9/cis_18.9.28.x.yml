@@ -8,6 +8,22 @@
     - automated
     - rule_18.9.28.1
     - accounts
+    - NIST800-171_3.13.1
+    - NIST800-171_3.13.2
+    - NIST800-171_3.4.1
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_CM-1
+    - NIST800-53R5_CM-2
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
+    - NIST800-53R5_CM-7_1
+    - NIST800-53R5_CM-9
+    - NIST800-53R5_SA-10
+    - NIST800-53R5_SA-3
+    - NIST800-53R5_SA-8
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows\System
     name: BlockUserFromShowingAccountDetailsOnSignin
@@ -22,6 +38,8 @@
     - automated
     - rule_18.9.28.2
     - network
+    - NIST800-171_3.1.7
+    - NIST800-53R5_AC-6_10
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows\System
     name: DontDisplayNetworkSelectionUI
@@ -36,6 +54,8 @@
     - automated
     - rule_18.9.28.3
     - enumerate
+    - NIST800-171_3.1.7
+    - NIST800-53R5_AC-6_10
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows\System
     name: DontEnumerateConnectedUsers
@@ -66,6 +86,11 @@
     - automated
     - rule_18.9.28.5
     - notifications
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows\System
     name: DisableLockScreenAppNotifications
@@ -82,6 +107,11 @@
     - automated
     - rule_18.9.28.6
     - picture_password
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows\System
     name: BlockDomainPicturePassword
@@ -98,6 +128,11 @@
     - automated
     - rule_18.9.28.7
     - pin
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows\System
     name: AllowDomainPINLogon

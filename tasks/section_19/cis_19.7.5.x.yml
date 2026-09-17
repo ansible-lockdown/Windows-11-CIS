@@ -8,6 +8,8 @@
     - automated
     - rule_19.7.5.1
     - preserve_zone_information
+    - NIST800-171_3.4.2
+    - NIST800-53R5_CM-6_b
   ansible.windows.win_regedit:
     path: HKU:\{{ item }}\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments
     name: SaveZoneInformation
@@ -24,6 +26,10 @@
     - automated
     - rule_19.7.5.2
     - antivirus
+    - NIST800-171_3.14.2
+    - NIST800-171_3.14.4
+    - NIST800-171_3.14.5
+    - NIST800-53R5_SI-3
   ansible.windows.win_regedit:
     path: HKU:\{{ item }}\Software\Microsoft\Windows\Currentversion\Policies\Attachments
     name: ScanWithAntiVirus

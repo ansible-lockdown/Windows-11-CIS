@@ -8,6 +8,8 @@
     - automated
     - rule_18.10.41.1
     - account
+    - NIST800-171_3.1.1
+    - NIST800-53R5_AC-2_1
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\MicrosoftAccount
     name: DisableUserAuth

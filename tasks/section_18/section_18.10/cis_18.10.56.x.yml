@@ -22,6 +22,11 @@
     - automated
     - rule_18.10.56.2.3
     - remote_desktop_connection_client
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
     name: DisablePasswordSaving
@@ -55,6 +60,11 @@
     - rule_18.10.56.3.3.1
     - remote_desktop_session_host
     - device_and_resource_redirection
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows NT\Terminal Services
     name: EnableUiaRedirection
@@ -70,6 +80,11 @@
     - rule_18.10.56.3.3.2
     - remote_desktop_session_host
     - device_and_resource_redirection
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows NT\Terminal Services
     name: fDisableCcm
@@ -85,6 +100,11 @@
     - rule_18.10.56.3.3.3
     - remote_desktop_session_host
     - device_and_resource_redirection
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows NT\Terminal Services
     name: fDisableCdm
@@ -100,6 +120,11 @@
     - rule_18.10.56.3.3.4
     - remote_desktop_session_host
     - device_and_resource_redirection
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows NT\Terminal Services
     name: fDisableLocationRedir
@@ -115,6 +140,11 @@
     - rule_18.10.56.3.3.5
     - remote_desktop_session_host
     - device_and_resource_redirection
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows NT\Terminal Services
     name: fDisableLPT
@@ -130,6 +160,9 @@
     - rule_18.10.56.3.3.6
     - remote_desktop_session_host
     - device_and_resource_redirection
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-7_b
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows NT\Terminal Services
     name: fDisablePNPRedir
@@ -145,6 +178,11 @@
     - rule_18.10.56.3.3.7
     - remote_desktop_session_host
     - device_and_resource_redirection
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows NT\Terminal Services
     name: fDisableWebAuthn
@@ -160,6 +198,11 @@
     - rule_18.10.56.3.9.1
     - remote_desktop_session_host
     - security
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.2
+    - NIST800-171_3.5.1
+    - NIST800-53R5_AC-17_6
+    - NIST800-53R5_IA-2
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
     name: fPromptForPassword
@@ -175,6 +218,8 @@
     - rule_18.10.56.3.9.2
     - remote_desktop_session_host
     - security
+    - NIST800-171_3.3.1
+    - NIST800-53R5_SC-7_8
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
     name: fEncryptRPCTraffic
@@ -190,6 +235,14 @@
     - rule_18.10.56.3.9.3
     - remote_desktop_session_host
     - security
+    - NIST800-171_3.1.13
+    - NIST800-171_3.13.8
+    - NIST800-171_3.5.2
+    - NIST800-53R5_AC-17_2
+    - NIST800-53R5_IA-5
+    - NIST800-53R5_IA-5_1
+    - NIST800-53R5_SC-8
+    - NIST800-53R5_SC-8_1
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
     name: SecurityLayer
@@ -205,6 +258,14 @@
     - rule_18.10.56.3.9.4
     - remote_desktop_session_host
     - security
+    - NIST800-171_3.1.13
+    - NIST800-171_3.13.8
+    - NIST800-171_3.5.2
+    - NIST800-53R5_AC-17_2
+    - NIST800-53R5_IA-5
+    - NIST800-53R5_IA-5_1
+    - NIST800-53R5_SC-8
+    - NIST800-53R5_SC-8_1
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
     name: UserAuthentication
@@ -220,6 +281,14 @@
     - rule_18.10.56.3.9.5
     - remote_desktop_session_host
     - security
+    - NIST800-171_3.1.13
+    - NIST800-171_3.13.8
+    - NIST800-171_3.5.2
+    - NIST800-53R5_AC-17_2
+    - NIST800-53R5_IA-5
+    - NIST800-53R5_IA-5_1
+    - NIST800-53R5_SC-8
+    - NIST800-53R5_SC-8_1
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
     name: MinEncryptionLevel
@@ -235,8 +304,10 @@
     - rule_18.10.56.3.10.1
     - remote_desktop_session_host
     - session_time_limits
+    - NIST800-171_3.1.10
+    - NIST800-53R5_AC-11
   block:
-    - name: "18.10.56.3.10.1 | PATCH | Ensure Set time limit for active but idle Remote Desktop Services sessions is set to Enabled 15 minutes or less, but not Never (0) | Set Variable."
+    - name: "18.10.56.3.10.1 | PATCH | Ensure Set time limit for active but idle Remote Desktop Services sessions is set to Enabled 15 minutes or less, but not Never (0) | Set Variable"
       when:
         - win11cis_idle_rdp_session_disconnect_time <= 900000
         - win11cis_idle_rdp_session_disconnect_time != 0
@@ -246,14 +317,14 @@
         data: "{{ win11cis_idle_rdp_session_disconnect_time }}"
         type: dword
 
-    - name: "18.10.56.3.10.1 | AUDIT | Ensure Set time limit for active but idle Remote Desktop Services sessions is set to Enabled 15 minutes or less, but not Never (0) | Warning Check For Variable Standards."
+    - name: "18.10.56.3.10.1 | AUDIT | Ensure Set time limit for active but idle Remote Desktop Services sessions is set to Enabled 15 minutes or less, but not Never (0) | Warning Check For Variable Standards"
       when: win11cis_idle_rdp_session_disconnect_time == 0 or win11cis_idle_rdp_session_disconnect_time > 900000
       ansible.builtin.debug:
         msg:
           - "Warning!! You have an invalid time set for win11cis_idle_rdp_session_disconnect_time. Please read"
           - "the notes for the variable and make the necessary change to the variable to be in compliance."
 
-    - name: "18.10.56.3.10.1 | AUDIT | Ensure Set time limit for active but idle Remote Desktop Services sessions is set to Enabled 15 minutes or less, but not Never (0) | Warn Count."
+    - name: "18.10.56.3.10.1 | AUDIT | Ensure Set time limit for active but idle Remote Desktop Services sessions is set to Enabled 15 minutes or less, but not Never (0) | Warn Count"
       when: win11cis_idle_rdp_session_disconnect_time == 0 or win11cis_idle_rdp_session_disconnect_time > 900000
       ansible.builtin.import_tasks:
         file: warning_facts.yml
@@ -269,6 +340,8 @@
     - rule_18.10.56.3.10.2
     - remote_desktop_session_host
     - session_time_limits
+    - NIST800-171_3.1.10
+    - NIST800-53R5_AC-11
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
     name: MaxDisconnectionTime
@@ -284,6 +357,8 @@
     - rule_18.10.56.3.11.1
     - remote_desktop_session_host
     - temporary_folders
+    - NIST800-53R5_AU-11
+    - NIST800-53R5_SI-12
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows Nt\Terminal Services
     name: DeleteTempDirsOnExit

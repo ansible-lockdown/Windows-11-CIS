@@ -8,6 +8,7 @@
     - automated
     - rule_18.9.4.1
     - encryption_oracle
+    - NIST800-53R5_SI-16
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\CredSSP\Parameters
     name: AllowEncryptionOracle
@@ -22,6 +23,8 @@
     - automated
     - rule_18.9.4.2
     - remote_host_credentials
+    - NIST800-171_3.5.2
+    - NIST800-53R5_IA-5
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CredentialsDelegation
     name: AllowProtectedCreds

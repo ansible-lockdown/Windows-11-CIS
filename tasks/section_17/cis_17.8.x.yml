@@ -8,8 +8,15 @@
     - automated
     - rule_17.8.1
     - audit_sensitive_privilege
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
   block:
-    - name: "17.8.1 | AUDIT | Ensure Audit Sensitive Privilege Use is set to Success and Failure | Get current audit events."
+    - name: "17.8.1 | AUDIT | Ensure Audit Sensitive Privilege Use is set to Success and Failure | Get current audit events"
       ansible.windows.win_shell: AuditPol /get /subcategory:"Sensitive Privilege Use" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
       changed_when: false
       check_mode: false

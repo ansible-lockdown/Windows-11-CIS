@@ -8,7 +8,7 @@
     - automated
     - rule_18.10.49.1
   block:
-    - name: "18.10.49.1 | PATCH | Ensure 'Enable news and interests on the taskbar' is set to 'Disabled'. | Set Value."
+    - name: "18.10.49.1 | PATCH | Ensure 'Enable news and interests on the taskbar' is set to 'Disabled' | Set Value"
       ansible.windows.win_regedit:
         path: HKLM:\Software\Policies\Microsoft\Windows\Windows Feeds
         name: EnableFeeds
@@ -19,7 +19,7 @@
         - "'Attempted to perform an unauthorized operation' not in discovered_18_10_49_1_write.msg | default('')"
       register: discovered_18_10_49_1_write
 
-    - name: "18.10.49.1 | AUDIT | Ensure 'Enable news and interests on the taskbar' is set to 'Disabled'. | Warning The Operating System Blocked The Write."
+    - name: "18.10.49.1 | AUDIT | Ensure 'Enable news and interests on the taskbar' is set to 'Disabled' | Warning The Operating System Blocked The Write"
       when: "'Attempted to perform an unauthorized operation' in discovered_18_10_49_1_write.msg | default('')"
       ansible.builtin.debug:
         msg:
@@ -28,7 +28,7 @@
           - "this value from every process outside its own allow list, elevated or not, so it can only"
           - "be set through Group Policy. Apply it from a GPO or accept the control as not applicable."
 
-    - name: "18.10.49.1 | AUDIT | Ensure 'Enable news and interests on the taskbar' is set to 'Disabled'. | Warn Count."
+    - name: "18.10.49.1 | AUDIT | Ensure 'Enable news and interests on the taskbar' is set to 'Disabled' | Warn Count"
       when: "'Attempted to perform an unauthorized operation' in discovered_18_10_49_1_write.msg | default('')"
       ansible.builtin.import_tasks:
         file: warning_facts.yml

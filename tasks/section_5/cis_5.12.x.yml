@@ -1,6 +1,6 @@
 ---
 
-- name: "5.12 | PATCH | Ensure 'OpenSSH SSH Server (sshd)' is set to 'Disabled' or 'Not Installed'."
+- name: "5.12 | PATCH | Ensure 'OpenSSH SSH Server (sshd)' is set to 'Disabled' or 'Not Installed'"
   when:
     - win11cis_rule_5_12
     - not win_skip_for_test
@@ -12,12 +12,12 @@
     - rule_5.12
     - sshd
   block:
-    - name: "5.12 | AUDIT | Ensure 'OpenSSH SSH Server (sshd)' is set to 'Disabled' or 'Not Installed' | Check to see if sshd service exists."
+    - name: "5.12 | AUDIT | Ensure 'OpenSSH SSH Server (sshd)' is set to 'Disabled' or 'Not Installed' | Check to see if sshd service exists"
       ansible.windows.win_service_info:
         name: sshd
       register: discovered_5_12_sshd_service_info
 
-    - name: "5.12 | PATCH | Ensure 'OpenSSH SSH Server (sshd)' is set to 'Disabled' or 'Not Installed' | Disable sshd service."
+    - name: "5.12 | PATCH | Ensure 'OpenSSH SSH Server (sshd)' is set to 'Disabled' or 'Not Installed' | Disable sshd service"
       when:
         - discovered_5_12_sshd_service_info.exists
         - not win11cis_uninstall_sshd_service
@@ -26,7 +26,7 @@
         start_mode: disabled
         state: stopped
 
-    - name: "5.12 | PATCH | Ensure 'OpenSSH SSH Server (sshd)' is set to 'Disabled' or 'Not Installed' | Uninstall sshd service."
+    - name: "5.12 | PATCH | Ensure 'OpenSSH SSH Server (sshd)' is set to 'Disabled' or 'Not Installed' | Uninstall sshd service"
       when:
         - discovered_5_12_sshd_service_info.exists
         - win11cis_uninstall_sshd_service
@@ -34,7 +34,7 @@
         name: sshd
         state: absent
 
-- name: "5.13 | PATCH | Ensure 'Peer Name Resolution Protocol (PNRPsvc)' is set to 'Disabled'."
+- name: "5.13 | PATCH | Ensure 'Peer Name Resolution Protocol (PNRPsvc)' is set to 'Disabled'"
   when: win11cis_rule_5_13
   tags:
     - level2-high-security-sensitive-data-environment
@@ -43,19 +43,19 @@
     - rule_5.13
     - pnrpsvc
   block:
-    - name: "5.13 | AUDIT | Ensure 'Peer Name Resolution Protocol (PNRPsvc)' is set to 'Disabled' | Check to see if pnrpsvc service exists."
+    - name: "5.13 | AUDIT | Ensure 'Peer Name Resolution Protocol (PNRPsvc)' is set to 'Disabled' | Check to see if pnrpsvc service exists"
       ansible.windows.win_service_info:
         name: PNRPsvc
       register: discovered_5_13_pnrpsvc_service_info
 
-    - name: "5.13 | PATCH | Ensure 'Peer Name Resolution Protocol (PNRPsvc)' is set to 'Disabled' | Disable pnrpsvc service."
+    - name: "5.13 | PATCH | Ensure 'Peer Name Resolution Protocol (PNRPsvc)' is set to 'Disabled' | Disable pnrpsvc service"
       when: discovered_5_13_pnrpsvc_service_info.exists
       ansible.windows.win_service:
         name: PNRPsvc
         start_mode: disabled
         state: stopped
 
-- name: "5.14 | PATCH | Ensure 'Peer Networking Grouping (p2psvc)' is set to 'Disabled'."
+- name: "5.14 | PATCH | Ensure 'Peer Networking Grouping (p2psvc)' is set to 'Disabled'"
   when: win11cis_rule_5_14
   tags:
     - level2-high-security-sensitive-data-environment
@@ -64,19 +64,19 @@
     - rule_5.14
     - p2psvc
   block:
-    - name: "5.14 | AUDIT | Ensure 'Peer Networking Grouping (p2psvc)' is set to 'Disabled' | Check to see if p2psvc service exists."
+    - name: "5.14 | AUDIT | Ensure 'Peer Networking Grouping (p2psvc)' is set to 'Disabled' | Check to see if p2psvc service exists"
       ansible.windows.win_service_info:
         name: p2psvc
       register: discovered_5_14_p2psvc_service_info
 
-    - name: "5.14 | PATCH | Ensure 'Peer Networking Grouping (p2psvc)' is set to 'Disabled' | Disable p2psvc service."
+    - name: "5.14 | PATCH | Ensure 'Peer Networking Grouping (p2psvc)' is set to 'Disabled' | Disable p2psvc service"
       when: discovered_5_14_p2psvc_service_info.exists
       ansible.windows.win_service:
         name: p2psvc
         start_mode: disabled
         state: stopped
 
-- name: "5.15 | PATCH | Ensure 'Peer Networking Identity Manager (p2pimsvc)' is set to 'Disabled'."
+- name: "5.15 | PATCH | Ensure 'Peer Networking Identity Manager (p2pimsvc)' is set to 'Disabled'"
   when: win11cis_rule_5_15
   tags:
     - level2-high-security-sensitive-data-environment
@@ -85,19 +85,19 @@
     - rule_5.15
     - p2pimsvc
   block:
-    - name: "5.15 | AUDIT | Ensure 'Peer Networking Identity Manager (p2pimsvc)' is set to 'Disabled | Check to see if p2pimsvc service exists."
+    - name: "5.15 | AUDIT | Ensure 'Peer Networking Identity Manager (p2pimsvc)' is set to 'Disabled | Check to see if p2pimsvc service exists"
       ansible.windows.win_service_info:
         name: p2pimsvc
       register: discovered_5_15_p2pimsvc_service_info
 
-    - name: "5.15 | PATCH | Ensure 'Peer Networking Identity Manager (p2pimsvc)' is set to 'Disabled | Disable p2pimsvc service."
+    - name: "5.15 | PATCH | Ensure 'Peer Networking Identity Manager (p2pimsvc)' is set to 'Disabled | Disable p2pimsvc service"
       when: discovered_5_15_p2pimsvc_service_info.exists
       ansible.windows.win_service:
         name: p2pimsvc
         start_mode: disabled
         state: stopped
 
-- name: "5.16 | PATCH | Ensure 'PNRP Machine Name Publication Service (PNRPAutoReg)' is set to 'Disabled'."
+- name: "5.16 | PATCH | Ensure 'PNRP Machine Name Publication Service (PNRPAutoReg)' is set to 'Disabled'"
   when: win11cis_rule_5_16
   tags:
     - level2-high-security-sensitive-data-environment
@@ -106,19 +106,19 @@
     - rule_5.16
     - pnrpautoreg
   block:
-    - name: "5.16 | AUDIT | Ensure 'PNRP Machine Name Publication Service (PNRPAutoReg)' is set to 'Disabled' \ Check to see if PNRPAutoReg service exists."
+    - name: "5.16 | AUDIT | Ensure 'PNRP Machine Name Publication Service (PNRPAutoReg)' is set to 'Disabled' \ Check to see if PNRPAutoReg service exists"
       ansible.windows.win_service_info:
         name: PNRPAutoReg
       register: discovered_5_16_pnrpautoreg_service_info
 
-    - name: "5.16 | PATCH | Ensure 'PNRP Machine Name Publication Service (PNRPAutoReg)' is set to 'Disabled' | Disable PNRPAutoReg service."
+    - name: "5.16 | PATCH | Ensure 'PNRP Machine Name Publication Service (PNRPAutoReg)' is set to 'Disabled' | Disable PNRPAutoReg service"
       when: discovered_5_16_pnrpautoreg_service_info.exists
       ansible.windows.win_service:
         name: PNRPAutoReg
         start_mode: disabled
         state: stopped
 
-- name: "5.17 | PATCH | Ensure 'Print Spooler (Spooler)' is set to 'Disabled'."
+- name: "5.17 | PATCH | Ensure 'Print Spooler (Spooler)' is set to 'Disabled'"
   when: win11cis_rule_5_17
   tags:
     - level2-high-security-sensitive-data-environment
@@ -127,19 +127,19 @@
     - rule_5.17
     - spooler
   block:
-    - name: "5.17 | AUDIT | Ensure 'Print Spooler (Spooler)' is set to 'Disabled' | Check to see if Spooler service exists."
+    - name: "5.17 | AUDIT | Ensure 'Print Spooler (Spooler)' is set to 'Disabled' | Check to see if Spooler service exists"
       ansible.windows.win_service_info:
         name: Spooler
       register: discovered_5_17_spooler_service_info
 
-    - name: "5.17 | PATCH | Ensure 'Print Spooler (Spooler)' is set to 'Disabled' | Disable Spooler service."
+    - name: "5.17 | PATCH | Ensure 'Print Spooler (Spooler)' is set to 'Disabled' | Disable Spooler service"
       when: discovered_5_17_spooler_service_info.exists
       ansible.windows.win_service:
         name: Spooler
         start_mode: disabled
         state: stopped
 
-- name: "5.18 | PATCH | Ensure 'Problem Reports and Solutions Control Panel Support (wercplsupport)' is set to 'Disabled'."
+- name: "5.18 | PATCH | Ensure 'Problem Reports and Solutions Control Panel Support (wercplsupport)' is set to 'Disabled'"
   when: win11cis_rule_5_18
   tags:
     - level2-high-security-sensitive-data-environment
@@ -148,19 +148,19 @@
     - rule_5.18
     - wercplsupport
   block:
-    - name: "5.18 | AUDIT | Ensure 'Problem Reports and Solutions Control Panel Support (wercplsupport)' is set to 'Disabled' | Check to see if wercplsupport service exists."
+    - name: "5.18 | AUDIT | Ensure 'Problem Reports and Solutions Control Panel Support (wercplsupport)' is set to 'Disabled' | Check to see if wercplsupport service exists"
       ansible.windows.win_service_info:
         name: wercplsupport
       register: discovered_5_18_wercplsupport_service_info
 
-    - name: "5.18 | PATCH | Ensure 'Problem Reports and Solutions Control Panel Support (wercplsupport)' is set to 'Disabled' | Disable wercplsupport service."
+    - name: "5.18 | PATCH | Ensure 'Problem Reports and Solutions Control Panel Support (wercplsupport)' is set to 'Disabled' | Disable wercplsupport service"
       when: discovered_5_18_wercplsupport_service_info.exists
       ansible.windows.win_service:
         name: wercplsupport
         start_mode: disabled
         state: stopped
 
-- name: "5.19 | PATCH | Ensure 'Remote Access Auto Connection Manager (RasAuto)' is set to 'Disabled'."
+- name: "5.19 | PATCH | Ensure 'Remote Access Auto Connection Manager (RasAuto)' is set to 'Disabled'"
   when: win11cis_rule_5_19
   tags:
     - level2-high-security-sensitive-data-environment
@@ -169,19 +169,19 @@
     - rule_5.19
     - rasauto
   block:
-    - name: "5.19 | AUDIT | Ensure 'Remote Access Auto Connection Manager (RasAuto)' is set to 'Disabled' | Check to see if RasAuto service exists."
+    - name: "5.19 | AUDIT | Ensure 'Remote Access Auto Connection Manager (RasAuto)' is set to 'Disabled' | Check to see if RasAuto service exists"
       ansible.windows.win_service_info:
         name: RasAuto
       register: discovered_5_19_rasauto_service_info
 
-    - name: "5.19 | PATCH | Ensure 'Remote Access Auto Connection Manager (RasAuto)' is set to 'Disabled' | Disable RasAuto service."
+    - name: "5.19 | PATCH | Ensure 'Remote Access Auto Connection Manager (RasAuto)' is set to 'Disabled' | Disable RasAuto service"
       when: discovered_5_19_rasauto_service_info.exists
       ansible.windows.win_service:
         name: RasAuto
         start_mode: disabled
         state: stopped
 
-- name: "5.20 | PATCH | Ensure 'Remote Desktop Configuration (SessionEnv)' is set to 'Disabled'."
+- name: "5.20 | PATCH | Ensure 'Remote Desktop Configuration (SessionEnv)' is set to 'Disabled'"
   when: win11cis_rule_5_20
   tags:
     - level2-high-security-sensitive-data-environment
@@ -190,19 +190,19 @@
     - rule_5.20
     - sessionenv
   block:
-    - name: "5.20 | AUDIT | Ensure 'Remote Desktop Configuration (SessionEnv)' is set to 'Disabled' | Check to see if SessionEnv service exists."
+    - name: "5.20 | AUDIT | Ensure 'Remote Desktop Configuration (SessionEnv)' is set to 'Disabled' | Check to see if SessionEnv service exists"
       ansible.windows.win_service_info:
         name: SessionEnv
       register: discovered_5_20_sessionenv_service_info
 
-    - name: "5.20 | PATCH | Ensure 'Remote Desktop Configuration (SessionEnv)' is set to 'Disabled' | Disable SessionEnv service."
+    - name: "5.20 | PATCH | Ensure 'Remote Desktop Configuration (SessionEnv)' is set to 'Disabled' | Disable SessionEnv service"
       when: discovered_5_20_sessionenv_service_info.exists
       ansible.windows.win_service:
         name: SessionEnv
         start_mode: disabled
         state: stopped
 
-- name: "5.21 | PATCH | Ensure 'Remote Desktop Services (TermService)' is set to 'Disabled'."
+- name: "5.21 | PATCH | Ensure 'Remote Desktop Services (TermService)' is set to 'Disabled'"
   when:
     - win11cis_rule_5_21
     - not win_skip_for_test
@@ -213,12 +213,12 @@
     - rule_5.21
     - termservice
   block:
-    - name: "5.21 | AUDIT | Ensure 'Remote Desktop Services (TermService)' is set to 'Disabled' | Check to see if TermService service exists."
+    - name: "5.21 | AUDIT | Ensure 'Remote Desktop Services (TermService)' is set to 'Disabled' | Check to see if TermService service exists"
       ansible.windows.win_service_info:
         name: TermService
       register: discovered_5_21_termservice_service_info
 
-    - name: "5.21 | PATCH | Ensure 'Remote Desktop Services (TermService)' is set to 'Disabled' | Disable TermService service."
+    - name: "5.21 | PATCH | Ensure 'Remote Desktop Services (TermService)' is set to 'Disabled' | Disable TermService service"
       when: discovered_5_21_termservice_service_info.exists
       ansible.windows.win_service:
         name: TermService
@@ -226,7 +226,7 @@
         force_dependent_services: true
         state: stopped
 
-- name: "5.22 | PATCH | Ensure 'Remote Desktop Services UserMode Port Redirector (UmRdpService)' is set to 'Disabled'."
+- name: "5.22 | PATCH | Ensure 'Remote Desktop Services UserMode Port Redirector (UmRdpService)' is set to 'Disabled'"
   when: win11cis_rule_5_22
   tags:
     - level2-high-security-sensitive-data-environment
@@ -235,12 +235,12 @@
     - rule_5.22
     - umrdpservice
   block:
-    - name: "5.22 | AUDIT | Ensure 'Remote Desktop Services UserMode Port Redirector (UmRdpService)' is set to 'Disabled' | Check to see if UmRdpService service exists."
+    - name: "5.22 | AUDIT | Ensure 'Remote Desktop Services UserMode Port Redirector (UmRdpService)' is set to 'Disabled' | Check to see if UmRdpService service exists"
       ansible.windows.win_service_info:
         name: UmRdpService
       register: discovered_5_22_umrdpservice_service_info
 
-    - name: "5.22 | PATCH | Ensure 'Remote Desktop Services UserMode Port Redirector (UmRdpService)' is set to 'Disabled' | Disable UmRdpService service."
+    - name: "5.22 | PATCH | Ensure 'Remote Desktop Services UserMode Port Redirector (UmRdpService)' is set to 'Disabled' | Disable UmRdpService service"
       when: discovered_5_22_umrdpservice_service_info.exists
       ansible.windows.win_service:
         name: UmRdpService

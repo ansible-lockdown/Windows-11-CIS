@@ -7,6 +7,13 @@
     - patch
     - automated
     - rule_2.3.2.1
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
   ansible.windows.win_regedit:
     path: HKLM:\System\CurrentControlSet\Control\Lsa
     name: SCENoApplyLegacyAuditPolicy
@@ -20,6 +27,7 @@
     - patch
     - automated
     - rule_2.3.2.2
+    - NIST800-53R5_AU-4
   ansible.windows.win_regedit:
     path: HKLM:\System\CurrentControlSet\Control\Lsa
     name: CrashOnAuditFail

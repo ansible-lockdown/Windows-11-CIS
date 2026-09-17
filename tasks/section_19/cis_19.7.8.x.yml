@@ -8,6 +8,8 @@
     - automated
     - rule_19.7.8.1
     - windows_spotlight
+    - NIST800-171_3.1.10
+    - NIST800-53R5_AC-11
   ansible.windows.win_regedit:
     path: HKU:\{{ item }}\Software\Policies\Microsoft\Windows\CloudContent
     name: ConfigureWindowsSpotlight
@@ -24,6 +26,9 @@
     - automated
     - rule_19.7.8.2
     - third_party_content
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6_b
   ansible.windows.win_regedit:
     path: HKU:\{{ item }}\Software\Policies\Microsoft\Windows\CloudContent
     name: DisableThirdPartySuggestions
@@ -40,6 +45,9 @@
     - automated
     - rule_19.7.8.3
     - diagnostic_data
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_SI-4
   ansible.windows.win_regedit:
     path: HKU:\{{ item }}\Software\Policies\Microsoft\Windows\CloudContent
     name: DisableTailoredExperiencesWithDiagnosticData
@@ -56,6 +64,11 @@
     - automated
     - rule_19.7.8.4
     - windows_spotlight
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
   ansible.windows.win_regedit:
     path: HKU:\{{ item }}\Software\Policies\Microsoft\Windows\CloudContent
     name: DisableWindowsSpotlightFeatures
@@ -72,6 +85,11 @@
     - automated
     - rule_19.7.8.5
     - windows_spotlight
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
   ansible.windows.win_regedit:
     path: HKU:\{{ item }}\SOFTWARE\Policies\Microsoft\Windows\CloudContent
     name: DisableSpotlightCollectionOnDesktop

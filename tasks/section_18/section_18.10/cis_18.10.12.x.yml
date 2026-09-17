@@ -7,6 +7,8 @@
     - patch
     - automated
     - rule_18.10.12.1
+    - NIST800-171_3.1.1
+    - NIST800-53R5_AC-2_1
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent
     name: DisableConsumerAccountStateContent
@@ -20,6 +22,11 @@
     - patch
     - automated
     - rule_18.10.12.2
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent
     name: DisableCloudOptimizedContent
@@ -33,6 +40,11 @@
     - patch
     - automated
     - rule_18.10.12.3
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent
     name: DisableWindowsConsumerFeatures

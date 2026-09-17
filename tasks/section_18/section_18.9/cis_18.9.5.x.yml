@@ -23,7 +23,7 @@
     - rule_18.9.5.2
     - virtualization_based_security
   block:
-    - name: "18.9.5.2 | PATCH | Ensure 'Turn On Virtualization Based Security: Select Platform Security Level' is set to 'Secure Boot' or higher | Set Variable."
+    - name: "18.9.5.2 | PATCH | Ensure 'Turn On Virtualization Based Security: Select Platform Security Level' is set to 'Secure Boot' or higher | Set Variable"
       when: win11cis_virtualization_based_security_level == 1 or win11cis_virtualization_based_security_level == 3
       ansible.windows.win_regedit:
         path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard
@@ -31,7 +31,7 @@
         data: "{{ win11cis_virtualization_based_security_level }}"
         type: dword
 
-    - name: "18.9.5.2 | AUDIT | Ensure 'Turn On Virtualization Based Security: Select Platform Security Level' is set to 'Secure Boot' or higher | Warning Check For Variable Standards."
+    - name: "18.9.5.2 | AUDIT | Ensure 'Turn On Virtualization Based Security: Select Platform Security Level' is set to 'Secure Boot' or higher | Warning Check For Variable Standards"
       when:
         - win11cis_virtualization_based_security_level != 1
         - win11cis_virtualization_based_security_level != 3
@@ -40,7 +40,7 @@
           - "Warning!! You have an invalid setting for win11cis_virtualization_based_security_level. Please read"
           - "the notes for the variable and make the necessary change to the variable to be in compliance."
 
-    - name: "18.9.5.2 | AUDIT | Ensure 'Turn On Virtualization Based Security: Select Platform Security Level' is set to 'Secure Boot' or higher | Warn Count."
+    - name: "18.9.5.2 | AUDIT | Ensure 'Turn On Virtualization Based Security: Select Platform Security Level' is set to 'Secure Boot' or higher | Warn Count"
       when:
         - win11cis_virtualization_based_security_level != 1
         - win11cis_virtualization_based_security_level != 3

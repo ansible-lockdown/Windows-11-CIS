@@ -9,7 +9,7 @@
     - rule_18.6.4.1
     - dns_over_https
   block:
-    - name: "18.6.4.1 | PATCH | Ensure Configure DNS over HTTPS (DoH) name resolution is set to Enabled: Allow DoH or higher. | Set Variable."
+    - name: "18.6.4.1 | PATCH | Ensure Configure DNS over HTTPS (DoH) name resolution is set to Enabled: Allow DoH or higher | Set Variable"
       when: win11cis_doh_policy == 2 or win11cis_doh_policy == 3
       ansible.windows.win_regedit:
         path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient
@@ -17,7 +17,7 @@
         data: "{{ win11cis_doh_policy }}"
         type: dword
 
-    - name: "18.6.4.1 | AUDIT | Ensure Configure DNS over HTTPS (DoH) name resolution is set to Enabled: Allow DoH or higher. | Warning Check For Variable Standards."
+    - name: "18.6.4.1 | AUDIT | Ensure Configure DNS over HTTPS (DoH) name resolution is set to Enabled: Allow DoH or higher | Warning Check For Variable Standards"
       when:
         - win11cis_doh_policy != 2
         - win11cis_doh_policy != 3
@@ -26,7 +26,7 @@
           - "Warning!! You have an invalid setting for win11cis_doh_policy. Please read"
           - "the notes for the variable and make the necessary change to the variable to be in compliance."
 
-    - name: "18.6.4.1 | AUDIT | Ensure Configure DNS over HTTPS (DoH) name resolution is set to Enabled: Allow DoH or higher. | Warn Count."
+    - name: "18.6.4.1 | AUDIT | Ensure Configure DNS over HTTPS (DoH) name resolution is set to Enabled: Allow DoH or higher | Warn Count"
       when:
         - win11cis_doh_policy != 2
         - win11cis_doh_policy != 3
@@ -45,8 +45,13 @@
     - automated
     - rule_18.6.4.2
     - netbios
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
   block:
-    - name: "18.6.4.2 | PATCH | Ensure 'Configure NetBIOS settings' is set to 'Enabled: Disable NetBIOS name resolution on public networks'. | Set Variable."
+    - name: "18.6.4.2 | PATCH | Ensure 'Configure NetBIOS settings' is set to 'Enabled: Disable NetBIOS name resolution on public networks' | Set Variable"
       when: win11cis_enable_netbios_policy == 2 or win11cis_enable_netbios_policy == 0
       ansible.windows.win_regedit:
         path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient
@@ -54,7 +59,7 @@
         data: "{{ win11cis_enable_netbios_policy }}"
         type: dword
 
-    - name: "18.6.4.2 | AUDIT | Ensure 'Configure NetBIOS settings' is set to 'Enabled: Disable NetBIOS name resolution on public networks'. | Warning Check For Variable Standards."
+    - name: "18.6.4.2 | AUDIT | Ensure 'Configure NetBIOS settings' is set to 'Enabled: Disable NetBIOS name resolution on public networks' | Warning Check For Variable Standards"
       when:
         - win11cis_enable_netbios_policy != 2
         - win11cis_enable_netbios_policy != 0
@@ -63,7 +68,7 @@
           - "Warning!! You have an invalid setting for win11cis_enable_netbios_policy. Please read"
           - "the notes for the variable and make the necessary change to the variable to be in compliance."
 
-    - name: "18.6.4.2 | AUDIT | Ensure 'Configure NetBIOS settings' is set to 'Enabled: Disable NetBIOS name resolution on public networks'. | Warn Count."
+    - name: "18.6.4.2 | AUDIT | Ensure 'Configure NetBIOS settings' is set to 'Enabled: Disable NetBIOS name resolution on public networks' | Warn Count"
       when:
         - win11cis_enable_netbios_policy != 2
         - win11cis_enable_netbios_policy != 0
@@ -72,7 +77,7 @@
       vars:
         warn_control_id: '18.6.4.2'
 
-- name: "18.6.4.3 | PATCH | Ensure Turn off multicast name resolution is set to Enabled."
+- name: "18.6.4.3 | PATCH | Ensure Turn off multicast name resolution is set to Enabled"
   when:
     - win11cis_rule_18_6_4_3
     - discovered_domain_joined
@@ -82,6 +87,11 @@
     - automated
     - rule_18.6.4.3
     - multicast
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows NT\DNSClient
     name: EnableMulticast

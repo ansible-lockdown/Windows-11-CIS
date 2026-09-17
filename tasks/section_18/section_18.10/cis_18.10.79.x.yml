@@ -7,6 +7,9 @@
     - patch
     - automated
     - rule_18.10.79.1
+    - NIST800-171_3.14.6
+    - NIST800-171_3.14.7
+    - NIST800-53R5_SI-4
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\WindowsInkWorkspace
     name: AllowSuggestedAppsInWindowsInkWorkspace
@@ -20,8 +23,11 @@
     - patch
     - automated
     - rule_18.10.79.2
+    - NIST800-171_3.14.6
+    - NIST800-171_3.14.7
+    - NIST800-53R5_SI-4
   block:
-    - name: "18.10.79.2 | PATCH | Ensure 'Allow Windows Ink Workspace' is set to 'Enabled: On, but disallow access above lock' OR 'Enabled: Disabled' | Set Variable."
+    - name: "18.10.79.2 | PATCH | Ensure 'Allow Windows Ink Workspace' is set to 'Enabled: On, but disallow access above lock' OR 'Enabled: Disabled' | Set Variable"
       when: win11cis_allow_windows_ink_workspace == 0 or win11cis_allow_windows_ink_workspace == 1
       ansible.windows.win_regedit:
         path: HKLM:\Software\Policies\Microsoft\WindowsInkWorkspace
@@ -29,7 +35,7 @@
         data: "{{ win11cis_allow_windows_ink_workspace }}"
         type: dword
 
-    - name: "18.10.79.2 | AUDIT | Ensure 'Allow Windows Ink Workspace' is set to 'Enabled: On, but disallow access above lock' OR 'Enabled: Disabled' | Warning Check For Variable Standards."
+    - name: "18.10.79.2 | AUDIT | Ensure 'Allow Windows Ink Workspace' is set to 'Enabled: On, but disallow access above lock' OR 'Enabled: Disabled' | Warning Check For Variable Standards"
       when:
         - win11cis_allow_windows_ink_workspace != 0
         - win11cis_allow_windows_ink_workspace != 1
@@ -38,7 +44,7 @@
           - "Warning!! You have an invalid setting for win11cis_allow_windows_ink_workspace. Please read"
           - "the notes for the variable and make the necessary change to the variable to be in compliance."
 
-    - name: "18.10.79.2 | AUDIT | Ensure 'Allow Windows Ink Workspace' is set to 'Enabled: On, but disallow access above lock' OR 'Enabled: Disabled' | Warn Count."
+    - name: "18.10.79.2 | AUDIT | Ensure 'Allow Windows Ink Workspace' is set to 'Enabled: On, but disallow access above lock' OR 'Enabled: Disabled' | Warn Count"
       when:
         - win11cis_allow_windows_ink_workspace != 0
         - win11cis_allow_windows_ink_workspace != 1

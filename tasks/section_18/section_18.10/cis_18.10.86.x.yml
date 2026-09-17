@@ -7,6 +7,9 @@
     - patch
     - automated
     - rule_18.10.86.1
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-53R5_AU-2
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging
     name: EnableScriptBlockLogging
@@ -20,8 +23,11 @@
     - patch
     - automated
     - rule_18.10.86.2
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-53R5_AU-2
   block:
-    - name: "18.10.86.2 | PATCH | Ensure 'Turn on PowerShell Transcription' is set to 'Enabled | Turn on PowerShell Transcription."
+    - name: "18.10.86.2 | PATCH | Ensure 'Turn on PowerShell Transcription' is set to 'Enabled | Turn on PowerShell Transcription"
       ansible.windows.win_regedit:
         path: HKLM:\Software\Policies\Microsoft\Windows\Powershell\Transcription
         name: EnableTranscripting

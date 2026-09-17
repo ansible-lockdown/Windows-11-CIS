@@ -8,6 +8,8 @@
     - automated
     - rule_19.7.42.1
     - elevated_privileges
+    - NIST800-171_3.1.1
+    - NIST800-53R5_AC-2_9
   ansible.windows.win_regedit:
     path: HKU:\{{ item }}\Software\Policies\Microsoft\Windows\Installer
     name: AlwaysInstallElevated

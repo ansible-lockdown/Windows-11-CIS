@@ -8,8 +8,15 @@
     - automated
     - rule_17.6.1
     - detailed_file_share
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
   block:
-    - name: "17.6.1 | AUDIT | Ensure Audit Detailed File Share is set to include Failure | Get current audit events."
+    - name: "17.6.1 | AUDIT | Ensure Audit Detailed File Share is set to include Failure | Get current audit events"
       ansible.windows.win_shell: AuditPol /get /subcategory:"Detailed File Share" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
       changed_when: false
       check_mode: false
@@ -28,8 +35,15 @@
     - automated
     - rule_17.6.2
     - audit_file_share
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
   block:
-    - name: "17.6.2 | AUDIT | Ensure Audit File Share is set to Success and Failure | Get current audit events."
+    - name: "17.6.2 | AUDIT | Ensure Audit File Share is set to Success and Failure | Get current audit events"
       ansible.windows.win_shell: AuditPol /get /subcategory:"File Share" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
       changed_when: false
       check_mode: false
@@ -52,6 +66,13 @@
     - automated
     - rule_17.6.3
     - object_access
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
   ansible.windows.win_audit_policy_system:
     subcategory: Other Object Access Events
     audit_type: success, failure
@@ -64,8 +85,15 @@
     - automated
     - rule_17.6.4
     - audit_removable_storage
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
   block:
-    - name: "17.6.4 | AUDIT | Ensure Audit Removable Storage is set to Success and Failure | Get current audit events."
+    - name: "17.6.4 | AUDIT | Ensure Audit Removable Storage is set to Success and Failure | Get current audit events"
       ansible.windows.win_shell: AuditPol /get /subcategory:"Removable Storage" -r | ConvertFrom-Csv | Select-Object -expand "Inclusion Setting"
       changed_when: false
       check_mode: false
