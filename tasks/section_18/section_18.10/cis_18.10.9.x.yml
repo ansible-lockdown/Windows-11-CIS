@@ -63,7 +63,7 @@
     - fixed_data_drives
     - recovery_password
   block:
-    - name: "18.10.9.1.4 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Password' is set to 'Enabled: Allow 48-digit recovery password' or higher | Set Variable."
+    - name: "18.10.9.1.4 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Password' is set to 'Enabled: Allow 48-digit recovery password' or higher | Set Variable"
       when: win11cis_48_digit_recovery_password_setting == 1 or win11cis_48_digit_recovery_password_setting == 2 # pragma: allowlist secret
       ansible.windows.win_regedit:
         path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
@@ -71,7 +71,7 @@
         data: "{{ win11cis_48_digit_recovery_password_setting }}"
         type: dword
 
-    - name: "18.10.9.1.4 | AUDIT | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Password' is set to 'Enabled: Allow 48-digit recovery password' or higher | Warning Check For Variable Standards."
+    - name: "18.10.9.1.4 | AUDIT | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Password' is set to 'Enabled: Allow 48-digit recovery password' or higher | Warning Check For Variable Standards"
       when:
         - win11cis_48_digit_recovery_password_setting != 1
         - win11cis_48_digit_recovery_password_setting != 2
@@ -80,7 +80,7 @@
           - "Warning!! You have an invalid setting for win11cis_48_digit_recovery_password_setting. Please read"
           - "the notes for the variable and make the necessary change to the variable to be in compliance."
 
-    - name: "18.10.9.1.4 | AUDIT | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Password' is set to 'Enabled: Allow 48-digit recovery password' or higher | Warn Count."
+    - name: "18.10.9.1.4 | AUDIT | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Password' is set to 'Enabled: Allow 48-digit recovery password' or higher | Warn Count"
       when:
         - win11cis_48_digit_recovery_password_setting != 1
         - win11cis_48_digit_recovery_password_setting != 2
@@ -101,7 +101,7 @@
     - fixed_data_drives
     - recovery_key
   block:
-    - name: "18.10.9.1.5 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Key' is set to 'Enabled: Allow 256-bit recovery key' or higher' | Set Variable."
+    - name: "18.10.9.1.5 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Key' is set to 'Enabled: Allow 256-bit recovery key' or higher' | Set Variable"
       when: win11cis_256bit_recovery_key_setting == 1 or win11cis_256bit_recovery_key_setting == 2
       ansible.windows.win_regedit:
         path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
@@ -109,7 +109,7 @@
         data: "{{ win11cis_256bit_recovery_key_setting }}"
         type: dword
 
-    - name: "18.10.9.1.5 | AUDIT | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Key' is set to 'Enabled: Allow 256-bit recovery key' or higher' | Warning Check For Variable Standards."
+    - name: "18.10.9.1.5 | AUDIT | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Key' is set to 'Enabled: Allow 256-bit recovery key' or higher' | Warning Check For Variable Standards"
       when:
         - win11cis_256bit_recovery_key_setting != 1
         - win11cis_256bit_recovery_key_setting != 2
@@ -118,7 +118,7 @@
           - "Warning!! You have an invalid setting for win11cis_256bit_recovery_key_setting. Please read"
           - "the notes for the variable and make the necessary change to the variable to be in compliance."
 
-    - name: "18.10.9.1.5 | AUDIT | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Key' is set to 'Enabled: Allow 256-bit recovery key' or higher' | Warn Count."
+    - name: "18.10.9.1.5 | AUDIT | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Key' is set to 'Enabled: Allow 256-bit recovery key' or higher' | Warn Count"
       when:
         - win11cis_256bit_recovery_key_setting != 1
         - win11cis_256bit_recovery_key_setting != 2

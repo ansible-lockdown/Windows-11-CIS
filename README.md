@@ -226,13 +226,10 @@ as it would on Linux:
 
 **Technical Dependencies:**
 
-- Windows 11 Enterprise 22H2 - Other versions are not supported
-- Running Ansible/Tower setup (this role is tested against Ansible version 2.10.1 and newer)
+- Windows 11 Enterprise 25H2 - Other versions are not supported
 - Python3 Ansible run environment
-- passlib (or python2-passlib, if using python2)
-- python-lxml
+- passlib
 - python-xmltodict
-- python-jmespath
 - pywinrm or pypsrp
 
 Package 'python-xmltodict' is required if you enable the OpenSCAP tool installation and run a report. Packages python(2)-passlib and python-jmespath are required for tasks with custom filters or modules. These are all required on the controller host that executes Ansible.
@@ -302,4 +299,4 @@ Massive thanks to the fantastic community and all its members.
 
 This includes a huge thanks and credit to the original authors and maintainers.
 
-[Windows-11-CIS-Audit]: https://github.com/ansible-lockdown/Windows=11-CIS-Audit
+[Windows-11-CIS-Audit]: https://github.com/ansible-lockdown/Windows-11-CIS-Audit

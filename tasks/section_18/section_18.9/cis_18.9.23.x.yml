@@ -8,6 +8,7 @@
     - automated
     - rule_18.9.23.1
     - certifcates
+    - NIST800-53R5_IA-3_1
   block:
     - name: "18.9.23.1 | PATCH | Ensure Support device authentication using certificate is set to Enabled Automatic | DevicePKInitBehavior"
       ansible.windows.win_regedit:

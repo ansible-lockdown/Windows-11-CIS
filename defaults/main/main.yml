@@ -664,6 +664,14 @@ win11cis_minimum_password_age: 1
 win11cis_minimum_password_length: 14
 
 # 1.2.1
+# ORDERING NOTE: Windows enforces LockoutDuration >= ResetLockoutCount and win_security_policy
+# re-imports the whole secedit ini on every call, so each write is validated against the machine's
+# current pair (see ansible/ansible#62594). On a stock host lockout is disabled and both values
+# read 0, but applying 1.2.2 enables lockout and Windows then auto-populates both to 30 - so a
+# decision taken before 1.2.2 runs is already stale. The reconcile step therefore lives in
+# tasks/section_1/cis_1.2.x.yml between 1.2.2 and 1.2.1, where it re-reads the pair and lowers
+# ResetLockoutCount only when the current value exceeds the target duration, which is the one
+# state in which writing the duration first is rejected.
 # win11cis_account_lockout_duration is the  policy setting determines the length of time that
 # must pass before a locked account is unlocked and a user can try to log on again.
 # NOTE: If the value for this policy setting is configured to 0, locked out accounts will remain locked out

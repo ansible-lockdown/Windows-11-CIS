@@ -8,8 +8,11 @@
     - automated
     - rule_18.10.15.1
     - diagnostics
+    - NIST800-171_3.14.6
+    - NIST800-171_3.14.7
+    - NIST800-53R5_SI-4
   block:
-    - name: "18.10.15.1 | PATCH | Ensure Allow Diagnostic Data is set to Enabled: Diagnostic data off (not recommended) or Enabled: Send required diagnostic data | Set Variable."
+    - name: "18.10.15.1 | PATCH | Ensure Allow Diagnostic Data is set to Enabled: Diagnostic data off (not recommended) or Enabled: Send required diagnostic data | Set Variable"
       when: win11cis_allow_telemetry == 0 or win11cis_allow_telemetry == 1
       ansible.windows.win_regedit:
         path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection
@@ -17,7 +20,7 @@
         data: "{{ win11cis_allow_telemetry }}"
         type: dword
 
-    - name: "18.10.15.1 | AUDIT | Ensure Allow Diagnostic Data is set to Enabled: Diagnostic data off (not recommended) or Enabled: Send required diagnostic data | Warning Check For Variable Standards."
+    - name: "18.10.15.1 | AUDIT | Ensure Allow Diagnostic Data is set to Enabled: Diagnostic data off (not recommended) or Enabled: Send required diagnostic data | Warning Check For Variable Standards"
       when:
         - win11cis_allow_telemetry != 0
         - win11cis_allow_telemetry != 1
@@ -26,7 +29,7 @@
           - "Warning!! You have an invalid setting for win11cis_allow_telemetry. Please read"
           - "the notes for the variable and make the necessary change to the variable to be in compliance."
 
-    - name: "18.10.15.1 | AUDIT | Ensure Allow Diagnostic Data is set to Enabled: Diagnostic data off (not recommended) or Enabled: Send required diagnostic data | Warn Count."
+    - name: "18.10.15.1 | AUDIT | Ensure Allow Diagnostic Data is set to Enabled: Diagnostic data off (not recommended) or Enabled: Send required diagnostic data | Warn Count"
       when:
         - win11cis_allow_telemetry != 0
         - win11cis_allow_telemetry != 1
@@ -43,6 +46,9 @@
     - automated
     - rule_18.10.15.2
     - proxy
+    - NIST800-171_3.14.6
+    - NIST800-171_3.14.7
+    - NIST800-53R5_SI-4
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows\DataCollection
     name: DisableEnterpriseAuthProxy
@@ -57,6 +63,9 @@
     - automated
     - rule_18.10.15.3
     - one_settings
+    - NIST800-171_3.14.6
+    - NIST800-171_3.14.7
+    - NIST800-53R5_SI-4
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection
     name: DisableOneSettingsDownloads
@@ -71,6 +80,9 @@
     - automated
     - rule_18.10.15.4
     - notifications
+    - NIST800-171_3.14.6
+    - NIST800-171_3.14.7
+    - NIST800-53R5_SI-4
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows\Datacollection
     name: DoNotShowFeedbackNotifications
@@ -85,6 +97,13 @@
     - automated
     - rule_18.10.15.5
     - one_settings
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-171_3.3.6
+    - NIST800-53R5_AU-12
+    - NIST800-53R5_AU-3
+    - NIST800-53R5_AU-3_1
+    - NIST800-53R5_AU-7
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection
     name: EnableOneSettingsAuditing
@@ -99,6 +118,11 @@
     - automated
     - rule_18.10.15.6
     - logs
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection
     name: LimitDiagnosticLogCollection
@@ -113,6 +137,9 @@
     - automated
     - rule_18.10.15.7
     - dump_collection
+    - NIST800-171_3.3.1
+    - NIST800-171_3.3.2
+    - NIST800-53R5_AU-2
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection
     name: LimitDumpCollection

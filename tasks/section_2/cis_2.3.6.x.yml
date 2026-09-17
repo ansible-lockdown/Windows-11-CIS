@@ -8,6 +8,14 @@
     - automated
     - rule_2.3.6.1
     - encryption
+    - NIST800-171_3.1.13
+    - NIST800-171_3.13.8
+    - NIST800-171_3.5.2
+    - NIST800-53R5_AC-17_2
+    - NIST800-53R5_IA-5
+    - NIST800-53R5_IA-5_1
+    - NIST800-53R5_SC-8
+    - NIST800-53R5_SC-8_1
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Services\Netlogon\Parameters
     name: RequireSignOrSeal
@@ -22,6 +30,14 @@
     - automated
     - rule_2.3.6.2
     - encryption
+    - NIST800-171_3.1.13
+    - NIST800-171_3.13.8
+    - NIST800-171_3.5.2
+    - NIST800-53R5_AC-17_2
+    - NIST800-53R5_IA-5
+    - NIST800-53R5_IA-5_1
+    - NIST800-53R5_SC-8
+    - NIST800-53R5_SC-8_1
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Services\Netlogon\Parameters
     name: SealSecureChannel
@@ -36,6 +52,14 @@
     - automated
     - rule_2.3.6.3
     - encryption
+    - NIST800-171_3.1.13
+    - NIST800-171_3.13.8
+    - NIST800-171_3.5.2
+    - NIST800-53R5_AC-17_2
+    - NIST800-53R5_IA-5
+    - NIST800-53R5_IA-5_1
+    - NIST800-53R5_SC-8
+    - NIST800-53R5_SC-8_1
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Services\Netlogon\Parameters
     name: SignSecureChannel
@@ -50,6 +74,8 @@
     - automated
     - rule_2.3.6.4
     - password
+    - NIST800-171_3.1.1
+    - NIST800-53R5_AC-2_1
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Services\Netlogon\Parameters
     name: DisablePasswordChange
@@ -64,8 +90,10 @@
     - automated
     - rule_2.3.6.5
     - password
+    - NIST800-171_3.5.2
+    - NIST800-53R5_IA-5_1
   block:
-    - name: "2.3.6.5 | PATCH | Ensure Domain member Maximum machine account password age is set to 30 or fewer days but not 0. | Apply Settings To Registry."
+    - name: "2.3.6.5 | PATCH | Ensure Domain member Maximum machine account password age is set to 30 or fewer days but not 0 | Apply Settings To Registry"
       when:
         - win11cis_domain_member_maximum_password_age <= 30
         - win11cis_domain_member_maximum_password_age > 0
@@ -75,14 +103,14 @@
         data: "{{ win11cis_domain_member_maximum_password_age }}"
         type: dword
 
-    - name: "2.3.6.5 | AUDIT | Ensure Domain member Maximum machine account password age is set to 30 or fewer days but not 0. | Warning Check For Variable Standards."
+    - name: "2.3.6.5 | AUDIT | Ensure Domain member Maximum machine account password age is set to 30 or fewer days but not 0 | Warning Check For Variable Standards"
       when: win11cis_domain_member_maximum_password_age > 30 or win11cis_domain_member_maximum_password_age == 0
       ansible.builtin.debug:
         msg:
           - "Warning!! You have an invalid number of days set for win11cis_domain_member_maximum_password_age. Please read"
           - "the notes for the variable and make the necessary change to the variable to be in compliance."
 
-    - name: "2.3.6.5 | AUDIT | Ensure Domain member Maximum machine account password age is set to 30 or fewer days but not 0. | Warn Count."
+    - name: "2.3.6.5 | AUDIT | Ensure Domain member Maximum machine account password age is set to 30 or fewer days but not 0 | Warn Count"
       when: win11cis_domain_member_maximum_password_age > 30 or win11cis_domain_member_maximum_password_age == 0
       ansible.builtin.import_tasks:
         file: warning_facts.yml
@@ -97,6 +125,14 @@
     - automated
     - rule_2.3.6.6
     - session-key
+    - NIST800-171_3.1.13
+    - NIST800-171_3.13.8
+    - NIST800-171_3.5.2
+    - NIST800-53R5_AC-17_2
+    - NIST800-53R5_IA-5
+    - NIST800-53R5_IA-5_1
+    - NIST800-53R5_SC-8
+    - NIST800-53R5_SC-8_1
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Services\Netlogon\Parameters
     name: RequireStrongKey

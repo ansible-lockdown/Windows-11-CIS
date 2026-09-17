@@ -1,6 +1,6 @@
 ---
 
-- name: "18.9.36.1 | PATCH | Ensure Enable RPC Endpoint Mapper Client Authentication is set to Enabled."
+- name: "18.9.36.1 | PATCH | Ensure Enable RPC Endpoint Mapper Client Authentication is set to Enabled"
   when: win11cis_rule_18_9_36_1
   tags:
     - level1-corporate-enterprise-environment
@@ -14,7 +14,7 @@
     data: 1
     type: dword
 
-- name: "18.9.36.2 | PATCH | Ensure Restrict Unauthenticated RPC clients is set to Enabled Authenticated."
+- name: "18.9.36.2 | PATCH | Ensure Restrict Unauthenticated RPC clients is set to Enabled Authenticated"
   when: win11cis_rule_18_9_36_2
   tags:
     - level1-corporate-enterprise-environment

@@ -1,6 +1,6 @@
 ---
 
-- name: "5.1 | PATCH | Ensure 'Bluetooth Audio Gateway Service (BTAGService)' is set to 'Disabled'."
+- name: "5.1 | PATCH | Ensure 'Bluetooth Audio Gateway Service (BTAGService)' is set to 'Disabled'"
   when: win11cis_rule_5_1
   tags:
     - level2-high-security-sensitive-data-environment
@@ -9,19 +9,19 @@
     - rule_5.1
     - bluetooth
   block:
-    - name: "5.1 | AUDIT | Ensure 'Bluetooth Audio Gateway Service (BTAGService)' is set to 'Disabled' | Check to see if BTAGService service exists."
+    - name: "5.1 | AUDIT | Ensure 'Bluetooth Audio Gateway Service (BTAGService)' is set to 'Disabled' | Check to see if BTAGService service exists"
       ansible.windows.win_service_info:
         name: BTAGService
       register: discovered_5_1_btagservice_service_info
 
-    - name: "5.1 | PATCH | Ensure 'Bluetooth Audio Gateway Service (BTAGService)' is set to 'Disabled' | Disable BTAGService service."
+    - name: "5.1 | PATCH | Ensure 'Bluetooth Audio Gateway Service (BTAGService)' is set to 'Disabled' | Disable BTAGService service"
       when: discovered_5_1_btagservice_service_info.exists
       ansible.windows.win_service:
         name: BTAGService
         start_mode: disabled
         state: stopped
 
-- name: "5.2 | PATCH | Ensure 'Bluetooth Support Service (bthserv) is set to Disabled."
+- name: "5.2 | PATCH | Ensure 'Bluetooth Support Service (bthserv) is set to Disabled"
   when: win11cis_rule_5_2
   tags:
     - level2-high-security-sensitive-data-environment
@@ -30,19 +30,19 @@
     - rule_5.2
     - bluetooth
   block:
-    - name: "5.2 | AUDIT | Ensure 'Bluetooth Support Service (bthserv) is set to Disabled. | Check to see if bthserv service exists."
+    - name: "5.2 | AUDIT | Ensure 'Bluetooth Support Service (bthserv) is set to Disabled | Check to see if bthserv service exists"
       ansible.windows.win_service_info:
         name: bthserv
       register: discovered_5_2_bthserv_service_info
 
-    - name: "5.2 | PATCH | Ensure 'Bluetooth Support Service (bthserv) is set to Disabled. | Disable bthserv service."
+    - name: "5.2 | PATCH | Ensure 'Bluetooth Support Service (bthserv) is set to Disabled | Disable bthserv service"
       when: discovered_5_2_bthserv_service_info.exists
       ansible.windows.win_service:
         name: bthserv
         start_mode: disabled
         state: stopped
 
-- name: "5.3 | PATCH | Ensure 'Computer Browser (Browser)' is set to 'Disabled' or 'Not Installed'."
+- name: "5.3 | PATCH | Ensure 'Computer Browser (Browser)' is set to 'Disabled' or 'Not Installed'"
   when: win11cis_rule_5_3
   tags:
     - level1-corporate-enterprise-environment
@@ -51,12 +51,12 @@
     - rule_5.3
     - browser
   block:
-    - name: "5.3 | AUDIT | Ensure 'Computer Browser (Browser)' is set to 'Disabled' or 'Not Installed' | Check to see if Browser service exists."
+    - name: "5.3 | AUDIT | Ensure 'Computer Browser (Browser)' is set to 'Disabled' or 'Not Installed' | Check to see if Browser service exists"
       ansible.windows.win_reg_stat:
         path: HKLM:\SYSTEM\CurrentControlSet\Services\Browser
       register: discovered_5_3_browser_service_key
 
-    - name: "5.3 | PATCH | Ensure 'Computer Browser (Browser)' is set to 'Disabled' or 'Not Installed' | Disable Browser service."
+    - name: "5.3 | PATCH | Ensure 'Computer Browser (Browser)' is set to 'Disabled' or 'Not Installed' | Disable Browser service"
       when:
         - discovered_5_3_browser_service_key.exists
         - not win11cis_uninstall_computer_browser_service
@@ -65,7 +65,7 @@
         start_mode: disabled
         state: stopped
 
-    - name: "5.3 | PATCH | Ensure 'Computer Browser (Browser)' is set to 'Disabled' or 'Not Installed' | Uninstall Browser service."
+    - name: "5.3 | PATCH | Ensure 'Computer Browser (Browser)' is set to 'Disabled' or 'Not Installed' | Uninstall Browser service"
       when:
         - discovered_5_3_browser_service_key.exists
         - win11cis_uninstall_computer_browser_service
@@ -73,7 +73,7 @@
         name: Browser
         state: absent
 
-- name: "5.4 | PATCH | Ensure 'Downloaded Maps Manager (MapsBroker)' is set to 'Disabled'."
+- name: "5.4 | PATCH | Ensure 'Downloaded Maps Manager (MapsBroker)' is set to 'Disabled'"
   when: win11cis_rule_5_4
   tags:
     - level2-high-security-sensitive-data-environment
@@ -82,19 +82,19 @@
     - rule_5.4
     - maps
   block:
-    - name: "5.4 | AUDIT | Ensure 'Downloaded Maps Manager (MapsBroker)' is set to 'Disabled' | Check to see if MapsBroker service exists."
+    - name: "5.4 | AUDIT | Ensure 'Downloaded Maps Manager (MapsBroker)' is set to 'Disabled' | Check to see if MapsBroker service exists"
       ansible.windows.win_service_info:
         name: MapsBroker
       register: discovered_5_4_mapsbroker_service_info
 
-    - name: "5.4 | PATCH | Ensure 'Downloaded Maps Manager (MapsBroker)' is set to 'Disabled' | Disable MapsBroker service."
+    - name: "5.4 | PATCH | Ensure 'Downloaded Maps Manager (MapsBroker)' is set to 'Disabled' | Disable MapsBroker service"
       when: discovered_5_4_mapsbroker_service_info.exists
       ansible.windows.win_service:
         name: MapsBroker
         start_mode: disabled
         state: stopped
 
-- name: "5.5 | PATCH | Ensure 'Geolocation Service (lfsvc)' is set to 'Disabled'."
+- name: "5.5 | PATCH | Ensure 'Geolocation Service (lfsvc)' is set to 'Disabled'"
   when: win11cis_rule_5_5
   tags:
     - level2-high-security-sensitive-data-environment
@@ -103,19 +103,19 @@
     - rule_5.5
     - geolocation
   block:
-    - name: "5.5 | AUDIT | Ensure 'Geolocation Service (lfsvc)' is set to 'Disabled'. | Check to see if lfsvc service exists."
+    - name: "5.5 | AUDIT | Ensure 'Geolocation Service (lfsvc)' is set to 'Disabled' | Check to see if lfsvc service exists"
       ansible.windows.win_service_info:
         name: lfsvc
       register: discovered_5_5_lfsvc_service_info
 
-    - name: "5.5 | PATCH | Ensure 'Geolocation Service (lfsvc)' is set to 'Disabled'. | Disable lfsvc service."
+    - name: "5.5 | PATCH | Ensure 'Geolocation Service (lfsvc)' is set to 'Disabled' | Disable lfsvc service"
       when: discovered_5_5_lfsvc_service_info.exists
       ansible.windows.win_service:
         name: lfsvc
         start_mode: disabled
         state: stopped
 
-- name: "5.6 | PATCH | Ensure 'IIS Admin Service (IISADMIN)' is set to 'Disabled' or 'Not Installed'."
+- name: "5.6 | PATCH | Ensure 'IIS Admin Service (IISADMIN)' is set to 'Disabled' or 'Not Installed'"
   when: win11cis_rule_5_6
   tags:
     - level1-corporate-enterprise-environment
@@ -124,12 +124,12 @@
     - rule_5.6
     - iisadmin
   block:
-    - name: "5.6 | AUDIT | Ensure 'IIS Admin Service (IISADMIN)' is set to 'Disabled' or 'Not Installed' | Check to see if IISADMIN service exists."
+    - name: "5.6 | AUDIT | Ensure 'IIS Admin Service (IISADMIN)' is set to 'Disabled' or 'Not Installed' | Check to see if IISADMIN service exists"
       ansible.windows.win_service_info:
         name: iisadmin
       register: discovered_5_6_iisadmin_service_info
 
-    - name: "5.6 | PATCH | Ensure 'IIS Admin Service (IISADMIN)' is set to 'Disabled' or 'Not Installed' | Disable IISADMIN service."
+    - name: "5.6 | PATCH | Ensure 'IIS Admin Service (IISADMIN)' is set to 'Disabled' or 'Not Installed' | Disable IISADMIN service"
       when:
         - discovered_5_6_iisadmin_service_info.exists
         - not win11cis_uninstall_iis_admin_service
@@ -138,7 +138,7 @@
         start_mode: disabled
         state: stopped
 
-    - name: "5.6 | PATCH | Ensure 'IIS Admin Service (IISADMIN)' is set to 'Disabled' or 'Not Installed' | Uninstall IISADMIN service."
+    - name: "5.6 | PATCH | Ensure 'IIS Admin Service (IISADMIN)' is set to 'Disabled' or 'Not Installed' | Uninstall IISADMIN service"
       when:
         - discovered_5_6_iisadmin_service_info.exists
         - win11cis_uninstall_iis_admin_service
@@ -146,7 +146,7 @@
         name: iisadmin
         state: absent
 
-- name: "5.7 | PATCH | Ensure 'Infrared monitor service (irmon)' is set to 'Disabled' or 'Not Installed'."
+- name: "5.7 | PATCH | Ensure 'Infrared monitor service (irmon)' is set to 'Disabled' or 'Not Installed'"
   when: win11cis_rule_5_7
   tags:
     - level1-corporate-enterprise-environment
@@ -155,12 +155,12 @@
     - rule_5.7
     - irmon
   block:
-    - name: "5.7 | AUDIT | Ensure 'Infrared monitor service (irmon)' is set to 'Disabled' or 'Not Installed' | Check to see if irmon service exists."
+    - name: "5.7 | AUDIT | Ensure 'Infrared monitor service (irmon)' is set to 'Disabled' or 'Not Installed' | Check to see if irmon service exists"
       ansible.windows.win_service_info:
         name: irmon
       register: discovered_5_7_irmon_service_info
 
-    - name: "5.7 | PATCH | Ensure 'Infrared monitor service (irmon)' is set to 'Disabled' or 'Not Installed' | Disable irmon service."
+    - name: "5.7 | PATCH | Ensure 'Infrared monitor service (irmon)' is set to 'Disabled' or 'Not Installed' | Disable irmon service"
       when:
         - discovered_5_7_irmon_service_info.exists
         - not win11cis_uninstall_irmon_service
@@ -169,7 +169,7 @@
         start_mode: disabled
         state: stopped
 
-    - name: "5.7 | PATCH | Ensure 'Infrared monitor service (irmon)' is set to 'Disabled' or 'Not Installed' | Uninstall irmon service."
+    - name: "5.7 | PATCH | Ensure 'Infrared monitor service (irmon)' is set to 'Disabled' or 'Not Installed' | Uninstall irmon service"
       when:
         - discovered_5_7_irmon_service_info.exists
         - win11cis_uninstall_irmon_service
@@ -177,7 +177,7 @@
         name: irmon
         state: absent
 
-- name: "5.8 | PATCH | Ensure 'Link-Layer Topology Discovery Mapper (lltdsvc)' is set to 'Disabled'."
+- name: "5.8 | PATCH | Ensure 'Link-Layer Topology Discovery Mapper (lltdsvc)' is set to 'Disabled'"
   when: win11cis_rule_5_8
   tags:
     - level2-high-security-sensitive-data-environment
@@ -186,19 +186,19 @@
     - rule_5.8
     - lltdsvc
   block:
-    - name: "5.8 | AUDIT | Ensure 'Link-Layer Topology Discovery Mapper (lltdsvc)' is set to 'Disabled' | Check to see if lltdsvc service exists."
+    - name: "5.8 | AUDIT | Ensure 'Link-Layer Topology Discovery Mapper (lltdsvc)' is set to 'Disabled' | Check to see if lltdsvc service exists"
       ansible.windows.win_service_info:
         name: lltdsvc
       register: discovered_5_8_lltdsvc_service_info
 
-    - name: "5.8 | PATCH | Ensure 'Link-Layer Topology Discovery Mapper (lltdsvc)' is set to 'Disabled' | Disable lltdsvc service."
+    - name: "5.8 | PATCH | Ensure 'Link-Layer Topology Discovery Mapper (lltdsvc)' is set to 'Disabled' | Disable lltdsvc service"
       when: discovered_5_8_lltdsvc_service_info.exists
       ansible.windows.win_service:
         name: lltdsvc
         start_mode: disabled
         state: stopped
 
-- name: "5.9 | PATCH | Ensure 'LxssManager (LxssManager)' is set to 'Disabled' or 'Not Installed'."
+- name: "5.9 | PATCH | Ensure 'LxssManager (LxssManager)' is set to 'Disabled' or 'Not Installed'"
   when: win11cis_rule_5_9
   tags:
     - level1-corporate-enterprise-environment
@@ -207,12 +207,12 @@
     - rule_5.9
     - lxssmanager
   block:
-    - name: "5.9 | AUDIT | Ensure 'LxssManager (LxssManager)' is set to 'Disabled' or 'Not Installed' | Check to see if LxssManager service exists."
+    - name: "5.9 | AUDIT | Ensure 'LxssManager (LxssManager)' is set to 'Disabled' or 'Not Installed' | Check to see if LxssManager service exists"
       ansible.windows.win_service_info:
         name: LxssManager
       register: discovered_5_9_lxssmanager_service_info
 
-    - name: "5.9 | PATCH | Ensure 'LxssManager (LxssManager)' is set to 'Disabled' or 'Not Installed' | Disable LxssManager service."
+    - name: "5.9 | PATCH | Ensure 'LxssManager (LxssManager)' is set to 'Disabled' or 'Not Installed' | Disable LxssManager service"
       when:
         - discovered_5_9_lxssmanager_service_info.exists
         - not win11cis_uninstall_lxssmanager_service
@@ -221,7 +221,7 @@
         start_mode: disabled
         state: stopped
 
-    - name: "5.9 | PATCH | Ensure 'LxssManager (LxssManager)' is set to 'Disabled' or 'Not Installed' | Uninstall LxssManager service."
+    - name: "5.9 | PATCH | Ensure 'LxssManager (LxssManager)' is set to 'Disabled' or 'Not Installed' | Uninstall LxssManager service"
       when:
         - discovered_5_9_lxssmanager_service_info.exists
         - win11cis_uninstall_lxssmanager_service
@@ -229,7 +229,7 @@
         name: LxssManager
         state: absent
 
-- name: "5.10 | PATCH | Ensure 'Microsoft FTP Service (FTPSVC)' is set to 'Disabled' or 'Not Installed'."
+- name: "5.10 | PATCH | Ensure 'Microsoft FTP Service (FTPSVC)' is set to 'Disabled' or 'Not Installed'"
   when: win11cis_rule_5_10
   tags:
     - level1-corporate-enterprise-environment
@@ -238,12 +238,12 @@
     - rule_5.10
     - ftpsvc
   block:
-    - name: "5.10 | AUDIT | Ensure 'Microsoft FTP Service (FTPSVC)' is set to 'Disabled' or 'Not Installed' | Check to see if FTPSVC service exists."
+    - name: "5.10 | AUDIT | Ensure 'Microsoft FTP Service (FTPSVC)' is set to 'Disabled' or 'Not Installed' | Check to see if FTPSVC service exists"
       ansible.windows.win_service_info:
         name: FTPSVC
       register: discovered_5_10_ftpsvc_service_info
 
-    - name: "5.10 | PATCH | Ensure 'Microsoft FTP Service (FTPSVC)' is set to 'Disabled' or 'Not Installed' | Disable FTPSVC service."
+    - name: "5.10 | PATCH | Ensure 'Microsoft FTP Service (FTPSVC)' is set to 'Disabled' or 'Not Installed' | Disable FTPSVC service"
       when:
         - discovered_5_10_ftpsvc_service_info.exists
         - not win11cis_uninstall_ftpsvc_service
@@ -252,7 +252,7 @@
         start_mode: disabled
         state: stopped
 
-    - name: "5.10 | PATCH | Ensure 'Microsoft FTP Service (FTPSVC)' is set to 'Disabled' or 'Not Installed' | Uninstall FTPSVC service."
+    - name: "5.10 | PATCH | Ensure 'Microsoft FTP Service (FTPSVC)' is set to 'Disabled' or 'Not Installed' | Uninstall FTPSVC service"
       when:
         - discovered_5_10_ftpsvc_service_info.exists
         - win11cis_uninstall_ftpsvc_service
@@ -260,7 +260,7 @@
         name: FTPSVC
         state: absent
 
-- name: "5.11 | PATCH | Ensure 'Microsoft iSCSI Initiator Service (MSiSCSI)' is set to 'Disabled'."
+- name: "5.11 | PATCH | Ensure 'Microsoft iSCSI Initiator Service (MSiSCSI)' is set to 'Disabled'"
   when: win11cis_rule_5_11
   tags:
     - level2-high-security-sensitive-data-environment
@@ -269,12 +269,12 @@
     - rule_5.11
     - msiscsi
   block:
-    - name: "5.11 | AUDIT | Ensure 'Microsoft iSCSI Initiator Service (MSiSCSI)' is set to 'Disabled'.| Check to see if MSiSCSI service exists."
+    - name: "5.11 | AUDIT | Ensure 'Microsoft iSCSI Initiator Service (MSiSCSI)' is set to 'Disabled'| Check to see if MSiSCSI service exists"
       ansible.windows.win_service_info:
         name: MSiSCSI
       register: discovered_5_11_msiscsi_service_info
 
-    - name: "5.11 | PATCH | Ensure 'Microsoft iSCSI Initiator Service (MSiSCSI)' is set to 'Disabled'. | Disable MSiSCSI service."
+    - name: "5.11 | PATCH | Ensure 'Microsoft iSCSI Initiator Service (MSiSCSI)' is set to 'Disabled' | Disable MSiSCSI service"
       when:
         - discovered_5_11_msiscsi_service_info.exists
         - not win11cis_uninstall_msiscsi_service
@@ -283,7 +283,7 @@
         start_mode: disabled
         state: stopped
 
-    - name: "5.11 | PATCH | Ensure 'Microsoft iSCSI Initiator Service (MSiSCSI)' is set to 'Disabled'. | Uninstall MSiSCSI service."
+    - name: "5.11 | PATCH | Ensure 'Microsoft iSCSI Initiator Service (MSiSCSI)' is set to 'Disabled' | Uninstall MSiSCSI service"
       when:
         - discovered_5_11_msiscsi_service_info.exists
         - win11cis_uninstall_msiscsi_service

@@ -20,6 +20,8 @@
     - patch
     - automated
     - rule_18.10.81.2
+    - NIST800-171_3.1.10
+    - NIST800-53R5_AC-11
   ansible.windows.win_regedit:
     path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System
     name: DisableAutomaticRestartSignOn

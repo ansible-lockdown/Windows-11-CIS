@@ -1,18 +1,28 @@
 ---
 
-- name: "2.2.1 | PATCH | Ensure Access Credential Manager as a trusted caller is set to No One."
+- name: "2.2.1 | PATCH | Ensure Access Credential Manager as a trusted caller is set to No One"
   when: win11cis_rule_2_2_1
   tags:
     - level1-corporate-enterprise-environment
     - patch
     - automated
     - rule_2.2.1
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeTrustedCredManAccessPrivilege
     users: []
     action: set
 
-- name: "2.2.2 | PATCH | Ensure Access this computer from the network is set to Administrators, Remote Desktop Users."
+- name: "2.2.2 | PATCH | Ensure Access this computer from the network is set to Administrators, Remote Desktop Users"
   when: win11cis_rule_2_2_2
   tags:
     - level1-corporate-enterprise-environment
@@ -26,25 +36,45 @@
       - Remote Desktop Users
     action: set
 
-- name: "2.2.3 | PATCH | Ensure Act as part of the operating system is set to No One."
+- name: "2.2.3 | PATCH | Ensure Act as part of the operating system is set to No One"
   when: win11cis_rule_2_2_3
   tags:
     - level1-corporate-enterprise-environment
     - patch
     - automated
     - rule_2.2.3
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeTcbPrivilege
     users: []
     action: set
 
-- name: "2.2.4 | PATCH | Ensure Adjust memory quotas for a process is set to Administrators, LOCAL SERVICE, NETWORK SERVICE."
+- name: "2.2.4 | PATCH | Ensure Adjust memory quotas for a process is set to Administrators, LOCAL SERVICE, NETWORK SERVICE"
   when: win11cis_rule_2_2_4
   tags:
     - level1-corporate-enterprise-environment
     - patch
     - automated
     - rule_2.2.4
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeIncreaseQuotaPrivilege
     users:
@@ -53,7 +83,7 @@
       - Network Service
     action: set
 
-- name: "2.2.5 | PATCH | Ensure Allow log on locally is set to Administrators, Users."
+- name: "2.2.5 | PATCH | Ensure Allow log on locally is set to Administrators, Users"
   when: win11cis_rule_2_2_5
   tags:
     - level1-corporate-enterprise-environment
@@ -67,7 +97,7 @@
       - Users
     action: set
 
-- name: "2.2.6 | PATCH | Ensure Allow log on through Remote Desktop Services is set to Administrators, Remote Desktop Users."
+- name: "2.2.6 | PATCH | Ensure Allow log on through Remote Desktop Services is set to Administrators, Remote Desktop Users"
   when: win11cis_rule_2_2_6
   tags:
     - level1-corporate-enterprise-environment
@@ -81,26 +111,46 @@
       - Remote Desktop Users
     action: set
 
-- name: "2.2.7 | PATCH | Ensure Back up files and directories is set to Administrators."
+- name: "2.2.7 | PATCH | Ensure Back up files and directories is set to Administrators"
   when: win11cis_rule_2_2_7
   tags:
     - level1-corporate-enterprise-environment
     - patch
     - automated
     - rule_2.2.7
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeBackupPrivilege
     users:
       - Administrators
     action: set
 
-- name: "2.2.8 | PATCH | Ensure Change the system time is set to Administrators, LOCAL SERVICE."
+- name: "2.2.8 | PATCH | Ensure Change the system time is set to Administrators, LOCAL SERVICE"
   when: win11cis_rule_2_2_8
   tags:
     - level1-corporate-enterprise-environment
     - patch
     - automated
     - rule_2.2.8
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeSystemTimePrivilege
     users:
@@ -108,7 +158,7 @@
       - Local Service
     action: set
 
-- name: "2.2.9 | PATCH | Ensure Change the time zone is set to Administrators, LOCAL SERVICE, Users."
+- name: "2.2.9 | PATCH | Ensure Change the time zone is set to Administrators, LOCAL SERVICE, Users"
   when: win11cis_rule_2_2_9
   tags:
     - level1-corporate-enterprise-environment
@@ -123,38 +173,68 @@
       - Users
     action: set
 
-- name: "2.2.10 | PATCH | Ensure Create a pagefile is set to Administrators."
+- name: "2.2.10 | PATCH | Ensure Create a pagefile is set to Administrators"
   when: win11cis_rule_2_2_10
   tags:
     - level1-corporate-enterprise-environment
     - patch
     - automated
     - rule_2.2.10
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeCreatePagefilePrivilege
     users:
       - Administrators
     action: set
 
-- name: "2.2.11 | PATCH | Ensure Create a token object is set to No One."
+- name: "2.2.11 | PATCH | Ensure Create a token object is set to No One"
   when: win11cis_rule_2_2_11
   tags:
     - level1-corporate-enterprise-environment
     - patch
     - automated
     - rule_2.2.11
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeCreateTokenPrivilege
     users: "{{ win11cis_secreatetokenprivilege }}"
     action: set
 
-- name: "2.2.12 | PATCH | Ensure Create global objects is set to Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE."
+- name: "2.2.12 | PATCH | Ensure Create global objects is set to Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE"
   when: win11cis_rule_2_2_12
   tags:
     - level1-corporate-enterprise-environment
     - patch
     - automated
     - rule_2.2.12
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeCreateGlobalPrivilege
     users:
@@ -164,19 +244,29 @@
       - Service
     action: set
 
-- name: "2.2.13 | PATCH | Ensure Create permanent shared objects is set to No One."
+- name: "2.2.13 | PATCH | Ensure Create permanent shared objects is set to No One"
   when: win11cis_rule_2_2_13
   tags:
     - level1-corporate-enterprise-environment
     - patch
     - automated
     - rule_2.2.13
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeCreatePermanentPrivilege
     users: []
     action: set
 
-- name: "2.2.14 | PATCH | Configure Create symbolic links."
+- name: "2.2.14 | PATCH | Configure Create symbolic links"
   when: win11cis_rule_2_2_14
   tags:
     - level1-corporate-enterprise-environment
@@ -184,7 +274,7 @@
     - automated
     - rule_2.2.14
   block:
-    - name: "2.2.14 | PATCH | Configure Create symbolic links. | No Hyper-V Installed."
+    - name: "2.2.14 | PATCH | Configure Create symbolic links | No Hyper-V Installed"
       when: "'Enabled' not in prelim_hyper_v_installed.stdout"
       ansible.windows.win_user_right:
         name: SeCreateSymbolicLinkPrivilege
@@ -192,7 +282,7 @@
           - Administrators
         action: set
 
-    - name: "2.2.14 | PATCH | Configure Create symbolic links. | Hyper-V Installed."
+    - name: "2.2.14 | PATCH | Configure Create symbolic links | Hyper-V Installed"
       when: "'Enabled' in prelim_hyper_v_installed.stdout"
       ansible.windows.win_user_right:
         name: SeCreateSymbolicLinkPrivilege
@@ -201,13 +291,23 @@
           - NT VIRTUAL MACHINE\Virtual Machines
         action: set
 
-- name: "2.2.15 | PATCH | Ensure Debug programs is set to Administrators."
+- name: "2.2.15 | PATCH | Ensure Debug programs is set to Administrators"
   when: win11cis_rule_2_2_15
   tags:
     - level1-corporate-enterprise-environment
     - patch
     - automated
     - rule_2.2.15
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeDebugPrivilege
     users:
@@ -216,7 +316,7 @@
 
 # When testing using WinRm and local admin account we have found this breaks connection to the box. That is
 # why we are skipping during testing.
-- name: "2.2.16 | PATCH | Ensure Deny access to this computer from the network to include Guests, Local account."
+- name: "2.2.16 | PATCH | Ensure Deny access to this computer from the network to include Guests, Local account"
   when:
     - win11cis_rule_2_2_16
     - not win_skip_for_test
@@ -232,46 +332,76 @@
       - Local account
     action: add
 
-- name: "2.2.17 | PATCH | Ensure Deny log on as a batch job to include Guests."
+- name: "2.2.17 | PATCH | Ensure Deny log on as a batch job to include Guests"
   when: win11cis_rule_2_2_17
   tags:
     - level1-corporate-enterprise-environment
     - patch
     - automated
     - rule_2.2.17
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeDenyBatchLogonRight
     users:
       - Guests
     action: add
 
-- name: "2.2.18 | PATCH | Ensure Deny log on as a service to include Guests."
+- name: "2.2.18 | PATCH | Ensure Deny log on as a service to include Guests"
   when: win11cis_rule_2_2_18
   tags:
     - level1-corporate-enterprise-environment
     - patch
     - automated
     - rule_2.2.18
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeDenyServiceLogonRight
     users:
       - Guests
     action: add
 
-- name: "2.2.19 | PATCH | Ensure Deny log on locally to include Guests."
+- name: "2.2.19 | PATCH | Ensure Deny log on locally to include Guests"
   when: win11cis_rule_2_2_19
   tags:
     - level1-corporate-enterprise-environment
     - patch
     - automated
     - rule_2.2.19
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeDenyInteractiveLogonRight
     users:
       - Guests
     action: add
 
-- name: "2.2.20 | PATCH | Ensure Deny log on through Remote Desktop Services to include Guests, Local account."
+- name: "2.2.20 | PATCH | Ensure Deny log on through Remote Desktop Services to include Guests, Local account"
   when:
     - win11cis_rule_2_2_20
     - not win_skip_for_test
@@ -287,7 +417,7 @@
       - Local account
     action: add
 
-- name: "2.2.21 | PATCH | Ensure Enable computer and user accounts to be trusted for delegation is set to No One."
+- name: "2.2.21 | PATCH | Ensure Enable computer and user accounts to be trusted for delegation is set to No One"
   when: win11cis_rule_2_2_21
   tags:
     - level1-corporate-enterprise-environment
@@ -299,7 +429,7 @@
     users: []
     action: set
 
-- name: "2.2.22 | PATCH | Ensure Force shutdown from a remote system is set to Administrators."
+- name: "2.2.22 | PATCH | Ensure Force shutdown from a remote system is set to Administrators"
   when: win11cis_rule_2_2_22
   tags:
     - level1-corporate-enterprise-environment
@@ -307,13 +437,23 @@
     - automated
     - rule_2.2.22
     - administrators
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeRemoteShutdownPrivilege
     users:
       - Administrators
     action: set
 
-- name: "2.2.23 | PATCH | Ensure Generate security audits is set to LOCAL SERVICE, NETWORK SERVICE."
+- name: "2.2.23 | PATCH | Ensure Generate security audits is set to LOCAL SERVICE, NETWORK SERVICE"
   when: win11cis_rule_2_2_23
   tags:
     - level1-corporate-enterprise-environment
@@ -321,6 +461,16 @@
     - automated
     - rule_2.2.23
     - services
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeAuditPrivilege
     users:
@@ -328,7 +478,7 @@
       - Network Service
     action: set
 
-- name: "2.2.24 | PATCH | Ensure Impersonate a client after authentication is set to Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE."
+- name: "2.2.24 | PATCH | Ensure Impersonate a client after authentication is set to Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE"
   when: win11cis_rule_2_2_24
   tags:
     - level1-corporate-enterprise-environment
@@ -337,14 +487,14 @@
     - rule_2.2.24
     - administrators
   block:
-    - name: "2.2.24 | AUDIT | Ensure Impersonate a client after authentication is set to Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE. | Check IIS-WebServerRole"
+    - name: "2.2.24 | AUDIT | Ensure Impersonate a client after authentication is set to Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE | Check IIS-WebServerRole"
       ansible.windows.win_shell: Get-WindowsOptionalFeature -Online -FeatureName IIS-WebServerRole | Select-Object -Property State | ft -hide
       changed_when: false
       check_mode: false
       failed_when: false
       register: discovered_2_2_24_iis_web_server_role_installed
 
-    - name: "2.2.24 | PATCH | Ensure Impersonate a client after authentication is set to Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE. | Web Server Not Installed."
+    - name: "2.2.24 | PATCH | Ensure Impersonate a client after authentication is set to Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE | Web Server Not Installed"
       when: "'Enabled' not in discovered_2_2_24_iis_web_server_role_installed.stdout_lines"
       ansible.windows.win_user_right:
         name: SeImpersonatePrivilege
@@ -355,7 +505,7 @@
           - Service
         action: set
 
-    - name: "2.2.24 | PATCH | Ensure Impersonate a client after authentication is set to Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE. | Web Server Installed."
+    - name: "2.2.24 | PATCH | Ensure Impersonate a client after authentication is set to Administrators, LOCAL SERVICE, NETWORK SERVICE, SERVICE | Web Server Installed"
       when: "'Enabled' in discovered_2_2_24_iis_web_server_role_installed.stdout_lines"
       ansible.windows.win_user_right:
         name: SeImpersonatePrivilege
@@ -367,7 +517,7 @@
           - Service
         action: set
 
-- name: "2.2.25 | PATCH | Ensure Increase scheduling priority is set to Administrators, Window Manager/Window Manager Group."
+- name: "2.2.25 | PATCH | Ensure Increase scheduling priority is set to Administrators, Window Manager/Window Manager Group"
   when: win11cis_rule_2_2_25
   tags:
     - level1-corporate-enterprise-environment
@@ -375,6 +525,16 @@
     - automated
     - rule_2.2.25
     - administrators
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeIncreaseBasePriorityPrivilege
     users:
@@ -382,7 +542,7 @@
       - Window Manager\Window Manager Group
     action: set
 
-- name: "2.2.26 | PATCH | Ensure Load and unload device drivers is set to Administrators."
+- name: "2.2.26 | PATCH | Ensure Load and unload device drivers is set to Administrators"
   when: win11cis_rule_2_2_26
   tags:
     - level1-corporate-enterprise-environment
@@ -390,13 +550,23 @@
     - automated
     - rule_2.2.26
     - administrators
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeLoadDriverPrivilege
     users:
       - Administrators
     action: set
 
-- name: "2.2.27 | PATCH | Ensure Lock pages in memory is set to No One."
+- name: "2.2.27 | PATCH | Ensure Lock pages in memory is set to No One"
   when: win11cis_rule_2_2_27
   tags:
     - level1-corporate-enterprise-environment
@@ -404,12 +574,22 @@
     - automated
     - rule_2.2.27
     - administrators
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeLockMemoryPrivilege
     users: []
     action: set
 
-- name: "2.2.28 | PATCH | Ensure Log on as a batch job is set to Administrators."
+- name: "2.2.28 | PATCH | Ensure Log on as a batch job is set to Administrators"
   when: win11cis_rule_2_2_28
   tags:
     - level2-high-security-sensitive-data-environment
@@ -422,7 +602,7 @@
     users: "{{ win11cis_sebatchlogonright }}"
     action: set
 
-- name: "2.2.29 | PATCH | Configure Log on as a service."
+- name: "2.2.29 | PATCH | Configure Log on as a service"
   when: win11cis_rule_2_2_29
   tags:
     - level2-high-security-sensitive-data-environment
@@ -430,7 +610,7 @@
     - automated
     - rule_2.2.29
   block:
-    - name: "2.2.29 | PATCH | Configure Log on as a service. | Hyper-V not installed."
+    - name: "2.2.29 | PATCH | Configure Log on as a service | Hyper-V not installed"
       when:
         - "'Enabled' not in prelim_hyper_v_installed.stdout"
         - win11cis_seservicelogonright | length == 0
@@ -439,7 +619,7 @@
         users: "{{ win11cis_seservicelogonright }}"
         action: set
 
-    - name: "2.2.29 | PATCH | Configure Log on as a service. | Hyper-V installed."
+    - name: "2.2.29 | PATCH | Configure Log on as a service | Hyper-V installed"
       when:
         - "'Enabled' in prelim_hyper_v_installed.stdout"
         - win11cis_seservicelogonright | length == 0
@@ -449,7 +629,7 @@
           - NT VIRTUAL MACHINE\Virtual Machines
         action: set
 
-    - name: "2.2.29 | PATCH | Configure Log on as a service. | WDAG Enabled ."
+    - name: "2.2.29 | PATCH | Configure Log on as a service | WDAG Enabled"
       when:
         - "'Enabled' in prelim_wdag_enabled.stdout"
         - win11cis_seservicelogonright | length == 0
@@ -459,7 +639,7 @@
           - WDAGUtilityAccount
         action: set
 
-    - name: "2.2.29 | PATCH | Configure Log on as a service. | Hyper-V & WDAG Enabled ."
+    - name: "2.2.29 | PATCH | Configure Log on as a service | Hyper-V & WDAG Enabled"
       when:
         - "'Enabled' in prelim_wdag_enabled.stdout"
         - "'Enabled' in prelim_hyper_v_installed.stdout"
@@ -471,14 +651,14 @@
           - WDAGUtilityAccount
         action: set
 
-    - name: "2.2.29 | PATCH | Configure Log on as a service. | User Defined Input."
+    - name: "2.2.29 | PATCH | Configure Log on as a service | User Defined Input"
       when: win11cis_seservicelogonright | length > 0
       ansible.windows.win_user_right:
         name: SeServiceLogonRight
         users: "{{ win11cis_seservicelogonright }}"
         action: set
 
-- name: "2.2.30 | PATCH | Ensure Manage auditing and security log is set to Administrators."
+- name: "2.2.30 | PATCH | Ensure Manage auditing and security log is set to Administrators"
   when: win11cis_rule_2_2_30
   tags:
     - level1-corporate-enterprise-environment
@@ -492,19 +672,29 @@
       - Administrators
     action: set
 
-- name: "2.2.31 | PATCH | Ensure Modify an object label is set to No One."
+- name: "2.2.31 | PATCH | Ensure Modify an object label is set to No One"
   when: win11cis_rule_2_2_31
   tags:
     - level1-corporate-enterprise-environment
     - patch
     - automated
     - rule_2.2.31
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeRelabelPrivilege
     users: []
     action: set
 
-- name: "2.2.32 | PATCH | Ensure Modify firmware environment values is set to Administrators."
+- name: "2.2.32 | PATCH | Ensure Modify firmware environment values is set to Administrators"
   when: win11cis_rule_2_2_32
   tags:
     - level1-corporate-enterprise-environment
@@ -512,13 +702,23 @@
     - automated
     - rule_2.2.32
     - administrators
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeSystemEnvironmentPrivilege
     users:
       - Administrators
     action: set
 
-- name: "2.2.33 | PATCH | Ensure Perform volume maintenance tasks is set to Administrators."
+- name: "2.2.33 | PATCH | Ensure Perform volume maintenance tasks is set to Administrators"
   when: win11cis_rule_2_2_33
   tags:
     - level1-corporate-enterprise-environment
@@ -526,13 +726,23 @@
     - automated
     - rule_2.2.33
     - administrators
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeManageVolumePrivilege
     users:
       - Administrators
     action: set
 
-- name: "2.2.34 | PATCH | Ensure Profile single process is set to Administrators."
+- name: "2.2.34 | PATCH | Ensure Profile single process is set to Administrators"
   when: win11cis_rule_2_2_34
   tags:
     - level1-corporate-enterprise-environment
@@ -540,13 +750,23 @@
     - automated
     - rule_2.2.34
     - administrators
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeProfileSingleProcessPrivilege
     users:
       - Administrators
     action: set
 
-- name: "2.2.35 | PATCH | Ensure Profile system performance is set to Administrators, NT SERVICE\\WdiServiceHost."
+- name: "2.2.35 | PATCH | Ensure Profile system performance is set to Administrators, NT SERVICE\\WdiServiceHost"
   when: win11cis_rule_2_2_35
   tags:
     - level1-corporate-enterprise-environment
@@ -555,6 +775,16 @@
     - rule_2.2.35
     - administrators
     - service
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeSystemProfilePrivilege
     users:
@@ -562,7 +792,7 @@
       - NT SERVICE\WdiServiceHost
     action: set
 
-- name: "2.2.36 | PATCH | Ensure Replace a process level token is set to LOCAL SERVICE, NETWORK SERVICE."
+- name: "2.2.36 | PATCH | Ensure Replace a process level token is set to LOCAL SERVICE, NETWORK SERVICE"
   when: win11cis_rule_2_2_36
   tags:
     - level1-corporate-enterprise-environment
@@ -570,6 +800,16 @@
     - automated
     - rule_2.2.36
     - service
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeAssignPrimaryTokenPrivilege
     users:
@@ -577,7 +817,7 @@
       - NETWORK SERVICE
     action: set
 
-- name: "2.2.37 | PATCH | Ensure Restore files and directories is set to Administrators."
+- name: "2.2.37 | PATCH | Ensure Restore files and directories is set to Administrators"
   when: win11cis_rule_2_2_37
   tags:
     - level1-corporate-enterprise-environment
@@ -585,13 +825,23 @@
     - automated
     - rule_2.2.37
     - administrators
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeRestorePrivilege
     users:
       - Administrators
     action: set
 
-- name: "2.2.38 | PATCH | Ensure Shut down the system is set to Administrators, Users."
+- name: "2.2.38 | PATCH | Ensure Shut down the system is set to Administrators, Users"
   when: win11cis_rule_2_2_38
   tags:
     - level1-corporate-enterprise-environment
@@ -614,6 +864,16 @@
     - automated
     - rule_2.2.39
     - administrators
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.5
+    - NIST800-171_3.3.8
+    - NIST800-171_3.3.9
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_AC-3
+    - NIST800-53R5_AC-6
+    - NIST800-53R5_AC-6_1
+    - NIST800-53R5_AC-6_7
+    - NIST800-53R5_AU-9_4
   ansible.windows.win_user_right:
     name: SeTakeOwnershipPrivilege
     users:

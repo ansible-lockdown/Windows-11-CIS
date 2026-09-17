@@ -8,6 +8,7 @@
     - automated
     - rule_18.9.26.1
     - lsass
+    - NIST800-53R5_SI-16
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows\System
     name: AllowCustomSSPsAPs
@@ -22,6 +23,7 @@
     - automated
     - rule_18.9.26.2
     - lsass
+    - NIST800-53R5_SI-16
   ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Control\Lsa
     name: RunAsPPL

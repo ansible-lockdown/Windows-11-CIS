@@ -2,6 +2,14 @@
 
 ## CIS Benchmark v3.0.0 - September 2026 Updates
 
+  - refactor: NIST800-53 task tags removed, NIST800-53R5 and NIST800-171 kept
+  - fix: 18.9.7.1.5 task names carry the full benchmark title, matching 18.9.7.1.1-.4 and .6
+  - feat: NIST800-171, NIST800-53 and NIST800-53R5 tags added to 358 controls
+  - fix: 1.2.1 re-reads the lockout pair after 1.2.2 and reconciles ResetLockoutCount
+  - fix: removed the prelim Account Lockout Policy Ordering block, which decided from a stale snapshot
+  - fix: the lockout reset write no longer runs under tags: always
+  - style: trailing full stops removed from 451 task names
+  - refactor: removed unused prelim registers prelim_displayversion, prelim_currentbuild and prelim_tpm_enabled
   - fix: 2.3.11.6 writes ForceLogoffWhenHourExpire through win_security_policy, not LanManServer EnableForcedLogOff
   - fix: 2.3.11.6 skipped on a domain joined host, with a warning; the Default Domain Policy sets it to 0
   - fix: 2.3.7.5 legal notice written through the security database; blank lines dropped, commas kept

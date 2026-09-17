@@ -78,6 +78,7 @@
     - automated
     - rule_18.10.75.2.1
     - explorer
+    - NIST800-53R5_SI-16
   block:
     - name: "18.10.75.2.1 | PATCH | Ensure Configure Windows Defender SmartScreen is set to Enabled Warn and prevent bypass | EnableSmartScreen"
       ansible.windows.win_regedit:

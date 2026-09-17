@@ -8,6 +8,8 @@
     - automated
     - rule_19.7.44.2.1
     - codec_download
+    - NIST800-171_3.4.2
+    - NIST800-53R5_CM-6
   ansible.windows.win_regedit:
     path: HKU:\{{ item }}\Software\Policies\Microsoft\Windowsmediaplayer
     name: PreventCodecDownload

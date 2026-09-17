@@ -10,6 +10,8 @@
     - automated
     - rule_18.9.24.1
     - kernel_dma_protection
+    - NIST800-171_3.4.1
+    - NIST800-53R5_CM-8
   ansible.windows.win_regedit:
     path: HKLM:\Software\Policies\Microsoft\Windows\Kernel DMA Protection
     name: DeviceEnumerationPolicy

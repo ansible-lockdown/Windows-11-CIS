@@ -8,6 +8,11 @@
     - automated
     - rule_18.5.1
     - mss_auto_logon
+    - NIST800-171_3.13.6
+    - NIST800-171_3.5.2
+    - NIST800-53R5_IA-5_1
+    - NIST800-53R5_SC-28
+    - NIST800-53R5_SC-28_1
   ansible.windows.win_regedit:
     path: HKLM:\Software\Microsoft\Windows Nt\CurrentVersion\Winlogon
     name: AutoAdminLogon
@@ -22,6 +27,8 @@
     - automated
     - rule_18.5.2
     - iprouting
+    - NIST800-171_3.5.2
+    - NIST800-53R5_CM-6
   ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters
     value: DisableIPSourceRouting
@@ -36,6 +43,8 @@
     - automated
     - rule_18.5.3
     - iprouting
+    - NIST800-171_3.13.1
+    - NIST800-53R5_SC-7_12
   ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
     value: DisableIPSourceRouting
@@ -64,6 +73,22 @@
     - automated
     - rule_18.5.5
     - icmp
+    - NIST800-171_3.13.1
+    - NIST800-171_3.13.2
+    - NIST800-171_3.4.1
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_CM-1
+    - NIST800-53R5_CM-2
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
+    - NIST800-53R5_CM-7_1
+    - NIST800-53R5_CM-9
+    - NIST800-53R5_SA-10
+    - NIST800-53R5_SA-3
+    - NIST800-53R5_SA-8
   ansible.windows.win_regedit:
     path: HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
     value: EnableICMPRedirect
@@ -92,6 +117,8 @@
     - automated
     - rule_18.5.7
     - nonamereleaseondemand
+    - NIST800-171_3.4.2
+    - NIST800-53R5_CM-6
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Services\Netbt\Parameters
     name: NoNameReleaseOnDemand
@@ -106,6 +133,11 @@
     - automated
     - rule_18.5.8
     - irdp
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Services\Tcpip\Parameters
     name: PerformRouterDiscovery
@@ -120,6 +152,7 @@
     - automated
     - rule_18.5.9
     - safedllsearchmode
+    - NIST800-53R5_SI-16
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Control\Session Manager
     name: SafeDllSearchMode
@@ -134,8 +167,15 @@
     - automated
     - rule_18.5.10
     - screen_saver
+    - NIST800-171_3.1.1
+    - NIST800-171_3.1.10
+    - NIST800-171_3.1.11
+    - NIST800-53R5_AC-11
+    - NIST800-53R5_AC-11_1
+    - NIST800-53R5_AC-12
+    - NIST800-53R5_AC-2_5
   block:
-    - name: "18.5.10 | PATCH | Ensure MSS ScreenSaverGracePeriod The time in seconds before the screen saver grace period expires is set to Enabled 5 or fewer seconds | Set Variable."
+    - name: "18.5.10 | PATCH | Ensure MSS ScreenSaverGracePeriod The time in seconds before the screen saver grace period expires is set to Enabled 5 or fewer seconds | Set Variable"
       when: win11cis_screen_saver_grace_period <= 5
       ansible.windows.win_regedit:
         path: HKLM:\Software\Microsoft\Windows Nt\Currentversion\Winlogon
@@ -143,14 +183,14 @@
         data: "{{ win11cis_screen_saver_grace_period }}"
         type: string
 
-    - name: "18.5.10 | AUDIT | Ensure MSS ScreenSaverGracePeriod The time in seconds before the screen saver grace period expires is set to Enabled 5 or fewer seconds | Warning Check For Variable Standards."
+    - name: "18.5.10 | AUDIT | Ensure MSS ScreenSaverGracePeriod The time in seconds before the screen saver grace period expires is set to Enabled 5 or fewer seconds | Warning Check For Variable Standards"
       when: win11cis_screen_saver_grace_period > 5
       ansible.builtin.debug:
         msg:
           - "Warning!! You have an invalid time set for win11cis_screen_saver_grace_period. Please read"
           - "the notes for the variable and make the necessary change to the variable to be in compliance."
 
-    - name: "18.5.10 | AUDIT | Ensure MSS ScreenSaverGracePeriod The time in seconds before the screen saver grace period expires is set to Enabled 5 or fewer seconds | Set Warn Count."
+    - name: "18.5.10 | AUDIT | Ensure MSS ScreenSaverGracePeriod The time in seconds before the screen saver grace period expires is set to Enabled 5 or fewer seconds | Set Warn Count"
       when: win11cis_screen_saver_grace_period > 5
       ansible.builtin.import_tasks:
         file: warning_facts.yml
@@ -165,6 +205,20 @@
     - automated
     - rule_18.5.11
     - tcp_max_data_retransmissions
+    - NIST800-171_3.1.16
+    - NIST800-171_3.1.17
+    - NIST800-171_3.4.1
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_AC-18
+    - NIST800-53R5_AC-18_1
+    - NIST800-53R5_AC-18_3
+    - NIST800-53R5_CM-2
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
+    - NIST800-53R5_CM-7_1
+    - NIST800-53R5_CM-9
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Services\Tcpip6\Parameters
     name: TcpMaxDataRetransmissions
@@ -179,6 +233,20 @@
     - automated
     - rule_18.5.12
     - tcp_max_data_retransmissions
+    - NIST800-171_3.1.16
+    - NIST800-171_3.1.17
+    - NIST800-171_3.4.1
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_AC-18
+    - NIST800-53R5_AC-18_1
+    - NIST800-53R5_AC-18_3
+    - NIST800-53R5_CM-2
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
+    - NIST800-53R5_CM-7_1
+    - NIST800-53R5_CM-9
   ansible.windows.win_regedit:
     path: HKLM:\System\Currentcontrolset\Services\Tcpip\Parameters
     name: TcpMaxDataRetransmissions
@@ -193,8 +261,9 @@
     - automated
     - rule_18.5.13
     - mss_warning_level
+    - NIST800-53R5_AU-4
   block:
-    - name: "18.5.13 | PATCH | Ensure MSS WarningLevel Percentage threshold for the security event log at which the system will generate a warning is set to Enabled 90 or less | Set Variable."
+    - name: "18.5.13 | PATCH | Ensure MSS WarningLevel Percentage threshold for the security event log at which the system will generate a warning is set to Enabled 90 or less | Set Variable"
       when: win11cis_log_threshold_audit_event <= 90
       ansible.windows.win_regedit:
         path: HKLM:\System\Currentcontrolset\Services\Eventlog\Security
@@ -202,14 +271,14 @@
         data: "{{ win11cis_log_threshold_audit_event }}"
         type: dword
 
-    - name: "18.5.13 | AUDIT | Ensure MSS WarningLevel Percentage threshold for the security event log at which the system will generate a warning is set to Enabled 90 or less | Warning Check For Variable Standards."
+    - name: "18.5.13 | AUDIT | Ensure MSS WarningLevel Percentage threshold for the security event log at which the system will generate a warning is set to Enabled 90 or less | Warning Check For Variable Standards"
       when: win11cis_log_threshold_audit_event > 90
       ansible.builtin.debug:
         msg:
           - "Warning!! You have an invalid percentage set for win11cis_log_threshold_audit_event. Please read"
           - "the notes for the variable and make the necessary change to the variable to be in compliance."
 
-    - name: "18.5.13 | AUDIT | Ensure MSS WarningLevel Percentage threshold for the security event log at which the system will generate a warning is set to Enabled 90 or less | Warn Count."
+    - name: "18.5.13 | AUDIT | Ensure MSS WarningLevel Percentage threshold for the security event log at which the system will generate a warning is set to Enabled 90 or less | Warn Count"
       when: win11cis_log_threshold_audit_event > 90
       ansible.builtin.import_tasks:
         file: warning_facts.yml

@@ -19,6 +19,12 @@ reboot_host: false
 # as standalone rather than having domain-only settings applied to it.
 discovered_domain_joined: false
 
+# Read from secedit in section_1/cis_1.2.x.yml, after 1.2.2 has enabled lockout. Windows
+# rejects a LockoutDuration lower than the current ResetLockoutCount, so 1.2.1 needs the pair
+# as it stands at that point, not as it stood before the role touched it.
+discovered_win11cis_current_lockout_duration: 0
+discovered_win11cis_current_lockout_reset: 0
+
 # Account Policy (CIS section 1) is domain scoped on any domain joined host: the
 # Default Domain Policy overwrites local [System Access] at every refresh, so the
 # ten secedit backed controls in section 1 cannot hold there. Seeded false so a

@@ -64,7 +64,7 @@
     data: 1
     type: dword
 
-- name: "18.9.7.1.5 | PATCH | Ensure Prevent installation of devices using drivers that match these device setup classes is set to IEEE 1394 device setup classes."
+- name: "18.9.7.1.5 | PATCH | Ensure 'Prevent installation of devices using drivers that match these device setup classes: Prevent installation of devices using drivers for these device setup' is set to 'IEEE 1394 device setup classes'"
   when: win11cis_rule_18_9_7_1_5
   tags:
     - level1-bitlocker
@@ -75,28 +75,28 @@
     - rule_18.9.7.1.5
     - device_installations_restrictions
   block:
-    - name: "18.9.7.1.5 | PATCH | Ensure Prevent installation of devices using drivers that match these device setup classes is set to IEEE 1394 device setup classes. | IEEE 1394 devices that support the SBP2 Protocol Class."
+    - name: "18.9.7.1.5 | PATCH | Ensure 'Prevent installation of devices using drivers that match these device setup classes: Prevent installation of devices using drivers for these device setup' is set to 'IEEE 1394 device setup classes' | IEEE 1394 devices that support the SBP2 Protocol Class"
       ansible.windows.win_regedit:
         path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Restrictions\DenyDeviceClasses
         name: 1
         data: '{d48179be-ec20-11d1-b6b8-00c04fa372a7}'
         type: string
 
-    - name: "18.9.7.1.5 | PATCH | Ensure Prevent installation of devices using drivers that match these device setup classes is set to IEEE 1394 device setup classes. | IEEE 1394 devices that support the IEC-61883 Protocol Class."
+    - name: "18.9.7.1.5 | PATCH | Ensure 'Prevent installation of devices using drivers that match these device setup classes: Prevent installation of devices using drivers for these device setup' is set to 'IEEE 1394 device setup classes' | IEEE 1394 devices that support the IEC-61883 Protocol Class"
       ansible.windows.win_regedit:
         path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Restrictions\DenyDeviceClasses
         name: 2
         data: '{7ebefbc0-3200-11d2-b4c2-00a0C9697d07}'
         type: string
 
-    - name: "18.9.7.1.5 | PATCH | Ensure Prevent installation of devices using drivers that match these device setup classes is set to IEEE 1394 device setup classes. | IEEE 1394 devices that support the AVC Protocol Class."
+    - name: "18.9.7.1.5 | PATCH | Ensure 'Prevent installation of devices using drivers that match these device setup classes: Prevent installation of devices using drivers for these device setup' is set to 'IEEE 1394 device setup classes' | IEEE 1394 devices that support the AVC Protocol Class"
       ansible.windows.win_regedit:
         path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Restrictions\DenyDeviceClasses
         name: 3
         data: '{c06ff265-ae09-48f0-812c-16753d7cba83}'
         type: string
 
-    - name: "18.9.7.1.5 | PATCH | Ensure Prevent installation of devices using drivers that match these device setup classes is set to IEEE 1394 device setup classes. | IEEE 1394 Host Bus Controller Class."
+    - name: "18.9.7.1.5 | PATCH | Ensure 'Prevent installation of devices using drivers that match these device setup classes: Prevent installation of devices using drivers for these device setup' is set to 'IEEE 1394 device setup classes' | IEEE 1394 Host Bus Controller Class"
       ansible.windows.win_regedit:
         path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Restrictions\DenyDeviceClasses
         name: 4
@@ -127,6 +127,10 @@
     - automated
     - rule_18.9.7.2
     - metadata
+    - NIST800-171_3.4.8
+    - NIST800-53R5_CM-10
+    - NIST800-53R5_CM-7_5
+    - NIST800-53R5_SI-16
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata
     name: PreventDeviceMetadataFromNetwork
