@@ -1,7 +1,6 @@
 ---
 
-- name: change_requires_reboot
+- name: Change_requires_reboot
+  tags: always
   ansible.builtin.set_fact:
-      reboot_host: true
-  tags:
-      - always
+    reboot_host: true

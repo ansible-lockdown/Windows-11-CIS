@@ -1,165 +1,183 @@
 ---
 
-- name: "2.3.10.1 | PATCH | Ensure Network access Allow anonymous SID Name translation is set to Disabled."
-  community.windows.win_security_policy:
-      section: System Access
-      key: LSAAnonymousNameLookup
-      value: 0
+- name: "2.3.10.1 | PATCH | Ensure Network access Allow anonymous SID Name translation is set to Disabled"
   when: win11cis_rule_2_3_10_1
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_2.3.10.1
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_2.3.10.1
+    - NIST800-171_3.1.7
+    - NIST800-171_3.5.3
+    - NIST800-53R5_AC-6_10
+    - NIST800-53R5_IA-2_2
+  community.windows.win_security_policy:
+    section: System Access
+    key: LSAAnonymousNameLookup
+    value: 0
 
-- name: "2.3.10.2 | PATCH | Ensure Network access Do not allow anonymous enumeration of SAM accounts is set to Enabled."
-  ansible.windows.win_regedit:
-      path: HKLM:\System\Currentcontrolset\Control\Lsa
-      name: RestrictAnonymousSAM
-      data: 1
-      type: dword
+- name: "2.3.10.2 | PATCH | Ensure Network access Do not allow anonymous enumeration of SAM accounts is set to Enabled"
   when: win11cis_rule_2_3_10_2
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_2.3.10.2
-      - sam
-
-- name: "2.3.10.3 | PATCH | Ensure Network access Do not allow anonymous enumeration of SAM accounts and shares is set to Enabled."
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_2.3.10.2
+    - sam
   ansible.windows.win_regedit:
-      path: HKLM:\System\Currentcontrolset\Control\Lsa
-      name: RestrictAnonymous
-      data: 1
-      type: dword
+    path: HKLM:\System\Currentcontrolset\Control\Lsa
+    name: RestrictAnonymousSAM
+    data: 1
+    type: dword
+
+- name: "2.3.10.3 | PATCH | Ensure Network access Do not allow anonymous enumeration of SAM accounts and shares is set to Enabled"
   when: win11cis_rule_2_3_10_3
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_2.3.10.3
-      - sam
-
-- name: "2.3.10.4 | PATCH | Ensure Network access Do not allow storage of passwords and credentials for network authentication is set to Enabled."
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_2.3.10.3
+    - sam
   ansible.windows.win_regedit:
-      path: HKLM:\System\Currentcontrolset\Control\Lsa
-      name: DisableDomainCreds
-      data: 1
-      type: dword
+    path: HKLM:\System\Currentcontrolset\Control\Lsa
+    name: RestrictAnonymous
+    data: 1
+    type: dword
+
+- name: "2.3.10.4 | PATCH | Ensure Network access Do not allow storage of passwords and credentials for network authentication is set to Enabled"
   when: win11cis_rule_2_3_10_4
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_2.3.10.4
-      - accounts
-
-- name: "2.3.10.5 | PATCH | Ensure Network access Let Everyone permissions apply to anonymous users is set to Disabled."
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_2.3.10.4
+    - accounts
+    - NIST800-171_3.5.10
+    - NIST800-53R5_IA-5_1_c
   ansible.windows.win_regedit:
-      path: HKLM:\System\Currentcontrolset\Control\Lsa
-      name: EveryoneIncludesAnonymous
-      data: 0
-      type: dword
+    path: HKLM:\System\Currentcontrolset\Control\Lsa
+    name: DisableDomainCreds
+    data: 1
+    type: dword
+
+- name: "2.3.10.5 | PATCH | Ensure Network access Let Everyone permissions apply to anonymous users is set to Disabled"
   when: win11cis_rule_2_3_10_5
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_2.3.10.5
-      - accounts
-
-- name: "2.3.10.6 | PATCH | Ensure 'Network access: Named Pipes that can be accessed anonymously' is set to 'None'."
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_2.3.10.5
+    - accounts
+    - NIST800-171_3.1.7
+    - NIST800-53R5_AC-6_10
   ansible.windows.win_regedit:
-      path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
-      name: NullSessionPipes
-      data: ""
-      type: multistring
+    path: HKLM:\System\Currentcontrolset\Control\Lsa
+    name: EveryoneIncludesAnonymous
+    data: 0
+    type: dword
+
+- name: "2.3.10.6 | PATCH | Ensure 'Network access: Named Pipes that can be accessed anonymously' is set to 'None'"
   when: win11cis_rule_2_3_10_6
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_2.3.10.6
-      - named_pipes
-
-- name: "2.3.10.7 | PATCH | Ensure 'Network access: Remotely accessible registry paths' is configured."
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_2.3.10.6
+    - named_pipes
   ansible.windows.win_regedit:
-      path: HKLM:\System\Currentcontrolset\Control\Securepipeservers\Winreg\AllowedExactpaths
-      name: "Machine"
-      data: ['System\CurrentControlSet\Control\ProductOptions', 'System\CurrentControlSet\Control\Server Applications', 'Software\Microsoft\Windows NT\CurrentVersion']
-      type: multistring
+    path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
+    name: NullSessionPipes
+    data: ""
+    type: multistring
+
+- name: "2.3.10.7 | PATCH | Ensure 'Network access: Remotely accessible registry paths' is configured"
   when: win11cis_rule_2_3_10_7
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_2.3.10.7
-
-- name: "2.3.10.8 | PATCH | Configure Network access Remotely accessible registry paths and sub-paths is configured."
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_2.3.10.7
+    - NIST800-171_3.1.5
+    - NIST800-53R5_AC-6_7_b
   ansible.windows.win_regedit:
-      path: HKLM:\System\Currentcontrolset\Control\Securepipeservers\Winreg\Allowedpaths
-      name: "Machine"
-      data: ['System\CurrentControlSet\Control\Print\Printers', 'System\CurrentControlSet\Services\Eventlog', 'Software\Microsoft\OLAP Server', 'Software\Microsoft\Windows NT\CurrentVersion\Print', 'Software\Microsoft\Windows NT\CurrentVersion\Windows', 'System\CurrentControlSet\Control\ContentIndex', 'System\CurrentControlSet\Control\Terminal Server', 'System\CurrentControlSet\Control\Terminal Server\UserConfig', 'System\CurrentControlSet\Control\Terminal Server\DefaultUserConfiguration', 'Software\Microsoft\Windows NT\CurrentVersion\Perflib', 'System\CurrentControlSet\Services\SysmonLog']
-      type: multistring
+    path: HKLM:\System\Currentcontrolset\Control\Securepipeservers\Winreg\AllowedExactpaths
+    name: "Machine"
+    data: ['System\CurrentControlSet\Control\ProductOptions', 'System\CurrentControlSet\Control\Server Applications', 'Software\Microsoft\Windows NT\CurrentVersion']
+    type: multistring
+
+- name: "2.3.10.8 | PATCH | Ensure Network access Remotely accessible registry paths and sub-paths is configured"
   when: win11cis_rule_2_3_10_8
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_2.3.10.8
-
-- name: "2.3.10.9 | PATCH | Ensure Network access Restrict anonymous access to Named Pipes and Shares is set to Enabled."
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_2.3.10.8
+    - NIST800-171_3.1.5
+    - NIST800-53R5_AC-6_7_b
   ansible.windows.win_regedit:
-      path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
-      name: RestrictNullSessAccess
-      data: 1
-      type: dword
+    path: HKLM:\System\Currentcontrolset\Control\Securepipeservers\Winreg\Allowedpaths
+    name: "Machine"
+    data: ['System\CurrentControlSet\Control\Print\Printers', 'System\CurrentControlSet\Services\Eventlog', 'Software\Microsoft\OLAP Server', 'Software\Microsoft\Windows NT\CurrentVersion\Print', 'Software\Microsoft\Windows NT\CurrentVersion\Windows', 'System\CurrentControlSet\Control\ContentIndex', 'System\CurrentControlSet\Control\Terminal Server', 'System\CurrentControlSet\Control\Terminal Server\UserConfig', 'System\CurrentControlSet\Control\Terminal Server\DefaultUserConfiguration', 'Software\Microsoft\Windows NT\CurrentVersion\Perflib', 'System\CurrentControlSet\Services\SysmonLog']
+    type: multistring
+
+- name: "2.3.10.9 | PATCH | Ensure Network access Restrict anonymous access to Named Pipes and Shares is set to Enabled"
   when: win11cis_rule_2_3_10_9
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_2.3.10.9
-      - named_pipes
-
-- name: "2.3.10.10 | PATCH | Ensure Network access Restrict clients allowed to make remote calls to SAM is set to Administrators, Remote Access Allow."
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_2.3.10.9
+    - named_pipes
+    - NIST800-171_3.1.7
+    - NIST800-53R5_AC-6_10
   ansible.windows.win_regedit:
-      path: HKLM:\System\CurrentControlSet\Control\Lsa
-      name: RestrictRemoteSAM
-      data: "O:BAG:BAD:(A;;RC;;;BA)"
-      type: string
+    path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
+    name: RestrictNullSessAccess
+    data: 1
+    type: dword
+
+- name: "2.3.10.10 | PATCH | Ensure Network access Restrict clients allowed to make remote calls to SAM is set to Administrators, Remote Access Allow"
   when: win11cis_rule_2_3_10_10
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_2.3.10.10
-      - sam
-
-- name: "2.3.10.11 | PATCH | Ensure Network access Shares that can be accessed anonymously is set to None."
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_2.3.10.10
+    - sam
   ansible.windows.win_regedit:
-      path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
-      name: NullSessionShares
-      data: ""
-      type: multistring
+    path: HKLM:\System\CurrentControlSet\Control\Lsa
+    name: RestrictRemoteSAM
+    data: "O:BAG:BAD:(A;;RC;;;BA)"
+    type: string
+
+- name: "2.3.10.11 | PATCH | Ensure Network access Shares that can be accessed anonymously is set to None"
   when: win11cis_rule_2_3_10_11
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_2.3.10.11
-      - shares
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_2.3.10.11
+    - shares
+    - NIST800-171_3.1.1
+    - NIST800-53R5_AC-3
+  ansible.windows.win_regedit:
+    path: HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters
+    name: NullSessionShares
+    data: ""
+    type: multistring
 
 - name: "2.3.10.12 | PATCH | Ensure Network access Sharing and security model for local accounts is set to Classic - local users authenticate as themselves"
-  ansible.windows.win_regedit:
-      path: HKLM:\System\Currentcontrolset\Control\Lsa
-      name: ForceGuest
-      data: 0
-      type: dword
   when: win11cis_rule_2_3_10_12
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_2.3.10.12
-      - shares
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_2.3.10.12
+    - shares
+    - NIST800-171_3.4.2
+    - NIST800-53R5_CM-6_b
+  ansible.windows.win_regedit:
+    path: HKLM:\System\Currentcontrolset\Control\Lsa
+    name: ForceGuest
+    data: 0
+    type: dword

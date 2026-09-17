@@ -1,56 +1,76 @@
 ---
 
 - name: "18.10.17.1 | PATCH | Ensure 'Enable App Installer' is set to 'Disabled'"
-  ansible.windows.win_regedit:
-      path: HKLM:\Software\Policies\Microsoft\Windows\AppInstaller
-      name: EnableAppInstaller
-      data: 0
-      type: dword
   when: win11cis_rule_18_10_17_1
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_18.10.17.1
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_18.10.17.1
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
+  ansible.windows.win_regedit:
+    path: HKLM:\Software\Policies\Microsoft\Windows\AppInstaller
+    name: EnableAppInstaller
+    data: 0
+    type: dword
 
 - name: "18.10.17.2 | PATCH | Ensure 'Enable App Installer Experimental Features' is set to 'Disabled'"
-  ansible.windows.win_regedit:
-      path: HKLM:\Software\Policies\Microsoft\Windows\AppInstaller
-      name: EnableExperimentalFeatures
-      data: 0
-      type: dword
   when: win11cis_rule_18_10_17_2
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_18.10.17.2
-      - experimental
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_18.10.17.2
+    - experimental
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
+  ansible.windows.win_regedit:
+    path: HKLM:\Software\Policies\Microsoft\Windows\AppInstaller
+    name: EnableExperimentalFeatures
+    data: 0
+    type: dword
 
 - name: "18.10.17.3 | PATCH | Ensure 'Enable App Installer Hash Override' is set to 'Disabled'"
-  ansible.windows.win_regedit:
-      path: HKLM:\Software\Policies\Microsoft\Windows\AppInstaller
-      name: EnableHashOverride
-      data: 0
-      type: dword
   when: win11cis_rule_18_10_17_3
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_18.10.17.3
-      - hash
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_18.10.17.3
+    - hash
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
+  ansible.windows.win_regedit:
+    path: HKLM:\Software\Policies\Microsoft\Windows\AppInstaller
+    name: EnableHashOverride
+    data: 0
+    type: dword
 
 - name: "18.10.17.4 | PATCH | Ensure 'Enable App Installer ms-appinstaller protocol' is set to 'Disabled'"
-  ansible.windows.win_regedit:
-      path: HKLM:\Software\Policies\Microsoft\Windows\AppInstaller
-      name: EnableMSAppInstallerProtocol
-      data: 0
-      type: dword
   when: win11cis_rule_18_10_17_4
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_18.10.17.4
-      - hash
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_18.10.17.4
+    - hash
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
+  ansible.windows.win_regedit:
+    path: HKLM:\Software\Policies\Microsoft\Windows\AppInstaller
+    name: EnableMSAppInstallerProtocol
+    data: 0
+    type: dword

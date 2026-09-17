@@ -1,105 +1,140 @@
 ---
 
 - name: "18.9.28.1 | PATCH | Ensure Block user from showing account details on sign-in is set to Enabled"
-  ansible.windows.win_regedit:
-      path: HKLM:\Software\Policies\Microsoft\Windows\System
-      name: BlockUserFromShowingAccountDetailsOnSignin
-      data: 1
-      type: dword
   when: win11cis_rule_18_9_28_1
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_18.9.28.1
-      - accounts
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_18.9.28.1
+    - accounts
+    - NIST800-171_3.13.1
+    - NIST800-171_3.13.2
+    - NIST800-171_3.4.1
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_AC-2
+    - NIST800-53R5_CM-1
+    - NIST800-53R5_CM-2
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
+    - NIST800-53R5_CM-7_1
+    - NIST800-53R5_CM-9
+    - NIST800-53R5_SA-10
+    - NIST800-53R5_SA-3
+    - NIST800-53R5_SA-8
+  ansible.windows.win_regedit:
+    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    name: BlockUserFromShowingAccountDetailsOnSignin
+    data: 1
+    type: dword
 
 - name: "18.9.28.2 | PATCH | Ensure Do not display network selection UI is set to Enabled"
-  ansible.windows.win_regedit:
-      path: HKLM:\Software\Policies\Microsoft\Windows\System
-      name: DontDisplayNetworkSelectionUI
-      data: 1
-      type: dword
   when: win11cis_rule_18_9_28_2
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_18.9.28.2
-      - network
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_18.9.28.2
+    - network
+    - NIST800-171_3.1.7
+    - NIST800-53R5_AC-6_10
+  ansible.windows.win_regedit:
+    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    name: DontDisplayNetworkSelectionUI
+    data: 1
+    type: dword
 
 - name: "18.9.28.3 | PATCH | Ensure Do not enumerate connected users on domain-joined computers is set to Enabled"
-  ansible.windows.win_regedit:
-      path: HKLM:\Software\Policies\Microsoft\Windows\System
-      name: DontEnumerateConnectedUsers
-      data: 1
-      type: dword
   when: win11cis_rule_18_9_28_3
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_18.9.28.3
-      - enumerate
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_18.9.28.3
+    - enumerate
+    - NIST800-171_3.1.7
+    - NIST800-53R5_AC-6_10
+  ansible.windows.win_regedit:
+    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    name: DontEnumerateConnectedUsers
+    data: 1
+    type: dword
 
 - name: "18.9.28.4 | PATCH | Ensure Enumerate local users on domain-joined computers is set to Disabled"
-  ansible.windows.win_regedit:
-      path: HKLM:\Software\Policies\Microsoft\Windows\System
-      name: EnumerateLocalUsers
-      data: 0
-      type: dword
   when: win11cis_rule_18_9_28_4
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_18.9.28.4
-      - enumerate
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_18.9.28.4
+    - enumerate
+  ansible.windows.win_regedit:
+    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    name: EnumerateLocalUsers
+    data: 0
+    type: dword
 
 - name: "18.9.28.5 | PATCH | Ensure Turn off app notifications on the lock screen is set to Enabled"
-  ansible.windows.win_regedit:
-      path: HKLM:\Software\Policies\Microsoft\Windows\System
-      name: DisableLockScreenAppNotifications
-      data: 1
-      type: dword
   when:
-      - win11cis_rule_18_9_28_5
-      - discovered_domain_joined
+    - win11cis_rule_18_9_28_5
+    - discovered_domain_joined
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_18.9.28.5
-      - notifications
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_18.9.28.5
+    - notifications
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
+  ansible.windows.win_regedit:
+    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    name: DisableLockScreenAppNotifications
+    data: 1
+    type: dword
 
 - name: "18.9.28.6 | PATCH | Ensure Turn off picture password sign-in is set to Enabled"
-  ansible.windows.win_regedit:
-      path: HKLM:\Software\Policies\Microsoft\Windows\System
-      name: BlockDomainPicturePassword
-      data: 1
-      type: dword
   when:
-      - win11cis_rule_18_9_28_6
-      - discovered_domain_joined
+    - win11cis_rule_18_9_28_6
+    - discovered_domain_joined
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_18.9.28.6
-      - picture_password
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_18.9.28.6
+    - picture_password
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
+  ansible.windows.win_regedit:
+    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    name: BlockDomainPicturePassword
+    data: 1
+    type: dword
 
 - name: "18.9.28.7 | PATCH | Ensure Turn on convenience PIN sign-in is set to Disabled"
-  ansible.windows.win_regedit:
-      path: HKLM:\Software\Policies\Microsoft\Windows\System
-      name: AllowDomainPINLogon
-      data: 0
-      type: dword
   when:
-      - win11cis_rule_18_9_28_7
-      - discovered_domain_joined
+    - win11cis_rule_18_9_28_7
+    - discovered_domain_joined
   tags:
-      - level1-corporate-enterprise-environment
-      - patch
-      - automated
-      - rule_18.9.28.7
-      - pin
+    - level1-corporate-enterprise-environment
+    - patch
+    - automated
+    - rule_18.9.28.7
+    - pin
+    - NIST800-171_3.4.2
+    - NIST800-171_3.4.6
+    - NIST800-171_3.4.7
+    - NIST800-53R5_CM-6
+    - NIST800-53R5_CM-7
+  ansible.windows.win_regedit:
+    path: HKLM:\Software\Policies\Microsoft\Windows\System
+    name: AllowDomainPINLogon
+    data: 0
+    type: dword

@@ -1,0 +1,43 @@
+---
+
+- name: "UNLOAD | List The Hives Currently Loaded"
+  tags: always
+  ansible.windows.win_shell: (Get-ChildItem "REGISTRY::HKEY_USERS").name | Where-Object {$_ -notlike "*_classes"}
+  changed_when: false
+  failed_when: false
+  register: discovered_hku_current
+
+- name: "UNLOAD | Set Fact For The Hives Loaded By The Role"
+  tags: always
+  ansible.builtin.set_fact:
+    discovered_hku_role_loaded_list: "{{ (discovered_hku_current.stdout | regex_replace('HKEY_USERS\\\\', '') | split)
+      | intersect(['DEFAULT'] + (username_and_sid_results_list | default([]) | map(attribute=1) | list))
+      | difference(discovered_hku_preloaded_list | difference(['DEFAULT'])) }}"
+
+- name: "UNLOAD | Unload The Hives Loaded By The Role"
+  when: discovered_hku_role_loaded_list | length > 0
+  tags: always
+  ansible.windows.win_shell: |
+    [gc]::Collect()
+    [gc]::WaitForPendingFinalizers()
+    REG UNLOAD HKU\{{ item }}
+  changed_when: false
+  failed_when: false
+  loop: "{{ discovered_hku_role_loaded_list }}"
+  register: discovered_hku_unload_results
+
+- name: "UNLOAD | Warn About Hives That Could Not Be Unloaded"
+  when: discovered_hku_unload_results.results | default([]) | selectattr('rc', 'ne', 0) | list | length > 0
+  tags: always
+  vars:
+    warn_control_id: Hive_Unload_Failed
+  block:
+    - name: "UNLOAD | Warn About Hives That Could Not Be Unloaded | Message"
+      ansible.builtin.debug:
+        msg:
+          - "Warning!! The following user hives were loaded by this role and could not be unloaded:"
+          - "{{ discovered_hku_unload_results.results | selectattr('rc', 'ne', 0) | map(attribute='item') | list }}"
+
+    - name: "UNLOAD | Warn About Hives That Could Not Be Unloaded | Warning Count"
+      ansible.builtin.import_tasks:
+        file: warning_facts.yml
