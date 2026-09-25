@@ -31,9 +31,7 @@
     type: dword
 
 - name: "18.9.19.3 | PATCH | Ensure Configure registry policy processing Process even if the Group Policy objects have not changed is set to Enabled TRUE"
-  when:
-    - win11cis_rule_18_9_19_3
-    - discovered_domain_joined
+  when: win11cis_rule_18_9_19_3
   tags:
     - level1-corporate-enterprise-environment
     - patch
@@ -63,9 +61,7 @@
     type: dword
 
 - name: "18.9.19.4 | PATCH | Ensure 'Configure security policy processing: Do not apply during periodic background processing' is set to 'Enabled: FALSE'"
-  when:
-    - win11cis_rule_18_9_19_4
-    - discovered_domain_joined
+  when: win11cis_rule_18_9_19_4
   tags:
     - level1-corporate-enterprise-environment
     - patch
@@ -96,9 +92,7 @@
     type: dword
 
 - name: "18.9.19.5 | PATCH | Ensure 'Configure security policy processing: Process even if the Group Policy objects have not changed' is set to 'Enabled: TRUE'"
-  when:
-    - win11cis_rule_18_9_19_5
-    - discovered_domain_joined
+  when: win11cis_rule_18_9_19_5
   tags:
     - level1-corporate-enterprise-environment
     - patch
@@ -129,9 +123,7 @@
     type: dword
 
 - name: "18.9.19.6 | PATCH | Ensure Continue experiences on this device is set to Disabled"
-  when:
-    - win11cis_rule_18_9_19_6
-    - discovered_domain_joined
+  when: win11cis_rule_18_9_19_6
   tags:
     - level1-corporate-enterprise-environment
     - patch
@@ -150,9 +142,7 @@
     type: dword
 
 - name: "18.9.19.7 | PATCH | Ensure Turn off background refresh of Group Policy is set to Disabled"
-  when:
-    - win11cis_rule_18_9_19_7
-    - discovered_domain_joined
+  when: win11cis_rule_18_9_19_7
   tags:
     - level1-corporate-enterprise-environment
     - patch

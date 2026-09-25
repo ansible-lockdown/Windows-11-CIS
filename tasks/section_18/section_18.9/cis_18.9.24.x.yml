@@ -1,7 +1,9 @@
 ---
 
 - name: "18.9.24.1 | PATCH | Ensure Enumeration policy for external devices incompatible with Kernel DMA Protection is set to Enabled Block All"
-  when: win11cis_rule_18_9_24_1
+  when:
+    - win11cis_rule_18_9_24_1
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker

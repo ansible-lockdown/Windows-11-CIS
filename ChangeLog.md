@@ -2,6 +2,16 @@
 
 ## CIS Benchmark v3.0.0 - September 2026 Updates
 
+  - fix: BitLocker (BL) controls gated on win11cis_bitlocker, default false
+  - fix: win11cis_bitlocker moved to defaults/main/main.yml
+  - fix: 18.10.9.3.14 writes RDVDenyWriteAccess under SYSTEM\CurrentControlSet\Policies\Microsoft\FVE
+  - fix: 18.10.9.3.14 removes the stray SOFTWARE\Policies\Microsoft\FVE value
+  - fix: malformed NIST800-53R5 tags IA_5, CM_9, AC-IA-5 and AC-IA-5_1 removed
+  - docs: README - BitLocker profile section
+  - fix: domain gate removed from 18.4.8, 18.6.4.2, 18.6.4.3, 18.6.21.2, 18.9.19.3-7, 18.9.28.5-7 and 2.3.7.9
+  - fix: 2.3.6 Domain Member and 9.1 Domain firewall profile applied on standalone hosts
+  - fix: BitLocker 18.10.9.2.15-18 applied on domain joined hosts
+  - docs: README - LAPS the only domain-only section
   - refactor: NIST800-53 task tags removed, NIST800-53R5 and NIST800-171 kept
   - fix: 18.9.7.1.5 task names carry the full benchmark title, matching 18.9.7.1.1-.4 and .6
   - feat: NIST800-171, NIST800-53 and NIST800-53R5 tags added to 358 controls

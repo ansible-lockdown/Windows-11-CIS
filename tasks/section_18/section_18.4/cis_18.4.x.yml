@@ -132,9 +132,7 @@
     datatype: dword
 
 - name: "18.4.8 | PATCH | Ensure WDigest Authentication is set to Disabled"
-  when:
-    - win11cis_rule_18_4_8
-    - discovered_domain_joined
+  when: win11cis_rule_18_4_8
   tags:
     - level1-corporate-enterprise-environment
     - patch
