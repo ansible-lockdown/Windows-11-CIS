@@ -36,9 +36,7 @@
         warn_control_id: '18.6.4.1'
 
 - name: "18.6.4.2 | PATCH | Ensure 'Configure NetBIOS settings' is set to 'Enabled: Disable NetBIOS name resolution on public networks'"
-  when:
-    - win11cis_rule_18_6_4_2
-    - discovered_domain_joined
+  when: win11cis_rule_18_6_4_2
   tags:
     - level1-corporate-enterprise-environment
     - patch
@@ -78,9 +76,7 @@
         warn_control_id: '18.6.4.2'
 
 - name: "18.6.4.3 | PATCH | Ensure Turn off multicast name resolution is set to Enabled"
-  when:
-    - win11cis_rule_18_6_4_3
-    - discovered_domain_joined
+  when: win11cis_rule_18_6_4_3
   tags:
     - level1-corporate-enterprise-environment
     - patch

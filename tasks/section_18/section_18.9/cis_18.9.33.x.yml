@@ -37,7 +37,9 @@
     type: dword
 
 - name: "18.9.33.6.3 | PATCH | Ensure 'Allow standby states (S1-S3) when sleeping (on battery)' is set to 'Disabled'"
-  when: win11cis_rule_18_9_33_6_3
+  when:
+    - win11cis_rule_18_9_33_6_3
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -54,7 +56,9 @@
     type: dword
 
 - name: "18.9.33.6.4 | PATCH | Ensure 'Allow standby states (S1-S3) when sleeping (plugged in)' is set to 'Disabled'"
-  when: win11cis_rule_18_9_33_6_4
+  when:
+    - win11cis_rule_18_9_33_6_4
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker

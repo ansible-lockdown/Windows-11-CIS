@@ -157,10 +157,10 @@ win11cis_ansible_facts_path: 'C:\ProgramData\ansible\facts.d'
 #### Audit selection ####
 ## These select what the AUDIT checks. The role itself selects level by --tags,
 ## so setting level_2 false here does not stop the role applying level 2
-## controls - it stops the audit asserting them.
+## controls - it stops the audit asserting them. The BitLocker profile toggle,
+## win11cis_bitlocker, gates the role as well and is in defaults/main/main.yml.
 win11cis_level_1: true
 win11cis_level_2: true
-win11cis_bitlocker: false
 
 ## Written by run_audit.ps1 before the audit runs. One collection pass replaces
 ## a secedit/auditpol shell-out per control.

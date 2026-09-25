@@ -104,8 +104,14 @@ Set the skipped controls in the Default Domain Policy. On a standalone host ever
 of them is applied and asserted as normal.
 
 Nothing else is affected. On the same host a full cycle took the audit from 34
-failures to 6, remediating every domain only control - LAPS, the Domain firewall
-profile, Group Policy processing, domain sign-in, NetBIOS and multicast, WDigest.
+failures to 6, remediating LAPS, the Domain firewall profile, Group Policy
+processing, domain sign-in, NetBIOS and multicast, WDigest.
+
+LAPS (18.9.25.x) is the only section that needs a domain: Windows LAPS does not
+support standalone computers, so the role and the audit skip it there. Everything
+else, including 2.3.6 Domain Member and the 9.1 Domain firewall profile, is a
+registry setting and is applied and asserted on standalone and domain joined hosts
+alike. The BitLocker controls follow `win11cis_bitlocker`, whatever the domain state.
 
 ---
 
@@ -122,6 +128,15 @@ This is managed using tags:
 - bitlocker
 
 The controls found in defaults/main also need to reflect those control numbers due to aligning every control to the audit component.
+
+### BitLocker profile
+
+BitLocker (BL) is an optional CIS profile for hosts that use BitLocker drive
+encryption. Its controls run only when `win11cis_bitlocker` is true (default false,
+in `defaults/main/main.yml`), and the audit asserts them on the same switch, so the
+two always agree. Several of them set how the drive unlocks - a startup PIN with the
+TPM, for example - so turn it on deliberately. The bitlocker tags select within the
+profile; they do not enable it on their own.
 
 ## Coming From A Previous Release
 

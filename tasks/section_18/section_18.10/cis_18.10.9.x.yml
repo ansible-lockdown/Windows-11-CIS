@@ -1,7 +1,9 @@
 ---
 
 - name: "18.10.9.1.1 | PATCH | Ensure 'Allow access to BitLocker-protected fixed data drives from earlier versions of Windows' is set to 'Disabled'"
-  when: win11cis_rule_18_10_9_1_1
+  when:
+    - win11cis_rule_18_10_9_1_1
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -18,7 +20,9 @@
     type: string
 
 - name: "18.10.9.1.2 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered' is set to 'Enabled'"
-  when: win11cis_rule_18_10_9_1_2
+  when:
+    - win11cis_rule_18_10_9_1_2
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -35,7 +39,9 @@
     type: dword
 
 - name: "18.10.9.1.3 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Allow data recovery agent' is set to 'Enabled: True'"
-  when: win11cis_rule_18_10_9_1_3
+  when:
+    - win11cis_rule_18_10_9_1_3
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -52,7 +58,9 @@
     type: dword
 
 - name: "18.10.9.1.4 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Password' is set to 'Enabled: Allow 48-digit recovery password' or higher"
-  when: win11cis_rule_18_10_9_1_4
+  when:
+    - win11cis_rule_18_10_9_1_4
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -90,7 +98,9 @@
         warn_control_id: '18.10.9.1.4'
 
 - name: "18.10.9.1.5 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Recovery Key' is set to 'Enabled: Allow 256-bit recovery key' or higher'"
-  when: win11cis_rule_18_10_9_1_5
+  when:
+    - win11cis_rule_18_10_9_1_5
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -128,7 +138,9 @@
         warn_control_id: '18.10.9.1.5'
 
 - name: "18.10.9.1.6 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Omit recovery options from the BitLocker setup wizard' is set to 'Enabled: True''"
-  when: win11cis_rule_18_10_9_1_6
+  when:
+    - win11cis_rule_18_10_9_1_6
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -145,7 +157,9 @@
     type: dword
 
 - name: "18.10.9.1.7 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Save BitLocker recovery information to AD DS for fixed data drives' is set to 'Enabled: False'"
-  when: win11cis_rule_18_10_9_1_7
+  when:
+    - win11cis_rule_18_10_9_1_7
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -162,7 +176,9 @@
     type: dword
 
 - name: "18.10.9.1.8 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Configure storage of BitLocker recovery information to AD DS' is set to 'Enabled: Backup recovery passwords and key packages'"
-  when: win11cis_rule_18_10_9_1_8
+  when:
+    - win11cis_rule_18_10_9_1_8
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -179,7 +195,9 @@
     type: dword
 
 - name: "18.10.9.1.9 | PATCH | Ensure 'Choose how BitLocker-protected fixed drives can be recovered: Do not enable BitLocker until recovery information is stored to AD DS for fixed data drives' is set to 'Enabled: False'"
-  when: win11cis_rule_18_10_9_1_9
+  when:
+    - win11cis_rule_18_10_9_1_9
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -196,7 +214,9 @@
     type: dword
 
 - name: "18.10.9.1.10 | PATCH | Ensure 'Configure use of hardware-based encryption for fixed data drives' is set to 'Disabled'"
-  when: win11cis_rule_18_10_9_1_10
+  when:
+    - win11cis_rule_18_10_9_1_10
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -213,7 +233,9 @@
     type: dword
 
 - name: "18.10.9.1.11 | PATCH | Ensure 'Configure use of passwords for fixed data drives' is set to 'Disabled'"
-  when: win11cis_rule_18_10_9_1_11
+  when:
+    - win11cis_rule_18_10_9_1_11
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -230,7 +252,9 @@
     type: dword
 
 - name: "18.10.9.1.12 | PATCH | Ensure 'Configure use of smart cards on fixed data drives' is set to 'Enabled'"
-  when: win11cis_rule_18_10_9_1_12
+  when:
+    - win11cis_rule_18_10_9_1_12
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -247,7 +271,9 @@
     type: dword
 
 - name: "18.10.9.1.13 | PATCH | Ensure 'Configure use of smart cards on fixed data drives: Require use of smart cards on fixed data drives' is set to 'Enabled: True'"
-  when: win11cis_rule_18_10_9_1_13
+  when:
+    - win11cis_rule_18_10_9_1_13
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -264,7 +290,9 @@
     type: dword
 
 - name: "18.10.9.2.1 | PATCH | Ensure 'Allow enhanced PINs for startup' is set to 'Enabled'"
-  when: win11cis_rule_18_10_9_2_1
+  when:
+    - win11cis_rule_18_10_9_2_1
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -281,7 +309,9 @@
     type: dword
 
 - name: "18.10.9.2.2 | PATCH | Ensure 'Allow Secure Boot for integrity validation' is set to 'Enabled'"
-  when: win11cis_rule_18_10_9_2_2
+  when:
+    - win11cis_rule_18_10_9_2_2
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -298,7 +328,9 @@
     type: dword
 
 - name: "18.10.9.2.3 | PATCH | Ensure 'Choose how BitLocker-protected operating system drives can be recovered' is set to 'Enabled'"
-  when: win11cis_rule_18_10_9_2_3
+  when:
+    - win11cis_rule_18_10_9_2_3
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -315,7 +347,9 @@
     type: dword
 
 - name: "18.10.9.2.4 | PATCH | Ensure 'Choose how BitLocker-protected operating system drives can be recovered: Allow data recovery agent' is set to 'Enabled: False'"
-  when: win11cis_rule_18_10_9_2_4
+  when:
+    - win11cis_rule_18_10_9_2_4
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -332,7 +366,9 @@
     type: dword
 
 - name: "18.10.9.2.5 | PATCH | Ensure 'Choose how BitLocker-protected operating system drives can be recovered: Recovery Password' is set to 'Enabled: Require 48-digit recovery password'"
-  when: win11cis_rule_18_10_9_2_5
+  when:
+    - win11cis_rule_18_10_9_2_5
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -349,7 +385,9 @@
     type: dword
 
 - name: "18.10.9.2.6 | PATCH | Ensure 'Choose how BitLocker-protected operating system drives can be recovered: Recovery Key' is set to 'Enabled: Do not allow 256-bit recovery key'"
-  when: win11cis_rule_18_10_9_2_6
+  when:
+    - win11cis_rule_18_10_9_2_6
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -366,7 +404,9 @@
     type: dword
 
 - name: "18.10.9.2.7 | PATCH | Ensure 'Choose how BitLocker-protected operating system drives can be recovered: Omit recovery options from the BitLocker setup wizard' is set to 'Enabled: True'"
-  when: win11cis_rule_18_10_9_2_7
+  when:
+    - win11cis_rule_18_10_9_2_7
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -383,7 +423,9 @@
     type: dword
 
 - name: "18.10.9.2.8 | PATCH | Ensure 'Choose how BitLocker-protected operating system drives can be recovered: Save BitLocker recovery information to AD DS for operating system drives' is set to 'Enabled: True'"
-  when: win11cis_rule_18_10_9_2_8
+  when:
+    - win11cis_rule_18_10_9_2_8
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -400,7 +442,9 @@
     type: dword
 
 - name: "18.10.9.2.9 | PATCH | Ensure 'Choose how BitLocker-protected operating system drives can be recovered: Configure storage of BitLocker recovery information to AD DS:' is set to 'Enabled: Store recovery passwords and key packages'"
-  when: win11cis_rule_18_10_9_2_9
+  when:
+    - win11cis_rule_18_10_9_2_9
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -417,7 +461,9 @@
     type: dword
 
 - name: "18.10.9.2.10 | PATCH | Ensure 'Choose how BitLocker-protected operating system drives can be recovered: Do not enable BitLocker until recovery information is stored to AD DS for operating system drives' is set to 'Enabled: True'"
-  when: win11cis_rule_18_10_9_2_10
+  when:
+    - win11cis_rule_18_10_9_2_10
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -434,7 +480,9 @@
     type: dword
 
 - name: "18.10.9.2.11 | PATCH | Ensure 'Configure use of hardware-based encryption for operating system drives' is set to 'Disabled'"
-  when: win11cis_rule_18_10_9_2_11
+  when:
+    - win11cis_rule_18_10_9_2_11
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -451,7 +499,9 @@
     type: dword
 
 - name: "18.10.9.2.12 | PATCH | Ensure 'Configure use of passwords for operating system drives' is set to 'Disabled'"
-  when: win11cis_rule_18_10_9_2_12
+  when:
+    - win11cis_rule_18_10_9_2_12
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -467,7 +517,9 @@
     type: dword
 
 - name: "18.10.9.2.13 | PATCH | Ensure 'Require additional authentication at startup' is set to 'Enabled'"
-  when: win11cis_rule_18_10_9_2_13
+  when:
+    - win11cis_rule_18_10_9_2_13
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -483,7 +535,9 @@
     type: dword
 
 - name: "18.10.9.2.14 | PATCH | Ensure 'Require additional authentication at startup: Allow BitLocker without a compatible TPM' is set to 'Enabled: False'"
-  when: win11cis_rule_18_10_9_2_14
+  when:
+    - win11cis_rule_18_10_9_2_14
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -502,7 +556,7 @@
 - name: "18.10.9.2.15 | PATCH | Ensure 'Require additional authentication at startup: Configure TPM startup:' is set to 'Enabled: Do not allow TPM'"
   when:
     - win11cis_rule_18_10_9_2_15
-    - not discovered_domain_joined
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -521,7 +575,7 @@
 - name: "18.10.9.2.16 | PATCH | Ensure 'Require additional authentication at startup: Configure TPM startup PIN:' is set to 'Enabled: Require startup PIN with TPM'"
   when:
     - win11cis_rule_18_10_9_2_16
-    - not discovered_domain_joined
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -540,7 +594,7 @@
 - name: "18.10.9.2.17 | PATCH | Ensure 'Require additional authentication at startup: Configure TPM startup key:' is set to 'Enabled: Do not allow startup key with TPM'"
   when:
     - win11cis_rule_18_10_9_2_17
-    - not discovered_domain_joined
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -559,7 +613,7 @@
 - name: "18.10.9.2.18 | PATCH | Ensure 'Require additional authentication at startup: Configure TPM startup key and PIN:' is set to 'Enabled: Do not allow startup key and PIN with TPM'"
   when:
     - win11cis_rule_18_10_9_2_18
-    - not discovered_domain_joined
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -576,7 +630,9 @@
     type: dword
 
 - name: "18.10.9.3.1 | PATCH | Ensure 'Allow access to BitLocker-protected removable data drives from earlier versions of Windows' is set to 'Disabled'"
-  when: win11cis_rule_18_10_9_3_1
+  when:
+    - win11cis_rule_18_10_9_3_1
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -592,7 +648,9 @@
     type: string
 
 - name: "18.10.9.3.2 | PATCH | Ensure 'Choose how BitLocker-protected removable drives can be recovered' is set to 'Enabled'"
-  when: win11cis_rule_18_10_9_3_2
+  when:
+    - win11cis_rule_18_10_9_3_2
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -609,7 +667,9 @@
     type: dword
 
 - name: "18.10.9.3.3 | PATCH | Ensure 'Choose how BitLocker-protected removable drives can be recovered: Allow data recovery agent' is set to 'Enabled: True'"
-  when: win11cis_rule_18_10_9_3_3
+  when:
+    - win11cis_rule_18_10_9_3_3
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -626,7 +686,9 @@
     type: dword
 
 - name: "18.10.9.3.4 | PATCH | Ensure 'Choose how BitLocker-protected removable drives can be recovered: Recovery Password' is set to 'Enabled: Do not allow 48-digit recovery password'"
-  when: win11cis_rule_18_10_9_3_4
+  when:
+    - win11cis_rule_18_10_9_3_4
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -643,7 +705,9 @@
     type: dword
 
 - name: "18.10.9.3.5 | PATCH | Ensure 'Choose how BitLocker-protected removable drives can be recovered: Recovery Key' is set to 'Enabled: Do not allow 256-bit recovery key'"
-  when: win11cis_rule_18_10_9_3_5
+  when:
+    - win11cis_rule_18_10_9_3_5
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -660,7 +724,9 @@
     type: dword
 
 - name: "18.10.9.3.6 | PATCH | Ensure 'Choose how BitLocker-protected removable drives can be recovered: Omit recovery options from the BitLocker setup wizard' is set to 'Enabled: True'"
-  when: win11cis_rule_18_10_9_3_6
+  when:
+    - win11cis_rule_18_10_9_3_6
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -677,7 +743,9 @@
     type: dword
 
 - name: "18.10.9.3.7 | PATCH | Ensure 'Choose how BitLocker-protected removable drives can be recovered: Save BitLocker recovery information to AD DS for removable data drives' is set to 'Enabled: False'"
-  when: win11cis_rule_18_10_9_3_7
+  when:
+    - win11cis_rule_18_10_9_3_7
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -694,7 +762,9 @@
     type: dword
 
 - name: "18.10.9.3.8 | PATCH | Ensure 'Choose how BitLocker-protected removable drives can be recovered: Configure storage of BitLocker recovery information to AD DS:' is set to 'Enabled: Backup recovery passwords and key packages'"
-  when: win11cis_rule_18_10_9_3_8
+  when:
+    - win11cis_rule_18_10_9_3_8
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -711,7 +781,9 @@
     type: dword
 
 - name: "18.10.9.3.9 | PATCH | Ensure 'Choose how BitLocker-protected removable drives can be recovered: Do not enable BitLocker until recovery information is stored to AD DS for removable data drives' is set to 'Enabled: False'"
-  when: win11cis_rule_18_10_9_3_9
+  when:
+    - win11cis_rule_18_10_9_3_9
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -728,7 +800,9 @@
     type: dword
 
 - name: "18.10.9.3.10 | PATCH | Ensure 'Configure use of hardware-based encryption for removable data drives' is set to 'Disabled'"
-  when: win11cis_rule_18_10_9_3_10
+  when:
+    - win11cis_rule_18_10_9_3_10
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -745,7 +819,9 @@
     type: dword
 
 - name: "18.10.9.3.11 | PATCH | Ensure 'Configure use of passwords for removable data drives' is set to 'Disabled'"
-  when: win11cis_rule_18_10_9_3_11
+  when:
+    - win11cis_rule_18_10_9_3_11
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -762,7 +838,9 @@
     type: dword
 
 - name: "18.10.9.3.12 | PATCH | Ensure 'Configure use of smart cards on removable data drives' is set to 'Enabled'"
-  when: win11cis_rule_18_10_9_3_12
+  when:
+    - win11cis_rule_18_10_9_3_12
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -779,7 +857,9 @@
     type: dword
 
 - name: "18.10.9.3.13 | PATCH | Ensure 'Configure use of smart cards on removable data drives: Require use of smart cards on removable data drives' is set to 'Enabled: True' "
-  when: win11cis_rule_18_10_9_3_13
+  when:
+    - win11cis_rule_18_10_9_3_13
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -796,7 +876,9 @@
     type: dword
 
 - name: "18.10.9.3.14 | PATCH | Ensure 'Deny write access to removable drives not protected by BitLocker' is set to 'Enabled'"
-  when: win11cis_rule_18_10_9_3_14
+  when:
+    - win11cis_rule_18_10_9_3_14
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -805,14 +887,24 @@
     - automated
     - rule_18.10.9.3.14
     - removable_data_drives
-  ansible.windows.win_regedit:
-    path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
-    name: RDVDenyWriteAccess
-    data: 1
-    type: dword
+  block:
+    - name: "18.10.9.3.14 | PATCH | Ensure 'Deny write access to removable drives not protected by BitLocker' is set to 'Enabled' | Remove the stray value written by earlier role versions"
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\FVE
+        name: RDVDenyWriteAccess
+        state: absent
+
+    - name: "18.10.9.3.14 | PATCH | Ensure 'Deny write access to removable drives not protected by BitLocker' is set to 'Enabled' | Set the policy value"
+      ansible.windows.win_regedit:
+        path: HKLM:\SYSTEM\CurrentControlSet\Policies\Microsoft\FVE
+        name: RDVDenyWriteAccess
+        data: 1
+        type: dword
 
 - name: "18.10.9.3.15 | PATCH | Ensure 'Deny write access to removable drives not protected by BitLocker: Do not allow write access to devices configured in another organization' is set to 'Enabled: False'"
-  when: win11cis_rule_18_10_9_3_15
+  when:
+    - win11cis_rule_18_10_9_3_15
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -828,7 +920,9 @@
     type: dword
 
 - name: "18.10.9.4 | PATCH | Ensure 'Disable new DMA devices when this computer is locked' is set to 'Enabled'"
-  when: win11cis_rule_18_10_9_4
+  when:
+    - win11cis_rule_18_10_9_4
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker

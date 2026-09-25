@@ -16,7 +16,6 @@
     - NIST800-53R5_AC-17_2
     - NIST800-53R5_IA-5
     - NIST800-53R5_IA-5_1
-    - NIST800-53R5_IA_5
     - NIST800-53R5_SC-8
     - NIST800-53R5_SC-9_1
   ansible.windows.win_regedit:
@@ -41,7 +40,6 @@
     - NIST800-53R5_AC-17_2
     - NIST800-53R5_IA-5
     - NIST800-53R5_IA-5_1
-    - NIST800-53R5_IA_5
     - NIST800-53R5_SC-8
     - NIST800-53R5_SC-9_1
   ansible.windows.win_regedit:
@@ -64,7 +62,6 @@
     - NIST800-53R5_AC-17_2
     - NIST800-53R5_IA-5
     - NIST800-53R5_IA-5_1
-    - NIST800-53R5_IA_5
     - NIST800-53R5_SC-8
     - NIST800-53R5_SC-9_1
   ansible.windows.win_regedit:
@@ -89,7 +86,6 @@
     - NIST800-53R5_AC-17_2
     - NIST800-53R5_IA-5
     - NIST800-53R5_IA-5_1
-    - NIST800-53R5_IA_5
     - NIST800-53R5_SC-8
     - NIST800-53R5_SC-9_1
   ansible.windows.win_regedit:
@@ -136,7 +132,6 @@
     - NIST800-53R5_AC-17_2
     - NIST800-53R5_IA-5
     - NIST800-53R5_IA-5_1
-    - NIST800-53R5_IA_5
     - NIST800-53R5_SC-8
     - NIST800-53R5_SC-9_1
   ansible.windows.win_regedit:

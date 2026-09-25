@@ -32,7 +32,6 @@
     file: cis_2.3.4.x.yml
 
 - name: "SECTION | 2.3.6 | Domain Member"
-  when: discovered_domain_joined
   tags:
     - local_policies
     - security_options

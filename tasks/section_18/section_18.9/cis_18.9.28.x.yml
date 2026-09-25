@@ -77,9 +77,7 @@
     type: dword
 
 - name: "18.9.28.5 | PATCH | Ensure Turn off app notifications on the lock screen is set to Enabled"
-  when:
-    - win11cis_rule_18_9_28_5
-    - discovered_domain_joined
+  when: win11cis_rule_18_9_28_5
   tags:
     - level1-corporate-enterprise-environment
     - patch
@@ -98,9 +96,7 @@
     type: dword
 
 - name: "18.9.28.6 | PATCH | Ensure Turn off picture password sign-in is set to Enabled"
-  when:
-    - win11cis_rule_18_9_28_6
-    - discovered_domain_joined
+  when: win11cis_rule_18_9_28_6
   tags:
     - level1-corporate-enterprise-environment
     - patch
@@ -119,9 +115,7 @@
     type: dword
 
 - name: "18.9.28.7 | PATCH | Ensure Turn on convenience PIN sign-in is set to Disabled"
-  when:
-    - win11cis_rule_18_9_28_7
-    - discovered_domain_joined
+  when: win11cis_rule_18_9_28_7
   tags:
     - level1-corporate-enterprise-environment
     - patch
