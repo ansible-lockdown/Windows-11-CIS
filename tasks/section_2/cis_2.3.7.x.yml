@@ -35,7 +35,9 @@
     type: dword
 
 - name: "2.3.7.3 | PATCH | Ensure Interactive logon: Machine account lockout threshold is set to 10 or fewer invalid logon attempts, but not 0"
-  when: win11cis_rule_2_3_7_3
+  when:
+    - win11cis_rule_2_3_7_3
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -200,9 +202,7 @@
         warn_control_id: '2.3.7.8'
 
 - name: "2.3.7.9 | PATCH | Ensure Interactive logon Smart card removal behavior is set to Lock Workstation or higher"
-  when:
-    - win11cis_rule_2_3_7_9
-    - discovered_domain_joined
+  when: win11cis_rule_2_3_7_9
   tags:
     - level1-corporate-enterprise-environment
     - patch

@@ -1,7 +1,9 @@
 ---
 
 - name: "18.9.7.1.1 | PATCH | Ensure 'Prevent installation of devices that match any of these device IDs' is set to 'Enabled'"
-  when: win11cis_rule_18_9_7_1_1
+  when:
+    - win11cis_rule_18_9_7_1_1
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -17,7 +19,9 @@
     type: dword
 
 - name: "18.9.7.1.2 | PATCH | Ensure 'Prevent installation of devices that match any of these device IDs: Prevent installation of devices that match any of these device IDs' is set to 'PCI\\CC_0C0A'"
-  when: win11cis_rule_18_9_7_1_2
+  when:
+    - win11cis_rule_18_9_7_1_2
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -33,7 +37,9 @@
     type: string
 
 - name: "18.9.7.1.3 | PATCH | Ensure 'Prevent installation of devices that match any of these device IDs: Also apply to matching devices that are already installed.' is set to 'True'"
-  when: win11cis_rule_18_9_7_1_3
+  when:
+    - win11cis_rule_18_9_7_1_3
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -49,7 +55,9 @@
     type: dword
 
 - name: "18.9.7.1.4 | PATCH | Ensure 'Prevent installation of devices using drivers that match these device setup classes' is set to 'Enabled'"
-  when: win11cis_rule_18_9_7_1_4
+  when:
+    - win11cis_rule_18_9_7_1_4
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -65,7 +73,9 @@
     type: dword
 
 - name: "18.9.7.1.5 | PATCH | Ensure 'Prevent installation of devices using drivers that match these device setup classes: Prevent installation of devices using drivers for these device setup' is set to 'IEEE 1394 device setup classes'"
-  when: win11cis_rule_18_9_7_1_5
+  when:
+    - win11cis_rule_18_9_7_1_5
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker
@@ -104,7 +114,9 @@
         type: string
 
 - name: "18.9.7.1.6 | PATCH | Ensure 'Prevent installation of devices using drivers that match these device setup classes: Also apply to matching devices that are already installed.' is set to 'True'"
-  when: win11cis_rule_18_9_7_1_6
+  when:
+    - win11cis_rule_18_9_7_1_6
+    - win11cis_bitlocker
   tags:
     - level1-bitlocker
     - level2-bitlocker

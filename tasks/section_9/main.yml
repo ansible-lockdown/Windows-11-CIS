@@ -1,7 +1,6 @@
 ---
 
 - name: "SECTION | 9.1 | Domain Profile"
-  when: discovered_domain_joined
   tags:
     - windows_defender_firewall_with_advanced_security
     - domain_profile
