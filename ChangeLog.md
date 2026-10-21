@@ -2,6 +2,8 @@
 
 ## CIS Benchmark v3.0.0 - September 2026 Updates
 
+  - fix: 18.10.92.4.4 writes SetAllowOptionalContent
+  - fix: 18.10.92.4.4 removes the stray AllowOptionalContent value
   - fix: BitLocker (BL) controls gated on win11cis_bitlocker, default false
   - fix: win11cis_bitlocker moved to defaults/main/main.yml
   - fix: 18.10.9.3.14 writes RDVDenyWriteAccess under SYSTEM\CurrentControlSet\Policies\Microsoft\FVE

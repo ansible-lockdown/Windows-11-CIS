@@ -222,8 +222,16 @@
     - rule_18.10.92.4.4
     - manage_updates_offered_from_windows_update
     - updates
-  ansible.windows.win_regedit:
-    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
-    name: AllowOptionalContent
-    data: 0
-    type: dword
+  block:
+    - name: "18.10.92.4.4 | PATCH | Ensure Enable optional updates is set to Disabled | Remove the stray value written by earlier role versions"
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+        name: AllowOptionalContent
+        state: absent
+
+    - name: "18.10.92.4.4 | PATCH | Ensure Enable optional updates is set to Disabled | Set the policy value"
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+        name: SetAllowOptionalContent
+        data: 0
+        type: dword
