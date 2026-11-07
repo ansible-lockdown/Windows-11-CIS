@@ -1,7 +1,10 @@
 # Changelog
 
-## CIS Benchmark v3.0.0 - September 2026 Updates
+## CIS Benchmark v3.0.0 - November 2026 Updates
 
+  - removed public benchmark tracker
+
+## CIS Benchmark v3.0.0 - September 2026 Updates
   - fix: 18.10.92.4.4 writes SetAllowOptionalContent
   - fix: 18.10.92.4.4 removes the stray AllowOptionalContent value
   - fix: BitLocker (BL) controls gated on win11cis_bitlocker, default false
@@ -60,6 +63,7 @@
   - refactor: removed the hosted_virtual_system_override / discovered_cloud_based_system cloud detection. It existed to reorder the 1.2.x secedit lockout controls, which the prelim ResetLockoutCount normalisation replaced, and the fact had no remaining consumers. Private-Windows-2025-CIS had already dropped it
   - feat: syver is public, so get_audit_binary_method now defaults to download - audit_bin_url points at the krameff/syver releases and audit_bin_version pins v0.11.1 with the SHA256 from the signed release sums. The binary no longer has to be staged on the control node, and win_get_url verifies the digest before writing it. ARM64 is left empty deliberately: v0.11.1 publishes no Windows ARM64 asset
   - split sections to smaller groups of tasks
+  - workflow update
 
 Alignment against CIS Microsoft Windows 11 Enterprise Benchmark v3.0.0
   - feat: added missing control 18.8.2 - Remove Personalized Website Recommendations from the Recommended section in the Start Menu
